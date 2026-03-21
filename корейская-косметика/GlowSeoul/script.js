@@ -102,6 +102,37 @@ const CATEGORIES = {
 
 /* ===== STATE ===== */
 let activeCategory = 'all';
+let currentLang = localStorage.getItem('glowseoul_lang') || 'ru';
+
+/* ===== I18N TRANSLATIONS ===== */
+const I18N = {
+    kz: {
+        'nav.catalog': 'Каталог',
+        'nav.about': 'Біз туралы',
+        'nav.brands': 'Брендтер',
+        'nav.faq': 'FAQ',
+        'nav.contact': 'Байланыс',
+        'hero.badge': 'Қазақстандағы ресми өкіл',
+        'hero.title': 'Денсаулық пен сұлулыққа арналған корей сапасы',
+        'hero.text': 'GM Plant корей өндірушісінен GUNMISU және LODELLA брендтерінің түпнұсқа өнімдері. Косметика, гигиена құралдары және БАҚ Қазақстан бойынша жеткізумен.',
+        'hero.cta': 'Каталогты қарау',
+        'hero.consult': 'Кеңес алу',
+        'cat.title': 'Санаттар',
+        'cat.sub': 'Денсаулық пен сұлулыққа арналған табиғи шешімдер',
+        'about.badge': 'Компания туралы',
+        'about.title': 'Кореядан табиғи шешімдер',
+        'brands.title': 'Біздің брендтер',
+        'adv.title': 'Неге бізді таңдайды',
+        'order.title': 'Қалай тапсырыс беруге болады',
+        'order.sub': 'Тапсырысыңызға дейін үш қарапайым қадам',
+        'faq.title': 'Жиі қойылатын сұрақтар',
+        'faq.sub': 'Клиенттеріміздің ең танымал сұрақтарына жауаптар',
+        'footer.rights': 'Барлық құқықтар қорғалған.',
+        'footer.privacy': 'Құпиялылық саясаты',
+        'bar.call': 'Қоңырау шалу',
+        'modal.related': 'Осымен бірге алады'
+    }
+};
 
 /* ===== SINGLE INTERSECTION OBSERVER (reused) ===== */
 const scrollObserver = new IntersectionObserver((entries) => {
@@ -145,12 +176,14 @@ function renderProducts(products) {
                 </div>
                 <a href="https://wa.me/77472694342?text=${encodeURIComponent(`Здравствуйте! Хочу узнать подробнее о товаре: ${p.brand} ${p.name}`)}"
                    class="btn btn--primary btn--full" target="_blank" rel="noopener">
-                    Узнать цену
+                    ${currentLang === 'kz' ? 'Бағасын білу' : 'Узнать цену'}
                 </a>
             </div>
         </div>`).join('');
 
-    count.textContent = `Показано ${products.length} из ${PRODUCTS.length} товаров`;
+    count.textContent = currentLang === 'kz'
+        ? `${PRODUCTS.length} тауардан ${products.length} көрсетілген`
+        : `Показано ${products.length} из ${PRODUCTS.length} товаров`;
     observeElements();
 }
 
@@ -175,6 +208,20 @@ function openQuickView(productId) {
     const modal = document.getElementById('quickViewModal');
     const body = document.getElementById('modalBody');
 
+    // Get related products (same category, excluding current, max 3)
+    const related = PRODUCTS.filter(r => r.category === p.category && r.id !== p.id).slice(0, 3);
+    const relatedHTML = related.length > 0 ? `
+        <div class="modal-related">
+            <h4 class="modal-related__title" data-i18n="modal.related">${currentLang === 'kz' ? 'Осымен бірге алады' : 'С этим товаром покупают'}</h4>
+            <div class="modal-related__grid">
+                ${related.map(r => `
+                <div class="modal-related__item" data-id="${r.id}">
+                    <img src="${r.image}" alt="${r.brand} ${r.name}" width="120" height="120">
+                    <div class="modal-related__item-name">${r.name}</div>
+                </div>`).join('')}
+            </div>
+        </div>` : '';
+
     body.innerHTML = `
     <div class="modal-product">
         <div class="modal-product__img">
@@ -189,18 +236,25 @@ function openQuickView(productId) {
             </div>
             <div class="modal-product__price-note">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-                Цена уточняется по запросу
+                ${currentLang === 'kz' ? 'Бағасы сұрау бойынша' : 'Цена уточняется по запросу'}
             </div>
             <a href="https://wa.me/77472694342?text=${encodeURIComponent(`Здравствуйте! Хочу узнать цену и подробности: ${p.brand} ${p.name}`)}"
                class="btn btn--primary btn--full modal-product__cta" target="_blank" rel="noopener">
-                Написать в WhatsApp
+                ${currentLang === 'kz' ? 'WhatsApp-қа жазу' : 'Написать в WhatsApp'}
             </a>
+            ${relatedHTML}
         </div>
     </div>`;
 
+    // Click on related product opens its modal
+    body.querySelectorAll('.modal-related__item').forEach(item => {
+        item.addEventListener('click', () => {
+            openQuickView(parseInt(item.dataset.id, 10));
+        });
+    });
+
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
-    // Focus the close button for keyboard accessibility
     const closeBtn = document.getElementById('modalClose');
     if (closeBtn) closeBtn.focus();
 }
@@ -353,13 +407,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    /* ===== HEADER SCROLL (with rAF throttle) ===== */
+    /* ===== HEADER SCROLL + SCROLL-TOP (with rAF throttle) ===== */
     let scrollTicking = false;
     window.addEventListener('scroll', () => {
         if (!scrollTicking) {
             requestAnimationFrame(() => {
+                const y = window.scrollY;
                 const header = document.querySelector('.header');
-                if (header) header.style.boxShadow = window.scrollY > 80 ? '0 2px 20px rgba(0,0,0,0.08)' : 'none';
+                if (header) header.style.boxShadow = y > 80 ? '0 2px 20px rgba(0,0,0,0.08)' : 'none';
+                if (scrollTopBtn) scrollTopBtn.classList.toggle('visible', y > 400);
                 scrollTicking = false;
             });
             scrollTicking = true;
@@ -400,6 +456,68 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target.closest('.btn')) return;
         openQuickView(parseInt(card.dataset.id, 10));
     });
+
+    /* ===== SCROLL TO TOP ===== */
+    const scrollTopBtn = document.getElementById('scrollTop');
+    if (scrollTopBtn) {
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    /* ===== SCROLL-BASED VISIBILITY (header shadow, scroll-top, sticky bar) ===== */
+    // Override the header scroll with combined handler
+    /* (previous rAF scroll handler still works for header, add scroll-top visibility) */
+
+    /* ===== LANGUAGE TOGGLE ===== */
+    const langToggle = document.getElementById('langToggle');
+    const ruTexts = {};
+
+    // Store original Russian texts
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        ruTexts[el.dataset.i18n] = el.textContent;
+    });
+
+    function applyLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem('glowseoul_lang', lang);
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.dataset.i18n;
+            if (lang === 'kz' && I18N.kz[key]) {
+                el.textContent = I18N.kz[key];
+            } else if (lang === 'ru' && ruTexts[key]) {
+                el.textContent = ruTexts[key];
+            }
+        });
+
+        // Update toggle visual
+        if (langToggle) {
+            const active = langToggle.querySelector('.lang-toggle__active');
+            const alt = langToggle.querySelector('.lang-toggle__alt');
+            if (active && alt) {
+                active.textContent = lang.toUpperCase();
+                alt.textContent = lang === 'ru' ? 'KZ' : 'RU';
+            }
+        }
+
+        // Update html lang attribute
+        document.documentElement.lang = lang === 'kz' ? 'kk' : 'ru';
+
+        // Re-render products to update button text
+        filterProducts(activeCategory);
+    }
+
+    if (langToggle) {
+        langToggle.addEventListener('click', () => {
+            applyLanguage(currentLang === 'ru' ? 'kz' : 'ru');
+        });
+    }
+
+    // Apply saved language on load
+    if (currentLang === 'kz') {
+        applyLanguage('kz');
+    }
 
     /* ===== FAQ ACCORDION ===== */
     document.querySelectorAll('.faq-item__header').forEach(btn => {
