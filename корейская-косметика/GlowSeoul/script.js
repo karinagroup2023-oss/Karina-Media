@@ -92,6 +92,52 @@ const PRODUCTS = [
     }
 ];
 
+/* ===== PRODUCT TRANSLATIONS ===== */
+const PRODUCTS_KZ = {
+    1: {
+        desc: 'SPF50+ PA++++ жоғары қорғаныс деңгейі бар BB-крем. Ылғалдандыратын текстура, маска эффектісіз табиғи жабу. УК-сәуледен қорғау, ағарту және әжімге қарсы күтім — бәрі біреуінде.',
+        tags: ['SPF50+', 'Ылғалдандыру', 'Тон', 'Anti-age']
+    },
+    2: {
+        desc: 'Селагинелла, манука балы, шырғанақ және пептидтік кешені бар бет пен денеге арналған көпфункционалды крем. Қорғау, қалпына келтіру, тон теңестіру және табиғи жарқырау.',
+        tags: ['Пептидтер', 'Манука', 'Шырғанақ', 'Anti-age']
+    },
+    3: {
+        desc: 'Тығыз гель текстурасы бар коллагенді бустер — «сұйық ботокс». 12 түрлі пептид және 17 аминқышқыл. Жұмсақ пилинг, тері тосқауылын нығайту және айқын жасқа қарсы әсер.',
+        tags: ['Коллаген', 'Пептидтер', '«Сұйық ботокс»', '120 мл']
+    },
+    4: {
+        desc: 'Аралас, майлы және сезімтал теріге арналған жеңіл SPF-сыворотка. Тез сіңеді, ақ дақ қалдырмайды. Ағарту және жасқа қарсы әсер.',
+        tags: ['SPF50+', 'Сыворотка', 'Ақ дақсыз', 'Барлық маусымдар']
+    },
+    5: {
+        desc: 'Алтын көмірі бар қара маска. 35 г табиғи ингредиенттер: пептидтер, глутатион, мия сығындысы, мацутаке саңырауқұлағы, манука балы, жасыл шай. Әжімді азайту және тонды ағарту.',
+        tags: ['Маска', 'Пептидтер', 'Глутатион', 'Детокс']
+    },
+    6: {
+        desc: 'Ерлерге арналған интимді гигиена гелі. Оңтайлы температураны қолдау, қан айналымын жақсарту, антибактериялық және дезодорланатын әсер. Күнделікті жайлылық пен сергектік.',
+        tags: ['Ерлер', 'Гигиена', 'Антибактериялық', 'Сергектік']
+    },
+    7: {
+        desc: 'Y-аймағына арналған әйелдер сывороткасы. Қалпына келтіру, ылғалдандыру және сау микрофлораны қолдау. Интимді денсаулыққа жаңа өмір сыйлаңыз.',
+        tags: ['Әйелдер', 'Сыворотка', 'Y-аймағы', 'Күтім']
+    },
+    8: {
+        desc: 'V Story сериясының интимді күтім құралы. Confidence in health care — күнделікті қамқор мен сенімділік.',
+        tags: ['Интимді күтім', 'V Story', 'Денсаулық', 'Жайлылық']
+    },
+    9: {
+        name: '매일비움 PLUS (Бұршақ)',
+        desc: 'Денсаулық пен жеңілдікке арналған табиғи көмекші. Холестеринді төмендету, май шөгінділерін азайту, ішекті тазарту. Құрамында: жол шөбінің қабығы, кептірілген өрік, гарциния камбоджиялық.',
+        tags: ['БАҚ', 'Арықтау', 'Тазарту', 'Табиғи']
+    },
+    10: {
+        name: '당케어 올인원 유산균 (Пробиотик)',
+        desc: 'Қандағы қантты бақылау үшін Banaba жапырақтарының сығындысы бар пробиотик. Ас қорытуды жақсарту, пайдалы бактериялардың өсуі, зиянды микрофлораны басу. Мырыш, коллаген және поливитаминдермен байытылған.',
+        tags: ['Пробиотик', 'Қант бақылау', 'Ас қорыту', 'Витаминдер']
+    }
+};
+
 /* ===== CATEGORY MAP ===== */
 const CATEGORIES = {
     all: 'Все товары',
@@ -239,25 +285,31 @@ function renderProducts(products) {
     const count = document.getElementById('productsCount');
     if (!grid || !count) return;
 
-    grid.innerHTML = products.map(p => `
+    grid.innerHTML = products.map(p => {
+        const kz = PRODUCTS_KZ[p.id] || {};
+        const desc = currentLang === 'kz' && kz.desc ? kz.desc : p.desc;
+        const tags = currentLang === 'kz' && kz.tags ? kz.tags : p.tags;
+        const name = currentLang === 'kz' && kz.name ? kz.name : p.name;
+        return `
         <div class="product-card" data-id="${p.id}" data-category="${p.category}">
             <div class="product-card__img">
-                <img src="${p.image}" alt="${p.brand} ${p.name}" loading="lazy" width="400" height="400">
+                <img src="${p.image}" alt="${p.brand} ${name}" loading="lazy" width="400" height="400">
                 <span class="product-card__badge">${p.brand}</span>
             </div>
             <div class="product-card__info">
                 <span class="product-card__brand">${p.brand}</span>
-                <h3 class="product-card__name">${p.name}</h3>
-                <p class="product-card__desc">${p.desc}</p>
+                <h3 class="product-card__name">${name}</h3>
+                <p class="product-card__desc">${desc}</p>
                 <div class="product-card__tags">
-                    ${p.tags.map(t => `<span class="product-tag">${t}</span>`).join('')}
+                    ${tags.map(t => `<span class="product-tag">${t}</span>`).join('')}
                 </div>
                 <a href="https://wa.me/77472694342?text=${encodeURIComponent(`Здравствуйте! Хочу узнать подробнее о товаре: ${p.brand} ${p.name}`)}"
                    class="btn btn--primary btn--full" target="_blank" rel="noopener">
                     ${currentLang === 'kz' ? 'Бағасын білу' : 'Узнать цену'}
                 </a>
             </div>
-        </div>`).join('');
+        </div>`;
+    }).join('');
 
     count.textContent = currentLang === 'kz'
         ? `${PRODUCTS.length} тауардан ${products.length} көрсетілген`
@@ -285,6 +337,10 @@ function openQuickView(productId) {
 
     const modal = document.getElementById('quickViewModal');
     const body = document.getElementById('modalBody');
+    const kz = PRODUCTS_KZ[p.id] || {};
+    const desc = currentLang === 'kz' && kz.desc ? kz.desc : p.desc;
+    const tags = currentLang === 'kz' && kz.tags ? kz.tags : p.tags;
+    const name = currentLang === 'kz' && kz.name ? kz.name : p.name;
 
     // Get related products (same category, excluding current, max 3)
     const related = PRODUCTS.filter(r => r.category === p.category && r.id !== p.id).slice(0, 3);
@@ -292,25 +348,29 @@ function openQuickView(productId) {
         <div class="modal-related">
             <h4 class="modal-related__title" data-i18n="modal.related">${currentLang === 'kz' ? 'Осымен бірге алады' : 'С этим товаром покупают'}</h4>
             <div class="modal-related__grid">
-                ${related.map(r => `
+                ${related.map(r => {
+                    const rKz = PRODUCTS_KZ[r.id] || {};
+                    const rName = currentLang === 'kz' && rKz.name ? rKz.name : r.name;
+                    return `
                 <div class="modal-related__item" data-id="${r.id}">
-                    <img src="${r.image}" alt="${r.brand} ${r.name}" width="120" height="120">
-                    <div class="modal-related__item-name">${r.name}</div>
-                </div>`).join('')}
+                    <img src="${r.image}" alt="${r.brand} ${rName}" width="120" height="120">
+                    <div class="modal-related__item-name">${rName}</div>
+                </div>`;
+                }).join('')}
             </div>
         </div>` : '';
 
     body.innerHTML = `
     <div class="modal-product">
         <div class="modal-product__img">
-            <img src="${p.image}" alt="${p.brand} ${p.name}" width="400" height="400">
+            <img src="${p.image}" alt="${p.brand} ${name}" width="400" height="400">
         </div>
         <div class="modal-product__info">
             <h2>${p.brand}</h2>
-            <h3>${p.name}</h3>
-            <p class="modal-product__desc">${p.desc}</p>
+            <h3>${name}</h3>
+            <p class="modal-product__desc">${desc}</p>
             <div class="modal-product__tags">
-                ${p.tags.map(t => `<span class="modal-product__tag">${t}</span>`).join('')}
+                ${tags.map(t => `<span class="modal-product__tag">${t}</span>`).join('')}
             </div>
             <div class="modal-product__price-note">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
