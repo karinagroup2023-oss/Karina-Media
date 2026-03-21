@@ -105,7 +105,7 @@ if (bookingForm) {
             `Программа: ${program}\nСтрана: ${country}\n` +
             `Имя: ${name}\nТелефон: ${phone}\nEmail: ${email}`
         );
-        window.open(`https://wa.me/70000000000?text=${waText}`, '_blank');
+        window.open(`https://wa.me/77009633931?text=${waText}`, '_blank');
 
         openModal(modal);
         bookingForm.reset();
