@@ -147,9 +147,10 @@ if (bookingForm && bookingDate) {
             `Дата: ${formattedDate} в ${time}\n` +
             `Имя: ${name}\nТелефон: ${phone}`
         );
-        window.open(`https://wa.me/79000000000?text=${waText}`, '_blank');
+        window.open(`https://wa.me/79161899030?text=${waText}`, '_blank');
 
         modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
         bookingForm.reset();
         bookingDate.value = today;
     });
@@ -163,8 +164,16 @@ if (modalOk) modalOk.addEventListener('click', closeModal);
 
 function closeModal() {
     const modal = document.getElementById('successModal');
-    if (modal) modal.classList.remove('active');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
 }
+
+/* Close modal on backdrop click */
+document.getElementById('successModal')?.addEventListener('click', e => {
+    if (e.target.classList.contains('modal')) closeModal();
+});
 
 /* ===== SCROLL ANIMATIONS ===== */
 const observer = new IntersectionObserver((entries) => {
@@ -177,6 +186,7 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
+document.body.classList.add('js-loaded');
 document.querySelectorAll('.service-card, .master-card, .portfolio-item, .accordion-item, .review-card, .about-feature, .contact-item').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
