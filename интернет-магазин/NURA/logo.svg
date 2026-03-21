@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" fill="none">
+  <!-- Background bar accent -->
+  <rect x="0" y="68" width="320" height="2" rx="1" fill="#b8956a"/>
+
+  <!-- N -->
+  <path d="M20 16h6.5l28 36h.3V16h7v48h-6.5l-28-36h-.3v36h-7V16z" fill="#0a0a0a"/>
+
+  <!-- Ū (with macron) -->
+  <path d="M82 16h7v30c0 5.5 1.2 9.2 3.5 11.2 2.4 2 5.4 3 9 3 3.6 0 6.6-1 9-3 2.3-2 3.5-5.7 3.5-11.2V16h7v31c0 8-2.3 14-6.8 17.8-4.5 3.8-10 5.7-16.4 5.7-3.8 0-7.2-.7-10.2-2.2-3-1.5-5.4-3.7-7.2-6.8-1.6-2.8-2.4-6.8-2.4-12V16z" fill="#0a0a0a"/>
+  <rect x="88" y="6" width="26" height="3" rx="1.5" fill="#b8956a"/>
+
+  <!-- R -->
+  <path d="M144 16h22c6 0 10.5 1.5 13.5 4.5 3 3 4.5 6.8 4.5 11.5 0 4-1.2 7.2-3.5 9.8-2.3 2.5-5.5 4.2-9.5 5l14.5 17.2h-9l-13.5-16h-12V64h-7V16zm7 6.5v19h14.5c3.8 0 6.7-1 8.8-2.8 2-1.8 3-4.2 3-7.2 0-3-1-5.4-3-7.2-2.1-1.8-5-2.8-8.8-2.8H151z" fill="#0a0a0a"/>
+
+  <!-- A -->
+  <path d="M218 16h8l24 48h-7.5l-6-12.5h-29L201.5 64H194l24-48zm.5 10.5L207 46h23l-11.5-19.5z" fill="#0a0a0a"/>
+
+  <!-- Decorative diamond -->
+  <path d="M268 40l6-8 6 8-6 8z" fill="#b8956a"/>
+
+  <!-- Tagline -->
+  <text x="290" y="44" font-family="Georgia,serif" font-size="9" fill="#b8956a" letter-spacing="1.5" font-style="italic">premium</text>
+</svg>
