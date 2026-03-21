@@ -107,28 +107,106 @@ let currentLang = localStorage.getItem('glowseoul_lang') || 'ru';
 /* ===== I18N TRANSLATIONS ===== */
 const I18N = {
     kz: {
+        // Nav
         'nav.catalog': 'Каталог',
         'nav.about': 'Біз туралы',
         'nav.brands': 'Брендтер',
         'nav.faq': 'FAQ',
         'nav.contact': 'Байланыс',
+        // Hero
         'hero.badge': 'Қазақстандағы ресми өкіл',
         'hero.title': 'Денсаулық пен сұлулыққа арналған корей сапасы',
         'hero.text': 'GM Plant корей өндірушісінен GUNMISU және LODELLA брендтерінің түпнұсқа өнімдері. Косметика, гигиена құралдары және БАҚ Қазақстан бойынша жеткізумен.',
         'hero.cta': 'Каталогты қарау',
         'hero.consult': 'Кеңес алу',
+        // Search
+        'search.placeholder': 'Тауарлар, брендтер бойынша іздеу...',
+        'search.popular': 'Танымал сұраулар',
+        'search.tag.bb': 'BB крем',
+        'search.tag.peptides': 'Пептидтер',
+        'search.tag.spf': 'Күннен қорғау',
+        'search.tag.mask': 'Маска',
+        'search.tag.probiotic': 'Пробиотик',
+        'search.tag.intimate': 'Интимді гигиена',
+        // Categories
         'cat.title': 'Санаттар',
         'cat.sub': 'Денсаулық пен сұлулыққа арналған табиғи шешімдер',
+        'cat.face.title': 'Бет күтімі',
+        'cat.face.desc': 'BB-крем, кремдер, бустерлер, маскалар, SPF',
+        'cat.face.count': '5 тауар',
+        'cat.intimate.title': 'Интимді гигиена',
+        'cat.intimate.desc': 'V Story ер мен әйел сериясы',
+        'cat.intimate.count': '3 тауар',
+        'cat.health.title': 'Денсаулық және БАҚ',
+        'cat.health.desc': 'Пробиотиктер, детокс, салмақ бақылау',
+        'cat.health.count': '2 тауар',
+        // Filters
+        'filter.all': 'Барлығы',
+        'filter.face': 'Бет',
+        'filter.intimate': 'Гигиена',
+        'filter.health': 'Денсаулық',
+        // About
         'about.badge': 'Компания туралы',
         'about.title': 'Кореядан табиғи шешімдер',
+        'about.p1': 'Біз Қазақстандағы <strong>GM Plant Co., Ltd.</strong> корей компаниясының ресми өкіліміз. 10 жылдан астам уақыт бойы GM Plant GMP стандарты бойынша денсаулық пен сұлулыққа арналған инновациялық өнімдерді әзірлейді және шығарады.',
+        'about.p2': '<strong>GUNMISU</strong> және <strong>LODELLA</strong> брендтері — функционалдық сусындар, БАҚ, тері күтіміне арналған косметика және озық корей технологияларын қолданған интимді гигиена құралдары.',
+        'about.feat.years': 'жыл нарықта',
+        'about.feat.gmp': 'өндіріс стандарты',
+        'about.feat.original': 'түпнұсқа өнім',
+        // Brands
         'brands.title': 'Біздің брендтер',
+        'brand.gunmisu.desc': 'Функционалдық косметика, интимді гигиена құралдары, БАҚ және денсаулыққа арналған өнімдер. Ер мен әйелдерге арналған инновациялық формулалар.',
+        'brand.lodella.desc': 'Трансферосомды технологиясы бар тері күтімінің премиум сериясы. Пептидтер мен табиғи компоненттері бар BB-кремдер, кремдер мен бустерлер.',
+        'brand.site': 'Өндірушінің сайты →',
+        // Advantages
         'adv.title': 'Неге бізді таңдайды',
+        'adv.1.title': '100% түпнұсқа',
+        'adv.1.desc': 'GM Plant өндірушісінен тікелей жеткізу, Оңтүстік Корея.',
+        'adv.2.title': 'Бүкіл ҚР бойынша жеткізу',
+        'adv.2.desc': 'Бүкіл Қазақстан бойынша жіберіледі. Егжей-тегжейін нақтылаңыз.',
+        'adv.3.title': 'Жеке кеңес беру',
+        'adv.3.desc': 'Сіздің қажеттіліктеріңізге сай өнім таңдауға көмектесеміз.',
+        'adv.4.title': 'GMP стандарты',
+        'adv.4.desc': 'Барлық өнім сертификатталған және GMP стандарты бойынша шығарылған.',
+        // How to Order
         'order.title': 'Қалай тапсырыс беруге болады',
         'order.sub': 'Тапсырысыңызға дейін үш қарапайым қадам',
+        'step.1.title': 'Тауарды таңдаңыз',
+        'step.1.desc': 'Каталогты қараңыз, сипаттамаларды оқыңыз және сізге қолайлы өнімді таңдаңыз.',
+        'step.2.title': 'WhatsApp-қа жазыңыз',
+        'step.2.desc': '«Бағасын білу» түймесін басыңыз немесе бізге жазыңыз — егжей-тегжейі мен бағасын нақтылаймыз.',
+        'step.3.title': 'Тапсырысты алыңыз',
+        'step.3.desc': 'Ыңғайлы тәсілмен төлеңіз (Kaspi, аударым, қолма-қол) және Қазақстан бойынша жеткізуді алыңыз.',
+        'step.cta': 'WhatsApp-қа жазу',
+        // FAQ
         'faq.title': 'Жиі қойылатын сұрақтар',
         'faq.sub': 'Клиенттеріміздің ең танымал сұрақтарына жауаптар',
+        'faq.q1': 'Бұл түпнұсқа өнім бе?',
+        'faq.a1': 'Иә, біз Қазақстандағы GM Plant Co., Ltd. корей компаниясының ресми өкіліміз. Барлық өнім тікелей Оңтүстік Кореядағы зауыттан жеткізіледі. Әр тауардың түпнұсқа қаптамасы, таңбалануы және сертификаттауы бар. Сұрау бойынша түпнұсқалығын растайтын құжаттарды ұсынамыз.',
+        'faq.q2': 'Жеткізу қалай жүзеге асырылады?',
+        'faq.a2': 'Бүкіл Қазақстан бойынша жеткіземіз. Алматы бойынша — курьермен 1-2 күнде. Басқа қалаларға — көлік компаниялары арқылы, мерзімі 3-7 жұмыс күні. Жеткізу құны аймаққа байланысты жеке есептеледі. Егжей-тегжейін менеджерден нақтылаңыз.',
+        'faq.q3': 'Қандай төлем тәсілдері бар?',
+        'faq.a3': 'Kaspi аударымы, Kaspi QR, банктік аударым және қолма-қол ақшамен (тек Алматы бойынша) төлем қабылдаймыз. Алдын ала төлем немесе алғанда төлем — менеджермен келісіледі.',
+        'faq.q4': 'Тауарды қайтаруға бола ма?',
+        'faq.a4': 'Тауар ашылмаған және түпнұсқа қаптамасы сақталған жағдайда алған сәттен бастап 14 күн ішінде қайтару мүмкін. Ашылған косметикалық құралдар мен гигиена құралдары ҚР заңнамасына сәйкес ауыстыруға және қайтаруға жатпайды.',
+        'faq.q5': 'Өнім сезімтал теріге жарай ма?',
+        'faq.a5': 'GUNMISU және LODELLA құралдарының көпшілігі сезімтал теріні ескере отырып жасалған және табиғи компоненттерден тұрады. Дегенмен, алғаш қолданар алдында терінің шағын аумағында сынақтан өткізуді ұсынамыз. Біздің менеджер сіздің тері түріне қолайлы құралдарды таңдауға көмектеседі.',
+        'faq.q6': 'Хабарламаларға қаншалықты тез жауап бересіздер?',
+        'faq.a6': 'Жұмыс уақытында (9:00-ден 20:00-ге дейін, демалыссыз) 5-15 минут ішінде жауап беруге тырысамыз. Жұмыс уақытынан тыс жазсаңыз, келесі күні таңертең жауап береміз.',
+        // Footer
+        'footer.desc': 'Қазақстандағы GUNMISU және LODELLA корей брендтерінің ресми өкілі. Денсаулық пен сұлулыққа арналған табиғи шешімдер.',
         'footer.rights': 'Барлық құқықтар қорғалған.',
         'footer.privacy': 'Құпиялылық саясаты',
+        'footer.col.catalog': 'Каталог',
+        'footer.col.info': 'Ақпарат',
+        'footer.col.contacts': 'Байланыс',
+        'footer.link.face': 'Бет күтімі',
+        'footer.link.intimate': 'Интимді гигиена',
+        'footer.link.health': 'Денсаулық және БАҚ',
+        'footer.link.about': 'Біз туралы',
+        'footer.link.brands': 'Брендтер',
+        'footer.link.gmplant': 'GM Plant (Корея)',
+        // Sticky bar & modal
         'bar.call': 'Қоңырау шалу',
         'modal.related': 'Осымен бірге алады'
     }
@@ -310,7 +388,7 @@ document.addEventListener('DOMContentLoaded', () => {
             );
 
             if (results.length === 0) {
-                searchResults.innerHTML = '<div class="search-no-results">Ничего не найдено. Попробуйте другой запрос.</div>';
+                searchResults.innerHTML = `<div class="search-no-results">${currentLang === 'kz' ? 'Ештеңе табылмады. Басқа сұрау жазып көріңіз.' : 'Ничего не найдено. Попробуйте другой запрос.'}</div>`;
                 return;
             }
 
@@ -472,10 +550,18 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ===== LANGUAGE TOGGLE ===== */
     const langToggle = document.getElementById('langToggle');
     const ruTexts = {};
+    const ruHtmlTexts = {};
+    const ruPlaceholders = {};
 
     // Store original Russian texts
     document.querySelectorAll('[data-i18n]').forEach(el => {
         ruTexts[el.dataset.i18n] = el.textContent;
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        ruHtmlTexts[el.dataset.i18nHtml] = el.innerHTML;
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        ruPlaceholders[el.dataset.i18nPlaceholder] = el.placeholder;
     });
 
     function applyLanguage(lang) {
@@ -488,6 +574,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 el.textContent = I18N.kz[key];
             } else if (lang === 'ru' && ruTexts[key]) {
                 el.textContent = ruTexts[key];
+            }
+        });
+
+        // Handle innerHTML translations (elements with <strong> etc.)
+        document.querySelectorAll('[data-i18n-html]').forEach(el => {
+            const key = el.dataset.i18nHtml;
+            if (lang === 'kz' && I18N.kz[key]) {
+                el.innerHTML = I18N.kz[key];
+            } else if (lang === 'ru' && ruHtmlTexts[key]) {
+                el.innerHTML = ruHtmlTexts[key];
+            }
+        });
+
+        // Handle placeholder translations
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.dataset.i18nPlaceholder;
+            if (lang === 'kz' && I18N.kz[key]) {
+                el.placeholder = I18N.kz[key];
+            } else if (lang === 'ru' && ruPlaceholders[key]) {
+                el.placeholder = ruPlaceholders[key];
             }
         });
 
