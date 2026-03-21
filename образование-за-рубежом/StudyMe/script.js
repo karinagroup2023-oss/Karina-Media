@@ -69,6 +69,28 @@ if (reviewsSlider && dotsContainer) {
 
 /* ===== BOOKING FORM ===== */
 const bookingForm = document.getElementById('bookingForm');
+const bookingProgram = document.getElementById('bookingProgram');
+const bookingCountry = document.getElementById('bookingCountry');
+
+if (bookingProgram && bookingCountry) {
+    const allOptions = [...bookingCountry.options].map(o => ({ value: o.value, text: o.textContent }));
+    const campCountries = ['', 'Англия', 'Южная Корея'];
+
+    bookingProgram.addEventListener('change', () => {
+        const prev = bookingCountry.value;
+        bookingCountry.innerHTML = '';
+        const list = bookingProgram.value === 'Языковой лагерь'
+            ? allOptions.filter(o => campCountries.includes(o.value))
+            : allOptions;
+        list.forEach(o => {
+            const opt = document.createElement('option');
+            opt.value = o.value;
+            opt.textContent = o.text;
+            if (o.value === prev) opt.selected = true;
+            bookingCountry.appendChild(opt);
+        });
+    });
+}
 
 if (bookingForm) {
     bookingForm.addEventListener('submit', e => {
