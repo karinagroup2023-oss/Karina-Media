@@ -1,0 +1,7 @@
+{
+  "name": "Финансовый Компас",
+  "description": "Smart financial management for SMBs. Tracks Cash Flow (DDS), P&L, and payment calendars with AI receipt scanning.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

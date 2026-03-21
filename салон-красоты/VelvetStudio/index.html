@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velvet Studio — Премиальный салон красоты в Алматы</title>
+    <meta name="description" content="Velvet Studio — салон красоты премиум-класса в Алматы. Стрижки, окрашивание, маникюр, макияж, косметология. Онлайн-запись 24/7.">
+    <meta name="keywords" content="салон красоты, Алматы, стрижка, окрашивание, маникюр, косметология, premium">
+    <link rel="canonical" href="https://velvetstudio.kz/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Velvet Studio — Премиальный салон красоты в Алматы">
+    <meta property="og:description" content="Премиальный салон красоты. Стрижки, окрашивание, маникюр, макияж, косметология. Запись онлайн.">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BeautySalon",
+        "name": "Velvet Studio",
+        "url": "https://velvetstudio.kz",
+        "telephone": "+7-700-555-00-77",
+        "address": { "@type": "PostalAddress", "streetAddress": "ул. Абая 52", "addressLocality": "Алматы", "addressCountry": "KZ" },
+        "openingHours": "Mo-Sa 09:00-21:00, Su 10:00-20:00",
+        "priceRange": "$$"
+    }
+    </script>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header" id="header">
+    <div class="container header__inner">
+        <a href="/" class="logo">Velvet<span>Studio</span></a>
+        <nav class="nav" id="nav">
+            <a href="#services" class="nav__link">Услуги</a>
+            <a href="#team" class="nav__link">Мастера</a>
+            <a href="#portfolio" class="nav__link">Портфолио</a>
+            <a href="#price" class="nav__link">Цены</a>
+            <a href="#reviews" class="nav__link">Отзывы</a>
+            <a href="#contact" class="nav__link">Контакты</a>
+        </nav>
+        <div class="header__right">
+            <a href="tel:+77005550077" class="header__phone">+7 700 555 00 77</a>
+            <a href="#booking" class="btn btn--primary btn--sm header__cta">Записаться</a>
+            <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+        </div>
+    </div>
+</header>
+
+<!-- Sticky CTA (mobile) -->
+<div class="sticky-cta" id="stickyCta">
+    <a href="#booking" class="btn btn--primary btn--full">Записаться онлайн</a>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero__bg">
+        <svg class="hero__pattern" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
+            <defs>
+                <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#1a1a1a"/>
+                    <stop offset="50%" stop-color="#2a2028"/>
+                    <stop offset="100%" stop-color="#1a1a1a"/>
+                </linearGradient>
+            </defs>
+            <rect width="1200" height="600" fill="url(#heroGrad)"/>
+            <circle cx="900" cy="150" r="200" fill="#d4a0b0" opacity="0.08"/>
+            <circle cx="300" cy="400" r="250" fill="#d4a0b0" opacity="0.05"/>
+            <circle cx="1100" cy="500" r="150" fill="#c9a96e" opacity="0.06"/>
+        </svg>
+    </div>
+    <div class="container hero__inner">
+        <span class="hero__label">Премиальный салон красоты</span>
+        <h1 class="hero__title">Красота —<br>это искусство</h1>
+        <p class="hero__text">Индивидуальный подход, топовые мастера и атмосфера заботы. Ваш идеальный образ начинается здесь.</p>
+        <div class="hero__actions">
+            <a href="#booking" class="btn btn--primary btn--lg">Записаться</a>
+            <a href="#portfolio" class="btn btn--ghost btn--lg">Наши работы</a>
+        </div>
+        <div class="hero__stats">
+            <div class="hero-stat">
+                <span class="hero-stat__num">12+</span>
+                <span class="hero-stat__label">лет опыта</span>
+            </div>
+            <div class="hero-stat">
+                <span class="hero-stat__num">15 000+</span>
+                <span class="hero-stat__label">довольных клиентов</span>
+            </div>
+            <div class="hero-stat">
+                <span class="hero-stat__num">20</span>
+                <span class="hero-stat__label">мастеров</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services -->
+<section class="services" id="services">
+    <div class="container">
+        <span class="section-label">Наши услуги</span>
+        <h2 class="section-title">Всё для вашей красоты</h2>
+        <div class="services__grid">
+            <div class="service-card">
+                <div class="service-card__icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="none" stroke="#d4a0b0" stroke-width="1"/><path d="M16 34c0-6 4-8 8-8s8 2 8 8M24 24c3 0 5-2 5-5s-2-5-5-5-5 2-5 5 2 5 5 5z" stroke="#1a1a1a" stroke-width="1.5" fill="none"/><path d="M18 14c1-3 3-4 6-4s5 1 6 4" stroke="#d4a0b0" stroke-width="1.5" fill="none"/></svg>
+                </div>
+                <h3 class="service-card__title">Волосы</h3>
+                <p class="service-card__desc">Стрижки, окрашивание, мелирование, кератин, ботокс, укладки</p>
+                <span class="service-card__price">от 5 000 ₸</span>
+                <a href="#price" class="service-card__link">Подробнее →</a>
+            </div>
+            <div class="service-card">
+                <div class="service-card__icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="none" stroke="#d4a0b0" stroke-width="1"/><ellipse cx="24" cy="28" rx="8" ry="5" stroke="#1a1a1a" stroke-width="1.5" fill="none"/><path d="M20 22c0-3 2-5 4-5s4 2 4 5" stroke="#d4a0b0" stroke-width="1.5" fill="none"/><circle cx="20" cy="28" r="1" fill="#d4a0b0"/><circle cx="28" cy="28" r="1" fill="#d4a0b0"/></svg>
+                </div>
+                <h3 class="service-card__title">Лицо</h3>
+                <p class="service-card__desc">Макияж, чистка, пилинг, уходовые процедуры, косметология</p>
+                <span class="service-card__price">от 8 000 ₸</span>
+                <a href="#price" class="service-card__link">Подробнее →</a>
+            </div>
+            <div class="service-card">
+                <div class="service-card__icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="none" stroke="#d4a0b0" stroke-width="1"/><ellipse cx="24" cy="26" rx="6" ry="8" stroke="#1a1a1a" stroke-width="1.5" fill="none"/><path d="M20 22l-2-4M28 22l2-4" stroke="#d4a0b0" stroke-width="1.5"/><circle cx="22" cy="26" r="1.5" fill="#d4a0b0" opacity="0.5"/><circle cx="26" cy="28" r="1" fill="#d4a0b0" opacity="0.5"/></svg>
+                </div>
+                <h3 class="service-card__title">Ногти</h3>
+                <p class="service-card__desc">Маникюр, педикюр, наращивание, дизайн, покрытие гель-лаком</p>
+                <span class="service-card__price">от 4 000 ₸</span>
+                <a href="#price" class="service-card__link">Подробнее →</a>
+            </div>
+            <div class="service-card">
+                <div class="service-card__icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="none" stroke="#d4a0b0" stroke-width="1"/><path d="M18 20c2-2 4-3 6-3s4 1 6 3" stroke="#1a1a1a" stroke-width="1.5" fill="none"/><path d="M16 26c3-1 5-1 8-1s5 0 8 1" stroke="#d4a0b0" stroke-width="1.5" fill="none"/><line x1="20" y1="28" x2="20" y2="34" stroke="#1a1a1a" stroke-width="1"/><line x1="24" y1="27" x2="24" y2="35" stroke="#1a1a1a" stroke-width="1"/><line x1="28" y1="28" x2="28" y2="34" stroke="#1a1a1a" stroke-width="1"/></svg>
+                </div>
+                <h3 class="service-card__title">Брови и ресницы</h3>
+                <p class="service-card__desc">Архитектура бровей, ламинирование, наращивание ресниц</p>
+                <span class="service-card__price">от 3 500 ₸</span>
+                <a href="#price" class="service-card__link">Подробнее →</a>
+            </div>
+            <div class="service-card">
+                <div class="service-card__icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="none" stroke="#d4a0b0" stroke-width="1"/><path d="M18 18c0-2 3-4 6-4s6 2 6 4v12c0 3-3 5-6 5s-6-2-6-5V18z" stroke="#1a1a1a" stroke-width="1.5" fill="none"/><path d="M20 22h8M20 26h8" stroke="#d4a0b0" stroke-width="1"/></svg>
+                </div>
+                <h3 class="service-card__title">Тело и SPA</h3>
+                <p class="service-card__desc">Массаж, обёртывания, эпиляция, SPA-программы</p>
+                <span class="service-card__price">от 7 000 ₸</span>
+                <a href="#price" class="service-card__link">Подробнее →</a>
+            </div>
+            <div class="service-card">
+                <div class="service-card__icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="none" stroke="#d4a0b0" stroke-width="1"/><path d="M24 14l2 4 4.5.7-3.2 3.2.8 4.5L24 24l-4.1 2.4.8-4.5-3.2-3.2L22 18z" stroke="#1a1a1a" stroke-width="1.5" fill="none"/><path d="M16 32h16" stroke="#d4a0b0" stroke-width="1.5"/><path d="M18 36h12" stroke="#d4a0b0" stroke-width="1" opacity="0.5"/></svg>
+                </div>
+                <h3 class="service-card__title">Образ для мероприятия</h3>
+                <p class="service-card__desc">Свадебный образ, вечерний макияж, укладка, экспресс-обслуживание</p>
+                <span class="service-card__price">от 25 000 ₸</span>
+                <a href="#price" class="service-card__link">Подробнее →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About -->
+<section class="about">
+    <div class="container about__inner">
+        <div class="about__media">
+            <div class="about__img about__img--main">
+                <svg viewBox="0 0 400 500"><rect width="400" height="500" rx="20" fill="#f5ede8"/><circle cx="200" cy="200" r="80" fill="#d4a0b0" opacity="0.2"/><rect x="80" y="320" width="240" height="2" fill="#d4a0b0" opacity="0.3"/><rect x="120" y="340" width="160" height="2" fill="#d4a0b0" opacity="0.2"/><text x="200" y="210" text-anchor="middle" font-family="serif" font-size="18" fill="#999">Интерьер салона</text></svg>
+            </div>
+            <div class="about__img about__img--accent">
+                <svg viewBox="0 0 250 300"><rect width="250" height="300" rx="16" fill="#efe4dd"/><circle cx="125" cy="130" r="50" fill="#d4a0b0" opacity="0.15"/><text x="125" y="140" text-anchor="middle" font-family="serif" font-size="14" fill="#999">Атмосфера</text></svg>
+            </div>
+        </div>
+        <div class="about__content">
+            <span class="section-label">О нас</span>
+            <h2 class="section-title">Пространство, где рождается красота</h2>
+            <p class="about__text">Velvet Studio — это не просто салон красоты. Это место, где забота, профессионализм и индивидуальный подход создают ваш уникальный образ.</p>
+            <p class="about__text">Наши мастера — победители международных конкурсов, прошедшие обучение в лучших школах Европы и Кореи. Мы используем только premium-косметику мировых брендов.</p>
+            <div class="about__features">
+                <div class="about-feature">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d4a0b0" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    <span>Premium косметика (Kerastase, Olaplex, NASHI)</span>
+                </div>
+                <div class="about-feature">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d4a0b0" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    <span>Стерильность и безопасность</span>
+                </div>
+                <div class="about-feature">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d4a0b0" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    <span>Комфортная приватная обстановка</span>
+                </div>
+                <div class="about-feature">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d4a0b0" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    <span>Бесплатная парковка и чай/кофе</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team -->
+<section class="team" id="team">
+    <div class="container">
+        <span class="section-label">Наша команда</span>
+        <h2 class="section-title">Мастера, которым доверяют</h2>
+        <div class="team__grid">
+            <div class="master-card">
+                <div class="master-card__img"><svg viewBox="0 0 280 340"><rect width="280" height="340" rx="16" fill="#f5ede8"/><circle cx="140" cy="140" r="60" fill="#d4a0b0" opacity="0.15"/><text x="140" y="145" text-anchor="middle" font-size="12" fill="#999">Фото</text></svg></div>
+                <div class="master-card__info">
+                    <h3 class="master-card__name">Айгерим Нурланова</h3>
+                    <span class="master-card__role">Топ-стилист • Колорист</span>
+                    <p class="master-card__exp">Опыт: 10 лет • Обучение: Vidal Sassoon London</p>
+                    <a href="#booking" class="btn btn--outline btn--sm">Записаться к мастеру</a>
+                </div>
+            </div>
+            <div class="master-card">
+                <div class="master-card__img"><svg viewBox="0 0 280 340"><rect width="280" height="340" rx="16" fill="#efe4dd"/><circle cx="140" cy="140" r="60" fill="#c9a96e" opacity="0.12"/><text x="140" y="145" text-anchor="middle" font-size="12" fill="#999">Фото</text></svg></div>
+                <div class="master-card__info">
+                    <h3 class="master-card__name">Дана Касымова</h3>
+                    <span class="master-card__role">Визажист • Бровист</span>
+                    <p class="master-card__exp">Опыт: 8 лет • Сертификат MAC Cosmetics</p>
+                    <a href="#booking" class="btn btn--outline btn--sm">Записаться к мастеру</a>
+                </div>
+            </div>
+            <div class="master-card">
+                <div class="master-card__img"><svg viewBox="0 0 280 340"><rect width="280" height="340" rx="16" fill="#f0e8ef"/><circle cx="140" cy="140" r="60" fill="#d4a0b0" opacity="0.12"/><text x="140" y="145" text-anchor="middle" font-size="12" fill="#999">Фото</text></svg></div>
+                <div class="master-card__info">
+                    <h3 class="master-card__name">Мадина Ахметова</h3>
+                    <span class="master-card__role">Мастер маникюра • Нейл-дизайн</span>
+                    <p class="master-card__exp">Опыт: 6 лет • Призёр Nail Olympics 2024</p>
+                    <a href="#booking" class="btn btn--outline btn--sm">Записаться к мастеру</a>
+                </div>
+            </div>
+            <div class="master-card">
+                <div class="master-card__img"><svg viewBox="0 0 280 340"><rect width="280" height="340" rx="16" fill="#e8ede8"/><circle cx="140" cy="140" r="60" fill="#8fad8f" opacity="0.12"/><text x="140" y="145" text-anchor="middle" font-size="12" fill="#999">Фото</text></svg></div>
+                <div class="master-card__info">
+                    <h3 class="master-card__name">Камила Жумабаева</h3>
+                    <span class="master-card__role">Косметолог • Дерматолог</span>
+                    <p class="master-card__exp">Опыт: 12 лет • Медицинская лицензия</p>
+                    <a href="#booking" class="btn btn--outline btn--sm">Записаться к мастеру</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Portfolio / Before-After -->
+<section class="portfolio" id="portfolio">
+    <div class="container">
+        <span class="section-label">Портфолио</span>
+        <h2 class="section-title">Наши работы</h2>
+        <div class="portfolio__tabs">
+            <button class="portfolio-tab active" data-tab="all">Все</button>
+            <button class="portfolio-tab" data-tab="hair">Волосы</button>
+            <button class="portfolio-tab" data-tab="nails">Ногти</button>
+            <button class="portfolio-tab" data-tab="makeup">Макияж</button>
+        </div>
+        <div class="portfolio__grid" id="portfolioGrid">
+            <div class="portfolio-item" data-type="hair">
+                <div class="portfolio-item__before-after">
+                    <div class="ba-side ba-side--before" style="background:#e8ddd5"><span>До</span></div>
+                    <div class="ba-side ba-side--after" style="background:#d4a0b0"><span>После</span></div>
+                    <input type="range" class="ba-slider" min="0" max="100" value="50" aria-label="До/После">
+                </div>
+                <p class="portfolio-item__caption">Окрашивание balayage • Мастер: Айгерим</p>
+            </div>
+            <div class="portfolio-item" data-type="hair">
+                <div class="portfolio-item__before-after">
+                    <div class="ba-side ba-side--before" style="background:#d5d0cc"><span>До</span></div>
+                    <div class="ba-side ba-side--after" style="background:#c9a96e"><span>После</span></div>
+                    <input type="range" class="ba-slider" min="0" max="100" value="50" aria-label="До/После">
+                </div>
+                <p class="portfolio-item__caption">Стрижка + тонирование • Мастер: Айгерим</p>
+            </div>
+            <div class="portfolio-item" data-type="nails">
+                <div class="portfolio-item__before-after">
+                    <div class="ba-side ba-side--before" style="background:#e8e0dc"><span>До</span></div>
+                    <div class="ba-side ba-side--after" style="background:#f0c4d4"><span>После</span></div>
+                    <input type="range" class="ba-slider" min="0" max="100" value="50" aria-label="До/После">
+                </div>
+                <p class="portfolio-item__caption">Нейл-дизайн French ombré • Мастер: Мадина</p>
+            </div>
+            <div class="portfolio-item" data-type="makeup">
+                <div class="portfolio-item__before-after">
+                    <div class="ba-side ba-side--before" style="background:#ede6e0"><span>До</span></div>
+                    <div class="ba-side ba-side--after" style="background:#d4b0a0"><span>После</span></div>
+                    <input type="range" class="ba-slider" min="0" max="100" value="50" aria-label="До/После">
+                </div>
+                <p class="portfolio-item__caption">Вечерний макияж • Мастер: Дана</p>
+            </div>
+            <div class="portfolio-item" data-type="hair">
+                <div class="portfolio-item__before-after">
+                    <div class="ba-side ba-side--before" style="background:#ddd5d0"><span>До</span></div>
+                    <div class="ba-side ba-side--after" style="background:#b08fa0"><span>После</span></div>
+                    <input type="range" class="ba-slider" min="0" max="100" value="50" aria-label="До/После">
+                </div>
+                <p class="portfolio-item__caption">Кератиновое выпрямление • Мастер: Айгерим</p>
+            </div>
+            <div class="portfolio-item" data-type="nails">
+                <div class="portfolio-item__before-after">
+                    <div class="ba-side ba-side--before" style="background:#e0ddd8"><span>До</span></div>
+                    <div class="ba-side ba-side--after" style="background:#d4c0a0"><span>После</span></div>
+                    <input type="range" class="ba-slider" min="0" max="100" value="50" aria-label="До/После">
+                </div>
+                <p class="portfolio-item__caption">Педикюр + дизайн • Мастер: Мадина</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Price List -->
+<section class="price" id="price">
+    <div class="container">
+        <span class="section-label">Прайс-лист</span>
+        <h2 class="section-title">Прозрачные цены</h2>
+        <div class="price__grid">
+            <div class="price-card">
+                <h3 class="price-card__title">Волосы</h3>
+                <div class="price-card__items">
+                    <div class="price-item"><span>Женская стрижка</span><span class="price-item__val">5 000 — 12 000 ₸</span></div>
+                    <div class="price-item"><span>Мужская стрижка</span><span class="price-item__val">3 500 — 6 000 ₸</span></div>
+                    <div class="price-item"><span>Окрашивание в один тон</span><span class="price-item__val">12 000 — 18 000 ₸</span></div>
+                    <div class="price-item"><span>Balayage / AirTouch</span><span class="price-item__val">25 000 — 45 000 ₸</span></div>
+                    <div class="price-item"><span>Кератиновое выпрямление</span><span class="price-item__val">20 000 — 35 000 ₸</span></div>
+                    <div class="price-item"><span>Ботокс для волос</span><span class="price-item__val">15 000 — 25 000 ₸</span></div>
+                    <div class="price-item"><span>Укладка</span><span class="price-item__val">5 000 — 8 000 ₸</span></div>
+                </div>
+            </div>
+            <div class="price-card">
+                <h3 class="price-card__title">Ногти</h3>
+                <div class="price-card__items">
+                    <div class="price-item"><span>Маникюр без покрытия</span><span class="price-item__val">4 000 ₸</span></div>
+                    <div class="price-item"><span>Маникюр + гель-лак</span><span class="price-item__val">6 000 — 8 000 ₸</span></div>
+                    <div class="price-item"><span>Наращивание ногтей</span><span class="price-item__val">10 000 — 15 000 ₸</span></div>
+                    <div class="price-item"><span>Педикюр + покрытие</span><span class="price-item__val">7 000 — 9 000 ₸</span></div>
+                    <div class="price-item"><span>Нейл-дизайн</span><span class="price-item__val">от 500 ₸ / ноготь</span></div>
+                    <div class="price-item"><span>Снятие покрытия</span><span class="price-item__val">2 000 ₸</span></div>
+                </div>
+            </div>
+            <div class="price-card">
+                <h3 class="price-card__title">Лицо и макияж</h3>
+                <div class="price-card__items">
+                    <div class="price-item"><span>Дневной макияж</span><span class="price-item__val">8 000 — 12 000 ₸</span></div>
+                    <div class="price-item"><span>Вечерний макияж</span><span class="price-item__val">12 000 — 18 000 ₸</span></div>
+                    <div class="price-item"><span>Свадебный образ</span><span class="price-item__val">35 000 — 60 000 ₸</span></div>
+                    <div class="price-item"><span>Чистка лица</span><span class="price-item__val">10 000 — 15 000 ₸</span></div>
+                    <div class="price-item"><span>Пилинг</span><span class="price-item__val">8 000 — 20 000 ₸</span></div>
+                    <div class="price-item"><span>Архитектура бровей</span><span class="price-item__val">3 500 — 5 000 ₸</span></div>
+                    <div class="price-item"><span>Ламинирование ресниц</span><span class="price-item__val">5 000 — 7 000 ₸</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Booking -->
+<section class="booking" id="booking">
+    <div class="container">
+        <div class="booking__card">
+            <div class="booking__info">
+                <span class="section-label" style="color:#d4a0b0">Онлайн-запись</span>
+                <h2 class="section-title" style="color:#fff">Запишитесь прямо сейчас</h2>
+                <p style="color:rgba(255,255,255,0.7);margin-bottom:24px">Выберите услугу, мастера и удобное время. Подтверждение придёт в WhatsApp.</p>
+                <div class="booking__perks">
+                    <div class="booking-perk"><span>🎁</span> Скидка 15% на первое посещение</div>
+                    <div class="booking-perk"><span>⏰</span> Запись 24/7 — без звонков</div>
+                    <div class="booking-perk"><span>✅</span> Бесплатная отмена за 3 часа</div>
+                </div>
+            </div>
+            <form class="booking__form" id="bookingForm">
+                <div class="form-group">
+                    <label>Услуга</label>
+                    <select id="bookingService" required>
+                        <option value="">Выберите услугу</option>
+                        <optgroup label="Волосы">
+                            <option>Женская стрижка</option>
+                            <option>Мужская стрижка</option>
+                            <option>Окрашивание</option>
+                            <option>Balayage / AirTouch</option>
+                            <option>Кератин / Ботокс</option>
+                            <option>Укладка</option>
+                        </optgroup>
+                        <optgroup label="Ногти">
+                            <option>Маникюр + гель-лак</option>
+                            <option>Педикюр</option>
+                            <option>Наращивание ногтей</option>
+                        </optgroup>
+                        <optgroup label="Лицо">
+                            <option>Макияж дневной/вечерний</option>
+                            <option>Свадебный образ</option>
+                            <option>Чистка лица</option>
+                            <option>Брови / Ресницы</option>
+                        </optgroup>
+                        <optgroup label="Тело">
+                            <option>Массаж</option>
+                            <option>SPA-программа</option>
+                            <option>Эпиляция</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Мастер</label>
+                    <select id="bookingMaster">
+                        <option value="">Любой мастер</option>
+                        <option>Айгерим Нурланова</option>
+                        <option>Дана Касымова</option>
+                        <option>Мадина Ахметова</option>
+                        <option>Камила Жумабаева</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Дата</label>
+                        <input type="date" id="bookingDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Время</label>
+                        <select id="bookingTime" required>
+                            <option value="">Время</option>
+                            <option>09:00</option><option>10:00</option><option>11:00</option>
+                            <option>12:00</option><option>13:00</option><option>14:00</option>
+                            <option>15:00</option><option>16:00</option><option>17:00</option>
+                            <option>18:00</option><option>19:00</option><option>20:00</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Ваше имя</label>
+                    <input type="text" placeholder="Как вас зовут?" id="bookingName" required>
+                </div>
+                <div class="form-group">
+                    <label>Телефон</label>
+                    <input type="tel" placeholder="+7 700 000 00 00" id="bookingPhone" required>
+                </div>
+                <button type="submit" class="btn btn--primary btn--full btn--lg">Записаться</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Reviews -->
+<section class="reviews" id="reviews">
+    <div class="container">
+        <span class="section-label">Отзывы</span>
+        <h2 class="section-title">Что говорят наши клиенты</h2>
+        <div class="reviews__slider" id="reviewsSlider">
+            <div class="review-card">
+                <div class="review-card__stars">★★★★★</div>
+                <p class="review-card__text">"Айгерим — волшебница! Делала balayage, цвет идеальный. Атмосфера в салоне невероятная, чувствуешь себя как дома."</p>
+                <div class="review-card__author">
+                    <div class="review-card__avatar">А</div>
+                    <div><strong>Алия М.</strong><span>Постоянный клиент • 2 года</span></div>
+                </div>
+            </div>
+            <div class="review-card">
+                <div class="review-card__stars">★★★★★</div>
+                <p class="review-card__text">"Лучший салон в Алматы! Маникюр держится 3+ недели. Мадина делает такие дизайны — все подруги спрашивают, куда хожу."</p>
+                <div class="review-card__author">
+                    <div class="review-card__avatar">Д</div>
+                    <div><strong>Динара К.</strong><span>Постоянный клиент • 1 год</span></div>
+                </div>
+            </div>
+            <div class="review-card">
+                <div class="review-card__stars">★★★★★</div>
+                <p class="review-card__text">"Камила подобрала мне идеальный уход для кожи. Результат уже через 2 процедуры. Профессионализм на высшем уровне!"</p>
+                <div class="review-card__author">
+                    <div class="review-card__avatar">С</div>
+                    <div><strong>Сабина Т.</strong><span>Клиент • 6 месяцев</span></div>
+                </div>
+            </div>
+            <div class="review-card">
+                <div class="review-card__stars">★★★★★</div>
+                <p class="review-card__text">"Свадебный образ от Даны — это просто бомба! Макияж продержался весь день, все гости были в восторге. Спасибо огромное!"</p>
+                <div class="review-card__author">
+                    <div class="review-card__avatar">М</div>
+                    <div><strong>Мария Н.</strong><span>Свадебный макияж</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="reviews__dots" id="reviewsDots"></div>
+    </div>
+</section>
+
+<!-- Instagram -->
+<section class="insta-section">
+    <div class="container">
+        <span class="section-label">Instagram</span>
+        <h2 class="section-title">@velvetstudio.kz</h2>
+        <div class="insta-grid">
+            <div class="insta-cell" style="background:linear-gradient(135deg,#f5ede8,#e8ddd5)"><svg width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="10" fill="#d4a0b0" opacity="0.3"/></svg></div>
+            <div class="insta-cell" style="background:linear-gradient(135deg,#efe4dd,#e0d5cc)"><svg width="32" height="32" viewBox="0 0 32 32"><rect x="6" y="6" width="20" height="20" rx="4" fill="#c9a96e" opacity="0.2"/></svg></div>
+            <div class="insta-cell" style="background:linear-gradient(135deg,#f0e8ef,#e5dae3)"><svg width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="14" r="6" fill="#d4a0b0" opacity="0.2"/><path d="M8 28c0-5 3.5-9 8-9s8 4 8 9" fill="#d4a0b0" opacity="0.15"/></svg></div>
+            <div class="insta-cell" style="background:linear-gradient(135deg,#e8ede8,#dde5dd)"><svg width="32" height="32" viewBox="0 0 32 32"><ellipse cx="16" cy="16" rx="8" ry="10" fill="#8fad8f" opacity="0.2"/></svg></div>
+            <div class="insta-cell" style="background:linear-gradient(135deg,#f5ede8,#efe4dd)"><svg width="32" height="32" viewBox="0 0 32 32"><path d="M16 6l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z" fill="#c9a96e" opacity="0.2"/></svg></div>
+            <div class="insta-cell" style="background:linear-gradient(135deg,#f0e0e8,#e8d0d8)"><svg width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="#d4a0b0" opacity="0.15"/></svg></div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+    <div class="container contact__inner">
+        <div class="contact__info">
+            <span class="section-label">Контакты</span>
+            <h2 class="section-title">Мы ждём вас</h2>
+            <div class="contact-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d4a0b0" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <div><strong>Адрес</strong><p>ул. Абая 52, Алматы, Казахстан</p></div>
+            </div>
+            <div class="contact-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d4a0b0" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                <div><strong>Телефон</strong><p><a href="tel:+77005550077">+7 700 555 00 77</a></p></div>
+            </div>
+            <div class="contact-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d4a0b0" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <div><strong>Часы работы</strong><p>Пн-Сб: 09:00 — 21:00<br>Вс: 10:00 — 20:00</p></div>
+            </div>
+            <div class="contact__socials">
+                <a href="#" aria-label="Instagram" class="social-link">Instagram</a>
+                <a href="https://wa.me/77005550077" aria-label="WhatsApp" class="social-link" target="_blank" rel="noopener">WhatsApp</a>
+                <a href="#" aria-label="Telegram" class="social-link">Telegram</a>
+            </div>
+        </div>
+        <div class="contact__map">
+            <div class="map-placeholder">
+                <svg viewBox="0 0 500 350"><rect width="500" height="350" rx="16" fill="#f5ede8"/><circle cx="250" cy="160" r="12" fill="#d4a0b0"/><path d="M250 148c-6.6 0-12 5.4-12 12 0 9 12 20 12 20s12-11 12-20c0-6.6-5.4-12-12-12z" fill="#d4a0b0"/><circle cx="250" cy="160" r="4" fill="#fff"/><rect x="50" y="280" width="400" height="1" fill="#d4a0b0" opacity="0.2"/><text x="250" y="310" text-anchor="middle" font-size="14" fill="#999" font-family="sans-serif">Google Maps</text><text x="250" y="330" text-anchor="middle" font-size="11" fill="#bbb" font-family="sans-serif">ул. Абая 52, Алматы</text></svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container footer__inner">
+        <div class="footer__brand">
+            <a href="/" class="logo logo--footer">Velvet<span>Studio</span></a>
+            <p>Премиальный салон красоты в Алматы. Красота — это искусство.</p>
+        </div>
+        <div class="footer__links">
+            <a href="#services">Услуги</a>
+            <a href="#team">Мастера</a>
+            <a href="#price">Цены</a>
+            <a href="#portfolio">Портфолио</a>
+            <a href="#reviews">Отзывы</a>
+            <a href="#contact">Контакты</a>
+        </div>
+        <div class="footer__bottom">
+            <p>&copy; 2026 Velvet Studio. Все права защищены.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- WhatsApp Widget -->
+<a href="https://wa.me/77005550077?text=Здравствуйте!%20Хочу%20записаться%20в%20Velvet%20Studio" class="whatsapp-widget" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- Success Modal -->
+<div class="modal" id="successModal">
+    <div class="modal__content">
+        <button class="modal__close" id="modalClose">&times;</button>
+        <div class="modal__body">
+            <svg width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#d4a0b0" opacity="0.15"/><path d="M20 32l8 8 16-16" stroke="#d4a0b0" stroke-width="3" fill="none"/></svg>
+            <h3>Вы записаны!</h3>
+            <p id="modalText">Подтверждение отправлено в WhatsApp. Ждём вас!</p>
+            <button class="btn btn--primary" id="modalOk">Отлично</button>
+        </div>
+    </div>
+</div>
+<div class="overlay" id="overlay"></div>
+
+<script src="script.js" defer></script>
+</body>
+</html>

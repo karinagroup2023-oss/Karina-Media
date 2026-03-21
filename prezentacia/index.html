@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Финансовый компас 1.0 — Пилотный практикум для малого бизнеса</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap');
+
+        :root {
+            --primary: #1a1a2e;
+            --accent: #4f46e5;
+            --accent-light: #818cf8;
+            --accent-glow: rgba(79, 70, 229, 0.3);
+            --gold: #f59e0b;
+            --gold-light: #fbbf24;
+            --green: #10b981;
+            --red: #ef4444;
+            --white: #ffffff;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-400: #9ca3af;
+            --gray-600: #4b5563;
+            --gray-800: #1f2937;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--primary);
+            color: var(--white);
+            line-height: 1.6;
+        }
+
+        .slide {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            scroll-snap-align: start;
+            position: relative;
+            overflow: hidden;
+            padding: 40px 20px;
+        }
+
+        .slide-content {
+            max-width: 1100px;
+            width: 100%;
+            z-index: 2;
+        }
+
+        /* ===== BACKGROUNDS ===== */
+        .bg-gradient-1 {
+            background: linear-gradient(135deg, #0f0c29 0%, #1a1a2e 40%, #16213e 100%);
+        }
+        .bg-gradient-2 {
+            background: linear-gradient(135deg, #16213e 0%, #1a1a2e 50%, #0f0c29 100%);
+        }
+        .bg-gradient-3 {
+            background: linear-gradient(160deg, #1a1a2e 0%, #0a192f 100%);
+        }
+        .bg-dark {
+            background: #0d0d1a;
+        }
+        .bg-accent {
+            background: linear-gradient(135deg, #4338ca 0%, #4f46e5 50%, #6366f1 100%);
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(79, 70, 229, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(245, 158, 11, 0.05) 0%, transparent 40%);
+            z-index: 0;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        .headline {
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            line-height: 1.15;
+            margin-bottom: 24px;
+        }
+
+        .headline .accent {
+            background: linear-gradient(135deg, var(--accent-light), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.35rem);
+            color: var(--gray-400);
+            font-weight: 400;
+            max-width: 700px;
+            margin-bottom: 32px;
+        }
+
+        .section-label {
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent-light);
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        /* ===== SLIDE 1 — HERO ===== */
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(79, 70, 229, 0.15);
+            border: 1px solid rgba(79, 70, 229, 0.3);
+            border-radius: 100px;
+            padding: 8px 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--accent-light);
+            margin-bottom: 32px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            margin-top: 48px;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            text-align: left;
+        }
+
+        .hero-stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--gold);
+        }
+
+        .hero-stat-label {
+            font-size: 0.85rem;
+            color: var(--gray-400);
+            margin-top: 4px;
+        }
+
+        /* ===== CTA BUTTON ===== */
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--accent) 0%, #6366f1 100%);
+            color: var(--white);
+            border: none;
+            padding: 16px 36px;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            box-shadow: 0 4px 24px var(--accent-glow);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(79, 70, 229, 0.5);
+        }
+
+        .cta-btn-outline {
+            background: transparent;
+            border: 2px solid rgba(255,255,255,0.2);
+            box-shadow: none;
+            margin-left: 16px;
+        }
+
+        .cta-btn-outline:hover {
+            border-color: var(--accent-light);
+            box-shadow: none;
+        }
+
+        /* ===== SPEAKER CARDS ===== */
+        .speakers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .speaker-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            padding: 40px 32px;
+            text-align: center;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .speaker-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--gold));
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .speaker-card:hover {
+            border-color: rgba(79, 70, 229, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .speaker-card:hover::before {
+            opacity: 1;
+        }
+
+        .speaker-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--gold));
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--white);
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+
+        .speaker-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .speaker-role {
+            font-size: 0.9rem;
+            color: var(--accent-light);
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .speaker-desc {
+            font-size: 0.9rem;
+            color: var(--gray-400);
+            line-height: 1.7;
+        }
+
+        .speaker-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 16px;
+        }
+
+        .speaker-tag {
+            background: rgba(79, 70, 229, 0.12);
+            border: 1px solid rgba(79, 70, 229, 0.2);
+            padding: 4px 14px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            color: var(--accent-light);
+            font-weight: 500;
+        }
+
+        /* ===== PAIN POINTS ===== */
+        .pain-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .pain-card {
+            background: rgba(239, 68, 68, 0.06);
+            border: 1px solid rgba(239, 68, 68, 0.15);
+            border-radius: 16px;
+            padding: 28px 24px;
+            transition: all 0.3s;
+        }
+
+        .pain-card:hover {
+            border-color: rgba(239, 68, 68, 0.35);
+            transform: translateY(-2px);
+        }
+
+        .pain-icon {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+
+        .pain-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #fca5a5;
+        }
+
+        .pain-desc {
+            font-size: 0.88rem;
+            color: var(--gray-400);
+            line-height: 1.6;
+        }
+
+        /* ===== PROGRAM DETAILS ===== */
+        .program-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .program-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 32px 28px;
+            transition: all 0.3s;
+        }
+
+        .program-card:hover {
+            border-color: rgba(79, 70, 229, 0.3);
+        }
+
+        .program-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent-light), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            line-height: 1;
+        }
+
+        .program-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .program-desc {
+            font-size: 0.88rem;
+            color: var(--gray-400);
+            line-height: 1.6;
+        }
+
+        /* ===== VALUE SECTION ===== */
+        .value-list {
+            margin-top: 32px;
+        }
+
+        .value-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            padding: 24px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .value-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .value-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .value-desc {
+            font-size: 0.88rem;
+            color: var(--gray-400);
+            line-height: 1.6;
+        }
+
+        /* ===== SCREENSHOTS ===== */
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .screenshot-wrapper {
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.03);
+            transition: all 0.4s;
+        }
+
+        .screenshot-wrapper:hover {
+            border-color: rgba(79, 70, 229, 0.4);
+            transform: scale(1.02);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+        }
+
+        .screenshot-wrapper img {
+            width: 100%;
+            display: block;
+        }
+
+        .screenshot-label {
+            padding: 14px 20px;
+            font-size: 0.85rem;
+            color: var(--gray-400);
+            font-weight: 500;
+            background: rgba(0,0,0,0.3);
+        }
+
+        /* ===== PRICING ===== */
+        .pricing-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-top: 40px;
+            align-items: start;
+        }
+
+        .pricing-market {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 36px 32px;
+        }
+
+        .pricing-offer {
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.15), rgba(99, 102, 241, 0.08));
+            border: 2px solid rgba(79, 70, 229, 0.4);
+            border-radius: 20px;
+            padding: 36px 32px;
+            position: relative;
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -14px;
+            right: 24px;
+            background: linear-gradient(135deg, var(--gold), #f59e0b);
+            color: var(--primary);
+            padding: 6px 18px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .pricing-label {
+            font-size: 0.85rem;
+            color: var(--gray-400);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .pricing-value {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .pricing-value.strikethrough {
+            color: var(--red);
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+
+        .pricing-value.highlight {
+            background: linear-gradient(135deg, var(--accent-light), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.8rem;
+        }
+
+        .pricing-detail {
+            font-size: 0.88rem;
+            color: var(--gray-400);
+            line-height: 1.8;
+            margin-top: 16px;
+        }
+
+        .pricing-detail li {
+            list-style: none;
+            padding-left: 24px;
+            position: relative;
+            margin-bottom: 6px;
+        }
+
+        .pricing-detail li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .pricing-market .pricing-detail li::before {
+            background: var(--red);
+        }
+
+        .pricing-offer .pricing-detail li::before {
+            background: var(--green);
+        }
+
+        /* ===== 5 INDICATORS ===== */
+        .indicators-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .indicator-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 28px 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .indicator-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .indicator-num {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--accent-light);
+            margin-bottom: 12px;
+        }
+
+        .indicator-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .indicator-desc {
+            font-size: 0.78rem;
+            color: var(--gray-400);
+            line-height: 1.5;
+        }
+
+        /* ===== FINAL CTA ===== */
+        .final-cta {
+            text-align: center;
+        }
+
+        .final-price {
+            font-size: clamp(3rem, 7vw, 5rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--gold-light), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 24px 0;
+        }
+
+        .final-features {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 32px 0 48px;
+        }
+
+        .final-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            color: var(--gray-200);
+        }
+
+        .final-feature .check {
+            width: 24px;
+            height: 24px;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--green);
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .limited-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 100px;
+            padding: 10px 24px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gold-light);
+            margin-top: 24px;
+        }
+
+        /* ===== COMPARISON TABLE ===== */
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 16px;
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            align-items: center;
+        }
+
+        .comparison-header {
+            font-weight: 700;
+            color: var(--gray-400);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .comparison-item {
+            font-size: 0.95rem;
+        }
+
+        .comparison-market {
+            color: var(--gray-400);
+        }
+
+        .comparison-us {
+            color: var(--green);
+            font-weight: 600;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .nav-dots {
+            position: fixed;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 0;
+        }
+
+        .nav-dot.active {
+            background: var(--accent-light);
+            box-shadow: 0 0 12px var(--accent-glow);
+        }
+
+        .nav-dot:hover {
+            background: rgba(255,255,255,0.5);
+        }
+
+        /* ===== TWO COLUMN LAYOUT ===== */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+        .delay-5 { transition-delay: 0.5s; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .speakers-grid, .two-col, .pricing-container, .screenshots-grid {
+                grid-template-columns: 1fr;
+            }
+            .indicators-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .hero-stats {
+                gap: 32px;
+            }
+            .nav-dots {
+                display: none;
+            }
+            .final-features {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .indicators-grid {
+                grid-template-columns: 1fr;
+            }
+            .pain-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation Dots -->
+<nav class="nav-dots" id="navDots"></nav>
+
+<!-- ===== SLIDE 1 — HERO ===== -->
+<section class="slide bg-gradient-1" id="slide-0">
+    <div class="slide-content">
+        <div class="hero-badge fade-in">Пилотный практикум &mdash; старт 6 апреля 2026 &mdash; количество мест ограничено</div>
+        <h1 class="headline fade-in delay-1">
+            <span class="accent">Финансовый компас</span> 1.0
+        </h1>
+        <p class="subtitle fade-in delay-2">
+            Перестаньте управлять деньгами «вслепую». 10 онлайн-встреч с финансовым аналитиком, бухгалтером и экономистом — для предпринимателей на упрощёнке, которые хотят принимать решения на основе цифр.
+        </p>
+        <div class="fade-in delay-3">
+            <a href="#slide-9" class="cta-btn">Узнать подробнее</a>
+        </div>
+        <div class="hero-stats fade-in delay-4">
+            <div class="hero-stat">
+                <div class="hero-stat-number">10</div>
+                <div class="hero-stat-label">онлайн-встреч</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-number">3</div>
+                <div class="hero-stat-label">эксперта</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-number">1-1,5 ч</div>
+                <div class="hero-stat-label">длительность встречи</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-number">6 апр</div>
+                <div class="hero-stat-label">старт практикума</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SLIDE 2 — СПИКЕР 1 & 2 ===== -->
+<section class="slide bg-gradient-2" id="slide-1">
+    <div class="slide-content">
+        <div class="section-label fade-in">Наши эксперты</div>
+        <h2 class="section-title fade-in delay-1">Те, кто поведёт вас<br>к финансовой ясности</h2>
+        <div class="speakers-grid">
+            <div class="speaker-card fade-in delay-2">
+                <div class="speaker-avatar" style="background: linear-gradient(135deg, #4f46e5, #7c3aed);">МТ</div>
+                <div class="speaker-name">Малика Толессин</div>
+                <div class="speaker-role">Финансовый аналитик &middot; FCCA &middot; 20+ лет опыта</div>
+                <div class="speaker-desc">
+                    MSc Financial Economics (City University of London). FCCA — Fellow Chartered Certified Accountant. Опыт в PwC, Baker Hughes, Tengizchevroil, Chevron. Финансовая отчётность, управленческий учёт, коммерческий анализ на проектах нефтегазового сектора.
+                </div>
+                <div class="speaker-tags">
+                    <span class="speaker-tag">FCCA</span>
+                    <span class="speaker-tag">PwC / Chevron / TCO</span>
+                    <span class="speaker-tag">Финансовый анализ</span>
+                    <span class="speaker-tag">МСФО / IFRS</span>
+                </div>
+            </div>
+            <div class="speaker-card fade-in delay-3">
+                <div class="speaker-avatar" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">ГК</div>
+                <div class="speaker-name">Гульнар Каримова</div>
+                <div class="speaker-role">Главный бухгалтер &middot; 30+ лет опыта</div>
+                <div class="speaker-desc">
+                    Магистр КИМЭП. Сертификат ACCA. Диплом профессионального бухгалтера (Италия). Опыт работы в международных компаниях: ENI Group, Baker Hughes, Agip, KPO. Финансовый координатор Каспийского региона (Казахстан, Кыргызстан, Узбекистан, Таджикистан).
+                </div>
+                <div class="speaker-tags">
+                    <span class="speaker-tag">КИМЭП</span>
+                    <span class="speaker-tag">ACCA</span>
+                    <span class="speaker-tag">ENI / Baker Hughes / Agip</span>
+                    <span class="speaker-tag">Упрощёнка 3%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SLIDE 3 — СПИКЕР 3 ===== -->
+<section class="slide bg-gradient-3" id="slide-2">
+    <div class="slide-content">
+        <div class="two-col">
+            <div>
+                <div class="section-label fade-in">Создатель программы</div>
+                <h2 class="section-title fade-in delay-1">Еркин Каримов<br><span style="color: var(--accent-light);">Создатель FinDirector</span></h2>
+                <p class="subtitle fade-in delay-2" style="margin-bottom: 24px;">
+                    Автор программы, которая заменит Excel-таблицы и даст вам дашборд с ключевыми показателями бизнеса в реальном времени.
+                </p>
+                <div class="value-list fade-in delay-3">
+                    <div class="value-item">
+                        <div class="value-icon">&#128202;</div>
+                        <div>
+                            <div class="value-title">Дашборд «Финансовый обзор»</div>
+                            <div class="value-desc">Остатки, выручка, расходы, прибыль — всё на одном экране с AI-советами</div>
+                        </div>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">&#128203;</div>
+                        <div>
+                            <div class="value-title">Управление договорами</div>
+                            <div class="value-desc">Контроль сумм, сроков и оплат по каждому проекту</div>
+                        </div>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">&#128200;</div>
+                        <div>
+                            <div class="value-title">P&L отчёт</div>
+                            <div class="value-desc">Автоматический расчёт прибылей и убытков с графиками</div>
+                        </div>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">&#128176;</div>
+                        <div>
+                            <div class="value-title">Движение денежных средств</div>
+                            <div class="value-desc">Полная картина: куда уходят и откуда приходят деньги</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="fade-in delay-4">
+                <div class="speaker-card" style="text-align: center;">
+                    <div class="speaker-avatar" style="background: linear-gradient(135deg, #10b981, #059669); width: 120px; height: 120px; font-size: 2.6rem;">ЕК</div>
+                    <div class="speaker-name" style="font-size: 1.4rem;">Еркин Каримов</div>
+                    <div class="speaker-role">Экономист &middot; Создатель FinDirector &middot; 20+ лет опыта</div>
+                    <div class="speaker-desc" style="margin-top: 16px;">
+                        Экономист с 20+ летним опытом контроля затрат на проектах стоимостью свыше US$2B (Chevron, LUKOIL, Agip/ENI, Kazakhmys). Основатель креативной студии KARINA Media. Создатель программы FinDirector для управления финансами малого бизнеса.
+                    </div>
+                    <div class="speaker-tags" style="margin-top: 20px;">
+                        <span class="speaker-tag">Chevron / LUKOIL / ENI</span>
+                        <span class="speaker-tag">FinDirector</span>
+                        <span class="speaker-tag">KARINA Media</span>
+                        <span class="speaker-tag">AI-решения</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SLIDE 4 — БОЛИ ===== -->
+<section class="slide bg-dark" id="slide-3">
+    <div class="slide-content">
+        <div class="section-label fade-in">Знакомая ситуация?</div>
+        <h2 class="section-title fade-in delay-1">Почему предприниматели<br>теряют деньги</h2>
+        <p class="subtitle fade-in delay-2">80% малых бизнесов в Казахстане не ведут управленческий учёт. Результат — решения наугад, штрафы и кассовые разрывы.</p>
+        <div class="pain-grid">
+            <div class="pain-card fade-in delay-2">
+                <div class="pain-icon">&#128561;</div>
+                <div class="pain-title">Кассовые разрывы</div>
+                <div class="pain-desc">Прибыль на бумаге есть — а платить зарплату и аренду нечем. Одна ошибка в планировании — и вы в минусе.</div>
+            </div>
+            <div class="pain-card fade-in delay-3">
+                <div class="pain-icon">&#128184;</div>
+                <div class="pain-title">Штрафы от налоговой</div>
+                <div class="pain-desc">Пропустили срок, не учли соцотчисления, ошибка в форме 910 — штраф от 50 000 тг. И это можно было предотвратить.</div>
+            </div>
+            <div class="pain-card fade-in delay-4">
+                <div class="pain-icon">&#129300;</div>
+                <div class="pain-title">Не знаете свою реальную прибыль</div>
+                <div class="pain-desc">Выручка есть, а сколько реально остаётся — непонятно. Данные в Excel, банке, приложении налоговой — всё разбросано.</div>
+            </div>
+            <div class="pain-card fade-in delay-5">
+                <div class="pain-icon">&#128181;</div>
+                <div class="pain-title">Бизнес и личные деньги — одна куча</div>
+                <div class="pain-desc">Вы — и директор, и бухгалтер. Но себе зарплату не платите. Сколько зарабатывает бизнес, а сколько вы — неизвестно.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SLIDE 5 — 5 ПОКАЗАТЕЛЕЙ ===== -->
+<section class="slide bg-gradient-1" id="slide-4">
+    <div class="slide-content">
+        <div class="section-label fade-in">Ключевые метрики</div>
+        <h2 class="section-title fade-in delay-1">5 показателей, которые должен<br>контролировать каждый владелец</h2>
+        <p class="subtitle fade-in delay-2">Если эти 5 инструментов работают — кассовых разрывов почти не бывает.</p>
+        <div class="indicators-grid">
+            <div class="indicator-card fade-in delay-1">
+                <div class="indicator-num">01</div>
+                <div class="indicator-title">Остаток денег на счетах</div>
+                <div class="indicator-desc">Сколько у вас есть прямо сейчас на всех счетах</div>
+            </div>
+            <div class="indicator-card fade-in delay-2">
+                <div class="indicator-num">02</div>
+                <div class="indicator-title">Денежный поток (Cash Flow)</div>
+                <div class="indicator-desc">Куда реально уходят деньги — операции, инвестиции, финансы</div>
+            </div>
+            <div class="indicator-card fade-in delay-3">
+                <div class="indicator-num">03</div>
+                <div class="indicator-title">Дебиторская задолженность</div>
+                <div class="indicator-desc">Кто и сколько вам должен — и когда заплатит</div>
+            </div>
+            <div class="indicator-card fade-in delay-4">
+                <div class="indicator-num">04</div>
+                <div class="indicator-title">Платёжный календарь</div>
+                <div class="indicator-desc">Кому и когда вы должны платить в ближайшие 4 недели</div>
+            </div>
+            <div class="indicator-card fade-in delay-5">
+                <div class="indicator-num">05</div>
+                <div class="indicator-title">Прибыль (P&L)</div>
+                <div class="indicator-desc">Сколько зарабатываете, тратите и сколько реально остаётся</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SLIDE 6 — ПРОГРАММА ===== -->
+<section class="slide bg-gradient-2" id="slide-5">
+    <div class="slide-content">
+        <div class="section-label fade-in">Программа</div>
+        <h2 class="section-title fade-in delay-1">Что вас ждёт на 10 встречах</h2>
+        <p class="subtitle fade-in delay-2">Онлайн, 1-2 раза в неделю по 1-1,5 часа. Практические занятия с тремя экспертами. Никакой воды — только то, что можно применить сразу.</p>
+        <div class="program-grid">
+            <div class="program-card fade-in delay-1">
+                <div class="program-number">01-03</div>
+                <div class="program-title">Финансовый фундамент</div>
+                <div class="program-desc">Разделение личных и бизнес-финансов. P&L из 5 строк. Себестоимость vs операционные расходы. Простая структура отчёта для ИП и самозанятых.</div>
+            </div>
+            <div class="program-card fade-in delay-2">
+                <div class="program-number">04-06</div>
+                <div class="program-title">Учёт и налоги</div>
+                <div class="program-desc">Упрощёнка 3% для ИП и ТОО. Обязательные соцплатежи. Платёжный календарь. Как не попасть на штрафы. Правильная форма 910.</div>
+            </div>
+            <div class="program-card fade-in delay-3">
+                <div class="program-number">07-08</div>
+                <div class="program-title">Аналитика и рост</div>
+                <div class="program-desc">Cash Flow и ДДС. Юнит-экономика продукта. Как считать, какие направления прибыльны, а какие работают вхолостую. Снижение затрат.</div>
+            </div>
+            <div class="program-card fade-in delay-4">
+                <div class="program-number">09-10</div>
+                <div class="program-title">FinDirector на практике</div>
+                <div class="program-desc">Работа с программой: дашборд, договоры, ДДС, P&L. Настройка под ваш бизнес. Ваша обратная связь формирует продукт — вы первые, кто его использует.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SLIDE 7 — СКРИНШОТЫ ===== -->
+<section class="slide bg-dark" id="slide-6">
+    <div class="slide-content">
+        <div class="section-label fade-in">Программа FinDirector</div>
+        <h2 class="section-title fade-in delay-1">Все финансы бизнеса —<br>на одном экране</h2>
+        <p class="subtitle fade-in delay-2">Участники пилотного практикума получат 6 месяцев бесплатного доступа. Программа адаптируется под ваш запрос.</p>
+        <div class="screenshot-wrapper fade-in delay-2" style="margin-top: 40px; max-width: 900px; margin-left: auto; margin-right: auto;">
+            <img src="101.png" alt="Финансовый обзор — дашборд">
+            <div class="screenshot-label">Главный дашборд: остатки на счетах, выручка, расходы, прибыль, динамика и AI-совет по управлению деньгами</div>
+        </div>
+        <div class="screenshots-grid" style="margin-top: 24px;">
+            <div class="screenshot-wrapper fade-in delay-3">
+                <img src="103.png" alt="Движение денежных средств">
+                <div class="screenshot-label">ДДС: все операции с категориями и статусами</div>
+            </div>
+            <div class="screenshot-wrapper fade-in delay-4">
+                <img src="104.png" alt="P&L отчёт">
+                <div class="screenshot-label">P&L: выручка, расходы, чистая прибыль с графиками</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SLIDE 8 — ЦЕННОСТЬ И СРАВНЕНИЕ ===== -->
+<section class="slide bg-gradient-3" id="slide-7">
+    <div class="slide-content">
+        <div class="section-label fade-in">Сравните сами</div>
+        <h2 class="section-title fade-in delay-1">Рыночная стоимость vs<br>стоимость практикума</h2>
+        <div class="pricing-container fade-in delay-2">
+            <div class="pricing-market">
+                <div class="pricing-label">Стоимость ошибок и альтернатив</div>
+                <div class="pricing-value strikethrough">от 150 000+ &#8376;</div>
+                <ul class="pricing-detail">
+                    <li>Штраф за ошибку в форме 910: от 50 000 &#8376;</li>
+                    <li>Один кассовый разрыв: потеря клиента или просрочка</li>
+                    <li>Бухгалтер на рынке: 5 000 - 15 000 &#8376;/час</li>
+                    <li>Финансовый аналитик: 15 000 - 35 000 &#8376;/час</li>
+                    <li>Даже 3-4 консультации = 60 000 - 120 000 &#8376;</li>
+                </ul>
+            </div>
+            <div class="pricing-offer">
+                <div class="pricing-badge">Пилотный практикум</div>
+                <div class="pricing-label">Всё вместе за</div>
+                <div class="pricing-value highlight">49 000 &#8376;</div>
+                <ul class="pricing-detail">
+                    <li>10 онлайн-встреч по 1-1,5 часа</li>
+                    <li>3 эксперта: аналитик, бухгалтер, экономист</li>
+                    <li>6 месяцев бесплатного доступа к FinDirector</li>
+                    <li>Эксклюзивная цена первого потока</li>
+                    <li>Программа адаптируется лично под вас</li>
+                    <li>Вы влияете на развитие продукта</li>
+                    <li>Старт: 6 апреля, 1-2 раза в неделю</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SLIDE 9 — ЧТО ПОЛУЧАТ УЧАСТНИКИ ===== -->
+<section class="slide bg-gradient-1" id="slide-8">
+    <div class="slide-content">
+        <div class="section-label fade-in">Результат</div>
+        <h2 class="section-title fade-in delay-1">Что вы получите<br>как участник практикума</h2>
+        <div class="two-col">
+            <div class="value-list fade-in delay-2">
+                <div class="value-item">
+                    <div class="value-icon">&#128218;</div>
+                    <div>
+                        <div class="value-title">Базовые финансовые знания</div>
+                        <div class="value-desc">P&L, Cash Flow, платёжный календарь, юнит-экономика — всё, что нужно для управления деньгами</div>
+                    </div>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">&#128737;</div>
+                    <div>
+                        <div class="value-title">Защита от штрафов</div>
+                        <div class="value-desc">Бухгалтер расскажет, за какими показателями следить, чтобы налоговая не стала вашей головной болью</div>
+                    </div>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">&#128201;</div>
+                    <div>
+                        <div class="value-title">Контроль финансового здоровья</div>
+                        <div class="value-desc">5 ключевых показателей каждую неделю — и кассовых разрывов почти не бывает</div>
+                    </div>
+                </div>
+            </div>
+            <div class="value-list fade-in delay-3">
+                <div class="value-item">
+                    <div class="value-icon">&#128187;</div>
+                    <div>
+                        <div class="value-title">6 месяцев FinDirector бесплатно</div>
+                        <div class="value-desc">Программа для управления финансами, адаптированная под запрос участников практикума</div>
+                    </div>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">&#128178;</div>
+                    <div>
+                        <div class="value-title">Умение снижать затраты</div>
+                        <div class="value-desc">Научитесь видеть, какие расходы — инвестиции, а какие — пустая трата денег</div>
+                    </div>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">&#129309;</div>
+                    <div>
+                        <div class="value-title">Влияние на продукт</div>
+                        <div class="value-desc">Ваш голос напрямую влияет на разработку FinDirector — программа строится под реальные потребности</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SLIDE 10 — ФИНАЛЬНЫЙ CTA ===== -->
+<section class="slide bg-accent" id="slide-9">
+    <div class="slide-content final-cta">
+        <div class="section-label fade-in" style="color: rgba(255,255,255,0.7);">Старт 6 апреля 2026</div>
+        <h2 class="headline fade-in delay-1" style="font-size: clamp(2rem, 5vw, 3.2rem);">
+            Начните управлять финансами<br>по цифрам, а не по ощущениям
+        </h2>
+        <div class="final-price fade-in delay-2">49 000 &#8376;</div>
+        <p class="fade-in delay-2" style="font-size: 1.1rem; opacity: 0.85; margin-bottom: 8px;">10 онлайн-встреч с 3 экспертами + 6 месяцев FinDirector бесплатно</p>
+        <div class="final-features fade-in delay-3">
+            <div class="final-feature">
+                <div class="check">&#10003;</div>
+                <span>Онлайн, 1-1,5 часа</span>
+            </div>
+            <div class="final-feature">
+                <div class="check">&#10003;</div>
+                <span>1-2 раза в неделю</span>
+            </div>
+            <div class="final-feature">
+                <div class="check">&#10003;</div>
+                <span>3 эксперта-практика</span>
+            </div>
+            <div class="final-feature">
+                <div class="check">&#10003;</div>
+                <span>6 мес. FinDirector бесплатно</span>
+            </div>
+        </div>
+        <div class="fade-in delay-4" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+            <a href="https://wa.me/77066567765" class="cta-btn" style="background: var(--white); color: var(--accent); font-size: 1.15rem; padding: 18px 48px;" target="_blank">
+                Записаться в практикум
+            </a>
+        </div>
+        <p class="fade-in delay-4" style="font-size: 1rem; opacity: 0.8; margin-top: 12px;">
+            WhatsApp: <a href="https://wa.me/77066567765" style="color: white; text-decoration: underline;" target="_blank">+7 706 656 77 65</a>
+        </p>
+        <div class="limited-badge fade-in delay-5">
+            Пилотный практикум &mdash; старт 6 апреля &mdash; количество мест ограничено
+        </div>
+    </div>
+</section>
+
+<script>
+    // Fade-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Navigation dots
+    const slides = document.querySelectorAll('.slide');
+    const navDots = document.getElementById('navDots');
+
+    slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'nav-dot';
+        dot.setAttribute('aria-label', `Slide ${i + 1}`);
+        dot.addEventListener('click', () => {
+            slides[i].scrollIntoView({ behavior: 'smooth' });
+        });
+        navDots.appendChild(dot);
+    });
+
+    const dotElements = navDots.querySelectorAll('.nav-dot');
+
+    const slideObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const index = Array.from(slides).indexOf(entry.target);
+                dotElements.forEach((d, i) => d.classList.toggle('active', i === index));
+            }
+        });
+    }, { threshold: 0.5 });
+
+    slides.forEach(slide => slideObserver.observe(slide));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlowSeoul — Корейская косметика с доставкой по Казахстану</title>
+    <meta name="description" content="GlowSeoul — интернет-магазин оригинальной корейской косметики в Казахстане. COSRX, Beauty of Joseon, Torriden, Anua и 100+ брендов. Бесплатная доставка от 15 000 ₸.">
+    <meta name="keywords" content="корейская косметика, k-beauty, казахстан, cosrx, beauty of joseon, уход за кожей, корейский уход">
+    <link rel="canonical" href="https://glowseoul.kz/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="GlowSeoul — Корейская косметика в Казахстане">
+    <meta property="og:description" content="Оригинальная корейская косметика с доставкой по Казахстану. 500+ средств от топовых брендов Кореи.">
+    <meta property="og:url" content="https://glowseoul.kz/">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="GlowSeoul">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✨</text></svg>">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "GlowSeoul",
+        "url": "https://glowseoul.kz",
+        "description": "Интернет-магазин оригинальной корейской косметики в Казахстане",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Алматы",
+            "addressCountry": "KZ"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+7-700-123-45-67",
+            "contactType": "customer service",
+            "availableLanguage": ["Russian", "Kazakh"]
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "GlowSeoul",
+        "url": "https://glowseoul.kz",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://glowseoul.kz/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+</head>
+<body>
+
+<!-- Announcement Bar -->
+<div class="announcement-bar">
+    <p>Бесплатная доставка при заказе от 15 000 ₸ &nbsp;|&nbsp; Скидка 15% на первый заказ: <strong>GLOW15</strong></p>
+</div>
+
+<!-- Header -->
+<header class="header" role="banner">
+    <div class="container header__inner">
+        <a href="/" class="logo">Glow<span>Seoul</span></a>
+        <nav class="nav" id="nav" role="navigation" aria-label="Основная навигация">
+            <a href="#catalog" class="nav__link">Каталог</a>
+            <a href="#brands" class="nav__link">Бренды</a>
+            <a href="#routine" class="nav__link">10-Step Routine</a>
+            <a href="#quiz" class="nav__link">Подбор ухода</a>
+            <a href="#blog" class="nav__link">Блог</a>
+            <a href="#contact" class="nav__link">Контакты</a>
+        </nav>
+        <div class="header__actions">
+            <!-- Language Switcher -->
+            <div class="lang-switcher">
+                <button class="lang-switcher__btn active" data-lang="ru">RU</button>
+                <button class="lang-switcher__btn" data-lang="kz">KZ</button>
+            </div>
+            <button class="header__btn" aria-label="Поиск" id="searchBtn">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            </button>
+            <button class="header__btn" aria-label="Избранное" id="wishlistBtn">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span class="badge" id="wishlistBadge">0</span>
+            </button>
+            <button class="header__btn" aria-label="Корзина" id="cartBtn">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                <span class="badge" id="cartBadge">0</span>
+            </button>
+            <button class="burger" id="burger" aria-label="Открыть меню">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- Search Overlay -->
+<div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Поиск по сайту">
+    <div class="search-overlay__inner">
+        <input type="text" class="search-input" placeholder="Поиск по товарам, брендам, ингредиентам..." id="searchInput" autocomplete="off">
+        <button class="search-close" id="searchClose" aria-label="Закрыть поиск">&times;</button>
+        <div class="search-results" id="searchResults"></div>
+        <div class="search-suggestions" id="searchSuggestions">
+            <p class="search-suggestions__title">Популярные запросы</p>
+            <div class="search-tags">
+                <button class="tag" data-query="муцин улитки">Муцин улитки</button>
+                <button class="tag" data-query="солнцезащитный">Солнцезащитный крем</button>
+                <button class="tag" data-query="COSRX">COSRX</button>
+                <button class="tag" data-query="тонер">Тонер-пэды</button>
+                <button class="tag" data-query="ниацинамид">Сыворотка с ниацинамидом</button>
+                <button class="tag" data-query="очищающий">Очищающий бальзам</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="container hero__inner">
+        <div class="hero__content">
+            <span class="hero__badge">K-Beauty из Сеула</span>
+            <h1 class="hero__title">Сияние начинается<br>с правильного ухода</h1>
+            <p class="hero__text">Оригинальная корейская косметика с доставкой по Казахстану. Более 500 средств от топовых брендов Кореи.</p>
+            <div class="hero__buttons">
+                <a href="#catalog" class="btn btn--primary">Смотреть каталог</a>
+                <a href="#quiz" class="btn btn--outline">Подобрать уход</a>
+            </div>
+        </div>
+        <div class="hero__visual">
+            <div class="hero__circle">
+                <div class="hero__product hero__product--1">
+                    <div class="product-float">
+                        <div class="product-float__icon">
+                            <svg width="32" height="32" viewBox="0 0 32 32"><rect x="10" y="2" width="12" height="28" rx="6" fill="#e8f5e9"/><rect x="12" y="4" width="8" height="8" rx="4" fill="#a5d6a7"/><rect x="13" y="14" width="6" height="12" rx="3" fill="#c8e6c9"/></svg>
+                        </div>
+                        <span>Тонер</span>
+                    </div>
+                </div>
+                <div class="hero__product hero__product--2">
+                    <div class="product-float">
+                        <div class="product-float__icon">
+                            <svg width="32" height="32" viewBox="0 0 32 32"><rect x="11" y="6" width="10" height="22" rx="5" fill="#fff3e0"/><circle cx="16" cy="4" r="2" fill="#ffcc80"/><rect x="13" y="12" width="6" height="10" rx="3" fill="#ffe0b2"/></svg>
+                        </div>
+                        <span>Сыворотка</span>
+                    </div>
+                </div>
+                <div class="hero__product hero__product--3">
+                    <div class="product-float">
+                        <div class="product-float__icon">
+                            <svg width="32" height="32" viewBox="0 0 32 32"><ellipse cx="16" cy="20" rx="12" ry="8" fill="#fce4ec"/><ellipse cx="16" cy="18" rx="10" ry="6" fill="#f8bbd0"/><rect x="12" y="12" width="8" height="6" rx="4" fill="#f48fb1"/></svg>
+                        </div>
+                        <span>Крем</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Categories -->
+<section class="categories" id="catalog">
+    <div class="container">
+        <h2 class="section-title">Категории</h2>
+        <div class="categories__grid">
+            <a href="#products" class="category-card" data-category-filter="skincare">
+                <div class="category-card__icon">
+                    <svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#fce4ec"/><path d="M20 10c-4 0-7 3-7 7v8c0 2 1.5 3.5 3.5 3.5h7c2 0 3.5-1.5 3.5-3.5v-8c0-4-3-7-7-7z" fill="#f48fb1"/></svg>
+                </div>
+                <h3 class="category-card__title">Уход за лицом</h3>
+                <p class="category-card__desc">Тонеры, сыворотки, кремы, маски</p>
+            </a>
+            <a href="#products" class="category-card" data-category-filter="makeup">
+                <div class="category-card__icon">
+                    <svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#f3e5f5"/><rect x="17" y="8" width="6" height="24" rx="3" fill="#ce93d8"/><circle cx="20" cy="32" r="2" fill="#ab47bc"/></svg>
+                </div>
+                <h3 class="category-card__title">Макияж</h3>
+                <p class="category-card__desc">Тинты, кушоны, тушь, палетки</p>
+            </a>
+            <a href="#products" class="category-card" data-category-filter="sun">
+                <div class="category-card__icon">
+                    <svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#fff8e1"/><circle cx="20" cy="20" r="8" fill="#ffd54f"/><g stroke="#ffc107" stroke-width="2"><line x1="20" y1="6" x2="20" y2="10"/><line x1="20" y1="30" x2="20" y2="34"/><line x1="6" y1="20" x2="10" y2="20"/><line x1="30" y1="20" x2="34" y2="20"/></g></svg>
+                </div>
+                <h3 class="category-card__title">Солнцезащита</h3>
+                <p class="category-card__desc">SPF-кремы, стики, эссенции</p>
+            </a>
+            <a href="#products" class="category-card" data-category-filter="cleansing">
+                <div class="category-card__icon">
+                    <svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#e3f2fd"/><ellipse cx="20" cy="22" rx="8" ry="10" fill="#90caf9"/><circle cx="16" cy="18" r="2" fill="#e3f2fd"/><circle cx="22" cy="16" r="1.5" fill="#e3f2fd"/></svg>
+                </div>
+                <h3 class="category-card__title">Очищение</h3>
+                <p class="category-card__desc">Пенки, бальзамы, мицеллярная вода</p>
+            </a>
+            <a href="#products" class="category-card" data-category-filter="body">
+                <div class="category-card__icon">
+                    <svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#e8f5e9"/><rect x="14" y="10" width="12" height="18" rx="6" fill="#81c784"/><rect x="16" y="12" width="8" height="6" rx="4" fill="#a5d6a7"/></svg>
+                </div>
+                <h3 class="category-card__title">Уход за телом</h3>
+                <p class="category-card__desc">Лосьоны, скрабы, масла</p>
+            </a>
+            <a href="#products" class="category-card" data-category-filter="hair">
+                <div class="category-card__icon">
+                    <svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#fff3e0"/><path d="M14 12c0-3 3-6 6-6s6 3 6 6v14c0 3-3 5-6 5s-6-2-6-5V12z" fill="#ffb74d"/></svg>
+                </div>
+                <h3 class="category-card__title">Волосы</h3>
+                <p class="category-card__desc">Шампуни, маски, сыворотки</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Skin Concerns Navigation -->
+<section class="concerns">
+    <div class="container">
+        <h2 class="section-title">Подберите по проблеме кожи</h2>
+        <div class="concerns__grid">
+            <button class="concern-pill" data-concern="acne">Акне и воспаления</button>
+            <button class="concern-pill" data-concern="pigmentation">Пигментация</button>
+            <button class="concern-pill" data-concern="dryness">Сухость и обезвоживание</button>
+            <button class="concern-pill" data-concern="aging">Морщины и anti-age</button>
+            <button class="concern-pill" data-concern="pores">Расширенные поры</button>
+            <button class="concern-pill" data-concern="dull">Тусклый цвет лица</button>
+            <button class="concern-pill" data-concern="sensitive">Чувствительная кожа</button>
+            <button class="concern-pill" data-concern="redness">Покраснения</button>
+        </div>
+    </div>
+</section>
+
+<!-- Flash Sale -->
+<section class="flash-sale">
+    <div class="container">
+        <div class="flash-sale__header">
+            <div>
+                <h2 class="section-title">Flash Sale</h2>
+                <p class="flash-sale__subtitle">Скидки до 50% на хиты</p>
+            </div>
+            <div class="countdown" id="countdown">
+                <div class="countdown__block"><span class="countdown__num" id="hours">23</span><span class="countdown__label">часов</span></div>
+                <div class="countdown__sep">:</div>
+                <div class="countdown__block"><span class="countdown__num" id="minutes">45</span><span class="countdown__label">минут</span></div>
+                <div class="countdown__sep">:</div>
+                <div class="countdown__block"><span class="countdown__num" id="seconds">12</span><span class="countdown__label">секунд</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Advanced Filters + Products -->
+<section class="products-section" id="products">
+    <div class="container">
+        <div class="products-layout">
+            <!-- Sidebar Filters -->
+            <aside class="filters-sidebar" id="filtersSidebar">
+                <div class="filters-sidebar__header">
+                    <h3>Фильтры</h3>
+                    <button class="filters-reset" id="filtersReset">Сбросить</button>
+                </div>
+
+                <div class="filter-group">
+                    <h4 class="filter-group__title" data-toggle="skintype">Тип кожи <span class="filter-arrow">▾</span></h4>
+                    <div class="filter-group__options" id="skintype">
+                        <label class="filter-checkbox"><input type="checkbox" value="dry"> Сухая</label>
+                        <label class="filter-checkbox"><input type="checkbox" value="oily"> Жирная</label>
+                        <label class="filter-checkbox"><input type="checkbox" value="combination"> Комбинированная</label>
+                        <label class="filter-checkbox"><input type="checkbox" value="sensitive"> Чувствительная</label>
+                        <label class="filter-checkbox"><input type="checkbox" value="normal"> Нормальная</label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4 class="filter-group__title" data-toggle="concern">Проблема кожи <span class="filter-arrow">▾</span></h4>
+                    <div class="filter-group__options" id="concern">
+                        <label class="filter-checkbox"><input type="checkbox" value="acne"> Акне</label>
+                        <label class="filter-checkbox"><input type="checkbox" value="pigmentation"> Пигментация</label>
+                        <label class="filter-checkbox"><input type="checkbox" value="aging"> Anti-age</label>
+                        <label class="filter-checkbox"><input type="checkbox" value="pores"> Расширенные поры</label>
+                        <label class="filter-checkbox"><input type="checkbox" value="dryness"> Сухость</label>
+                        <label class="filter-checkbox"><input type="checkbox" value="redness"> Покраснения</label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4 class="filter-group__title" data-toggle="ingredients">Ингредиенты <span class="filter-arrow">▾</span></h4>
+                    <div class="filter-group__options" id="ingredients">
+                        <label class="filter-checkbox"><input type="checkbox" value="snail"> Муцин улитки</label>
+                        <label class="filter-checkbox"><input type="checkbox" value="centella"> Центелла</label>
+                        <label class="filter-checkbox"><input type="checkbox" value="niacinamide"> Ниацинамид</label>
+                        <label class="filter-checkbox"><input type="checkbox" value="hyaluronic"> Гиалуроновая кислота</label>
+                        <label class="filter-checkbox"><input type="checkbox" value="retinol"> Ретинол</label>
+                        <label class="filter-checkbox"><input type="checkbox" value="propolis"> Прополис</label>
+                        <label class="filter-checkbox"><input type="checkbox" value="rice"> Рис</label>
+                        <label class="filter-checkbox"><input type="checkbox" value="heartleaf"> Хауттюйния</label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4 class="filter-group__title" data-toggle="brand">Бренд <span class="filter-arrow">▾</span></h4>
+                    <div class="filter-group__options" id="brand">
+                        <label class="filter-checkbox"><input type="checkbox" value="cosrx"> COSRX</label>
+                        <label class="filter-checkbox"><input type="checkbox" value="boj"> Beauty of Joseon</label>
+                        <label class="filter-checkbox"><input type="checkbox" value="torriden"> Torriden</label>
+                        <label class="filter-checkbox"><input type="checkbox" value="skin1004"> SKIN1004</label>
+                        <label class="filter-checkbox"><input type="checkbox" value="anua"> Anua</label>
+                        <label class="filter-checkbox"><input type="checkbox" value="medicube"> Medicube</label>
+                        <label class="filter-checkbox"><input type="checkbox" value="imfrom"> I'm From</label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4 class="filter-group__title">Цена</h4>
+                    <div class="filter-group__options">
+                        <div class="price-range">
+                            <input type="range" min="0" max="30000" value="30000" step="500" class="price-slider" id="priceRange">
+                            <div class="price-range__labels">
+                                <span>0 ₸</span>
+                                <span id="priceValue">30 000 ₸</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn--primary btn--full filters-apply" id="mobileFiltersClose">Применить</button>
+            </aside>
+
+            <!-- Products Grid -->
+            <div class="products-main">
+                <div class="products__topbar">
+                    <div class="products__tabs">
+                        <button class="filter-btn active" data-filter="all">Все</button>
+                        <button class="filter-btn" data-filter="bestseller">Хиты продаж</button>
+                        <button class="filter-btn" data-filter="new">Новинки</button>
+                        <button class="filter-btn" data-filter="sale">Со скидкой</button>
+                    </div>
+                    <button class="filters-toggle" id="filtersToggle">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="8" cy="6" r="2" fill="currentColor"/><circle cx="16" cy="12" r="2" fill="currentColor"/><circle cx="10" cy="18" r="2" fill="currentColor"/></svg>
+                        Фильтры
+                    </button>
+                </div>
+                <div class="products__count" id="productsCount">Показано 8 товаров</div>
+                <div class="products__grid" id="productsGrid"></div>
+                <div class="products__more">
+                    <a href="#" class="btn btn--outline">Показать все товары</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Brands -->
+<section class="brands" id="brands">
+    <div class="container">
+        <h2 class="section-title">Популярные бренды</h2>
+        <div class="brands__marquee">
+            <div class="brands__track">
+                <div class="brand-item">COSRX</div>
+                <div class="brand-item">Beauty of Joseon</div>
+                <div class="brand-item">Torriden</div>
+                <div class="brand-item">SKIN1004</div>
+                <div class="brand-item">Anua</div>
+                <div class="brand-item">Medicube</div>
+                <div class="brand-item">I'm From</div>
+                <div class="brand-item">Laneige</div>
+                <div class="brand-item">Sulwhasoo</div>
+                <div class="brand-item">Missha</div>
+                <div class="brand-item">Innisfree</div>
+                <div class="brand-item">Etude</div>
+                <div class="brand-item">COSRX</div>
+                <div class="brand-item">Beauty of Joseon</div>
+                <div class="brand-item">Torriden</div>
+                <div class="brand-item">SKIN1004</div>
+                <div class="brand-item">Anua</div>
+                <div class="brand-item">Medicube</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 10-Step Routine -->
+<section class="routine" id="routine">
+    <div class="container">
+        <h2 class="section-title">10-Step Korean Skincare Routine</h2>
+        <p class="section-subtitle">Легендарный корейский ритуал ухода за кожей. Нажмите на шаг, чтобы узнать больше.</p>
+        <div class="routine__steps">
+            <div class="routine-step">
+                <div class="routine-step__num">01</div>
+                <div class="routine-step__content">
+                    <h3>Гидрофильное масло</h3>
+                    <p>Растворяет макияж, SPF и загрязнения на масляной основе</p>
+                    <div class="routine-step__detail">
+                        <strong>Рекомендуем:</strong> Banila Co Clean It Zero, Hanskin Pore Cleansing Oil BHA<br>
+                        <strong>Когда:</strong> Вечер, 1-й шаг двойного очищения
+                    </div>
+                </div>
+                <span class="routine-step__arrow">→</span>
+            </div>
+            <div class="routine-step">
+                <div class="routine-step__num">02</div>
+                <div class="routine-step__content">
+                    <h3>Пенка для умывания</h3>
+                    <p>Удаляет остатки загрязнений на водной основе</p>
+                    <div class="routine-step__detail">
+                        <strong>Рекомендуем:</strong> COSRX Low pH Good Morning Cleanser, Rovectin Skin Essentials Conditioning Cleanser<br>
+                        <strong>Когда:</strong> Утро и вечер
+                    </div>
+                </div>
+                <span class="routine-step__arrow">→</span>
+            </div>
+            <div class="routine-step">
+                <div class="routine-step__num">03</div>
+                <div class="routine-step__content">
+                    <h3>Тонер</h3>
+                    <p>Восстанавливает pH-баланс и подготавливает кожу</p>
+                    <div class="routine-step__detail">
+                        <strong>Рекомендуем:</strong> Anua Heartleaf 77% Soothing Toner, I'm From Rice Toner<br>
+                        <strong>Когда:</strong> Утро и вечер, после очищения
+                    </div>
+                </div>
+                <span class="routine-step__arrow">→</span>
+            </div>
+            <div class="routine-step">
+                <div class="routine-step__num">04</div>
+                <div class="routine-step__content">
+                    <h3>Эссенция</h3>
+                    <p>Глубокое увлажнение и запуск клеточного обновления</p>
+                    <div class="routine-step__detail">
+                        <strong>Рекомендуем:</strong> COSRX Advanced Snail 96 Mucin Power Essence<br>
+                        <strong>Когда:</strong> Утро и вечер, после тонера
+                    </div>
+                </div>
+                <span class="routine-step__arrow">→</span>
+            </div>
+            <div class="routine-step">
+                <div class="routine-step__num">05</div>
+                <div class="routine-step__content">
+                    <h3>Сыворотка / Ампула</h3>
+                    <p>Концентрированные активные ингредиенты для решения проблем</p>
+                    <div class="routine-step__detail">
+                        <strong>Рекомендуем:</strong> Beauty of Joseon Glow Serum, Torriden DIVE-IN Serum<br>
+                        <strong>Когда:</strong> Вечер (утром — по необходимости)
+                    </div>
+                </div>
+                <span class="routine-step__arrow">→</span>
+            </div>
+            <div class="routine-step">
+                <div class="routine-step__num">06</div>
+                <div class="routine-step__content">
+                    <h3>Тканевая маска</h3>
+                    <p>Интенсивное питание 2-3 раза в неделю</p>
+                    <div class="routine-step__detail">
+                        <strong>Рекомендуем:</strong> Mediheal N.M.F Aquaring, Dr. Jart+ Dermask<br>
+                        <strong>Когда:</strong> 2-3 раза в неделю, после сыворотки
+                    </div>
+                </div>
+                <span class="routine-step__arrow">→</span>
+            </div>
+            <div class="routine-step">
+                <div class="routine-step__num">07</div>
+                <div class="routine-step__content">
+                    <h3>Крем для глаз</h3>
+                    <p>Нежный уход за деликатной зоной вокруг глаз</p>
+                    <div class="routine-step__detail">
+                        <strong>Рекомендуем:</strong> Innisfree Jeju Orchid Eye Cream, AHC Ten Revolution Real Eye Cream<br>
+                        <strong>Когда:</strong> Утро и вечер
+                    </div>
+                </div>
+                <span class="routine-step__arrow">→</span>
+            </div>
+            <div class="routine-step">
+                <div class="routine-step__num">08</div>
+                <div class="routine-step__content">
+                    <h3>Увлажняющий крем</h3>
+                    <p>Закрепляет все слои ухода и удерживает влагу</p>
+                    <div class="routine-step__detail">
+                        <strong>Рекомендуем:</strong> COSRX Oil-Free Ultra-Moisturizing Lotion, Belif The True Cream Aqua Bomb<br>
+                        <strong>Когда:</strong> Утро и вечер, финальный шаг
+                    </div>
+                </div>
+                <span class="routine-step__arrow">→</span>
+            </div>
+            <div class="routine-step">
+                <div class="routine-step__num">09</div>
+                <div class="routine-step__content">
+                    <h3>SPF-защита</h3>
+                    <p>Защита от UVA/UVB лучей — обязательный шаг утром</p>
+                    <div class="routine-step__detail">
+                        <strong>Рекомендуем:</strong> Beauty of Joseon Relief Sun SPF50+, ROUND LAB Birch Juice Moisturizing Sun Cream<br>
+                        <strong>Когда:</strong> Каждое утро, последний шаг
+                    </div>
+                </div>
+                <span class="routine-step__arrow">→</span>
+            </div>
+            <div class="routine-step">
+                <div class="routine-step__num">10</div>
+                <div class="routine-step__content">
+                    <h3>Ночная маска</h3>
+                    <p>Восстановление и питание кожи во время сна</p>
+                    <div class="routine-step__detail">
+                        <strong>Рекомендуем:</strong> Laneige Water Sleeping Mask, COSRX Ultimate Nourishing Rice Overnight Spa Mask<br>
+                        <strong>Когда:</strong> 2-3 раза в неделю вместо крема
+                    </div>
+                </div>
+                <span class="routine-step__arrow">→</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quiz -->
+<section class="quiz" id="quiz">
+    <div class="container">
+        <div class="quiz__card">
+            <div class="quiz__content" id="quizContent">
+                <!-- Step 0: Intro -->
+                <div class="quiz-step active" data-step="0">
+                    <span class="quiz__badge">Персональный подбор</span>
+                    <h2>Найдите свой идеальный уход за 60 секунд</h2>
+                    <p>Ответьте на 5 простых вопросов о вашей коже, и мы подберём персональную рутину из проверенных корейских средств.</p>
+                    <ul class="quiz__benefits">
+                        <li>Учитываем тип и состояние кожи</li>
+                        <li>Подбор по бюджету</li>
+                        <li>Рекомендации от экспертов K-beauty</li>
+                    </ul>
+                    <button class="btn btn--primary btn--lg" id="startQuiz">Пройти тест</button>
+                </div>
+
+                <!-- Step 1: Skin Type -->
+                <div class="quiz-step" data-step="1">
+                    <div class="quiz-step__header">
+                        <div class="quiz-progress"><div class="quiz-progress__bar" style="width:20%"></div></div>
+                        <span class="quiz-step__counter">1 / 5</span>
+                    </div>
+                    <h3>Какой у вас тип кожи?</h3>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-value="dry">
+                            <span class="quiz-option__icon">💧</span>
+                            <strong>Сухая</strong>
+                            <span>Стянутость, шелушения, мало себума</span>
+                        </button>
+                        <button class="quiz-option" data-value="oily">
+                            <span class="quiz-option__icon">✨</span>
+                            <strong>Жирная</strong>
+                            <span>Блеск, расширенные поры, избыток себума</span>
+                        </button>
+                        <button class="quiz-option" data-value="combination">
+                            <span class="quiz-option__icon">⚖️</span>
+                            <strong>Комбинированная</strong>
+                            <span>T-зона жирная, щёки сухие</span>
+                        </button>
+                        <button class="quiz-option" data-value="sensitive">
+                            <span class="quiz-option__icon">🌸</span>
+                            <strong>Чувствительная</strong>
+                            <span>Покраснения, раздражения, реакция на косметику</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Concerns -->
+                <div class="quiz-step" data-step="2">
+                    <div class="quiz-step__header">
+                        <div class="quiz-progress"><div class="quiz-progress__bar" style="width:40%"></div></div>
+                        <span class="quiz-step__counter">2 / 5</span>
+                    </div>
+                    <h3>Что беспокоит больше всего?</h3>
+                    <p class="quiz-step__hint">Можно выбрать несколько вариантов</p>
+                    <div class="quiz-options quiz-options--multi">
+                        <button class="quiz-option quiz-option--sm" data-value="acne">Акне и воспаления</button>
+                        <button class="quiz-option quiz-option--sm" data-value="pigmentation">Пигментные пятна</button>
+                        <button class="quiz-option quiz-option--sm" data-value="wrinkles">Морщины</button>
+                        <button class="quiz-option quiz-option--sm" data-value="pores">Расширенные поры</button>
+                        <button class="quiz-option quiz-option--sm" data-value="dryness">Сухость</button>
+                        <button class="quiz-option quiz-option--sm" data-value="dull">Тусклый цвет лица</button>
+                        <button class="quiz-option quiz-option--sm" data-value="redness">Покраснения</button>
+                        <button class="quiz-option quiz-option--sm" data-value="none">Нет особых проблем</button>
+                    </div>
+                    <button class="btn btn--primary quiz-next" data-next="3">Далее →</button>
+                </div>
+
+                <!-- Step 3: Age -->
+                <div class="quiz-step" data-step="3">
+                    <div class="quiz-step__header">
+                        <div class="quiz-progress"><div class="quiz-progress__bar" style="width:60%"></div></div>
+                        <span class="quiz-step__counter">3 / 5</span>
+                    </div>
+                    <h3>Ваш возраст?</h3>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-value="18-24">
+                            <strong>18 — 24</strong>
+                            <span>Профилактика и базовый уход</span>
+                        </button>
+                        <button class="quiz-option" data-value="25-34">
+                            <strong>25 — 34</strong>
+                            <span>Активная профилактика, увлажнение</span>
+                        </button>
+                        <button class="quiz-option" data-value="35-44">
+                            <strong>35 — 44</strong>
+                            <span>Anti-age, регенерация, лифтинг</span>
+                        </button>
+                        <button class="quiz-option" data-value="45+">
+                            <strong>45+</strong>
+                            <span>Интенсивное восстановление, плотность кожи</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Budget -->
+                <div class="quiz-step" data-step="4">
+                    <div class="quiz-step__header">
+                        <div class="quiz-progress"><div class="quiz-progress__bar" style="width:80%"></div></div>
+                        <span class="quiz-step__counter">4 / 5</span>
+                    </div>
+                    <h3>Бюджет на уход?</h3>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-value="budget">
+                            <strong>До 10 000 ₸</strong>
+                            <span>Базовый набор из 3-4 средств</span>
+                        </button>
+                        <button class="quiz-option" data-value="mid">
+                            <strong>10 000 — 25 000 ₸</strong>
+                            <span>Полноценная рутина из 5-7 средств</span>
+                        </button>
+                        <button class="quiz-option" data-value="premium">
+                            <strong>25 000 — 50 000 ₸</strong>
+                            <span>Премиальный уход + активы</span>
+                        </button>
+                        <button class="quiz-option" data-value="luxury">
+                            <strong>От 50 000 ₸</strong>
+                            <span>Лучшие средства без ограничений</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 5: Experience -->
+                <div class="quiz-step" data-step="5">
+                    <div class="quiz-step__header">
+                        <div class="quiz-progress"><div class="quiz-progress__bar" style="width:100%"></div></div>
+                        <span class="quiz-step__counter">5 / 5</span>
+                    </div>
+                    <h3>Ваш опыт с корейской косметикой?</h3>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-value="beginner">
+                            <strong>Новичок</strong>
+                            <span>Хочу попробовать K-beauty впервые</span>
+                        </button>
+                        <button class="quiz-option" data-value="intermediate">
+                            <strong>Знаком(а)</strong>
+                            <span>Уже пробовал(а) несколько средств</span>
+                        </button>
+                        <button class="quiz-option" data-value="expert">
+                            <strong>Эксперт</strong>
+                            <span>Полная рутина из корейских средств</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Result -->
+                <div class="quiz-step" data-step="result">
+                    <div class="quiz-result">
+                        <span class="quiz__badge">Ваш результат</span>
+                        <h2 id="quizResultTitle">Ваша персональная рутина готова!</h2>
+                        <div class="quiz-result__products" id="quizResultProducts"></div>
+                        <div class="quiz-result__actions">
+                            <button class="btn btn--primary" id="quizAddAll">Добавить всё в корзину</button>
+                            <button class="btn btn--outline" id="quizRestart">Пройти заново</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Blog -->
+<section class="blog" id="blog">
+    <div class="container">
+        <div class="blog__header">
+            <h2 class="section-title">GlowSeoul Journal</h2>
+            <a href="#blog" class="blog__all">Все статьи →</a>
+        </div>
+        <div class="blog__grid">
+            <article class="blog-card blog-card--featured">
+                <div class="blog-card__img" style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9)">
+                    <svg class="blog-card__svg" width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="30" fill="#81c784" opacity="0.5"/><path d="M40 15v50M25 25c8 5 22 5 30 0M25 55c8-5 22-5 30 0" stroke="#2e7d32" stroke-width="2" fill="none"/></svg>
+                    <span class="blog-card__tag">Гайд</span>
+                </div>
+                <div class="blog-card__content">
+                    <h3>Полный гайд по 10-Step Korean Skincare Routine для новичков</h3>
+                    <p>Разбираем каждый шаг корейского ухода: зачем он нужен, как выбрать средства и в каком порядке наносить.</p>
+                    <div class="blog-card__meta">
+                        <span>12 мин чтения</span>
+                        <span>18 марта 2026</span>
+                    </div>
+                </div>
+            </article>
+            <article class="blog-card">
+                <div class="blog-card__img" style="background: linear-gradient(135deg, #fff3e0, #ffe0b2)">
+                    <svg class="blog-card__svg" width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="30" r="20" fill="#ffb74d" opacity="0.4"/><path d="M30 15c-8 0-15 7-15 15s7 15 15 15 15-7 15-15" stroke="#e65100" stroke-width="2" fill="none"/><circle cx="30" cy="30" r="5" fill="#ff9800"/></svg>
+                    <span class="blog-card__tag">Ингредиенты</span>
+                </div>
+                <div class="blog-card__content">
+                    <h3>Муцин улитки: почему это главный ингредиент K-beauty</h3>
+                    <p>Как работает, кому подходит и топ-5 средств с муцином.</p>
+                    <div class="blog-card__meta">
+                        <span>7 мин</span>
+                        <span>15 марта 2026</span>
+                    </div>
+                </div>
+            </article>
+            <article class="blog-card">
+                <div class="blog-card__img" style="background: linear-gradient(135deg, #fff8e1, #fff9c4)">
+                    <svg class="blog-card__svg" width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="30" r="15" fill="#fdd835" opacity="0.5"/><g stroke="#f9a825" stroke-width="1.5"><line x1="30" y1="8" x2="30" y2="14"/><line x1="30" y1="46" x2="30" y2="52"/><line x1="8" y1="30" x2="14" y2="30"/><line x1="46" y1="30" x2="52" y2="30"/><line x1="14" y1="14" x2="18" y2="18"/><line x1="42" y1="42" x2="46" y2="46"/></g></svg>
+                    <span class="blog-card__tag">Обзор</span>
+                </div>
+                <div class="blog-card__content">
+                    <h3>ТОП-7 корейских солнцезащитных кремов 2026</h3>
+                    <p>Лёгкие текстуры, без белого следа — тестируем лучшие SPF.</p>
+                    <div class="blog-card__meta">
+                        <span>10 мин</span>
+                        <span>10 марта 2026</span>
+                    </div>
+                </div>
+            </article>
+            <article class="blog-card">
+                <div class="blog-card__img" style="background: linear-gradient(135deg, #fce4ec, #f8bbd0)">
+                    <svg class="blog-card__svg" width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="30" r="18" fill="#f48fb1" opacity="0.3"/><path d="M20 25h20M20 30h15M20 35h20" stroke="#c2185b" stroke-width="2"/><circle cx="42" cy="20" r="6" fill="#e91e63" opacity="0.4"/></svg>
+                    <span class="blog-card__tag">Советы</span>
+                </div>
+                <div class="blog-card__content">
+                    <h3>5 ошибок в уходе, которые совершает каждая вторая</h3>
+                    <p>Проверьте свою рутину и исправьте частые ошибки.</p>
+                    <div class="blog-card__meta">
+                        <span>5 мин</span>
+                        <span>5 марта 2026</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- Advantages -->
+<section class="advantages">
+    <div class="container">
+        <div class="advantages__grid">
+            <div class="advantage">
+                <div class="advantage__icon">
+                    <svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#e3f2fd"/><path d="M10 22l6 6 14-14" stroke="#1976d2" stroke-width="3" fill="none"/></svg>
+                </div>
+                <h3 class="advantage__title">100% оригинал</h3>
+                <p class="advantage__desc">Прямые поставки из Южной Кореи. Гарантия подлинности.</p>
+            </div>
+            <div class="advantage">
+                <div class="advantage__icon">
+                    <svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#e8f5e9"/><path d="M12 20h16M20 12v16" stroke="#388e3c" stroke-width="2"/><path d="M8 15l12-5 12 5v10l-12 5-12-5z" stroke="#388e3c" stroke-width="1.5" fill="none"/></svg>
+                </div>
+                <h3 class="advantage__title">Доставка по всему КЗ</h3>
+                <p class="advantage__desc">Бесплатно от 15 000 ₸. Доставка за 2-5 дней.</p>
+            </div>
+            <div class="advantage">
+                <div class="advantage__icon">
+                    <svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#fff3e0"/><circle cx="20" cy="18" r="6" stroke="#e65100" stroke-width="2" fill="none"/><path d="M12 30c0-4 3.5-7 8-7s8 3 8 7" stroke="#e65100" stroke-width="2" fill="none"/></svg>
+                </div>
+                <h3 class="advantage__title">Консультация эксперта</h3>
+                <p class="advantage__desc">Поможем подобрать уход под ваш тип кожи бесплатно.</p>
+            </div>
+            <div class="advantage">
+                <div class="advantage__icon">
+                    <svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#fce4ec"/><path d="M20 12l2 4 4.5.7-3.2 3.2.8 4.5L20 22l-4.1 2.4.8-4.5-3.2-3.2L18 16z" fill="#e91e63"/></svg>
+                </div>
+                <h3 class="advantage__title">Бонусная программа</h3>
+                <p class="advantage__desc">Копите баллы с каждой покупки и обменивайте на скидки.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Instagram -->
+<section class="instagram">
+    <div class="container">
+        <h2 class="section-title">@glowseoul.kz</h2>
+        <p class="section-subtitle">Подпишитесь на нас в Instagram за бьюти-вдохновением</p>
+        <div class="instagram__grid">
+            <div class="insta-item" style="background:linear-gradient(135deg,#fce4ec,#f8bbd0)"><svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="12" fill="#f48fb1" opacity="0.5"/><rect x="14" y="14" width="12" height="12" rx="3" stroke="#c2185b" stroke-width="1.5" fill="none"/></svg></div>
+            <div class="insta-item" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9)"><svg width="40" height="40" viewBox="0 0 40 40"><ellipse cx="20" cy="20" rx="10" ry="14" fill="#81c784" opacity="0.4"/></svg></div>
+            <div class="insta-item" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2)"><svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="8" fill="#ffb74d" opacity="0.6"/><circle cx="20" cy="20" r="14" stroke="#ff9800" stroke-width="1" fill="none"/></svg></div>
+            <div class="insta-item" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb)"><svg width="40" height="40" viewBox="0 0 40 40"><path d="M15 25c3-8 7-8 10 0" stroke="#1976d2" stroke-width="2" fill="none"/><circle cx="20" cy="16" r="4" fill="#64b5f6" opacity="0.5"/></svg></div>
+            <div class="insta-item" style="background:linear-gradient(135deg,#f3e5f5,#e1bee7)"><svg width="40" height="40" viewBox="0 0 40 40"><rect x="12" y="10" width="16" height="20" rx="8" fill="#ce93d8" opacity="0.4"/></svg></div>
+            <div class="insta-item" style="background:linear-gradient(135deg,#fff8e1,#fff9c4)"><svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="10" fill="#fdd835" opacity="0.4"/><g stroke="#f9a825" stroke-width="1"><line x1="20" y1="6" x2="20" y2="10"/><line x1="30" y1="20" x2="34" y2="20"/><line x1="6" y1="20" x2="10" y2="20"/></g></svg></div>
+        </div>
+    </div>
+</section>
+
+<!-- WhatsApp Widget -->
+<a href="https://wa.me/77001234567?text=Здравствуйте!%20Хочу%20получить%20консультацию%20по%20корейской%20косметике" class="whatsapp-widget" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- Footer -->
+<footer class="footer" id="contact" role="contentinfo">
+    <div class="container">
+        <div class="footer__grid">
+            <div class="footer__brand">
+                <a href="/" class="logo logo--footer">Glow<span>Seoul</span></a>
+                <p>Оригинальная корейская косметика с доставкой по Казахстану. Красота, проверенная Сеулом.</p>
+                <div class="footer__socials">
+                    <a href="#" aria-label="Instagram">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                    </a>
+                    <a href="#" aria-label="Telegram">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0 12 12 0 0011.944 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                    </a>
+                    <a href="https://wa.me/77001234567" aria-label="WhatsApp" target="_blank" rel="noopener">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer__col">
+                <h4>Каталог</h4>
+                <a href="#">Уход за лицом</a>
+                <a href="#">Макияж</a>
+                <a href="#">Солнцезащита</a>
+                <a href="#">Очищение</a>
+                <a href="#">Уход за телом</a>
+                <a href="#">Волосы</a>
+            </div>
+            <div class="footer__col">
+                <h4>Информация</h4>
+                <a href="#">О нас</a>
+                <a href="#">Доставка и оплата</a>
+                <a href="#">Возврат</a>
+                <a href="#">Программа лояльности</a>
+                <a href="#">Контакты</a>
+            </div>
+            <div class="footer__col">
+                <h4>Контакты</h4>
+                <a href="tel:+77001234567">+7 700 123 45 67</a>
+                <a href="mailto:hello@glowseoul.kz">hello@glowseoul.kz</a>
+                <p>Алматы, Казахстан</p>
+                <p>Пн-Сб: 10:00 — 20:00</p>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p>&copy; 2026 GlowSeoul. Все права защищены.</p>
+            <div class="footer__payments">
+                <span class="payment payment--kaspi">Kaspi</span>
+                <span class="payment">Visa</span>
+                <span class="payment">Mastercard</span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Cart Drawer -->
+<div class="cart-drawer" id="cartDrawer" role="dialog" aria-label="Корзина">
+    <div class="cart-drawer__header">
+        <h3>Корзина <span id="cartDrawerCount">(0)</span></h3>
+        <button class="cart-drawer__close" id="cartClose" aria-label="Закрыть корзину">&times;</button>
+    </div>
+    <div class="cart-drawer__shipping" id="shippingProgress">
+        <div class="shipping-bar">
+            <div class="shipping-bar__fill" id="shippingFill" style="width:0%"></div>
+        </div>
+        <p class="shipping-bar__text" id="shippingText">Добавьте товаров на 15 000 ₸ для бесплатной доставки</p>
+    </div>
+    <div class="cart-drawer__items" id="cartItems">
+        <div class="cart-empty" id="cartEmpty">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            <p>Корзина пуста</p>
+            <a href="#catalog" class="btn btn--outline" id="cartEmptyBtn">Перейти в каталог</a>
+        </div>
+    </div>
+    <div class="cart-drawer__footer" id="cartFooter" style="display:none">
+        <div class="cart-drawer__total">
+            <span>Итого:</span>
+            <strong id="cartTotal">0 ₸</strong>
+        </div>
+        <button class="btn btn--primary btn--full">Оформить заказ</button>
+        <div class="cart-drawer__pay">
+            <span>Принимаем:</span>
+            <span class="payment payment--kaspi payment--sm">Kaspi</span>
+            <span class="payment payment--sm">Visa</span>
+            <span class="payment payment--sm">MC</span>
+        </div>
+    </div>
+</div>
+
+<!-- Quick View Modal -->
+<div class="modal" id="quickViewModal" role="dialog" aria-label="Быстрый просмотр товара">
+    <div class="modal__content">
+        <button class="modal__close" id="modalClose" aria-label="Закрыть">&times;</button>
+        <div class="modal__body" id="modalBody"></div>
+    </div>
+</div>
+
+<div class="overlay" id="overlay"></div>
+
+<script src="script.js" defer></script>
+</body>
+</html>

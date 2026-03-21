@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyMe — Образование за рубежом | Языковые лагеря</title>
+    <meta name="description" content="StudyMe — помогаем поступить в лучшие зарубежные вузы. Бесплатное образование в Европе. Языковые лагеря для школьников в разных странах мира.">
+    <meta name="keywords" content="образование за рубежом, обучение за границей, языковые лагеря, поступление в вуз, бесплатное образование Европа, StudyMe">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="StudyMe — Образование за рубежом и языковые лагеря">
+    <meta property="og:description" content="Поможем поступить в зарубежный вуз. Бесплатное образование в Европе. Языковые лагеря для школьников.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://studyme.vercel.app">
+    <meta property="og:locale" content="ru_RU">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="StudyMe — Образование за рубежом и языковые лагеря">
+    <meta name="twitter:description" content="Поможем поступить в зарубежный вуз. Бесплатное образование в Европе. Языковые лагеря для школьников.">
+
+    <link rel="canonical" href="https://studyme.vercel.app">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%230f2b4c'/><text x='16' y='22' text-anchor='middle' font-size='18' fill='%23ff8a4c' font-family='sans-serif' font-weight='bold'>S</text></svg>" type="image/svg+xml">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "StudyMe",
+        "description": "Образовательное агентство. Помогаем поступить в зарубежные вузы, организуем языковые лагеря для школьников.",
+        "url": "https://studyme.vercel.app",
+        "sameAs": ["https://www.instagram.com/zarema.studyme/"],
+        "founder": {
+            "@type": "Person",
+            "name": "Зарема Мамаева"
+        },
+        "areaServed": ["KZ", "RU", "UZ", "KG"],
+        "serviceType": ["Study Abroad Consulting", "Language Camps"]
+    }
+    </script>
+</head>
+<body>
+    <!-- Skip link -->
+    <a href="#main" class="skip-link">Перейти к содержимому</a>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header" id="header">
+        <div class="container header__inner">
+            <a href="#main" class="logo">
+                <span class="logo__icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="2"/>
+                        <path d="M10 22V12l6-4 6 4v10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M10 17h12M16 8v14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+                    </svg>
+                </span>
+                <span class="logo__text">Study<span class="logo__accent">Me</span></span>
+            </a>
+            <nav class="nav" id="nav" role="navigation" aria-label="Основная навигация">
+                <a href="#programs" class="nav__link">Программы</a>
+                <a href="#countries" class="nav__link">Страны</a>
+                <a href="#camps" class="nav__link">Лагеря</a>
+                <a href="#process" class="nav__link">Как мы работаем</a>
+                <a href="#reviews" class="nav__link">Отзывы</a>
+                <a href="#contact" class="nav__link">Контакты</a>
+                <a href="#booking" class="nav__link nav__link--cta">Консультация</a>
+            </nav>
+            <button class="burger" id="burger" aria-label="Меню" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <main id="main">
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="hero__bg">
+            <div class="hero__globe">
+                <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="200" cy="200" r="180" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+                    <circle cx="200" cy="200" r="130" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+                    <circle cx="200" cy="200" r="80" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+                    <ellipse cx="200" cy="200" rx="180" ry="60" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+                    <ellipse cx="200" cy="200" rx="60" ry="180" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+                    <circle cx="120" cy="120" r="6" fill="rgba(255,138,76,0.4)"/>
+                    <circle cx="280" cy="150" r="4" fill="rgba(78,169,220,0.4)"/>
+                    <circle cx="160" cy="280" r="5" fill="rgba(255,138,76,0.3)"/>
+                    <circle cx="300" cy="260" r="3" fill="rgba(78,169,220,0.3)"/>
+                    <circle cx="200" cy="80" r="4" fill="rgba(255,255,255,0.2)"/>
+                </svg>
+            </div>
+        </div>
+        <div class="container hero__inner">
+            <div class="hero__badge">🎓 Образование за рубежом с 2018 года</div>
+            <h1 class="hero__title">Откройте мир<br><span class="hero__highlight">возможностей</span><br>для вашего ребёнка</h1>
+            <p class="hero__subtitle">Поможем поступить в лучшие зарубежные вузы на бесплатное обучение. Организуем языковые лагеря для школьников в&nbsp;разных странах мира.</p>
+            <div class="hero__actions">
+                <a href="#booking" class="btn btn--primary btn--lg">Бесплатная консультация</a>
+                <a href="#programs" class="btn btn--outline btn--lg">Наши программы</a>
+            </div>
+            <div class="hero__stats">
+                <div class="stat">
+                    <span class="stat__number">500+</span>
+                    <span class="stat__label">студентов<br>отправлено</span>
+                </div>
+                <div class="stat">
+                    <span class="stat__number">12</span>
+                    <span class="stat__label">стран<br>для обучения</span>
+                </div>
+                <div class="stat">
+                    <span class="stat__number">50+</span>
+                    <span class="stat__label">университетов-<br>партнёров</span>
+                </div>
+                <div class="stat">
+                    <span class="stat__number">95%</span>
+                    <span class="stat__label">успешных<br>зачислений</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROGRAMS ===== -->
+    <section class="section programs" id="programs">
+        <div class="container">
+            <div class="section__header">
+                <span class="section__badge">Направления</span>
+                <h2 class="section__title">Программы обучения</h2>
+                <p class="section__subtitle">Подберём идеальную образовательную программу под ваши цели и бюджет</p>
+            </div>
+            <div class="programs__grid">
+                <div class="program-card">
+                    <div class="program-card__icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <rect x="4" y="8" width="40" height="32" rx="4" stroke="currentColor" stroke-width="2"/>
+                            <path d="M4 16h40M16 8v8" stroke="currentColor" stroke-width="2"/>
+                            <path d="M14 24h20M14 30h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+                        </svg>
+                    </div>
+                    <h3 class="program-card__title">Бакалавриат</h3>
+                    <p class="program-card__text">Полное высшее образование в ведущих университетах Европы. Бесплатные программы в Чехии, Венгрии, Германии.</p>
+                    <ul class="program-card__features">
+                        <li>3-4 года обучения</li>
+                        <li>Бесплатное обучение</li>
+                        <li>Диплом EU стандарта</li>
+                    </ul>
+                    <a href="#booking" class="program-card__link">Узнать подробнее →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-card__icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <path d="M24 4L4 14l20 10 20-10L24 4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                            <path d="M8 17v14c0 0 6 8 16 8s16-8 16-8V17" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                            <path d="M44 14v16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="44" cy="32" r="2" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <h3 class="program-card__title">Магистратура</h3>
+                    <p class="program-card__text">Продвинутое образование и научная степень. Стипендиальные программы Stipendium Hungaricum, DAAD и другие.</p>
+                    <ul class="program-card__features">
+                        <li>1-2 года обучения</li>
+                        <li>Стипендии до 100%</li>
+                        <li>Международная карьера</li>
+                    </ul>
+                    <a href="#booking" class="program-card__link">Узнать подробнее →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-card__icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="2"/>
+                            <path d="M24 4c-6 8-6 32 0 40M24 4c6 8 6 32 0 40" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M6 18h36M6 30h36" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+                        </svg>
+                    </div>
+                    <h3 class="program-card__title">Языковые курсы</h3>
+                    <p class="program-card__text">Интенсивные языковые программы для подготовки к поступлению. Английский, немецкий, чешский языки.</p>
+                    <ul class="program-card__features">
+                        <li>От 4 недель</li>
+                        <li>Носители языка</li>
+                        <li>Сертификат</li>
+                    </ul>
+                    <a href="#booking" class="program-card__link">Узнать подробнее →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-card__icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <path d="M8 40V12a4 4 0 014-4h24a4 4 0 014 4v28" stroke="currentColor" stroke-width="2"/>
+                            <path d="M14 16h20M14 22h16M14 28h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+                            <path d="M4 40h40" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <rect x="28" y="30" width="8" height="10" rx="1" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="program-card__title">Подготовительный год</h3>
+                    <p class="program-card__text">Foundation-программы для адаптации и подготовки к основному обучению. Язык + академические предметы.</p>
+                    <ul class="program-card__features">
+                        <li>1 учебный год</li>
+                        <li>Адаптация в стране</li>
+                        <li>Гарантия поступления</li>
+                    </ul>
+                    <a href="#booking" class="program-card__link">Узнать подробнее →</a>
+                </div>
+
+                <div class="program-card program-card--accent">
+                    <div class="program-card__icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <circle cx="24" cy="16" r="8" stroke="currentColor" stroke-width="2"/>
+                            <path d="M12 40c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="currentColor" stroke-width="2"/>
+                            <path d="M30 12l6-6M36 6l-2 6 6-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="program-card__title">Языковые лагеря</h3>
+                    <p class="program-card__text">Каникулярные программы для школьников 10-17 лет. Изучение языка, экскурсии, спорт, новые друзья со всего мира.</p>
+                    <ul class="program-card__features">
+                        <li>Лето / Зима / Весна</li>
+                        <li>10-17 лет</li>
+                        <li>8 стран на выбор</li>
+                    </ul>
+                    <a href="#camps" class="program-card__link">Смотреть лагеря →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-card__icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <rect x="8" y="6" width="32" height="36" rx="4" stroke="currentColor" stroke-width="2"/>
+                            <path d="M16 14h16M16 20h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+                            <circle cx="24" cy="32" r="6" stroke="currentColor" stroke-width="2"/>
+                            <path d="M24 29v3l2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="program-card__title">Подготовка к экзаменам</h3>
+                    <p class="program-card__text">IELTS, TOEFL, TestDaF, Goethe-Zertifikat. Индивидуальная подготовка с гарантией результата.</p>
+                    <ul class="program-card__features">
+                        <li>Индивидуальный план</li>
+                        <li>Опытные тренеры</li>
+                        <li>Гарантия балла</li>
+                    </ul>
+                    <a href="#booking" class="program-card__link">Узнать подробнее →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== COUNTRIES ===== -->
+    <section class="section section--dark countries" id="countries">
+        <div class="container">
+            <div class="section__header">
+                <span class="section__badge">География</span>
+                <h2 class="section__title">Страны для обучения</h2>
+                <p class="section__subtitle">Мы сотрудничаем с университетами и школами в 12 странах мира</p>
+            </div>
+            <div class="countries__grid">
+                <div class="country-card">
+                    <div class="country-card__flag">🇨🇿</div>
+                    <h3 class="country-card__name">Чехия</h3>
+                    <p class="country-card__info">Бесплатное обучение на чешском языке в государственных вузах</p>
+                    <span class="country-card__tag">Бесплатно</span>
+                </div>
+                <div class="country-card">
+                    <div class="country-card__flag">🇭🇺</div>
+                    <h3 class="country-card__name">Венгрия</h3>
+                    <p class="country-card__info">Stipendium Hungaricum — полная стипендия на обучение и проживание</p>
+                    <span class="country-card__tag">Стипендия</span>
+                </div>
+                <div class="country-card">
+                    <div class="country-card__flag">🇩🇪</div>
+                    <h3 class="country-card__name">Германия</h3>
+                    <p class="country-card__info">Бесплатное обучение в государственных университетах. Стипендии DAAD</p>
+                    <span class="country-card__tag">Бесплатно</span>
+                </div>
+                <div class="country-card">
+                    <div class="country-card__flag">🇬🇧</div>
+                    <h3 class="country-card__name">Великобритания</h3>
+                    <p class="country-card__info">Престижные университеты, языковые школы и летние лагеря</p>
+                    <span class="country-card__tag">Лагеря</span>
+                </div>
+                <div class="country-card">
+                    <div class="country-card__flag">🇹🇷</div>
+                    <h3 class="country-card__name">Турция</h3>
+                    <p class="country-card__info">Türkiye Bursları — полная стипендия для иностранных студентов</p>
+                    <span class="country-card__tag">Стипендия</span>
+                </div>
+                <div class="country-card">
+                    <div class="country-card__flag">🇵🇱</div>
+                    <h3 class="country-card__name">Польша</h3>
+                    <p class="country-card__info">Доступное европейское образование с низкой стоимостью жизни</p>
+                    <span class="country-card__tag">Доступно</span>
+                </div>
+                <div class="country-card">
+                    <div class="country-card__flag">🇲🇾</div>
+                    <h3 class="country-card__name">Малайзия</h3>
+                    <p class="country-card__info">Англоязычные программы, тёплый климат, доступные цены</p>
+                    <span class="country-card__tag">Доступно</span>
+                </div>
+                <div class="country-card">
+                    <div class="country-card__flag">🇰🇷</div>
+                    <h3 class="country-card__name">Южная Корея</h3>
+                    <p class="country-card__info">Стипендии KGSP, современные кампусы, высокие технологии</p>
+                    <span class="country-card__tag">Стипендия</span>
+                </div>
+                <div class="country-card">
+                    <div class="country-card__flag">🇦🇪</div>
+                    <h3 class="country-card__name">ОАЭ</h3>
+                    <p class="country-card__info">Филиалы мировых университетов, международная среда, безопасность</p>
+                    <span class="country-card__tag">Премиум</span>
+                </div>
+                <div class="country-card">
+                    <div class="country-card__flag">🇺🇸</div>
+                    <h3 class="country-card__name">США</h3>
+                    <p class="country-card__info">Языковые лагеря, летние школы, undergraduate программы</p>
+                    <span class="country-card__tag">Лагеря</span>
+                </div>
+                <div class="country-card">
+                    <div class="country-card__flag">🇨🇦</div>
+                    <h3 class="country-card__name">Канада</h3>
+                    <p class="country-card__info">Языковые программы, path-to-university, иммиграционные перспективы</p>
+                    <span class="country-card__tag">Перспективы</span>
+                </div>
+                <div class="country-card">
+                    <div class="country-card__flag">🇲🇹</div>
+                    <h3 class="country-card__name">Мальта</h3>
+                    <p class="country-card__info">Языковые курсы и летние лагеря у Средиземного моря</p>
+                    <span class="country-card__tag">Лагеря</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CAMPS ===== -->
+    <section class="section camps" id="camps">
+        <div class="container">
+            <div class="section__header">
+                <span class="section__badge">Для школьников</span>
+                <h2 class="section__title">Языковые лагеря</h2>
+                <p class="section__subtitle">Каникулы с пользой: изучение языка, экскурсии, спорт и новые друзья со всего мира</p>
+            </div>
+
+            <div class="camps__features">
+                <div class="camp-feature">
+                    <div class="camp-feature__icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <circle cx="20" cy="14" r="8" stroke="currentColor" stroke-width="2"/>
+                            <path d="M8 36c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3>Возраст 10-17 лет</h3>
+                    <p>Программы адаптированы для разных возрастных групп</p>
+                </div>
+                <div class="camp-feature">
+                    <div class="camp-feature__icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <rect x="4" y="8" width="32" height="24" rx="3" stroke="currentColor" stroke-width="2"/>
+                            <path d="M4 14h32" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="12" cy="22" r="3" stroke="currentColor" stroke-width="1.5"/>
+                            <circle cx="20" cy="22" r="3" stroke="currentColor" stroke-width="1.5"/>
+                            <circle cx="28" cy="22" r="3" stroke="currentColor" stroke-width="1.5"/>
+                        </svg>
+                    </div>
+                    <h3>2-4 недели</h3>
+                    <p>Летние, зимние и весенние смены на каникулах</p>
+                </div>
+                <div class="camp-feature">
+                    <div class="camp-feature__icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <path d="M20 4l4 8 8 1-6 6 1.5 8L20 23l-7.5 4L14 19l-6-6 8-1 4-8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Полное погружение</h3>
+                    <p>Обучение + экскурсии + спорт + творчество на иностранном языке</p>
+                </div>
+                <div class="camp-feature">
+                    <div class="camp-feature__icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <path d="M20 4v4M20 32v4M4 20h4M32 20h4M8.5 8.5l2.8 2.8M28.7 28.7l2.8 2.8M8.5 31.5l2.8-2.8M28.7 11.3l2.8-2.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="20" cy="20" r="8" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3>Безопасность 24/7</h3>
+                    <p>Кураторы, страховка, трансфер и постоянная связь с родителями</p>
+                </div>
+            </div>
+
+            <div class="camps__grid">
+                <div class="camp-card">
+                    <div class="camp-card__image">
+                        <svg viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="240" fill="#1a3a5c"/>
+                            <circle cx="320" cy="60" r="30" fill="rgba(255,138,76,0.3)"/>
+                            <rect x="40" y="140" width="80" height="60" rx="4" fill="rgba(255,255,255,0.1)"/>
+                            <rect x="140" y="120" width="60" height="80" rx="4" fill="rgba(255,255,255,0.08)"/>
+                            <rect x="220" y="150" width="70" height="50" rx="4" fill="rgba(255,255,255,0.06)"/>
+                            <path d="M0 200 Q100 170 200 190 Q300 210 400 180 V240 H0Z" fill="rgba(255,255,255,0.05)"/>
+                            <text x="200" y="130" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="14" font-family="Inter">Великобритания</text>
+                        </svg>
+                    </div>
+                    <div class="camp-card__body">
+                        <div class="camp-card__tags">
+                            <span class="tag tag--lang">Английский</span>
+                            <span class="tag tag--season">Лето</span>
+                        </div>
+                        <h3 class="camp-card__title">Лондон, Великобритания</h3>
+                        <p class="camp-card__text">Обучение в языковой школе + экскурсии по Лондону, Оксфорду и Кембриджу. Проживание в резиденции.</p>
+                        <div class="camp-card__meta">
+                            <span>🎂 12-17 лет</span>
+                            <span>📅 2-4 недели</span>
+                        </div>
+                        <a href="#booking" class="btn btn--primary btn--sm">Забронировать</a>
+                    </div>
+                </div>
+
+                <div class="camp-card">
+                    <div class="camp-card__image">
+                        <svg viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="240" fill="#2d4a1e"/>
+                            <circle cx="60" cy="50" r="25" fill="rgba(255,220,100,0.3)"/>
+                            <path d="M100 200 L140 120 L180 200Z" fill="rgba(255,255,255,0.08)"/>
+                            <path d="M200 200 L260 100 L320 200Z" fill="rgba(255,255,255,0.06)"/>
+                            <path d="M0 210 Q100 190 200 200 Q300 210 400 195 V240 H0Z" fill="rgba(255,255,255,0.05)"/>
+                            <text x="200" y="130" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="14" font-family="Inter">Турция</text>
+                        </svg>
+                    </div>
+                    <div class="camp-card__body">
+                        <div class="camp-card__tags">
+                            <span class="tag tag--lang">Английский</span>
+                            <span class="tag tag--season">Лето / Зима</span>
+                        </div>
+                        <h3 class="camp-card__title">Анталья, Турция</h3>
+                        <p class="camp-card__text">Языковой лагерь на берегу моря. Английский + спорт + творческие мастерские. Комфортный отель.</p>
+                        <div class="camp-card__meta">
+                            <span>🎂 10-16 лет</span>
+                            <span>📅 2 недели</span>
+                        </div>
+                        <a href="#booking" class="btn btn--primary btn--sm">Забронировать</a>
+                    </div>
+                </div>
+
+                <div class="camp-card">
+                    <div class="camp-card__image">
+                        <svg viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="240" fill="#1e3a4a"/>
+                            <circle cx="340" cy="50" r="28" fill="rgba(255,138,76,0.25)"/>
+                            <rect x="60" y="130" width="100" height="70" rx="4" fill="rgba(255,255,255,0.08)"/>
+                            <rect x="180" y="150" width="80" height="50" rx="4" fill="rgba(255,255,255,0.06)"/>
+                            <path d="M0 200 Q150 180 250 200 Q350 220 400 190 V240 H0Z" fill="rgba(255,255,255,0.05)"/>
+                            <text x="200" y="130" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="14" font-family="Inter">Мальта</text>
+                        </svg>
+                    </div>
+                    <div class="camp-card__body">
+                        <div class="camp-card__tags">
+                            <span class="tag tag--lang">Английский</span>
+                            <span class="tag tag--season">Лето / Весна</span>
+                        </div>
+                        <h3 class="camp-card__title">Сент-Джулианс, Мальта</h3>
+                        <p class="camp-card__text">Средиземноморский лагерь: английский язык, водные виды спорта, исторические экскурсии.</p>
+                        <div class="camp-card__meta">
+                            <span>🎂 11-17 лет</span>
+                            <span>📅 2-3 недели</span>
+                        </div>
+                        <a href="#booking" class="btn btn--primary btn--sm">Забронировать</a>
+                    </div>
+                </div>
+
+                <div class="camp-card">
+                    <div class="camp-card__image">
+                        <svg viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="240" fill="#3a2a4a"/>
+                            <circle cx="300" cy="70" r="22" fill="rgba(255,220,100,0.2)"/>
+                            <rect x="80" y="140" width="90" height="60" rx="4" fill="rgba(255,255,255,0.08)"/>
+                            <rect x="200" y="130" width="110" height="70" rx="4" fill="rgba(255,255,255,0.06)"/>
+                            <path d="M0 205 Q100 185 200 200 Q300 215 400 195 V240 H0Z" fill="rgba(255,255,255,0.05)"/>
+                            <text x="200" y="130" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="14" font-family="Inter">Южная Корея</text>
+                        </svg>
+                    </div>
+                    <div class="camp-card__body">
+                        <div class="camp-card__tags">
+                            <span class="tag tag--lang">Корейский / Англ.</span>
+                            <span class="tag tag--season">Лето</span>
+                        </div>
+                        <h3 class="camp-card__title">Сеул, Южная Корея</h3>
+                        <p class="camp-card__text">K-culture лагерь: изучение корейского, тхэквондо, K-pop танцы, экскурсии по Сеулу.</p>
+                        <div class="camp-card__meta">
+                            <span>🎂 13-17 лет</span>
+                            <span>📅 2 недели</span>
+                        </div>
+                        <a href="#booking" class="btn btn--primary btn--sm">Забронировать</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROCESS ===== -->
+    <section class="section section--light process" id="process">
+        <div class="container">
+            <div class="section__header">
+                <span class="section__badge">Этапы</span>
+                <h2 class="section__title">Как мы работаем</h2>
+                <p class="section__subtitle">От первой консультации до зачисления — сопровождаем на каждом шаге</p>
+            </div>
+            <div class="process__steps">
+                <div class="process-step">
+                    <div class="process-step__number">01</div>
+                    <h3 class="process-step__title">Консультация</h3>
+                    <p class="process-step__text">Бесплатно обсуждаем ваши цели, бюджет и предпочтения. Подбираем подходящие страны и программы.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__number">02</div>
+                    <h3 class="process-step__title">Подбор программы</h3>
+                    <p class="process-step__text">Анализируем требования вузов, сроки подачи документов. Составляем персональный план поступления.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__number">03</div>
+                    <h3 class="process-step__title">Подготовка документов</h3>
+                    <p class="process-step__text">Помогаем собрать и оформить все документы: аттестат, мотивационное письмо, рекомендации, портфолио.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__number">04</div>
+                    <h3 class="process-step__title">Подача и зачисление</h3>
+                    <p class="process-step__text">Подаём заявки в выбранные вузы. Ведём переписку с приёмными комиссиями. Получаем приглашение.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__number">05</div>
+                    <h3 class="process-step__title">Виза и переезд</h3>
+                    <p class="process-step__text">Оформляем студенческую визу, бронируем жильё, организуем трансфер. Помогаем с адаптацией на месте.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT / FOUNDER ===== -->
+    <section class="section about" id="about">
+        <div class="container">
+            <div class="about__inner">
+                <div class="about__photo">
+                    <svg viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="500" rx="16" fill="#1a2744"/>
+                        <circle cx="200" cy="180" r="80" fill="rgba(255,255,255,0.08)"/>
+                        <circle cx="200" cy="160" r="40" fill="rgba(255,255,255,0.1)"/>
+                        <path d="M140 240 Q200 280 260 240 Q280 300 260 360 H140 Q120 300 140 240Z" fill="rgba(255,255,255,0.08)"/>
+                        <text x="200" y="440" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="14" font-family="Inter">Фото основателя</text>
+                    </svg>
+                </div>
+                <div class="about__content">
+                    <span class="section__badge">Основатель</span>
+                    <h2 class="section__title section__title--left">Зарема Мамаева</h2>
+                    <p class="about__role">Основатель StudyMe · Эксперт по зарубежному образованию</p>
+                    <p class="about__text">Помогаю студентам и их родителям осуществить мечту о качественном образовании за рубежом. За годы работы более 500 моих студентов поступили в университеты Европы, Азии и Ближнего Востока.</p>
+                    <p class="about__text">Моя миссия — сделать зарубежное образование доступным. Я лично знаю каждый вуз и каждую программу, которые рекомендую, потому что посетила их сама.</p>
+                    <div class="about__highlights">
+                        <div class="about__highlight">
+                            <strong>500+</strong>
+                            <span>студентов отправлено</span>
+                        </div>
+                        <div class="about__highlight">
+                            <strong>8 лет</strong>
+                            <span>в сфере образования</span>
+                        </div>
+                        <div class="about__highlight">
+                            <strong>12 стран</strong>
+                            <span>лично посещены</span>
+                        </div>
+                    </div>
+                    <a href="https://www.instagram.com/zarema.studyme/" target="_blank" rel="noopener" class="about__instagram">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5"/>
+                            <circle cx="12" cy="12" r="5"/>
+                            <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
+                        </svg>
+                        @zarema.studyme
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== REVIEWS ===== -->
+    <section class="section section--dark reviews" id="reviews">
+        <div class="container">
+            <div class="section__header">
+                <span class="section__badge">Отзывы</span>
+                <h2 class="section__title">Истории наших студентов</h2>
+                <p class="section__subtitle">Реальные отзывы тех, кто уже учится за рубежом с нашей помощью</p>
+            </div>
+            <div class="reviews__slider" id="reviewsSlider" tabindex="0" role="region" aria-label="Слайдер отзывов">
+                <div class="review-card">
+                    <div class="review-card__header">
+                        <div class="review-card__avatar" aria-hidden="true">А</div>
+                        <div>
+                            <div class="review-card__name">Айдана К.</div>
+                            <div class="review-card__uni">Карлов Университет, Прага</div>
+                        </div>
+                    </div>
+                    <div class="review-card__stars" role="img" aria-label="Рейтинг: 5 из 5">★★★★★</div>
+                    <p class="review-card__text">«StudyMe помогли мне поступить на бесплатное обучение в Чехию. Зарема сопровождала меня на каждом этапе — от выбора вуза до получения визы. Сейчас я учусь на 2-м курсе и очень счастлива!»</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-card__header">
+                        <div class="review-card__avatar" aria-hidden="true">Д</div>
+                        <div>
+                            <div class="review-card__name">Дамир Т.</div>
+                            <div class="review-card__uni">Будапештский университет, Венгрия</div>
+                        </div>
+                    </div>
+                    <div class="review-card__stars" role="img" aria-label="Рейтинг: 5 из 5">★★★★★</div>
+                    <p class="review-card__text">«Получил стипендию Stipendium Hungaricum благодаря команде StudyMe. Они помогли с мотивационным письмом и подготовкой к интервью. Учусь бесплатно, ещё и стипендию получаю!»</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-card__header">
+                        <div class="review-card__avatar" aria-hidden="true">М</div>
+                        <div>
+                            <div class="review-card__name">Мадина С.</div>
+                            <div class="review-card__uni">Мама ученицы, лагерь в Мальте</div>
+                        </div>
+                    </div>
+                    <div class="review-card__stars" role="img" aria-label="Рейтинг: 5 из 5">★★★★★</div>
+                    <p class="review-card__text">«Отправили дочь в языковой лагерь на Мальту. Ребёнок вернулся в восторге! За 3 недели подтянула английский, нашла друзей из разных стран. В следующем году поедем снова.»</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-card__header">
+                        <div class="review-card__avatar" aria-hidden="true">Т</div>
+                        <div>
+                            <div class="review-card__name">Тимур Б.</div>
+                            <div class="review-card__uni">TU Munich, Германия</div>
+                        </div>
+                    </div>
+                    <div class="review-card__stars" role="img" aria-label="Рейтинг: 5 из 5">★★★★★</div>
+                    <p class="review-card__text">«Мечтал учиться в Германии, но не знал с чего начать. StudyMe составили план, помогли с TestDaF и документами. Сейчас учусь на инженера в Мюнхене — бесплатно!»</p>
+                </div>
+            </div>
+            <div class="reviews__dots" id="reviewsDots"></div>
+        </div>
+    </section>
+
+    <!-- ===== BOOKING FORM ===== -->
+    <section class="section booking" id="booking">
+        <div class="container">
+            <div class="booking__inner">
+                <div class="booking__info">
+                    <span class="section__badge">Начните сейчас</span>
+                    <h2 class="section__title section__title--left">Бесплатная консультация</h2>
+                    <p class="booking__text">Оставьте заявку и мы свяжемся с вами в течение 24 часов. Расскажем о подходящих программах и ответим на все вопросы.</p>
+                    <div class="booking__benefits">
+                        <div class="booking__benefit">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+                            <span>Подберём программу под ваш бюджет</span>
+                        </div>
+                        <div class="booking__benefit">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+                            <span>Расскажем о бесплатных вариантах</span>
+                        </div>
+                        <div class="booking__benefit">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+                            <span>Составим персональный план</span>
+                        </div>
+                        <div class="booking__benefit">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+                            <span>Без скрытых платежей</span>
+                        </div>
+                    </div>
+                </div>
+                <form class="booking__form" id="bookingForm">
+                    <div class="form-group">
+                        <label for="bookingName">Ваше имя</label>
+                        <input type="text" id="bookingName" name="name" placeholder="Как к вам обращаться?" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingPhone">Телефон</label>
+                        <input type="tel" id="bookingPhone" name="phone" placeholder="+7 (___) ___-__-__" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingEmail">Email</label>
+                        <input type="email" id="bookingEmail" name="email" placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingProgram">Интересующая программа</label>
+                        <select id="bookingProgram" name="program" required>
+                            <option value="" disabled selected>Выберите программу</option>
+                            <option value="Бакалавриат">Бакалавриат</option>
+                            <option value="Магистратура">Магистратура</option>
+                            <option value="Языковые курсы">Языковые курсы</option>
+                            <option value="Подготовительный год">Подготовительный год</option>
+                            <option value="Языковой лагерь">Языковой лагерь</option>
+                            <option value="Подготовка к экзаменам">Подготовка к экзаменам</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingCountry">Предпочтительная страна</label>
+                        <select id="bookingCountry" name="country">
+                            <option value="" selected>Не определился(-ась)</option>
+                            <option value="Чехия">Чехия</option>
+                            <option value="Венгрия">Венгрия</option>
+                            <option value="Германия">Германия</option>
+                            <option value="Великобритания">Великобритания</option>
+                            <option value="Турция">Турция</option>
+                            <option value="Польша">Польша</option>
+                            <option value="Малайзия">Малайзия</option>
+                            <option value="Южная Корея">Южная Корея</option>
+                            <option value="ОАЭ">ОАЭ</option>
+                            <option value="США">США</option>
+                            <option value="Канада">Канада</option>
+                            <option value="Мальта">Мальта</option>
+                        </select>
+                    </div>
+                    <div class="form-group form-group--checkbox">
+                        <label>
+                            <input type="checkbox" id="bookingConsent" name="consent" required>
+                            <span>Я согласен(-на) на обработку персональных данных</span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full">Отправить заявку</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="section section--light contact" id="contact">
+        <div class="container">
+            <div class="section__header">
+                <span class="section__badge">Связаться</span>
+                <h2 class="section__title">Контакты</h2>
+            </div>
+            <div class="contact__grid">
+                <a href="tel:+70000000000" class="contact-item">
+                    <div class="contact-item__icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <strong>Телефон</strong>
+                        <span>+7 (000) 000-00-00</span>
+                    </div>
+                </a>
+                <a href="https://wa.me/70000000000" target="_blank" rel="noopener" class="contact-item">
+                    <div class="contact-item__icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <strong>WhatsApp</strong>
+                        <span>Написать в WhatsApp</span>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/zarema.studyme/" target="_blank" rel="noopener" class="contact-item">
+                    <div class="contact-item__icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5"/>
+                            <circle cx="12" cy="12" r="5"/>
+                            <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <strong>Instagram</strong>
+                        <span>@zarema.studyme</span>
+                    </div>
+                </a>
+                <a href="mailto:info@studyme.kz" class="contact-item">
+                    <div class="contact-item__icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <path d="M22 6l-10 7L2 6"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <strong>Email</strong>
+                        <span>info@studyme.kz</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container footer__inner">
+            <div class="footer__brand">
+                <span class="logo__text">Study<span class="logo__accent">Me</span></span>
+                <p>Образование за рубежом и языковые лагеря для школьников</p>
+            </div>
+            <div class="footer__links">
+                <h4>Программы</h4>
+                <a href="#programs">Бакалавриат</a>
+                <a href="#programs">Магистратура</a>
+                <a href="#camps">Языковые лагеря</a>
+                <a href="#programs">Подготовительный год</a>
+            </div>
+            <div class="footer__links">
+                <h4>Компания</h4>
+                <a href="#about">О нас</a>
+                <a href="#reviews">Отзывы</a>
+                <a href="#contact">Контакты</a>
+                <a href="#booking">Консультация</a>
+            </div>
+            <div class="footer__links">
+                <h4>Соцсети</h4>
+                <a href="https://www.instagram.com/zarema.studyme/" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://wa.me/70000000000" target="_blank" rel="noopener">WhatsApp</a>
+            </div>
+        </div>
+        <div class="container footer__bottom">
+            <p>&copy; 2018–2026 StudyMe. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <!-- ===== WHATSAPP WIDGET ===== -->
+    <a href="https://wa.me/70000000000" target="_blank" rel="noopener" class="whatsapp-widget" aria-label="Написать в WhatsApp">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
+
+    <!-- ===== STICKY CTA (mobile) ===== -->
+    <div class="sticky-cta" id="stickyCta">
+        <a href="#booking" class="btn btn--primary btn--full">Записаться на консультацию</a>
+    </div>
+
+    <!-- ===== SUCCESS MODAL ===== -->
+    <div class="modal" id="successModal">
+        <div class="modal__overlay" id="modalClose"></div>
+        <div class="modal__content" tabindex="-1">
+            <button class="modal__close" id="modalCloseBtn" aria-label="Закрыть">&times;</button>
+            <div class="modal__icon">
+                <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                    <circle cx="32" cy="32" r="30" stroke="var(--accent)" stroke-width="2"/>
+                    <path d="M20 32l8 8 16-16" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <p id="modalText"></p>
+            <button class="btn btn--primary" id="modalOk">Отлично!</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

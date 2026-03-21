@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор Юнит-Экономики</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #f7941d, #f15a24);
+            color: #fff;
+            padding: 16px 24px;
+            font-size: 13px;
+        }
+
+        .header p {
+            margin-bottom: 6px;
+            font-style: italic;
+        }
+
+        .header h1 {
+            font-size: 22px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-title {
+            background: #f7941d;
+            color: #fff;
+            padding: 10px 24px;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section-title.calculated {
+            background: #4a4a4a;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table td {
+            padding: 10px 24px;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+        }
+
+        table td:first-child {
+            width: 70%;
+        }
+
+        table td:last-child {
+            width: 30%;
+            text-align: right;
+        }
+
+        .input-row td {
+            background: #fff;
+        }
+
+        .input-row input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 2px solid #f7941d;
+            border-radius: 4px;
+            background: #fffbea;
+            font-size: 14px;
+            text-align: right;
+            font-weight: 600;
+            color: #333;
+            transition: border-color 0.2s;
+        }
+
+        .input-row input:focus {
+            outline: none;
+            border-color: #f15a24;
+            background: #fff8e0;
+        }
+
+        .calc-row td {
+            background: #fafafa;
+        }
+
+        .calc-value {
+            font-weight: 600;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .calc-value.positive {
+            color: #2e7d32;
+        }
+
+        .calc-value.negative {
+            color: #c62828;
+        }
+
+        .calc-value.neutral {
+            color: #333;
+        }
+
+        .separator {
+            height: 2px;
+            background: #eee;
+        }
+
+        .label {
+            color: #555;
+        }
+
+        .sub-section {
+            background: #f0f0f0;
+            padding: 8px 24px;
+            font-weight: 600;
+            font-size: 13px;
+            color: #666;
+            text-transform: uppercase;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .footer {
+            padding: 16px 24px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            border-top: 2px solid #f7941d;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 8px; }
+            table td { padding: 8px 12px; font-size: 13px; }
+            .header { padding: 12px 16px; }
+            .header h1 { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <p>В жёлтые поля вводим информацию</p>
+            <h1>Калькулятор Юнит-Экономики</h1>
+        </div>
+
+        <div class="section-title">Количество продаж товаров &nbsp;&nbsp;&nbsp; Показатели</div>
+
+        <table>
+            <tr class="input-row">
+                <td class="label">Сколько привлекаем пользователей (лидов) в месяц</td>
+                <td><input type="number" id="leads" value="200" oninput="calculate()"></td>
+            </tr>
+            <tr class="input-row">
+                <td class="label">Конверсия в клиентов, %</td>
+                <td><input type="number" id="conversion" value="3" step="0.1" oninput="calculate()"></td>
+            </tr>
+            <tr class="input-row">
+                <td class="label">Среднее кол-во покупок клиента в месяц</td>
+                <td><input type="number" id="purchasesPerClient" value="1" step="1" oninput="calculate()"></td>
+            </tr>
+            <tr class="input-row">
+                <td class="label">Стоимость привлечения 1 пользователя, тенге</td>
+                <td><input type="number" id="cac" value="3500" step="100" oninput="calculate()"></td>
+            </tr>
+            <tr class="input-row">
+                <td class="label">Средний чек одной продажи, тенге</td>
+                <td><input type="number" id="avgCheck" value="300000" step="1000" oninput="calculate()"></td>
+            </tr>
+            <tr class="input-row">
+                <td class="label">Себестоимость 1 продукции без учёта маркетинга и фиксированных издержек</td>
+                <td><input type="number" id="costPerUnit" value="40000" step="1000" oninput="calculate()"></td>
+            </tr>
+            <tr class="input-row">
+                <td class="label">Прочие расходы компании в месяц</td>
+                <td><input type="number" id="otherExpenses" value="1500000" step="10000" oninput="calculate()"></td>
+            </tr>
+        </table>
+
+        <div class="section-title calculated">Расчётные показатели</div>
+
+        <table>
+            <tr class="calc-row">
+                <td class="label">Количество клиентов</td>
+                <td><span class="calc-value neutral" id="out_clients">—</span></td>
+            </tr>
+            <tr class="calc-row">
+                <td class="label">Количество продаж</td>
+                <td><span class="calc-value neutral" id="out_sales">—</span></td>
+            </tr>
+            <tr class="calc-row">
+                <td class="label">Выручка от продаж</td>
+                <td><span class="calc-value neutral" id="out_revenue">—</span></td>
+            </tr>
+            <tr class="calc-row">
+                <td class="label">Себестоимость продаж</td>
+                <td><span class="calc-value neutral" id="out_cogs">—</span></td>
+            </tr>
+            <tr class="calc-row">
+                <td class="label">Валовая прибыль</td>
+                <td><span class="calc-value neutral" id="out_grossProfit">—</span></td>
+            </tr>
+            <tr class="calc-row">
+                <td class="label">Расходы на маркетинг</td>
+                <td><span class="calc-value neutral" id="out_marketing">—</span></td>
+            </tr>
+            <tr class="calc-row">
+                <td class="label">Прочие расходы компании в месяц</td>
+                <td><span class="calc-value neutral" id="out_otherExpenses">—</span></td>
+            </tr>
+            <tr class="calc-row">
+                <td class="label"><strong>Прибыль компании в месяц</strong></td>
+                <td><span class="calc-value neutral" id="out_profit"><strong>—</strong></span></td>
+            </tr>
+        </table>
+
+        <div class="separator"></div>
+
+        <table>
+            <tr class="calc-row">
+                <td class="label">Выручка на единицу товара</td>
+                <td><span class="calc-value neutral" id="out_revenuePerUnit">—</span></td>
+            </tr>
+            <tr class="calc-row">
+                <td class="label">Прибыль на единицу товара</td>
+                <td><span class="calc-value neutral" id="out_profitPerUnit">—</span></td>
+            </tr>
+        </table>
+
+        <div class="separator"></div>
+
+        <table>
+            <tr class="calc-row">
+                <td class="label">ROI маркетинга</td>
+                <td><span class="calc-value neutral" id="out_roi">—</span></td>
+            </tr>
+            <tr class="calc-row">
+                <td class="label">Точка безубыточности в тенге</td>
+                <td><span class="calc-value neutral" id="out_breakEvenMoney">—</span></td>
+            </tr>
+            <tr class="calc-row">
+                <td class="label">Точка безубыточности в штуках</td>
+                <td><span class="calc-value neutral" id="out_breakEvenUnits">—</span></td>
+            </tr>
+        </table>
+
+        <div class="footer">
+            Unit Economics Calculator &copy; 2026
+        </div>
+    </div>
+
+    <script>
+        function fmt(num) {
+            return num.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function setVal(id, value, isMoney) {
+            const el = document.getElementById(id);
+            if (isMoney === undefined) isMoney = true;
+
+            let text;
+            if (typeof value === 'string') {
+                text = value;
+            } else if (!isFinite(value)) {
+                text = '—';
+            } else {
+                text = fmt(value);
+            }
+
+            el.textContent = text;
+
+            // color
+            el.className = 'calc-value';
+            if (typeof value === 'number' && isFinite(value)) {
+                if (value > 0) el.classList.add('positive');
+                else if (value < 0) el.classList.add('negative');
+                else el.classList.add('neutral');
+            } else {
+                el.classList.add('neutral');
+            }
+        }
+
+        function getVal(id) {
+            return parseFloat(document.getElementById(id).value) || 0;
+        }
+
+        function calculate() {
+            const leads = getVal('leads');
+            const conversion = getVal('conversion') / 100;
+            const purchasesPerClient = getVal('purchasesPerClient');
+            const cac = getVal('cac');
+            const avgCheck = getVal('avgCheck');
+            const costPerUnit = getVal('costPerUnit');
+            const otherExpenses = getVal('otherExpenses');
+
+            // Calculations
+            const clients = leads * conversion;
+            const sales = clients * purchasesPerClient;
+            const revenue = sales * avgCheck;
+            const cogs = sales * costPerUnit;
+            const grossProfit = revenue - cogs;
+            const marketing = leads * cac;
+            const profit = grossProfit - marketing - otherExpenses;
+
+            const revenuePerUnit = avgCheck;
+            const profitPerUnit = sales > 0 ? profit / sales : 0;
+
+            const roi = marketing > 0 ? (grossProfit / marketing) * 100 : 0;
+
+            // Точка безубыточности
+            const marginPerUnit = avgCheck - costPerUnit;
+            const fixedCosts = marketing + otherExpenses;
+            const breakEvenUnits = marginPerUnit > 0 ? fixedCosts / marginPerUnit : Infinity;
+            const breakEvenMoney = breakEvenUnits * avgCheck;
+
+            // Display
+            setVal('out_clients', clients);
+            setVal('out_sales', sales);
+            setVal('out_revenue', revenue);
+            setVal('out_cogs', cogs);
+            setVal('out_grossProfit', grossProfit);
+            setVal('out_marketing', marketing);
+            setVal('out_otherExpenses', otherExpenses);
+            setVal('out_profit', profit);
+            setVal('out_revenuePerUnit', revenuePerUnit);
+            setVal('out_profitPerUnit', profitPerUnit);
+            setVal('out_roi', fmt(roi) + '%');
+            setVal('out_breakEvenMoney', breakEvenMoney);
+            setVal('out_breakEvenUnits', fmt(breakEvenUnits));
+        }
+
+        // Initial calculation
+        calculate();
+    </script>
+</body>
+</html>
