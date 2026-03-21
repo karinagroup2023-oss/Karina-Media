@@ -5,6 +5,7 @@ const PRODUCTS = [
         id: 1, brand: 'NŪRA', name: 'Шёлковое платье-миди', category: 'women',
         price: 89900, oldPrice: null,
         color: '#e8d5c4', colorName: 'Бежевый',
+        image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&h=800&fit=crop',
         colors: [{ name: 'Бежевый', hex: '#e8d5c4' }, { name: 'Чёрный', hex: '#1a1a1a' }],
         sizes: ['XS', 'S', 'M', 'L'],
         desc: 'Элегантное платье-миди из натурального шёлка. Струящийся силуэт, потайная молния сбоку. Идеально для вечернего выхода или особого случая.',
@@ -14,6 +15,7 @@ const PRODUCTS = [
         id: 2, brand: 'NŪRA', name: 'Кашемировое пальто оверсайз', category: 'women',
         price: 245000, oldPrice: 289000,
         color: '#c0c5cb', colorName: 'Серый',
+        image: 'https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=600&h=800&fit=crop',
         colors: [{ name: 'Серый', hex: '#c0c5cb' }, { name: 'Бежевый', hex: '#d4c4b0' }, { name: 'Чёрный', hex: '#1a1a1a' }],
         sizes: ['S', 'M', 'L', 'XL'],
         desc: 'Роскошное пальто из итальянского кашемира. Свободный крой оверсайз, пояс в комплекте. Классическая длина до колена.',
@@ -23,6 +25,7 @@ const PRODUCTS = [
         id: 3, brand: 'NŪRA', name: 'Блуза из органзы', category: 'women',
         price: 54900, oldPrice: null,
         color: '#f5e6d3', colorName: 'Молочный',
+        image: 'https://images.unsplash.com/photo-1564257631407-4deb1f99d992?w=600&h=800&fit=crop',
         colors: [{ name: 'Молочный', hex: '#f5e6d3' }, { name: 'Пудра', hex: '#e8c4c4' }],
         sizes: ['XS', 'S', 'M', 'L'],
         desc: 'Воздушная блуза из органзы с объёмными рукавами. Нежная текстура и романтичный силуэт. Подойдёт для офиса и особых мероприятий.',
@@ -32,6 +35,7 @@ const PRODUCTS = [
         id: 4, brand: 'NŪRA', name: 'Брюки палаццо шерсть', category: 'women',
         price: 67000, oldPrice: null,
         color: '#2c2c2c', colorName: 'Графит',
+        image: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600&h=800&fit=crop',
         colors: [{ name: 'Графит', hex: '#2c2c2c' }, { name: 'Бежевый', hex: '#d4c4b0' }],
         sizes: ['XS', 'S', 'M', 'L', 'XL'],
         desc: 'Широкие брюки палаццо из костюмной шерсти. Высокая посадка, стрелки, подкладка. Универсальная модель для делового и повседневного гардероба.',
@@ -41,6 +45,7 @@ const PRODUCTS = [
         id: 5, brand: 'NŪRA', name: 'Кожаная юбка-миди', category: 'women',
         price: 78500, oldPrice: null,
         color: '#3d2b1f', colorName: 'Шоколад',
+        image: 'https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=600&h=800&fit=crop',
         colors: [{ name: 'Шоколад', hex: '#3d2b1f' }, { name: 'Чёрный', hex: '#1a1a1a' }],
         sizes: ['XS', 'S', 'M', 'L'],
         desc: 'Юбка-миди из мягкой натуральной кожи. А-силуэт, потайная молния, подкладка из вискозы. Актуальная длина ниже колена.',
@@ -50,6 +55,7 @@ const PRODUCTS = [
         id: 6, brand: 'NŪRA', name: 'Трикотажный костюм', category: 'women',
         price: 112000, oldPrice: 134000,
         color: '#d4c4b0', colorName: 'Песочный',
+        image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&h=800&fit=crop',
         colors: [{ name: 'Песочный', hex: '#d4c4b0' }, { name: 'Серый', hex: '#a0a0a0' }],
         sizes: ['S', 'M', 'L'],
         desc: 'Костюм из мериносовой шерсти: свитер свободного кроя + брюки с эластичным поясом. Мягкая текстура, идеальная посадка.',
@@ -60,6 +66,7 @@ const PRODUCTS = [
         id: 7, brand: 'NŪRA', name: 'Костюм-тройка шерсть', category: 'men',
         price: 289000, oldPrice: null,
         color: '#2c3e50', colorName: 'Тёмно-синий',
+        image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&h=800&fit=crop',
         colors: [{ name: 'Тёмно-синий', hex: '#2c3e50' }, { name: 'Графит', hex: '#2c2c2c' }],
         sizes: ['46', '48', '50', '52', '54'],
         desc: 'Классический костюм-тройка из итальянской шерсти Super 120\'s. Пиджак, жилет и брюки. Полуприлегающий силуэт, ручная обработка краёв.',
@@ -69,6 +76,7 @@ const PRODUCTS = [
         id: 8, brand: 'NŪRA', name: 'Рубашка Oxford хлопок', category: 'men',
         price: 42900, oldPrice: null,
         color: '#f5f5f5', colorName: 'Белый',
+        image: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=600&h=800&fit=crop',
         colors: [{ name: 'Белый', hex: '#f5f5f5' }, { name: 'Голубой', hex: '#b8d4e3' }, { name: 'Розовый', hex: '#e8c4c4' }],
         sizes: ['S', 'M', 'L', 'XL', 'XXL'],
         desc: 'Классическая рубашка Oxford из египетского хлопка. Воротник button-down, стандартный крой. Идеальна с костюмом и с джинсами.',
@@ -78,6 +86,7 @@ const PRODUCTS = [
         id: 9, brand: 'NŪRA', name: 'Пальто oversize шерсть', category: 'men',
         price: 198000, oldPrice: 235000,
         color: '#5c4a3a', colorName: 'Коричневый',
+        image: 'https://images.unsplash.com/photo-1544923246-77307dd270b5?w=600&h=800&fit=crop',
         colors: [{ name: 'Коричневый', hex: '#5c4a3a' }, { name: 'Чёрный', hex: '#1a1a1a' }],
         sizes: ['M', 'L', 'XL', 'XXL'],
         desc: 'Мужское пальто оверсайз из итальянской шерсти. Двубортная застёжка, два кармана. Длина до середины бедра.',
@@ -87,6 +96,7 @@ const PRODUCTS = [
         id: 10, brand: 'NŪRA', name: 'Брюки чинос хлопок', category: 'men',
         price: 45900, oldPrice: null,
         color: '#c9b99a', colorName: 'Хаки',
+        image: 'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=600&h=800&fit=crop',
         colors: [{ name: 'Хаки', hex: '#c9b99a' }, { name: 'Тёмно-синий', hex: '#2c3e50' }, { name: 'Чёрный', hex: '#1a1a1a' }],
         sizes: ['46', '48', '50', '52', '54'],
         desc: 'Классические чинос из хлопка с эластаном. Зауженный крой, средняя посадка. Комфорт на каждый день.',
@@ -96,6 +106,7 @@ const PRODUCTS = [
         id: 11, brand: 'NŪRA', name: 'Кожаная куртка байкер', category: 'men',
         price: 175000, oldPrice: null,
         color: '#1a1a1a', colorName: 'Чёрный',
+        image: 'https://images.unsplash.com/photo-1521223890158-f9f7c3d5d504?w=600&h=800&fit=crop',
         colors: [{ name: 'Чёрный', hex: '#1a1a1a' }],
         sizes: ['M', 'L', 'XL'],
         desc: 'Мужская байкерская куртка из натуральной кожи ягнёнка. Асимметричная молния, подкладка из вискозы. Мягкая и лёгкая.',
@@ -105,6 +116,7 @@ const PRODUCTS = [
         id: 12, brand: 'NŪRA', name: 'Кашемировый свитер', category: 'men',
         price: 89000, oldPrice: null,
         color: '#c0c5cb', colorName: 'Светло-серый',
+        image: 'https://images.unsplash.com/photo-1614975059251-992f11792571?w=600&h=800&fit=crop',
         colors: [{ name: 'Светло-серый', hex: '#c0c5cb' }, { name: 'Тёмно-синий', hex: '#2c3e50' }, { name: 'Бежевый', hex: '#d4c4b0' }],
         sizes: ['S', 'M', 'L', 'XL'],
         desc: 'Свитер из 100% кашемира с круглым вырезом. Тонкая вязка, мягкая текстура. Базовая вещь для сезонного гардероба.',
@@ -115,6 +127,7 @@ const PRODUCTS = [
         id: 13, brand: 'NŪRA', name: 'Кожаная сумка тоут', category: 'accessories',
         price: 125000, oldPrice: null,
         color: '#5c4a3a', colorName: 'Коньяк',
+        image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600&h=800&fit=crop',
         colors: [{ name: 'Коньяк', hex: '#5c4a3a' }, { name: 'Чёрный', hex: '#1a1a1a' }],
         sizes: ['ONE'],
         desc: 'Вместительная сумка-тоут из натуральной кожи. Два внутренних кармана, магнитная застёжка. Подходит для ноутбука до 13".',
@@ -124,6 +137,7 @@ const PRODUCTS = [
         id: 14, brand: 'NŪRA', name: 'Шёлковый платок', category: 'accessories',
         price: 34900, oldPrice: null,
         color: '#b8956a', colorName: 'Золотой',
+        image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600&h=800&fit=crop',
         colors: [{ name: 'Золотой', hex: '#b8956a' }, { name: 'Бордовый', hex: '#6b2d3e' }, { name: 'Синий', hex: '#2c3e50' }],
         sizes: ['ONE'],
         desc: 'Шёлковый платок с авторским принтом. Размер 90×90 см. Ручная обработка краёв. Подарочная упаковка в комплекте.',
@@ -133,6 +147,7 @@ const PRODUCTS = [
         id: 15, brand: 'NŪRA', name: 'Ремень из итальянской кожи', category: 'accessories',
         price: 28500, oldPrice: null,
         color: '#1a1a1a', colorName: 'Чёрный',
+        image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&h=800&fit=crop',
         colors: [{ name: 'Чёрный', hex: '#1a1a1a' }, { name: 'Коньяк', hex: '#5c4a3a' }],
         sizes: ['85', '90', '95', '100', '105'],
         desc: 'Классический ремень из итальянской кожи. Матовая пряжка из сплава, ширина 3 см. Универсальный аксессуар на каждый день.',
@@ -142,6 +157,7 @@ const PRODUCTS = [
         id: 16, brand: 'NŪRA', name: 'Солнцезащитные очки авиатор', category: 'accessories',
         price: 56000, oldPrice: 68000,
         color: '#b8956a', colorName: 'Золотой',
+        image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&h=800&fit=crop',
         colors: [{ name: 'Золотой', hex: '#b8956a' }, { name: 'Серебро', hex: '#c0c5cb' }],
         sizes: ['ONE'],
         desc: 'Солнцезащитные очки в оправе авиатор. Металлическая оправа, поляризованные линзы с UV400 защитой. Футляр и салфетка в комплекте.',
@@ -241,7 +257,9 @@ function renderProducts() {
     grid.innerHTML = filtered.map(p => `
         <div class="product-card" data-id="${p.id}">
             <div class="product-card__img">
-                <div class="product-card__img-inner" style="background: linear-gradient(135deg, ${p.color}40 0%, ${p.color}80 100%)"></div>
+                <div class="product-card__img-inner" style="background: linear-gradient(135deg, ${p.color}40 0%, ${p.color}80 100%)">
+                    ${p.image ? `<img src="${p.image}" alt="${p.name}" loading="lazy" width="600" height="800">` : ''}
+                </div>
                 ${p.badge ? `<span class="product-card__badge">${p.badge}</span>` : ''}
                 <div class="product-card__quick">Быстрый просмотр</div>
             </div>
@@ -269,7 +287,9 @@ function openQuickView(productId) {
 
     body.innerHTML = `
     <div class="qv">
-        <div class="qv__img" style="background: linear-gradient(135deg, ${p.color}40 0%, ${p.color}80 100%)"></div>
+        <div class="qv__img" style="background: linear-gradient(135deg, ${p.color}40 0%, ${p.color}80 100%)">
+            ${p.image ? `<img src="${p.image}" alt="${p.name}" width="600" height="800" style="width:100%;height:100%;object-fit:cover">` : ''}
+        </div>
         <div class="qv__info">
             <div class="qv__brand">${p.brand}</div>
             <h2 class="qv__name">${p.name}</h2>
@@ -378,7 +398,9 @@ function renderCart() {
         if (!p) return '';
         return `
         <div class="cart-item">
-            <div class="cart-item__img" style="background: linear-gradient(135deg, ${p.color}40, ${p.color}80)"></div>
+            <div class="cart-item__img" style="background: linear-gradient(135deg, ${p.color}40, ${p.color}80)">
+                ${p.image ? `<img src="${p.image}" alt="${p.name}" width="80" height="100" style="width:100%;height:100%;object-fit:cover">` : ''}
+            </div>
             <div class="cart-item__info">
                 <div class="cart-item__brand">${p.brand}</div>
                 <div class="cart-item__name">${p.name}</div>
@@ -708,7 +730,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         searchResults.innerHTML = results.map(p => `
             <div class="search-result" data-id="${p.id}">
-                <div class="search-result__img" style="background: linear-gradient(135deg, ${p.color}40, ${p.color}80)"></div>
+                <div class="search-result__img" style="background: linear-gradient(135deg, ${p.color}40, ${p.color}80); overflow:hidden">
+                    ${p.image ? `<img src="${p.image}" alt="${p.name}" width="56" height="56" style="width:100%;height:100%;object-fit:cover">` : ''}
+                </div>
                 <div class="search-result__info">
                     <div class="search-result__brand">${p.brand}</div>
                     <div class="search-result__name">${p.name}</div>
