@@ -2,29 +2,15 @@ const contacts = [
   {
     icon: '✈️',
     label: 'Telegram',
-    value: '@mobilograf',
-    href: 'https://t.me/mobilograf',
+    value: '@natalipnv',
+    href: 'https://t.me/natalipnv',
     primary: true,
   },
   {
-    icon: '📷',
-    label: 'Instagram',
-    value: '@mobilograf.kz',
-    href: 'https://instagram.com/mobilograf.kz',
-    primary: false,
-  },
-  {
-    icon: '📞',
-    label: 'Телефон',
-    value: '+7 777 123 45 67',
-    href: 'tel:+77771234567',
-    primary: false,
-  },
-  {
-    icon: '✉️',
-    label: 'Email',
-    value: 'hello@mobilograf.kz',
-    href: 'mailto:hello@mobilograf.kz',
+    icon: '💬',
+    label: 'WhatsApp',
+    value: '+7 917 591 07 00',
+    href: 'https://wa.me/79175910700',
     primary: false,
   },
 ]
@@ -46,17 +32,19 @@ function handleQuickBook() {
   if (tg) {
     tg.HapticFeedback?.impactOccurred('medium')
     tg.showPopup({
-      title: 'Быстрое бронирование',
-      message: 'Напишите нам в Telegram, и мы подберём удобное время для съёмки!',
+      title: 'Написать Наталии',
+      message: 'Выберите удобный способ связи:',
       buttons: [
-        { id: 'open', type: 'default', text: 'Открыть Telegram' },
+        { id: 'tg',  type: 'default', text: 'Telegram' },
+        { id: 'wa',  type: 'default', text: 'WhatsApp' },
         { type: 'cancel', text: 'Закрыть' },
       ],
     }, (id) => {
-      if (id === 'open') tg.openLink('https://t.me/mobilograf')
+      if (id === 'tg') tg.openLink('https://t.me/natalipnv')
+      if (id === 'wa') tg.openLink('https://wa.me/79175910700')
     })
   } else {
-    window.open('https://t.me/mobilograf', '_blank')
+    window.open('https://t.me/natalipnv', '_blank')
   }
 }
 
@@ -83,10 +71,10 @@ export default function Contacts() {
       </div>
 
       <div className="book-section">
-        <p className="book-title">Готовы создать воспоминания?</p>
-        <p className="book-sub">Запишитесь на съёмку прямо сейчас — места ограничены</p>
+        <p className="book-title">Готовы к сотрудничеству?</p>
+        <p className="book-sub">Напишите мне — обсудим ваш проект и сроки</p>
         <button className="btn-primary" onClick={handleQuickBook}>
-          📸 Записаться на съёмку
+          ✉️ Написать Наталии
         </button>
       </div>
 
@@ -99,7 +87,7 @@ export default function Contacts() {
           </div>
           <div className="schedule-row">
             <span>Сб — Вс</span>
-            <span className="schedule-time">09:00 — 22:00</span>
+            <span className="schedule-time">по договорённости</span>
           </div>
         </div>
       </div>

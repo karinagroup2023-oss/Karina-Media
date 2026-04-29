@@ -1,50 +1,62 @@
 const packages = [
   {
-    id: 'mini',
-    name: 'Мини-сессия',
-    price: '15 000',
-    unit: '₸',
+    id: 'video-short',
+    name: 'Видеомонтаж до 1 мин',
+    price: 'от 1 200',
+    unit: '₽',
     tag: null,
-    icon: '📷',
+    icon: '🎬',
     features: [
-      '1 час съёмки',
-      '10 обработанных фото',
-      '1 локация',
-      'Онлайн-галерея',
-      'Срок: 5 дней',
+      'Reels, Shorts, TikTok',
+      'Монтаж + цветокоррекция',
+      'Музыка и звук',
+      'Субтитры по запросу',
+      'Цена зависит от сложности',
     ],
   },
   {
-    id: 'standard',
-    name: 'Стандарт',
-    price: '35 000',
-    unit: '₸',
+    id: 'podcast',
+    name: 'Монтаж подкаста',
+    price: 'от 5 000',
+    unit: '₽',
     tag: 'Популярный',
-    icon: '✨',
+    icon: '🎙️',
     features: [
-      '3 часа съёмки',
-      '30 обработанных фото',
-      'До 2 локаций',
-      'Онлайн-галерея',
-      'Печать 5 фото (10×15)',
-      'Срок: 3 дня',
+      'Видео до 1 часа',
+      'Чистка звука и пауз',
+      'Заставка и аутро',
+      'Главы и таймкоды',
+      'Адаптация под платформу',
     ],
   },
   {
-    id: 'premium',
-    name: 'Премиум',
-    price: '75 000',
-    unit: '₸',
-    tag: 'Лучший выбор',
-    icon: '👑',
+    id: 'visual',
+    name: 'Визуал / Обложки',
+    price: 'от 3 000',
+    unit: '₽',
+    tag: null,
+    icon: '🎨',
     features: [
-      'Полный день (8 часов)',
-      '100+ обработанных фото',
-      'Неограниченные локации',
-      'Онлайн-галерея',
-      'Фотокнига (20 стр.)',
-      'Приоритетная обработка',
-      'Срок: 2 дня',
+      'Раскладка на 9 обложек',
+      'Единый стиль ленты',
+      'Форматы для Instagram',
+      'Исходники в архиве',
+      'До 2 правок',
+    ],
+  },
+  {
+    id: 'education',
+    name: 'Обучение монтажу',
+    price: 'от 7 500',
+    unit: '₽',
+    tag: 'Онлайн',
+    icon: '🎓',
+    features: [
+      'Курс 2 недели',
+      'Индивидуальные занятия',
+      'Выбор программы (Premiere / CapCut / DaVinci)',
+      'Домашние задания + разбор',
+      'Поддержка после курса',
     ],
   },
 ]
@@ -54,19 +66,19 @@ function handleBook(packageName) {
   if (tg) {
     tg.HapticFeedback?.impactOccurred('medium')
     tg.showPopup({
-      title: 'Бронирование',
-      message: `Вы выбрали: ${packageName}. Мы свяжемся с вами в ближайшее время!`,
+      title: 'Заявка отправлена',
+      message: `Услуга: ${packageName}. Напишите мне в Telegram или WhatsApp — обсудим детали!`,
       buttons: [{ type: 'ok' }],
     })
   } else {
-    alert(`Выбран пакет: ${packageName}`)
+    alert(`Выбрана услуга: ${packageName}`)
   }
 }
 
 export default function Services() {
   return (
     <div className="services fade-in">
-      <p className="section-title">Пакеты услуг</p>
+      <p className="section-title">Услуги и цены</p>
 
       <div className="packages">
         {packages.map((pkg) => (
@@ -94,18 +106,18 @@ export default function Services() {
               className={`btn-primary ${pkg.tag ? '' : 'btn-outline'}`}
               onClick={() => handleBook(pkg.name)}
             >
-              Забронировать
+              Заказать
             </button>
           </div>
         ))}
       </div>
 
       <div className="note-card">
-        <p className="note-title">📌 Важно знать</p>
+        <p className="note-title">📌 Важно</p>
         <ul className="note-list">
-          <li>Предоплата 50% при бронировании</li>
-          <li>Выезд за город — доп. оплата от 5 000 ₸</li>
-          <li>Индивидуальные условия для свадеб</li>
+          <li>Стоимость видеомонтажа может меняться в зависимости от сложности</li>
+          <li>Срочные заказы — по договорённости</li>
+          <li>Оплата: 50% предоплата, 50% после сдачи</li>
         </ul>
       </div>
 
@@ -142,11 +154,12 @@ export default function Services() {
           gap: 12px;
           margin-bottom: 14px;
         }
-        .package-icon { font-size: 28px; }
+        .package-icon { font-size: 28px; flex-shrink: 0; }
         .package-name {
           font-size: 15px;
           font-weight: 600;
           margin-bottom: 2px;
+          padding-right: 70px;
         }
         .package-price { display: flex; align-items: baseline; }
         .price-value {
@@ -167,7 +180,7 @@ export default function Services() {
         }
         .package-features li {
           display: flex;
-          align-items: center;
+          align-items: flex-start;
           gap: 8px;
           font-size: 13px;
           color: var(--tg-hint);
@@ -176,6 +189,8 @@ export default function Services() {
           color: var(--accent);
           font-weight: 700;
           font-size: 12px;
+          margin-top: 2px;
+          flex-shrink: 0;
         }
         .btn-outline {
           background: transparent !important;

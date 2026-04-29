@@ -3,31 +3,32 @@ export default function Header() {
     <header className="header">
       <div className="header-avatar">
         <img
-          src="https://images.unsplash.com/photo-1554151228-14d9def656e4?w=120&h=120&fit=crop&q=80"
-          alt="Фотограф"
+          src="./natalia.jpg"
+          alt="Наталия"
+          onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=120&h=120&fit=crop&q=80' }}
         />
       </div>
       <div className="header-info">
-        <h1 className="header-name">МОБИЛОГРАФ</h1>
-        <p className="header-tagline">Захватываю моменты. Создаю воспоминания.</p>
+        <h1 className="header-name">НАТАЛИЯ</h1>
+        <p className="header-tagline">Видеомонтаж · Визуал · Обучение</p>
         <div className="header-location">
           <span className="location-icon">📍</span>
-          <span>Алматы, Казахстан</span>
+          <span>Москва, Россия</span>
         </div>
       </div>
       <div className="header-stats">
         <div className="stat">
-          <span className="stat-value">500+</span>
-          <span className="stat-label">Клиентов</span>
+          <span className="stat-value">200+</span>
+          <span className="stat-label">Проектов</span>
         </div>
         <div className="stat-divider" />
         <div className="stat">
-          <span className="stat-value">5 лет</span>
+          <span className="stat-value">3 года</span>
           <span className="stat-label">Опыт</span>
         </div>
         <div className="stat-divider" />
         <div className="stat">
-          <span className="stat-value">4.9 ★</span>
+          <span className="stat-value">5.0 ★</span>
           <span className="stat-label">Рейтинг</span>
         </div>
       </div>
