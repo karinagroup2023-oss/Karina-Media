@@ -1,21 +1,22 @@
 export default function Header() {
   return (
     <header className="header">
-      <div className="header-avatar">
+      <div className="header-cover">
         <img
           src="./natalia.jpg"
           alt="Наталия"
-          onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=120&h=120&fit=crop&q=80' }}
+          onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=480&q=80' }}
         />
-      </div>
-      <div className="header-info">
-        <h1 className="header-name">НАТАЛИЯ</h1>
-        <p className="header-tagline">Видеомонтаж · Визуал · Обучение</p>
-        <div className="header-location">
-          <span className="location-icon">📍</span>
-          <span>Москва, Россия</span>
+        <div className="header-overlay">
+          <h1 className="header-name">НАТАЛИЯ</h1>
+          <p className="header-tagline">Видеомонтаж · Визуал · Обучение</p>
+          <div className="header-location">
+            <span>📍</span>
+            <span>Москва, Россия</span>
+          </div>
         </div>
       </div>
+
       <div className="header-stats">
         <div className="stat">
           <span className="stat-value">200+</span>
@@ -35,38 +36,42 @@ export default function Header() {
 
       <style>{`
         .header {
-          background: linear-gradient(180deg, #141414 0%, #0a0a0a 100%);
-          padding: 24px 16px 20px;
-          text-align: center;
           border-bottom: 1px solid var(--border);
         }
-        .header-avatar {
-          width: 80px;
-          height: 80px;
-          border-radius: 50%;
+        .header-cover {
+          position: relative;
+          width: 100%;
+          height: 280px;
           overflow: hidden;
-          margin: 0 auto 12px;
-          border: 2.5px solid var(--accent);
-          padding: 2px;
-          background: var(--accent);
         }
-        .header-avatar img {
+        .header-cover img {
           width: 100%;
           height: 100%;
-          border-radius: 50%;
           object-fit: cover;
+          object-position: center top;
+          display: block;
+        }
+        .header-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          padding: 20px 16px;
         }
         .header-name {
-          font-size: 20px;
+          font-size: 24px;
           font-weight: 700;
-          letter-spacing: 0.1em;
-          color: var(--tg-text);
+          letter-spacing: 0.12em;
+          color: #fff;
           margin-bottom: 4px;
+          text-shadow: 0 1px 4px rgba(0,0,0,0.5);
         }
         .header-tagline {
           font-size: 13px;
-          color: var(--tg-hint);
-          margin-bottom: 8px;
+          color: rgba(255,255,255,0.75);
+          margin-bottom: 6px;
           font-style: italic;
         }
         .header-location {
@@ -74,11 +79,7 @@ export default function Header() {
           align-items: center;
           gap: 4px;
           font-size: 12px;
-          color: var(--tg-hint);
-          margin-bottom: 20px;
-        }
-        .location-icon {
-          font-size: 11px;
+          color: rgba(255,255,255,0.6);
         }
         .header-stats {
           display: flex;
@@ -86,8 +87,7 @@ export default function Header() {
           justify-content: center;
           gap: 20px;
           background: var(--card-bg);
-          border-radius: var(--radius-sm);
-          padding: 12px 20px;
+          padding: 14px 20px;
         }
         .stat {
           display: flex;
