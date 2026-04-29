@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Telegram Mini App — KARINA Media</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --dark: #111111;
+      --card: #181818;
+      --border: rgba(255,255,255,0.08);
+      --gold: #d4af37;
+      --gold-dim: rgba(212,175,55,0.12);
+      --white: #ffffff;
+      --gray: #888888;
+      --radius: 20px;
+      --radius-sm: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      line-height: 1.6;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold-dim);
+      border: 1px solid rgba(212,175,55,0.3);
+      color: var(--gold);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 28px;
+      letter-spacing: 0.05em;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 7vw, 72px);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 span { color: var(--gold); }
+
+    .hero-sub {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: var(--gray);
+      max-width: 560px;
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: #000;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 32px;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-gold:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 14px 32px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: border-color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* DEMO PHONE */
+    .phone-demo {
+      margin-top: 64px;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .phone {
+      width: 200px;
+      background: var(--card);
+      border-radius: 28px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+    }
+
+    .phone-bar {
+      background: var(--dark);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .phone-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+    .phone-title { font-size: 10px; color: var(--gray); }
+
+    .phone-screen { padding: 12px; }
+
+    .phone-cover {
+      width: 100%; height: 90px;
+      background: linear-gradient(135deg, #1a1500, #0d0d0d);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .phone-name {
+      font-size: 11px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 2px;
+    }
+    .phone-spec {
+      font-size: 9px;
+      color: var(--gray);
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .phone-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 10px;
+    }
+    .phone-tab {
+      flex: 1;
+      font-size: 8px;
+      text-align: center;
+      padding: 5px 2px;
+      color: var(--gray);
+    }
+    .phone-tab.active { color: var(--gold); border-bottom: 1.5px solid var(--gold); }
+
+    .phone-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+    }
+    .phone-cell {
+      background: var(--dark);
+      border-radius: 6px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    /* SECTION */
+    section { padding: 80px 24px; }
+    .container { max-width: 1080px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .section-sub {
+      font-size: 17px;
+      color: var(--gray);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+
+    /* FEATURES */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      transition: border-color 0.2s;
+    }
+    .feature-card:hover { border-color: rgba(212,175,55,0.3); }
+
+    .feature-icon { font-size: 32px; margin-bottom: 16px; }
+    .feature-title { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+    .feature-desc { font-size: 14px; color: var(--gray); line-height: 1.6; }
+
+    /* PRICING */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      align-items: start;
+    }
+
+    .price-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      position: relative;
+      transition: transform 0.2s;
+    }
+    .price-card:hover { transform: translateY(-4px); }
+    .price-card.popular {
+      border-color: var(--gold);
+      background: linear-gradient(145deg, #1a1500 0%, var(--card) 100%);
+    }
+
+    .popular-badge {
+      position: absolute;
+      top: -12px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: #000;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 16px;
+      border-radius: 20px;
+      white-space: nowrap;
+      letter-spacing: 0.05em;
+    }
+
+    .price-icon { font-size: 36px; margin-bottom: 16px; }
+    .price-name { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .price-desc { font-size: 13px; color: var(--gray); margin-bottom: 20px; line-height: 1.5; }
+
+    .price-value {
+      font-size: 38px;
+      font-weight: 800;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .price-unit { font-size: 16px; color: var(--gray); margin-bottom: 24px; }
+
+    .price-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .price-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--gray);
+    }
+    .check { color: var(--gold); font-weight: 700; margin-top: 1px; flex-shrink: 0; }
+
+    .price-btn {
+      width: 100%;
+      padding: 13px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+      transition: opacity 0.2s;
+    }
+    .price-btn:hover { opacity: 0.85; }
+    .price-btn-gold { background: var(--gold); color: #000; }
+    .price-btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--white); }
+
+    /* PROCESS */
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0;
+      position: relative;
+    }
+
+    .process-step {
+      padding: 32px 24px;
+      text-align: center;
+      position: relative;
+    }
+
+    .step-num {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--gold-dim);
+      border: 1.5px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--gold);
+      margin: 0 auto 16px;
+    }
+
+    .step-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .step-desc { font-size: 13px; color: var(--gray); line-height: 1.6; }
+
+    /* EXAMPLES */
+    .examples-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .example-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+    .example-card:hover { transform: translateY(-4px); }
+
+    .example-cover {
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+    }
+
+    .example-body { padding: 16px; }
+    .example-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .example-desc { font-size: 12px; color: var(--gray); margin-bottom: 12px; }
+    .example-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--gold);
+      background: var(--gold-dim);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    /* CTA */
+    .cta-section {
+      background: linear-gradient(135deg, #1a1500 0%, #0d0d0d 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+      padding: 80px 24px;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 32px 24px;
+      text-align: center;
+      color: var(--gray);
+      font-size: 13px;
+      border-top: 1px solid var(--border);
+    }
+    footer span { color: var(--gold); }
+
+    /* Divider */
+    .divider { height: 1px; background: var(--border); }
+
+    @media (max-width: 600px) {
+      .hero-cta { flex-direction: column; align-items: center; }
+      .phone-demo { gap: 8px; }
+      .phone { width: 160px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">✨ KARINA Media · Digital Agency</div>
+  <h1>Telegram <span>Mini App</span><br>для вашего бизнеса</h1>
+  <p class="hero-sub">Создаём современные приложения внутри Telegram — без скачивания, без браузера. Клиенты открывают ваш сервис в один клик.</p>
+  <div class="hero-cta">
+    <a href="https://t.me/karina_group2023" class="btn-gold">✈️ Обсудить проект</a>
+    <a href="#pricing" class="btn-outline">💰 Посмотреть цены</a>
+  </div>
+
+  <div class="phone-demo">
+    <div class="phone">
+      <div class="phone-bar">
+        <div class="phone-dot"></div>
+        <span class="phone-title">Портфолио-визитка</span>
+      </div>
+      <div class="phone-screen">
+        <div class="phone-cover">👤</div>
+        <div class="phone-name">НАТАЛИЯ</div>
+        <div class="phone-spec">Видеомонтаж · Москва</div>
+        <div class="phone-tabs">
+          <div class="phone-tab active">Работы</div>
+          <div class="phone-tab">Услуги</div>
+          <div class="phone-tab">Контакт</div>
+        </div>
+        <div class="phone-grid">
+          <div class="phone-cell">🎬</div>
+          <div class="phone-cell">🎨</div>
+          <div class="phone-cell">🎙️</div>
+          <div class="phone-cell">🎓</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phone">
+      <div class="phone-bar">
+        <div class="phone-dot"></div>
+        <span class="phone-title">Интернет-магазин</span>
+      </div>
+      <div class="phone-screen">
+        <div class="phone-cover">🛍️</div>
+        <div class="phone-name">МАГАЗИН</div>
+        <div class="phone-spec">Каталог · Корзина · Оплата</div>
+        <div class="phone-tabs">
+          <div class="phone-tab active">Каталог</div>
+          <div class="phone-tab">Корзина</div>
+          <div class="phone-tab">Профиль</div>
+        </div>
+        <div class="phone-grid">
+          <div class="phone-cell">👗</div>
+          <div class="phone-cell">👟</div>
+          <div class="phone-cell">💄</div>
+          <div class="phone-cell">🧴</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phone">
+      <div class="phone-bar">
+        <div class="phone-dot"></div>
+        <span class="phone-title">Бронирование</span>
+      </div>
+      <div class="phone-screen">
+        <div class="phone-cover">💅</div>
+        <div class="phone-name">СТУДИЯ</div>
+        <div class="phone-spec">Запись · Услуги · Мастера</div>
+        <div class="phone-tabs">
+          <div class="phone-tab active">Запись</div>
+          <div class="phone-tab">Услуги</div>
+          <div class="phone-tab">Акции</div>
+        </div>
+        <div class="phone-grid">
+          <div class="phone-cell">📅</div>
+          <div class="phone-cell">⏰</div>
+          <div class="phone-cell">👩</div>
+          <div class="phone-cell">⭐</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ПОЧЕМУ MINI APP -->
+<section>
+  <div class="container">
+    <div class="section-label">Почему Mini App</div>
+    <h2 class="section-title">Лучше сайта.<br>Проще приложения.</h2>
+    <p class="section-sub">Telegram Mini App открывается мгновенно прямо в мессенджере — без перехода в браузер и без установки.</p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-title">Мгновенный запуск</div>
+        <div class="feature-desc">Клиент нажимает одну кнопку в Telegram — приложение открывается за 0.5 секунды. Никаких переходов и ожиданий.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👤</div>
+        <div class="feature-title">Данные пользователя</div>
+        <div class="feature-desc">Telegram автоматически передаёт имя, фото и контакт клиента. Никаких форм регистрации.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💳</div>
+        <div class="feature-title">Встроенная оплата</div>
+        <div class="feature-desc">Принимайте платежи прямо в Telegram через Kaspi, карты и крипту — без переходов на сторонние сайты.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📲</div>
+        <div class="feature-title">Аудитория уже там</div>
+        <div class="feature-desc">В Казахстане Telegram используют 80%+ активных пользователей. Ваши клиенты уже в мессенджере.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔔</div>
+        <div class="feature-title">Push-уведомления</div>
+        <div class="feature-desc">Отправляйте уведомления через бота — акции, напоминания, статус заказа. Открываемость 80%+.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎨</div>
+        <div class="feature-title">Любой дизайн</div>
+        <div class="feature-desc">Полная свобода дизайна. Адаптируется под светлую и тёмную тему Telegram автоматически.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ДЛЯ КОГО -->
+<section>
+  <div class="container">
+    <div class="section-label">Применение</div>
+    <h2 class="section-title">Для любого бизнеса</h2>
+    <p class="section-sub">Mini App подходит для любой сферы, где важен быстрый контакт с клиентом.</p>
+
+    <div class="examples-grid">
+      <div class="example-card">
+        <div class="example-cover" style="background: linear-gradient(135deg,#1a0d0d,#0d0d0d)">💅</div>
+        <div class="example-body">
+          <div class="example-title">Салон красоты</div>
+          <div class="example-desc">Онлайн-запись, прайс, портфолио мастеров, акции</div>
+          <span class="example-tag">Красота</span>
+        </div>
+      </div>
+      <div class="example-card">
+        <div class="example-cover" style="background: linear-gradient(135deg,#0d1a0d,#0d0d0d)">🍕</div>
+        <div class="example-body">
+          <div class="example-title">Кафе / Доставка</div>
+          <div class="example-desc">Меню, корзина, оплата, отслеживание заказа</div>
+          <span class="example-tag">Еда</span>
+        </div>
+      </div>
+      <div class="example-card">
+        <div class="example-cover" style="background: linear-gradient(135deg,#0d0d1a,#0d0d0d)">🎓</div>
+        <div class="example-body">
+          <div class="example-title">Онлайн-школа</div>
+          <div class="example-desc">Курсы, уроки, прогресс, оплата, сертификаты</div>
+          <span class="example-tag">Образование</span>
+        </div>
+      </div>
+      <div class="example-card">
+        <div class="example-cover" style="background: linear-gradient(135deg,#1a1500,#0d0d0d)">🛍️</div>
+        <div class="example-body">
+          <div class="example-title">Интернет-магазин</div>
+          <div class="example-desc">Каталог, поиск, корзина, история заказов</div>
+          <span class="example-tag">E-commerce</span>
+        </div>
+      </div>
+      <div class="example-card">
+        <div class="example-cover" style="background: linear-gradient(135deg,#001a1a,#0d0d0d)">📸</div>
+        <div class="example-body">
+          <div class="example-title">Фотограф / Видеограф</div>
+          <div class="example-desc">Портфолио, прайс, форма заявки, контакты</div>
+          <span class="example-tag">Фриланс</span>
+        </div>
+      </div>
+      <div class="example-card">
+        <div class="example-cover" style="background: linear-gradient(135deg,#1a001a,#0d0d0d)">🏠</div>
+        <div class="example-body">
+          <div class="example-title">Недвижимость</div>
+          <div class="example-desc">Каталог объектов, фильтры, запись на просмотр</div>
+          <span class="example-tag">Недвижимость</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ПРОЦЕСС -->
+<section>
+  <div class="container">
+    <div class="section-label">Как работаем</div>
+    <h2 class="section-title">От идеи до запуска<br>за 7–14 дней</h2>
+    <p class="section-sub">Чёткий процесс без лишних созвонов и переписки.</p>
+
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-num">1</div>
+        <div class="step-title">Бриф</div>
+        <div class="step-desc">Обсуждаем цели, аудиторию и функционал в Telegram или по звонку. 30 минут.</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">2</div>
+        <div class="step-title">Дизайн</div>
+        <div class="step-desc">Создаём макет в вашем фирменном стиле. Согласовываем до старта разработки.</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">3</div>
+        <div class="step-title">Разработка</div>
+        <div class="step-desc">Пишем код, подключаем к Telegram-боту, настраиваем деплой на сервер.</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">4</div>
+        <div class="step-title">Запуск</div>
+        <div class="step-desc">Тестируем на реальных устройствах и передаём вам готовый продукт со всеми доступами.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ПРАЙС -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-label">Стоимость</div>
+    <h2 class="section-title">Прозрачные цены</h2>
+    <p class="section-sub">Никаких скрытых платежей. Фиксированная стоимость обсуждается до начала работы.</p>
+
+    <div class="pricing-grid">
+
+      <div class="price-card">
+        <div class="price-icon">📇</div>
+        <div class="price-name">Базовый</div>
+        <div class="price-desc">Визитка-портфолио. Идеально для фрилансеров и самозанятых.</div>
+        <div class="price-value">80 000</div>
+        <div class="price-unit">— 120 000 ₸</div>
+        <ul class="price-features">
+          <li><span class="check">✓</span> До 3 страниц (портфолио, услуги, контакты)</li>
+          <li><span class="check">✓</span> Ваш дизайн и фирменные цвета</li>
+          <li><span class="check">✓</span> Telegram SDK (haptic, popup)</li>
+          <li><span class="check">✓</span> Деплой и настройка бота</li>
+          <li><span class="check">✓</span> Срок: 5–7 дней</li>
+        </ul>
+        <a href="https://t.me/karina_group2023" class="price-btn price-btn-outline">Обсудить</a>
+      </div>
+
+      <div class="price-card popular">
+        <div class="popular-badge">★ ПОПУЛЯРНЫЙ</div>
+        <div class="price-icon">🚀</div>
+        <div class="price-name">Стандарт</div>
+        <div class="price-desc">Полноценный бизнес-инструмент с заявками и уведомлениями.</div>
+        <div class="price-value">150 000</div>
+        <div class="price-unit">— 250 000 ₸</div>
+        <ul class="price-features">
+          <li><span class="check">✓</span> До 5 страниц + фильтры и поиск</li>
+          <li><span class="check">✓</span> Форма заявки → уведомление в Telegram</li>
+          <li><span class="check">✓</span> Онлайн-запись или каталог товаров</li>
+          <li><span class="check">✓</span> База данных клиентов</li>
+          <li><span class="check">✓</span> Деплой + бот + техподдержка 1 мес.</li>
+          <li><span class="check">✓</span> Срок: 7–10 дней</li>
+        </ul>
+        <a href="https://t.me/karina_group2023" class="price-btn price-btn-gold">Заказать</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-icon">💎</div>
+        <div class="price-name">Премиум</div>
+        <div class="price-desc">Полноценный магазин или сервис с оплатой и личным кабинетом.</div>
+        <div class="price-value">350 000</div>
+        <div class="price-unit">— 600 000 ₸</div>
+        <ul class="price-features">
+          <li><span class="check">✓</span> Неограниченный функционал</li>
+          <li><span class="check">✓</span> Оплата (Kaspi, карты)</li>
+          <li><span class="check">✓</span> Личный кабинет пользователя</li>
+          <li><span class="check">✓</span> Интеграция с CRM / 1С</li>
+          <li><span class="check">✓</span> Push-рассылки по базе</li>
+          <li><span class="check">✓</span> Техподдержка 3 мес.</li>
+          <li><span class="check">✓</span> Срок: 14–21 день</li>
+        </ul>
+        <a href="https://t.me/karina_group2023" class="price-btn price-btn-outline">Обсудить</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="section-label">Начать</div>
+    <h2 class="section-title" style="max-width:600px;margin:0 auto 16px">Готовы запустить<br>свой Mini App?</h2>
+    <p class="section-sub" style="margin:0 auto 36px">Напишите нам — обсудим ваш проект и рассчитаем стоимость бесплатно.</p>
+    <a href="https://t.me/karina_group2023" class="btn-gold" style="font-size:16px;padding:16px 40px">
+      ✈️ Написать в Telegram
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 <span>KARINA Media</span> · Digital Agency · Казахстан</p>
+</footer>
+
+</body>
+</html>
