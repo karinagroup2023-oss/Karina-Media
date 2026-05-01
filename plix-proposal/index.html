@@ -1,0 +1,1810 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Коммерческое предложение — Plix Telegram Mini App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #1565C0;
+      --blue-dark: #0D47A1;
+      --blue-light: #E3F2FD;
+      --orange: #E65100;
+      --orange-light: #FFF3E0;
+      --green: #2E7D32;
+      --green-light: #E8F5E9;
+      --gray: #F5F7FA;
+      --border: #E2E8F0;
+      --text: #1A1A2E;
+      --text2: #4A5568;
+      --hint: #9CA3AF;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: white;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* ===== PAGE BREAKS FOR PRINT ===== */
+    @media print {
+      .page-break { page-break-before: always; }
+      body { font-size: 12px; }
+      .no-print { display: none; }
+
+      /* Keep individual cards from splitting mid-element */
+      .problem-card, .solution-card, .pricing-card, .payment-card,
+      .phone-wrap, .timeline-item, .roi-item, .integration-step,
+      .flow-step, .promo-step, .about-service, .cta-contact {
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+
+      /* Keep blocks/grids together */
+      .quote, .roi-box, .roi-grid, .problem-grid,
+      .payments-grid, .integration-box, .promo-try-box,
+      .compare-table, .about-grid, .flow, .cta-contacts,
+      .promo-code-display, .promo-steps {
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+
+      /* Phones: 2×2 grid so each phone+label stays on same page */
+      .phones-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+      .phone { max-width: 200px; }
+
+      /* CTA always on its own page */
+      .cta { page-break-before: always; }
+
+      /* Section title block never orphaned */
+      .section-label, .section-title, .section-subtitle {
+        page-break-after: avoid;
+        break-after: avoid;
+      }
+    }
+
+    /* ===== COVER ===== */
+    .cover {
+      background: linear-gradient(135deg, #0D47A1 0%, #1565C0 50%, #1976D2 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 60px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 500px; height: 500px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -150px; left: -80px;
+      width: 400px; height: 400px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 50%;
+    }
+
+    .cover-agency {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cover-agency-logo {
+      width: 48px; height: 48px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 20px;
+    }
+
+    .cover-agency-name {
+      font-size: 18px;
+      font-weight: 700;
+      opacity: 0.9;
+    }
+
+    .cover-agency-sub {
+      font-size: 12px;
+      opacity: 0.6;
+    }
+
+    .cover-main {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cover-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 32px;
+    }
+
+    .cover-title {
+      font-size: 52px;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 12px;
+      letter-spacing: -1px;
+    }
+
+    .cover-title span {
+      color: #FFD54F;
+    }
+
+    .cover-subtitle {
+      font-size: 20px;
+      font-weight: 400;
+      opacity: 0.8;
+      margin-bottom: 48px;
+      max-width: 600px;
+    }
+
+    .cover-stats {
+      display: flex;
+      gap: 40px;
+    }
+
+    .cover-stat-value {
+      font-size: 36px;
+      font-weight: 800;
+      color: #FFD54F;
+      line-height: 1;
+    }
+
+    .cover-stat-label {
+      font-size: 13px;
+      opacity: 0.7;
+      margin-top: 4px;
+    }
+
+    .cover-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      position: relative;
+      z-index: 1;
+      opacity: 0.6;
+      font-size: 13px;
+    }
+
+    /* ===== SECTIONS ===== */
+    .section {
+      padding: 64px 60px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section:last-child { border-bottom: none; }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .section-subtitle {
+      font-size: 16px;
+      color: var(--text2);
+      margin-bottom: 40px;
+      max-width: 640px;
+    }
+
+    /* ===== PROBLEM ===== */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .problem-card {
+      background: #FFF8F8;
+      border: 1px solid #FFCDD2;
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .problem-card-icon { font-size: 28px; margin-bottom: 12px; }
+    .problem-card-title { font-size: 15px; font-weight: 700; color: #C62828; margin-bottom: 6px; }
+    .problem-card-text { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+    /* ===== SOLUTION ===== */
+    .solution-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+    }
+
+    .solution-card {
+      background: var(--blue-light);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid #BBDEFB;
+    }
+
+    .solution-card-icon {
+      width: 48px; height: 48px;
+      background: var(--blue);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+
+    .solution-card-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .solution-card-text { font-size: 13px; color: var(--text2); }
+
+    /* ===== SCREENS ===== */
+    .screens-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .screen-card {
+      background: var(--gray);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .screen-preview {
+      background: linear-gradient(135deg, var(--blue) 0%, #1976D2 100%);
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      color: white;
+    }
+
+    .screen-info { padding: 16px; }
+    .screen-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .screen-desc { font-size: 12px; color: var(--text2); }
+
+    /* ===== FLOW ===== */
+    .flow {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin: 32px 0;
+      overflow-x: auto;
+    }
+
+    .flow-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      min-width: 140px;
+    }
+
+    .flow-icon {
+      width: 56px; height: 56px;
+      background: var(--blue);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: white;
+    }
+
+    .flow-step-title { font-size: 13px; font-weight: 700; margin-bottom: 3px; }
+    .flow-step-desc { font-size: 11px; color: var(--hint); }
+
+    .flow-arrow {
+      font-size: 20px;
+      color: var(--border);
+      padding: 0 4px;
+      flex-shrink: 0;
+      margin-bottom: 24px;
+    }
+
+    /* ===== TECH ===== */
+    .tech-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .tech-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gray);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* ===== INTEGRATION ===== */
+    .integration-box {
+      background: linear-gradient(135deg, #E8F5E9, #F1F8E9);
+      border: 2px solid #A5D6A7;
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    .integration-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--green);
+      margin-bottom: 16px;
+    }
+
+    .integration-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .integration-step {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: white;
+      border-radius: 10px;
+      padding: 12px 16px;
+    }
+
+    .integration-step-num {
+      width: 28px; height: 28px;
+      background: var(--green);
+      color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .integration-step-text { font-size: 13px; color: var(--text2); }
+    .integration-step-text strong { color: var(--text); }
+
+    /* ===== PRICING ===== */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+    }
+
+    .pricing-card {
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .pricing-card.recommended {
+      border-color: var(--blue);
+      box-shadow: 0 8px 32px rgba(21, 101, 192, 0.2);
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: 16px; right: 16px;
+      background: var(--orange);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .pricing-header {
+      padding: 28px 24px 20px;
+      background: var(--gray);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pricing-card.recommended .pricing-header {
+      background: linear-gradient(135deg, #0D47A1, #1565C0);
+      color: white;
+    }
+
+    .pricing-name {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--hint);
+      margin-bottom: 8px;
+    }
+
+    .pricing-card.recommended .pricing-name { color: rgba(255,255,255,0.7); }
+
+    .pricing-price {
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .pricing-card.recommended .pricing-price { color: white; }
+
+    .pricing-period {
+      font-size: 13px;
+      color: var(--hint);
+      font-weight: 400;
+    }
+
+    .pricing-card.recommended .pricing-period { color: rgba(255,255,255,0.6); }
+
+    .pricing-body {
+      padding: 24px;
+    }
+
+    .pricing-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .pricing-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text2);
+    }
+
+    .pricing-features li::before {
+      content: '✓';
+      color: var(--green);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .pricing-note {
+      font-size: 12px;
+      color: var(--hint);
+      background: var(--gray);
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin-top: 12px;
+    }
+
+    /* ===== TIMELINE ===== */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 24px;
+      padding-bottom: 28px;
+      position: relative;
+    }
+
+    .timeline-dot {
+      width: 40px; height: 40px;
+      background: var(--blue);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      color: white;
+    }
+
+    .timeline-content {
+      padding-top: 8px;
+      flex: 1;
+    }
+
+    .timeline-week {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .timeline-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .timeline-desc { font-size: 13px; color: var(--text2); }
+
+    /* ===== ROI ===== */
+    .roi-box {
+      background: linear-gradient(135deg, #0D47A1, #1565C0);
+      border-radius: 20px;
+      padding: 40px;
+      color: white;
+      margin-bottom: 24px;
+    }
+
+    .roi-title { font-size: 22px; font-weight: 800; margin-bottom: 24px; }
+
+    .roi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+    }
+
+    .roi-item { text-align: center; }
+    .roi-value { font-size: 40px; font-weight: 900; color: #FFD54F; line-height: 1; }
+    .roi-label { font-size: 13px; opacity: 0.8; margin-top: 6px; }
+
+    /* ===== ABOUT ===== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .about-services {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .about-service {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--gray);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* ===== CTA ===== */
+    .cta {
+      background: linear-gradient(135deg, #E65100, #FF6D00);
+      padding: 64px 60px;
+      color: white;
+      text-align: center;
+    }
+
+    .cta-title { font-size: 36px; font-weight: 900; margin-bottom: 12px; }
+    .cta-subtitle { font-size: 18px; opacity: 0.9; margin-bottom: 40px; }
+
+    .cta-contacts {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .cta-contact {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cta-contact-icon { font-size: 28px; }
+    .cta-contact-label { font-size: 12px; opacity: 0.7; }
+    .cta-contact-value { font-size: 16px; font-weight: 700; }
+
+    /* ===== QUOTE ===== */
+    .quote {
+      background: var(--orange-light);
+      border-left: 4px solid var(--orange);
+      padding: 20px 24px;
+      border-radius: 0 12px 12px 0;
+      margin: 24px 0;
+      font-size: 15px;
+      color: var(--text2);
+      font-style: italic;
+    }
+
+    /* ===== TABLE ===== */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 24px;
+    }
+
+    .compare-table th {
+      background: var(--blue);
+      color: white;
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .compare-table th:first-child { border-radius: 10px 0 0 0; }
+    .compare-table th:last-child { border-radius: 0 10px 0 0; }
+
+    .compare-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    .compare-table tr:nth-child(even) td { background: var(--gray); }
+    .compare-table tr:last-child td { border-bottom: none; }
+
+    .yes { color: var(--green); font-weight: 700; }
+    .no { color: #C62828; font-weight: 700; }
+
+    /* ===== PRINT BUTTON ===== */
+    .print-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--blue);
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(21, 101, 192, 0.4);
+      z-index: 100;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .print-btn:hover { background: var(--blue-dark); }
+
+    hr { border: none; border-top: 1px solid var(--border); }
+
+    .highlight {
+      background: var(--blue-light);
+      border-radius: 8px;
+      padding: 2px 8px;
+      color: var(--blue);
+      font-weight: 600;
+    }
+
+    /* ===== PHONE MOCKUPS ===== */
+    .phones-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .phone-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .phone {
+      width: 100%;
+      max-width: 180px;
+      background: #1A1A1A;
+      border-radius: 28px;
+      padding: 10px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.25);
+      position: relative;
+    }
+
+    .phone-notch {
+      width: 60px; height: 8px;
+      background: #1A1A1A;
+      border-radius: 4px;
+      margin: 0 auto 6px;
+    }
+
+    .phone-screen {
+      background: #F0F4F8;
+      border-radius: 20px;
+      overflow: hidden;
+      font-size: 9px;
+      line-height: 1.3;
+    }
+
+    .ps-tg-header {
+      background: white;
+      padding: 5px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #eee;
+      font-size: 8px;
+      color: #555;
+    }
+
+    .ps-header {
+      background: white;
+      padding: 7px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #E2E8F0;
+    }
+
+    .ps-header-title { font-size: 10px; font-weight: 800; color: #1A1A2E; }
+    .ps-badge { background: #EBF4FF; color: #1565C0; font-size: 7px; font-weight: 700; padding: 2px 6px; border-radius: 8px; }
+    .ps-badge-gold { background: #1565C0; color: #FFD54F; font-size: 7px; font-weight: 700; padding: 2px 6px; border-radius: 8px; }
+
+    .ps-tabs {
+      background: white;
+      display: flex;
+      border-bottom: 2px solid #E2E8F0;
+      font-size: 8px;
+      font-weight: 600;
+    }
+
+    .ps-tab { flex: 1; padding: 5px 4px; text-align: center; color: #9CA3AF; }
+    .ps-tab.active { color: #1565C0; border-bottom: 2px solid #1565C0; margin-bottom: -2px; }
+
+    .ps-chips {
+      display: flex;
+      gap: 4px;
+      padding: 5px 6px;
+      overflow: hidden;
+      background: white;
+    }
+
+    .ps-chip { background: #F0F4F8; border-radius: 10px; padding: 2px 6px; font-size: 7px; font-weight: 600; color: #4A5568; white-space: nowrap; }
+    .ps-chip.active { background: #1565C0; color: white; }
+
+    .ps-card {
+      background: white;
+      margin: 5px 5px;
+      border-radius: 10px;
+      padding: 7px 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+      border: 1px solid #E2E8F0;
+    }
+
+    .ps-card-tags { display: flex; gap: 3px; margin-bottom: 4px; flex-wrap: wrap; }
+    .ps-tag { font-size: 6px; font-weight: 600; padding: 1px 5px; border-radius: 5px; }
+    .ps-tag-req { background: #EBF4FF; color: #1565C0; }
+    .ps-tag-off { background: #FFF3E0; color: #E65100; }
+    .ps-tag-cat { background: #F0F4F8; color: #4A5568; }
+    .ps-tag-urg { background: #FFF8E1; color: #7B6000; }
+
+    .ps-card-title { font-size: 9px; font-weight: 800; color: #1A1A2E; margin-bottom: 3px; line-height: 1.2; }
+    .ps-card-desc { font-size: 7px; color: #6B7280; margin-bottom: 4px; line-height: 1.3; }
+    .ps-card-meta { display: flex; gap: 8px; font-size: 7px; color: #6B7280; margin-bottom: 5px; }
+    .ps-card-footer { display: flex; align-items: center; justify-content: space-between; }
+    .ps-card-company { font-size: 7px; color: #4A5568; }
+    .ps-card-responses { font-size: 7px; color: #9CA3AF; }
+    .ps-btn { background: #1565C0; color: white; font-size: 7px; font-weight: 700; padding: 3px 7px; border-radius: 5px; }
+    .ps-btn-sm { background: #E3F2FD; color: #1565C0; font-size: 7px; font-weight: 700; padding: 3px 7px; border-radius: 5px; }
+    .ps-date { font-size: 6px; color: #9CA3AF; }
+
+    .ps-form-section { padding: 5px 7px; }
+    .ps-form-label { font-size: 7px; font-weight: 700; color: #4A5568; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; margin-top: 5px; }
+    .ps-form-label span { color: #C62828; }
+    .ps-form-input { background: white; border: 1px solid #E2E8F0; border-radius: 6px; padding: 4px 6px; font-size: 7px; color: #9CA3AF; width: 100%; }
+    .ps-form-toggle { display: flex; background: white; border: 1px solid #E2E8F0; border-radius: 8px; overflow: hidden; margin: 5px 7px; }
+    .ps-toggle-btn { flex: 1; padding: 5px 4px; text-align: center; font-size: 7px; font-weight: 700; color: #9CA3AF; }
+    .ps-toggle-btn.active { background: #1565C0; color: white; }
+
+    .ps-profile-header { background: #1565C0; padding: 8px 8px; display: flex; align-items: center; gap: 6px; }
+    .ps-avatar { width: 22px; height: 22px; background: rgba(255,255,255,0.2); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; color: white; flex-shrink: 0; }
+    .ps-profile-name { font-size: 9px; font-weight: 800; color: white; }
+    .ps-profile-sub { font-size: 7px; color: rgba(255,255,255,0.7); }
+
+    .ps-promo-box { background: white; margin: 5px 5px; border-radius: 8px; padding: 6px 7px; border: 1px solid #E2E8F0; }
+    .ps-promo-title { font-size: 8px; font-weight: 700; margin-bottom: 3px; }
+    .ps-promo-row { display: flex; gap: 4px; }
+    .ps-promo-input { flex: 1; background: #F0F4F8; border: 1px solid #E2E8F0; border-radius: 5px; padding: 3px 5px; font-size: 7px; font-weight: 700; letter-spacing: 0.5px; color: #4A5568; }
+    .ps-promo-btn { background: #1565C0; color: white; font-size: 7px; font-weight: 700; padding: 3px 6px; border-radius: 5px; flex-shrink: 0; }
+
+    .ps-tariff-card { background: white; margin: 0 5px 4px; border-radius: 8px; padding: 6px 7px; border: 2px solid #E2E8F0; }
+    .ps-tariff-card.current { border-color: #1565C0; }
+    .ps-tariff-name { font-size: 8px; font-weight: 800; color: #1565C0; }
+    .ps-tariff-price { font-size: 9px; font-weight: 900; color: #1565C0; }
+
+    .ps-nav {
+      background: white;
+      display: flex;
+      border-top: 1px solid #E2E8F0;
+      padding: 5px 0 3px;
+    }
+
+    .ps-nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+    .ps-nav-icon { font-size: 11px; }
+    .ps-nav-label { font-size: 6px; color: #9CA3AF; font-weight: 500; }
+    .ps-nav-label.active { color: #1565C0; }
+
+    .ps-my-tabs { display: flex; background: white; border-bottom: 1px solid #E2E8F0; }
+    .ps-my-tab { flex: 1; padding: 5px 2px; text-align: center; font-size: 7px; color: #9CA3AF; font-weight: 600; }
+    .ps-my-tab.active { color: #1565C0; border-bottom: 2px solid #1565C0; }
+
+    .ps-response-card { background: white; margin: 5px 5px; border-radius: 10px; padding: 7px 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); border: 1px solid #E2E8F0; }
+    .ps-response-title { font-size: 8px; font-weight: 700; color: #1A1A2E; margin-bottom: 3px; }
+    .ps-response-company { font-size: 7px; color: #4A5568; margin-bottom: 2px; }
+    .ps-response-price { font-size: 8px; font-weight: 800; color: #2E7D32; margin-bottom: 4px; }
+    .ps-response-msg { font-size: 7px; color: #6B7280; margin-bottom: 5px; line-height: 1.3; }
+    .ps-response-btns { display: flex; gap: 4px; }
+
+    .phone-label { font-size: 14px; font-weight: 700; color: var(--text); text-align: center; }
+    .phone-sublabel { font-size: 12px; color: var(--text2); text-align: center; }
+
+    /* ===== PROMO SECTION ===== */
+    .promo-try-box {
+      background: linear-gradient(135deg, #1565C0, #1976D2);
+      border-radius: 20px;
+      padding: 36px 40px;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .promo-try-left { flex: 1; }
+    .promo-try-title { font-size: 24px; font-weight: 800; margin-bottom: 10px; }
+    .promo-try-desc { font-size: 14px; opacity: 0.85; margin-bottom: 20px; line-height: 1.6; }
+
+    .promo-code-display {
+      background: rgba(255,255,255,0.15);
+      border: 2px dashed rgba(255,255,255,0.5);
+      border-radius: 12px;
+      padding: 14px 20px;
+      display: inline-block;
+      margin-bottom: 14px;
+    }
+
+    .promo-code-label { font-size: 11px; opacity: 0.7; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px; }
+    .promo-code-value { font-size: 28px; font-weight: 900; letter-spacing: 4px; color: #FFD54F; }
+
+    .promo-steps { display: flex; flex-direction: column; gap: 8px; }
+    .promo-step { display: flex; align-items: center; gap: 10px; font-size: 13px; opacity: 0.9; }
+    .promo-step-num { width: 22px; height: 22px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+
+    .promo-try-right {
+      background: rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      min-width: 200px;
+    }
+
+    .promo-qr-placeholder {
+      width: 120px; height: 120px;
+      background: white;
+      border-radius: 12px;
+      margin: 0 auto 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+    }
+
+    .promo-link { font-size: 13px; font-weight: 700; opacity: 0.9; }
+
+    /* ===== PAYMENTS ===== */
+    .payments-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .payment-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 16px;
+      text-align: center;
+    }
+
+    .payment-icon { font-size: 32px; margin-bottom: 10px; }
+    .payment-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .payment-desc { font-size: 11px; color: var(--text2); line-height: 1.4; }
+    .payment-ready { font-size: 10px; font-weight: 700; margin-top: 8px; padding: 3px 8px; border-radius: 6px; display: inline-block; }
+    .payment-ready.yes { background: #E8F5E9; color: #2E7D32; }
+    .payment-ready.soon { background: #FFF3E0; color: #E65100; }
+  </style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">🖨️ Сохранить PDF</button>
+
+<!-- ===== ОБЛОЖКА ===== -->
+<div class="cover">
+  <div class="cover-agency">
+    <div class="cover-agency-logo">K</div>
+    <div>
+      <div class="cover-agency-name">KARINA Media</div>
+      <div class="cover-agency-sub">Digital-агентство · Казахстан</div>
+    </div>
+  </div>
+
+  <div class="cover-main">
+    <div class="cover-tag">
+      📱 Коммерческое предложение · Май 2026
+    </div>
+    <div class="cover-title">
+      Telegram Mini App<br/>для <span>Plix.kz</span>
+    </div>
+    <div class="cover-subtitle">
+      Маркетплейс строительных материалов прямо в Telegram — без скачивания приложений, без лишних шагов
+    </div>
+    <div class="cover-stats">
+      <div>
+        <div class="cover-stat-value">8М+</div>
+        <div class="cover-stat-label">Пользователей Telegram в Казахстане</div>
+      </div>
+      <div>
+        <div class="cover-stat-value">3×</div>
+        <div class="cover-stat-label">Конверсия в Telegram vs Email</div>
+      </div>
+      <div>
+        <div class="cover-stat-value">0</div>
+        <div class="cover-stat-label">Дней на скачивание приложения</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-footer">
+    <span>Подготовлено: KARINA Media</span>
+    <span>Для: Plix.kz</span>
+    <span>Май 2026</span>
+  </div>
+</div>
+
+<!-- ===== ПРОБЛЕМА ===== -->
+<div class="section page-break">
+  <div class="section-label">Ситуация</div>
+  <div class="section-title">Проблемы, которые мы решаем</div>
+  <div class="section-subtitle">
+    Строительная отрасль Казахстана активна в Telegram — но Plix.kz доступен только через браузер
+  </div>
+
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="problem-card-icon">📵</div>
+      <div class="problem-card-title">Нет мобильного приложения</div>
+      <div class="problem-card-text">Клиенты должны открывать сайт в браузере телефона — это неудобно. 70% трафика в B2B идёт с мобильных устройств.</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-card-icon">⏳</div>
+      <div class="problem-card-title">Медленный отклик на заявки</div>
+      <div class="problem-card-text">Поставщики узнают о новых заявках только зайдя на сайт. Нет мгновенных уведомлений — теряются сделки.</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-card-icon">📧</div>
+      <div class="problem-card-title">Email-уведомления никто не читает</div>
+      <div class="problem-card-text">Открываемость email в B2B — менее 20%. Telegram-сообщения читают 85%+ получателей в первый час.</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-card-icon">💰</div>
+      <div class="problem-card-title">Нативное приложение стоит миллионы</div>
+      <div class="problem-card-text">Разработка iOS + Android приложения: от 5 000 000 ₸. Плюс публикация, обновления, поддержка. Это долго и дорого.</div>
+    </div>
+  </div>
+
+  <div class="quote">
+    «Строители и поставщики Казахстана проводят в Telegram по 3–4 часа в день. Кто первым придёт к ним туда — тот выиграет рынок.»
+  </div>
+</div>
+
+<!-- ===== РЕШЕНИЕ ===== -->
+<div class="section page-break">
+  <div class="section-label">Решение</div>
+  <div class="section-title">Telegram Mini App для Plix.kz</div>
+  <div class="section-subtitle">
+    Полноценное мобильное приложение внутри Telegram — без скачивания, без регистрации с нуля, с мгновенными уведомлениями
+  </div>
+
+  <div class="solution-grid">
+    <div class="solution-card">
+      <div class="solution-card-icon">📩</div>
+      <div class="solution-card-title">Лента заявок и предложений</div>
+      <div class="solution-card-text">Фильтрация по 10 категориям стройматериалов и городам Казахстана. Обновляется в реальном времени.</div>
+    </div>
+    <div class="solution-card">
+      <div class="solution-card-icon">💬</div>
+      <div class="solution-card-title">Система откликов</div>
+      <div class="solution-card-text">Поставщик откликается на заявку — покупатель мгновенно получает уведомление в Telegram с контактами.</div>
+    </div>
+    <div class="solution-card">
+      <div class="solution-card-icon">✅</div>
+      <div class="solution-card-title">Верификация по БИН</div>
+      <div class="solution-card-text">Все компании проходят верификацию. Бейдж «Верифицирован» повышает доверие на платформе.</div>
+    </div>
+    <div class="solution-card">
+      <div class="solution-card-icon">💳</div>
+      <div class="solution-card-title">Встроенная оплата</div>
+      <div class="solution-card-text">Подписки оплачиваются через Telegram Stars или банковскую карту прямо в приложении.</div>
+    </div>
+    <div class="solution-card">
+      <div class="solution-card-icon">🔔</div>
+      <div class="solution-card-title">Push-уведомления</div>
+      <div class="solution-card-text">Автоматические уведомления о новых заявках в категориях подписки. 85%+ открываемость.</div>
+    </div>
+    <div class="solution-card">
+      <div class="solution-card-icon">🔄</div>
+      <div class="solution-card-title">Синхронизация с сайтом</div>
+      <div class="solution-card-text">Заявка на сайте → появляется в Mini App. Заявка в Mini App → появляется на сайте. Единая база данных.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== КАК ЭТО РАБОТАЕТ ===== -->
+<div class="section page-break">
+  <div class="section-label">Процесс</div>
+  <div class="section-title">Как работает для клиентов</div>
+  <div class="section-subtitle">Весь путь от поиска до сделки — в одном мессенджере</div>
+
+  <div style="margin-bottom: 40px;">
+    <div style="font-size: 15px; font-weight: 700; margin-bottom: 16px; color: var(--blue);">📩 Покупатель ищет материалы:</div>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-icon">✈️</div>
+        <div class="flow-step-title">Открывает бота</div>
+        <div class="flow-step-desc">@plixkz_bot в Telegram</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-icon">📋</div>
+        <div class="flow-step-title">Создаёт заявку</div>
+        <div class="flow-step-desc">Категория, количество, город</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-icon">🔔</div>
+        <div class="flow-step-title">Получает отклики</div>
+        <div class="flow-step-desc">Уведомление в Telegram</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-icon">📞</div>
+        <div class="flow-step-title">Выбирает лучшее</div>
+        <div class="flow-step-desc">Звонит или пишет в WhatsApp</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-icon">🤝</div>
+        <div class="flow-step-title">Сделка!</div>
+        <div class="flow-step-desc">Без лишних шагов</div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div style="font-size: 15px; font-weight: 700; margin-bottom: 16px; color: var(--orange);">🏷️ Поставщик продаёт материалы:</div>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-icon">🔔</div>
+        <div class="flow-step-title">Уведомление</div>
+        <div class="flow-step-desc">Новая заявка в его категории</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-icon">👀</div>
+        <div class="flow-step-title">Читает заявку</div>
+        <div class="flow-step-desc">Детали, количество, город</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-icon">✉️</div>
+        <div class="flow-step-title">Откликается</div>
+        <div class="flow-step-desc">Цена, сроки, контакты</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-icon">📞</div>
+        <div class="flow-step-title">Покупатель звонит</div>
+        <div class="flow-step-desc">Прямой контакт</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-icon">💰</div>
+        <div class="flow-step-title">Продажа!</div>
+        <div class="flow-step-desc">Быстро и удобно</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ЭКРАНЫ ===== -->
+<div class="section page-break">
+  <div class="section-label">Интерфейс</div>
+  <div class="section-title">Как выглядит приложение</div>
+  <div class="section-subtitle">Скриншоты реального работающего приложения — t.me/plixkz_bot</div>
+
+  <div class="phones-grid">
+
+    <!-- ЭКРАН 1: ЛЕНТА -->
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="ps-tg-header"><span>← Plix</span><span>···</span></div>
+          <!-- App Header -->
+          <div class="ps-header">
+            <div style="display:flex;align-items:center;gap:5px;">
+              <div style="width:18px;height:18px;background:#1565C0;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:white;">P</div>
+              <div>
+                <div style="font-size:9px;font-weight:800;color:#1565C0;">Plix</div>
+                <div style="font-size:6px;color:#9CA3AF;">Стройматериалы KZ</div>
+              </div>
+            </div>
+            <div class="ps-badge-gold">⭐ Год</div>
+          </div>
+          <!-- Tabs -->
+          <div class="ps-tabs">
+            <div class="ps-tab active">📩 Заявки <span style="background:#1565C0;color:white;border-radius:8px;padding:0 4px;font-size:6px;">8</span></div>
+            <div class="ps-tab">🏷️ Предложения <span style="background:#E65100;color:white;border-radius:8px;padding:0 4px;font-size:6px;">8</span></div>
+          </div>
+          <!-- Chips -->
+          <div class="ps-chips">
+            <div class="ps-chip active">📦 Все</div>
+            <div class="ps-chip">🏗️ Цемент</div>
+            <div class="ps-chip">🧱 Кирпич</div>
+          </div>
+          <!-- Card 1 -->
+          <div class="ps-card">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:3px;">
+              <div class="ps-card-tags">
+                <span class="ps-tag ps-tag-req">📩 Заявка</span>
+                <span class="ps-tag ps-tag-cat">🏗️ Цемент</span>
+                <span class="ps-tag ps-tag-urg">⚡ Срочно</span>
+              </div>
+              <div class="ps-date">1 мая</div>
+            </div>
+            <div class="ps-card-title">Цемент М500 — 1 000 мешков</div>
+            <div class="ps-card-desc">Для монолитного каркаса ЖК «Достык». НДС обязателен...</div>
+            <div class="ps-card-meta"><span>📍 Алматы</span><span>📦 1 000 мешков</span></div>
+            <div class="ps-card-footer">
+              <div>
+                <div class="ps-card-company">🏢 ТОО «ПромСтройKZ»</div>
+                <div class="ps-card-responses">5 откл.</div>
+              </div>
+              <div class="ps-btn">Откликнуться</div>
+            </div>
+          </div>
+          <!-- Card 2 mini -->
+          <div class="ps-card" style="margin-top:0;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:3px;">
+              <div class="ps-card-tags">
+                <span class="ps-tag ps-tag-req">📩 Заявка</span>
+                <span class="ps-tag ps-tag-cat">🔩 Металл</span>
+                <span class="ps-tag ps-tag-urg">⚡ Срочно</span>
+              </div>
+              <div class="ps-date">1 мая</div>
+            </div>
+            <div class="ps-card-title">Арматура А500С — 80 т</div>
+            <div class="ps-card-meta"><span>📍 Астана</span><span>📦 80 т</span></div>
+            <div class="ps-card-footer">
+              <div class="ps-card-company">🏢 ТОО «АстанаСтройГрупп»</div>
+              <div class="ps-btn">Откликнуться</div>
+            </div>
+          </div>
+          <!-- Nav -->
+          <div class="ps-nav">
+            <div class="ps-nav-item"><div class="ps-nav-icon">🏗️</div><div class="ps-nav-label active">Лента</div></div>
+            <div class="ps-nav-item"><div class="ps-nav-icon">➕</div><div class="ps-nav-label">Создать</div></div>
+            <div class="ps-nav-item"><div class="ps-nav-icon">📋</div><div class="ps-nav-label">Мои</div></div>
+            <div class="ps-nav-item"><div class="ps-nav-icon">👤</div><div class="ps-nav-label">Профиль</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Лента заявок</div>
+      <div class="phone-sublabel">Покупатель видит заявки и предложения, фильтрует по категории и откликается</div>
+    </div>
+
+    <!-- ЭКРАН 2: СОЗДАТЬ -->
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="ps-tg-header"><span>← Plix</span><span>···</span></div>
+          <div class="ps-header">
+            <div class="ps-header-title">Создать объявление</div>
+          </div>
+          <div class="ps-form-toggle">
+            <div class="ps-toggle-btn active">📩 Заявка на покупку</div>
+            <div class="ps-toggle-btn">🏷️ Предложение</div>
+          </div>
+          <div class="ps-form-section">
+            <div class="ps-form-label">Категория <span>*</span></div>
+            <div class="ps-form-input">Выберите категорию ∨</div>
+            <div class="ps-form-label">Заголовок <span>*</span></div>
+            <div class="ps-form-input">Напр.: Нужен цемент М400 — 200 мешков</div>
+            <div class="ps-form-label">Описание</div>
+            <div class="ps-form-input" style="height:30px;">Доп. детали: марка, доставка, условия...</div>
+            <div style="display:flex;gap:6px;">
+              <div style="flex:1;">
+                <div class="ps-form-label">Количество</div>
+                <div class="ps-form-input">100 ⇅</div>
+              </div>
+              <div style="width:50px;">
+                <div class="ps-form-label">Единица</div>
+                <div class="ps-form-input">шт ∨</div>
+              </div>
+            </div>
+            <div class="ps-form-label">Город <span>*</span></div>
+            <div class="ps-form-input">Выберите город ∨</div>
+            <div class="ps-form-label">Компания <span>*</span></div>
+            <div class="ps-form-input">ТОО / ИП / ФИО</div>
+            <div style="margin-top:8px;background:#1565C0;color:white;text-align:center;padding:6px;border-radius:8px;font-size:8px;font-weight:700;">Разместить объявление</div>
+          </div>
+          <div class="ps-nav">
+            <div class="ps-nav-item"><div class="ps-nav-icon">🏗️</div><div class="ps-nav-label">Лента</div></div>
+            <div class="ps-nav-item"><div class="ps-nav-icon">➕</div><div class="ps-nav-label active">Создать</div></div>
+            <div class="ps-nav-item"><div class="ps-nav-icon">📋</div><div class="ps-nav-label">Мои</div></div>
+            <div class="ps-nav-item"><div class="ps-nav-icon">👤</div><div class="ps-nav-label">Профиль</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Создать объявление</div>
+      <div class="phone-sublabel">Форма размещения заявки или предложения — категория, город, контакт</div>
+    </div>
+
+    <!-- ЭКРАН 3: МОИ + ОТКЛИКИ -->
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="ps-tg-header"><span>← Plix</span><span>···</span></div>
+          <div class="ps-header">
+            <div class="ps-header-title">Мои объявления</div>
+          </div>
+          <div class="ps-my-tabs">
+            <div class="ps-my-tab">Мои <span style="background:#1565C0;color:white;border-radius:8px;padding:0 4px;font-size:6px;">2</span></div>
+            <div class="ps-my-tab active">Отклики ко мне <span style="background:#E65100;color:white;border-radius:8px;padding:0 4px;font-size:6px;">3</span></div>
+            <div class="ps-my-tab">Мои отклики</div>
+          </div>
+          <!-- Incoming response card -->
+          <div class="ps-response-card">
+            <div style="font-size:7px;color:#9CA3AF;margin-bottom:3px;">На заявку: Цемент М500 — 1 000 мешков</div>
+            <div class="ps-response-title">АО «ШымкентЦемент»</div>
+            <div class="ps-response-company">📍 Шымкент · Верифицирован ✅</div>
+            <div class="ps-response-price">1 900 ₸/мешок — итого ~1 900 000 ₸</div>
+            <div class="ps-response-msg">Здравствуйте! Готовы поставить в течение 5 дней. Есть сертификат ГОСТ, НДС включён...</div>
+            <div class="ps-response-btns">
+              <div style="flex:1;background:#25D366;color:white;font-size:7px;font-weight:700;padding:4px;border-radius:5px;text-align:center;">💬 WhatsApp</div>
+              <div style="flex:1;background:#E3F2FD;color:#1565C0;font-size:7px;font-weight:700;padding:4px;border-radius:5px;text-align:center;">📞 Позвонить</div>
+            </div>
+          </div>
+          <div class="ps-response-card">
+            <div style="font-size:7px;color:#9CA3AF;margin-bottom:3px;">На заявку: Цемент М500 — 1 000 мешков</div>
+            <div class="ps-response-title">ТОО «ЦементТрейд»</div>
+            <div class="ps-response-company">📍 Алматы · Верифицирован ✅</div>
+            <div class="ps-response-price">2 050 ₸/мешок — доставка включена</div>
+            <div class="ps-response-msg">Можем отгрузить со склада в Алматы завтра...</div>
+            <div class="ps-response-btns">
+              <div style="flex:1;background:#25D366;color:white;font-size:7px;font-weight:700;padding:4px;border-radius:5px;text-align:center;">💬 WhatsApp</div>
+              <div style="flex:1;background:#E3F2FD;color:#1565C0;font-size:7px;font-weight:700;padding:4px;border-radius:5px;text-align:center;">📞 Позвонить</div>
+            </div>
+          </div>
+          <div class="ps-nav">
+            <div class="ps-nav-item"><div class="ps-nav-icon">🏗️</div><div class="ps-nav-label">Лента</div></div>
+            <div class="ps-nav-item"><div class="ps-nav-icon">➕</div><div class="ps-nav-label">Создать</div></div>
+            <div class="ps-nav-item"><div class="ps-nav-icon">📋</div><div class="ps-nav-label active">Мои</div></div>
+            <div class="ps-nav-item"><div class="ps-nav-icon">👤</div><div class="ps-nav-label">Профиль</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Входящие отклики</div>
+      <div class="phone-sublabel">Покупатель получает контакты поставщиков и сразу звонит или пишет в WhatsApp</div>
+    </div>
+
+    <!-- ЭКРАН 4: ПРОФИЛЬ -->
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="ps-tg-header"><span>← Plix</span><span>···</span></div>
+          <div class="ps-header">
+            <div class="ps-header-title">Профиль</div>
+            <div class="ps-badge-gold">⭐ Годовой</div>
+          </div>
+          <!-- Profile card -->
+          <div class="ps-profile-header">
+            <div class="ps-avatar">Е</div>
+            <div>
+              <div class="ps-profile-name">Еркин Каримов</div>
+              <div class="ps-profile-sub">@Yerkin_Karimov · ID: 160161565</div>
+            </div>
+          </div>
+          <div style="background:white;margin:0 5px 4px;border-radius:0 0 8px 8px;padding:5px 7px;border:1px solid #E2E8F0;border-top:none;">
+            <div style="display:flex;justify-content:space-between;font-size:8px;">
+              <span style="color:#4A5568;">📋 Текущий тариф</span>
+              <span style="color:#1565C0;font-weight:700;">Годовой</span>
+            </div>
+          </div>
+          <!-- Promo -->
+          <div class="ps-promo-box">
+            <div class="ps-promo-title">🎟️ Промокод</div>
+            <div style="font-size:6px;color:#9CA3AF;margin-bottom:4px;">Введите промокод для бесплатного доступа</div>
+            <div class="ps-promo-row">
+              <div class="ps-promo-input">PLIXTEST</div>
+              <div class="ps-promo-btn">Применить</div>
+            </div>
+          </div>
+          <!-- Tariff section -->
+          <div style="padding:3px 5px 2px;font-size:8px;font-weight:800;color:#1A1A2E;">Тарифные планы</div>
+          <div class="ps-tariff-card current">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-size:7px;color:#6B7280;">Free</div>
+                <div style="font-size:7px;color:#6B7280;">Размещение заявок</div>
+              </div>
+              <div style="font-size:8px;font-weight:700;color:#6B7280;">0 ₸</div>
+            </div>
+          </div>
+          <div class="ps-tariff-card" style="border-color:#1565C0;">
+            <div style="display:flex;justify-content:space-between;">
+              <div class="ps-tariff-name">Ежемесячный</div>
+              <div class="ps-tariff-price">25 000 ₸</div>
+            </div>
+            <div style="background:#1565C0;color:white;text-align:center;padding:3px;border-radius:5px;font-size:7px;font-weight:700;margin-top:4px;">⭐ Оплатить 250 Stars</div>
+          </div>
+          <div class="ps-nav">
+            <div class="ps-nav-item"><div class="ps-nav-icon">🏗️</div><div class="ps-nav-label">Лента</div></div>
+            <div class="ps-nav-item"><div class="ps-nav-icon">➕</div><div class="ps-nav-label">Создать</div></div>
+            <div class="ps-nav-item"><div class="ps-nav-icon">📋</div><div class="ps-nav-label">Мои</div></div>
+            <div class="ps-nav-item"><div class="ps-nav-icon">👤</div><div class="ps-nav-label active">Профиль</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Профиль и тарифы</div>
+      <div class="phone-sublabel">Данные компании, промокод для теста, оплата подписки через Stars или KaspiPay</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== ПОПРОБУЙТЕ САМИ ===== -->
+<div class="section page-break">
+  <div class="section-label">Демо</div>
+  <div class="section-title">Попробуйте прямо сейчас</div>
+  <div class="section-subtitle">Живое приложение уже работает — откройте его на своём телефоне</div>
+
+  <div class="promo-try-box">
+    <div class="promo-try-left">
+      <div class="promo-try-title">Тестовый доступ — бесплатно</div>
+      <div class="promo-try-desc">Мы даём вам 10-дневный полный доступ к тарифу «Ежемесячный» без оплаты — чтобы вы могли оценить все возможности платформы изнутри.</div>
+
+      <div class="promo-code-display">
+        <div class="promo-code-label">Промокод для тестирования</div>
+        <div class="promo-code-value">PLIXTEST</div>
+      </div>
+
+      <div class="promo-steps">
+        <div class="promo-step">
+          <div class="promo-step-num">1</div>
+          <span>Откройте <strong>t.me/plixkz_bot</strong> в Telegram</span>
+        </div>
+        <div class="promo-step">
+          <div class="promo-step-num">2</div>
+          <span>Нажмите кнопку <strong>Menu → Plix</strong></span>
+        </div>
+        <div class="promo-step">
+          <div class="promo-step-num">3</div>
+          <span>Перейдите в <strong>Профиль → Промокод</strong></span>
+        </div>
+        <div class="promo-step">
+          <div class="promo-step-num">4</div>
+          <span>Введите <strong>PLIXTEST</strong> и нажмите «Применить»</span>
+        </div>
+        <div class="promo-step">
+          <div class="promo-step-num">5</div>
+          <span>Создайте заявку, попробуйте откликнуться на чужую</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="promo-try-right">
+      <div class="promo-qr-placeholder">✈️</div>
+      <div class="promo-link">t.me/plixkz_bot</div>
+      <div style="font-size:11px;opacity:0.7;margin-top:6px;">Telegram → поиск → @plixkz_bot</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ОПЛАТА ===== -->
+<div class="section page-break">
+  <div class="section-label">Платёжные методы</div>
+  <div class="section-title">Как платят пользователи</div>
+  <div class="section-subtitle">Подключаем любые способы оплаты, привычные для Казахстана</div>
+
+  <div class="payments-grid">
+    <div class="payment-card">
+      <div class="payment-icon">⭐</div>
+      <div class="payment-name">Telegram Stars</div>
+      <div class="payment-desc">Встроенная оплата Telegram. Работает сейчас. Без комиссии процессинга.</div>
+      <div class="payment-ready yes">✓ Уже подключено</div>
+    </div>
+    <div class="payment-card" style="border-color:#EF4123;">
+      <div class="payment-icon">🟠</div>
+      <div class="payment-name">KaspiPay</div>
+      <div class="payment-desc">Самый популярный метод в Казахстане. Deeplink на оплату в приложении Kaspi.</div>
+      <div class="payment-ready soon">→ Подключаем по запросу</div>
+    </div>
+    <div class="payment-card">
+      <div class="payment-icon">💳</div>
+      <div class="payment-name">Банковская карта</div>
+      <div class="payment-desc">Visa / Mastercard через CloudPayments или PayBox. Безопасно, с 3D Secure.</div>
+      <div class="payment-ready soon">→ Подключаем по запросу</div>
+    </div>
+    <div class="payment-card">
+      <div class="payment-icon">🏦</div>
+      <div class="payment-name">Счёт / Перевод</div>
+      <div class="payment-desc">Для юридических лиц: счёт-фактура, банковский перевод, оплата по договору.</div>
+      <div class="payment-ready soon">→ Подключаем по запросу</div>
+    </div>
+  </div>
+
+  <div style="background: #FFF8E1; border-radius: 14px; padding: 20px 24px; margin-top: 24px; border: 1px solid #FFE082;">
+    <div style="font-size:15px;font-weight:700;color:#7B6000;margin-bottom:8px;">💡 KaspiPay — приоритет для рынка КЗ</div>
+    <div style="font-size:13px;color:#7B6000;line-height:1.7;">
+      Более <strong>12 миллионов</strong> казахстанцев используют Kaspi.kz ежедневно. Интеграция KaspiPay увеличит конверсию в оплату на <strong>30–50%</strong> — казахстанцы привыкли платить именно через Kaspi. Мы подключаем KaspiPay в рамках доработок после основного запуска.
+    </div>
+  </div>
+</div>
+
+<!-- ===== ИНТЕГРАЦИЯ С САЙТОМ ===== -->
+<div class="section page-break">
+  <div class="section-label">Техническая интеграция</div>
+  <div class="section-title">Синхронизация с Plix.kz</div>
+  <div class="section-subtitle">
+    Единая база данных — заявки появляются одновременно на сайте и в Mini App
+  </div>
+
+  <div class="integration-box">
+    <div class="integration-title">✅ Как это реализуется технически</div>
+    <div class="integration-steps">
+      <div class="integration-step">
+        <div class="integration-step-num">1</div>
+        <div class="integration-step-text"><strong>Анализ текущего бэкенда plix.kz</strong> — изучаем какая база данных и язык программирования используются</div>
+      </div>
+      <div class="integration-step">
+        <div class="integration-step-num">2</div>
+        <div class="integration-step-text"><strong>Подключение к единой БД</strong> — Mini App и сайт работают с одной базой данных Supabase (PostgreSQL)</div>
+      </div>
+      <div class="integration-step">
+        <div class="integration-step-num">3</div>
+        <div class="integration-step-text"><strong>API-мост</strong> — если сайт на другой БД, настраиваем webhook: создание на сайте → автосинхронизация в Mini App и наоборот</div>
+      </div>
+      <div class="integration-step">
+        <div class="integration-step-num">4</div>
+        <div class="integration-step-text"><strong>Тестирование</strong> — проверяем полный цикл: заявка с сайта появляется в Telegram за &lt;1 секунды</div>
+      </div>
+    </div>
+  </div>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Функция</th>
+        <th>Только сайт</th>
+        <th>Сайт + Mini App</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Доступ с телефона</td>
+        <td class="no">Неудобно (браузер)</td>
+        <td class="yes">Нативный опыт</td>
+      </tr>
+      <tr>
+        <td>Уведомления о заявках</td>
+        <td class="no">Email (20% открытий)</td>
+        <td class="yes">Telegram (85% открытий)</td>
+      </tr>
+      <tr>
+        <td>Скорость отклика</td>
+        <td class="no">Часы / дни</td>
+        <td class="yes">Минуты</td>
+      </tr>
+      <tr>
+        <td>Охват аудитории</td>
+        <td>Только веб-пользователи</td>
+        <td class="yes">+ 8М пользователей Telegram KZ</td>
+      </tr>
+      <tr>
+        <td>Оплата подписки</td>
+        <td>Только карта на сайте</td>
+        <td class="yes">Stars + KaspiPay + Карта + Счёт</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== СТОИМОСТЬ ===== -->
+<div class="section page-break">
+  <div class="section-label">Стоимость</div>
+  <div class="section-title">Варианты сотрудничества</div>
+  <div class="section-subtitle">Три формата — выберите тот, который подходит для вашего бизнеса</div>
+
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="pricing-header">
+        <div class="pricing-name">Разовая покупка</div>
+        <div class="pricing-price">900 000 <span class="pricing-period">₸</span></div>
+        <div class="pricing-period">единовременно</div>
+      </div>
+      <div class="pricing-body">
+        <ul class="pricing-features">
+          <li>Готовый Mini App (уже работает)</li>
+          <li>Интеграция с базой данных plix.kz</li>
+          <li>Telegram бот @plixkz_bot</li>
+          <li>Оплата: Telegram Stars + KaspiPay</li>
+          <li>Промокоды и команды сотрудников</li>
+          <li>3 месяца поддержки включено</li>
+          <li>Исходный код передаётся</li>
+        </ul>
+        <div class="pricing-note">
+          + Поддержка после 3 мес: 60 000 ₸/мес
+        </div>
+      </div>
+    </div>
+
+    <div class="pricing-card recommended">
+      <div class="pricing-badge">РЕКОМЕНДУЕМ</div>
+      <div class="pricing-header">
+        <div class="pricing-name">Партнёрство</div>
+        <div class="pricing-price">400 000 <span class="pricing-period">₸</span></div>
+        <div class="pricing-period">+ 10% с выручки Mini App</div>
+      </div>
+      <div class="pricing-body">
+        <ul class="pricing-features">
+          <li>Всё из «Разовой покупки»</li>
+          <li>Поддержка и хостинг — навсегда</li>
+          <li>KaspiPay — в первый месяц</li>
+          <li>Новые функции — приоритетно</li>
+          <li>Ежемесячный отчёт: пользователи, выручка</li>
+          <li>Прямая связь с командой 24/7</li>
+        </ul>
+        <div class="pricing-note">
+          💡 При 50 подписках × 25 000 ₸ = наша доля всего 125 000 ₸/мес — при выручке вам 1 125 000 ₸
+        </div>
+      </div>
+    </div>
+
+    <div class="pricing-card">
+      <div class="pricing-header">
+        <div class="pricing-name">Быстрый старт</div>
+        <div class="pricing-price">120 000 <span class="pricing-period">₸</span></div>
+        <div class="pricing-period">/месяц</div>
+      </div>
+      <div class="pricing-body">
+        <ul class="pricing-features">
+          <li>Mini App под брендом Plix</li>
+          <li>Хостинг и база данных</li>
+          <li>Поддержка и обновления</li>
+          <li>Telegram Stars оплата</li>
+          <li>Запуск за 3 рабочих дня</li>
+        </ul>
+        <div class="pricing-note">
+          Минимальный срок: 3 месяца.<br/>Интеграция с сайтом — дополнительно.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background: var(--green-light); border: 1px solid #A5D6A7; border-radius: 14px; padding: 20px 24px; margin-top: 24px;">
+    <div style="font-size:15px;font-weight:700;color:var(--green);margin-bottom:8px;">✅ Почему это выгодно?</div>
+    <div style="font-size:13px;color:var(--text2);line-height:1.7;">
+      Аналогичный Mini App с нуля стоит <strong>3–8 млн ₸</strong> и занимает <strong>3–6 месяцев</strong> разработки.
+      Наш продукт <strong>уже готов и работает</strong> — вы платите только за кастомизацию и интеграцию.
+      Проверьте прямо сейчас: <span style="color:var(--blue);font-weight:700;">t.me/plixkz_bot</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ROI ===== -->
+<div class="section page-break">
+  <div class="section-label">Экономика</div>
+  <div class="section-title">Возврат инвестиций</div>
+  <div class="section-subtitle">Реалистичный расчёт при умеренном росте аудитории через Telegram</div>
+
+  <div class="roi-box">
+    <div class="roi-title">📊 Прогноз при 100 подписчиках через Mini App</div>
+    <div class="roi-grid">
+      <div class="roi-item">
+        <div class="roi-value">2 500 000 ₸</div>
+        <div class="roi-label">Выручка в месяц<br/>(100 × 25 000 ₸)</div>
+      </div>
+      <div class="roi-item">
+        <div class="roi-value">4–6 мес</div>
+        <div class="roi-label">Окупаемость<br/>инвестиций</div>
+      </div>
+      <div class="roi-item">
+        <div class="roi-value">×3</div>
+        <div class="roi-label">Рост конверсии<br/>Telegram vs Email</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background: var(--gray); border-radius: 16px; padding: 28px;">
+    <div style="font-size: 16px; font-weight: 700; margin-bottom: 16px;">💡 Сравнение с альтернативами</div>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Решение</th>
+          <th>Стоимость</th>
+          <th>Срок запуска</th>
+          <th>Telegram-интеграция</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Telegram Mini App (наше)</strong></td>
+          <td class="yes">от 500 000 ₸</td>
+          <td class="yes">Готово сейчас</td>
+          <td class="yes">Нативная</td>
+        </tr>
+        <tr>
+          <td>iOS + Android приложение</td>
+          <td class="no">5 000 000 — 15 000 000 ₸</td>
+          <td class="no">6–12 месяцев</td>
+          <td class="no">Нет</td>
+        </tr>
+        <tr>
+          <td>PWA (мобильная версия сайта)</td>
+          <td>800 000 — 2 000 000 ₸</td>
+          <td>2–3 месяца</td>
+          <td class="no">Нет</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== СРОКИ ===== -->
+<div class="section page-break">
+  <div class="section-label">Сроки</div>
+  <div class="section-title">План запуска</div>
+  <div class="section-subtitle">От договора до полноценного запуска — 3 недели</div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot">1</div>
+      <div class="timeline-content">
+        <div class="timeline-week">День 1–3</div>
+        <div class="timeline-title">Анализ и договор</div>
+        <div class="timeline-desc">Изучаем бэкенд plix.kz, определяем способ интеграции, подписываем договор, получаем предоплату 50%</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot">2</div>
+      <div class="timeline-content">
+        <div class="timeline-week">День 4–7</div>
+        <div class="timeline-title">Настройка интеграции</div>
+        <div class="timeline-desc">Подключаем Mini App к базе данных plix.kz, настраиваем синхронизацию заявок в реальном времени</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot">3</div>
+      <div class="timeline-content">
+        <div class="timeline-week">День 8–12</div>
+        <div class="timeline-title">Брендинг и кастомизация</div>
+        <div class="timeline-desc">Адаптируем дизайн под фирменный стиль Plix.kz, добавляем логотип, цвета, описание бота</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot">4</div>
+      <div class="timeline-content">
+        <div class="timeline-week">День 13–17</div>
+        <div class="timeline-title">Тестирование</div>
+        <div class="timeline-desc">Полный цикл тестирования: создание заявок, отклики, уведомления, оплата, синхронизация с сайтом</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot">🚀</div>
+      <div class="timeline-content">
+        <div class="timeline-week">День 18–21</div>
+        <div class="timeline-title">Запуск и продвижение</div>
+        <div class="timeline-desc">Публичный запуск, рассылка существующим клиентам plix.kz, настройка рекламы в Telegram-каналах строительной тематики</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== О НАС ===== -->
+<div class="section page-break">
+  <div class="section-label">О компании</div>
+  <div class="section-title">KARINA Media</div>
+  <div class="section-subtitle">Digital-агентство полного цикла. Казахстан.</div>
+
+  <div class="about-grid">
+    <div>
+      <p style="font-size: 14px; color: var(--text2); line-height: 1.8; margin-bottom: 20px;">
+        Мы специализируемся на создании цифровых продуктов для бизнеса в Казахстане: сайты, Telegram Mini Apps, чат-боты, системы автоматизации.
+      </p>
+      <p style="font-size: 14px; color: var(--text2); line-height: 1.8; margin-bottom: 20px;">
+        <strong>Plix Telegram Mini App</strong> — это уже готовый, работающий продукт. Не прототип. Не макет. Живое приложение с реальной базой данных, оплатой и уведомлениями.
+      </p>
+      <p style="font-size: 14px; color: var(--text2); line-height: 1.8;">
+        Вы можете проверить прямо сейчас: <span class="highlight">t.me/plixkz_bot</span>
+      </p>
+    </div>
+    <div class="about-services">
+      <div class="about-service">✈️ &nbsp; Telegram Mini Apps и боты</div>
+      <div class="about-service">🌐 &nbsp; Сайты и лендинги</div>
+      <div class="about-service">🗄️ &nbsp; Интеграции и автоматизация</div>
+      <div class="about-service">💳 &nbsp; Подключение платёжных систем</div>
+      <div class="about-service">📊 &nbsp; Аналитика и отчётность</div>
+      <div class="about-service">🔧 &nbsp; Техническая поддержка 24/7</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CTA ===== -->
+<div class="cta">
+  <div class="cta-title">Готовы обсудить?</div>
+  <div class="cta-subtitle">
+    Покажем живое демо прямо на вашем телефоне.<br/>Без презентаций — сразу к делу.
+  </div>
+  <div class="cta-contacts">
+    <div class="cta-contact">
+      <div class="cta-contact-icon">✈️</div>
+      <div class="cta-contact-label">Telegram</div>
+      <div class="cta-contact-value">@karina_media</div>
+    </div>
+    <div class="cta-contact">
+      <div class="cta-contact-icon">💬</div>
+      <div class="cta-contact-label">WhatsApp</div>
+      <div class="cta-contact-value">+7 777 248 8020</div>
+    </div>
+    <div class="cta-contact">
+      <div class="cta-contact-icon">📧</div>
+      <div class="cta-contact-label">Email</div>
+      <div class="cta-contact-value">karina.group2023@gmail.com</div>
+    </div>
+    <div class="cta-contact">
+      <div class="cta-contact-icon">📱</div>
+      <div class="cta-contact-label">Демо приложения</div>
+      <div class="cta-contact-value">t.me/plixkz_bot</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
