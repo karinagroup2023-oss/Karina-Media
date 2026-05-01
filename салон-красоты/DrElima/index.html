@@ -12,9 +12,9 @@
     <meta property="og:description" content="Эстетика премиум-класса: естественно, профессионально. Инъекции, аппараты, пептиды. Москва, м. Сокол.">
     <meta property="og:url" content="https://dr-elima.ru/">
     <meta property="og:locale" content="ru_RU">
-    <meta property="og:image" content="img/elima.jpg">
+    <meta property="og:image" content="img/elima.jpeg">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="img/elima.jpg">
+    <meta name="twitter:image" content="img/elima.jpeg">
     <meta name="twitter:title" content="КОД РОСКОШИ — Клиника косметологии">
     <meta name="twitter:description" content="Элима Зайналабдинова. Эстетика премиум-класса. Инъекции, аппараты, пептиды. Москва, м. Сокол.">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#10024;</text></svg>">
@@ -22,6 +22,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .results__gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:40px}
+        .results__gallery a{display:block;overflow:hidden;border-radius:12px;aspect-ratio:1}
+        .results__gallery img{width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
+        .results__gallery a:hover img{transform:scale(1.06)}
+        .price-photos{overflow-x:auto;display:flex;gap:10px;padding-bottom:16px;margin-bottom:36px;scrollbar-width:thin;scrollbar-color:rgba(196,162,101,.4) transparent}
+        .price-photos img{height:220px;width:auto;flex-shrink:0;border-radius:10px;cursor:pointer}
+        .insta-grid .insta-cell--photo{display:block;overflow:hidden;border-radius:12px;aspect-ratio:1}
+        .insta-grid .insta-cell--photo img{width:100%;height:100%;object-fit:cover;transition:transform .35s ease;display:block}
+        .insta-grid .insta-cell--photo:hover img{transform:scale(1.06)}
+        @media(max-width:768px){.results__gallery{grid-template-columns:repeat(2,1fr)}.price-photos img{height:160px}}
+    </style>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -30,7 +42,7 @@
         "description": "Клиника косметологии. Эстетика премиум-класса. Инъекции, аппаратная косметология, пептиды.",
         "url": "https://dr-elima.ru",
         "telephone": "+7-916-189-90-30",
-        "image": "img/elima.jpg",
+        "image": "img/elima.jpeg",
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "2-я Песчаная ул., 6, корп. 1",
@@ -147,7 +159,7 @@
     <div class="container about__inner">
         <div class="about__media">
             <div class="about__img about__img--main">
-                <img src="img/elima.jpg" alt="Элима Зайналабдинова — врач-косметолог" width="400" height="520" style="width:100%;height:auto;border-radius:20px;object-fit:cover">
+                <img src="img/elima.jpeg" alt="Элима Зайналабдинова — врач-косметолог" width="400" height="520" style="width:100%;height:auto;border-radius:20px;object-fit:cover">
             </div>
         </div>
         <div class="about__content">
@@ -259,7 +271,7 @@
         <div class="team__grid">
             <div class="master-card">
                 <div class="master-card__img">
-                    <img src="img/elima.jpg" alt="Элима Зайналабдинова" width="400" height="480" loading="lazy" style="width:100%;height:auto;display:block;border-radius:20px 20px 0 0;object-fit:cover">
+                    <img src="img/elima.jpeg" alt="Элима Зайналабдинова" width="400" height="480" loading="lazy" style="width:100%;height:auto;display:block;border-radius:20px 20px 0 0;object-fit:cover">
                 </div>
                 <div class="master-card__info">
                     <h3 class="master-card__name">Элима Зайналабдинова</h3>
@@ -270,13 +282,7 @@
             </div>
             <div class="master-card">
                 <div class="master-card__img">
-                    <svg viewBox="0 0 400 480">
-                        <rect width="400" height="480" rx="20" fill="#3d0c0c"/>
-                        <circle cx="200" cy="190" r="70" fill="#8b4a4a" opacity="0.08"/>
-                        <text x="200" y="195" text-anchor="middle" font-family="'Playfair Display', serif" font-size="20" fill="#c4a265" opacity="0.5">Дина</text>
-                        <rect x="60" y="310" width="280" height="1" fill="#c4a265" opacity="0.15"/>
-                        <text x="200" y="340" text-anchor="middle" font-size="11" fill="#8b7355" opacity="0.6">Фото</text>
-                    </svg>
+                    <img src="img/dina.jpeg" alt="Врач Дина — косметолог-эстетист" width="400" height="480" loading="lazy" style="width:100%;height:auto;display:block;border-radius:20px 20px 0 0;object-fit:cover">
                 </div>
                 <div class="master-card__info">
                     <h3 class="master-card__name">Врач Дина</h3>
@@ -304,9 +310,11 @@
                     <svg class="accordion-icon" width="20" height="20" viewBox="0 0 20 20"><polyline points="5 8 10 13 15 8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
                 </button>
                 <div class="accordion-body">
-                    <div class="price-item"><span>Консультация (30 мин)</span><span class="price-item__val">30 000 &#8381;</span></div>
+                    <div class="price-item"><span>Консультация (30 минут)</span><span class="price-item__val">5 000 &#8381;</span></div>
+                    <div class="price-item price-item--note"><span>* Если в тот же день выполняется процедура — консультация бесплатно</span></div>
+                    <div class="price-item"><span>Консультация по омоложению и похудению с пептидами</span><span class="price-item__val">20 000 &#8381;</span></div>
                     <div class="price-item"><span>Онлайн-консультация</span><span class="price-item__val">10 000 &#8381;</span></div>
-                    <div class="price-item"><span>Консультация + омоложение + пептиды</span><span class="price-item__val">20 000 &#8381;</span></div>
+                    <div class="price-item price-item--note"><span>* Онлайн: сбор анамнеза, расшифровка анализов, рекомендации, ведение в течение месяца</span></div>
                     <div class="price-item"><span>3D-диагностика кожи</span><span class="price-item__val">5 000 &#8381;</span></div>
                     <div class="price-item price-item--note"><span>* 3D-диагностика бесплатно при проведении процедуры</span></div>
                 </div>
@@ -320,14 +328,21 @@
                 </button>
                 <div class="accordion-body">
                     <div class="price-item"><span>REVI EYE</span><span class="price-item__val">13 000 &#8381;</span></div>
-                    <div class="price-item"><span>REVI Brilliance</span><span class="price-item__val">14 000 &#8381;</span></div>
-                    <div class="price-item"><span>Jalupro / Jalupro HMW</span><span class="price-item__val">12 000 / 17 000 &#8381;</span></div>
-                    <div class="price-item"><span>Hyaron (5 шприцев)</span><span class="price-item__val">13 000 &#8381;</span></div>
-                    <div class="price-item"><span>Nucleofill (medium / strong)</span><span class="price-item__val">18 000 / 21 000 &#8381;</span></div>
-                    <div class="price-item"><span>Profhilo</span><span class="price-item__val">25 000 &#8381;</span></div>
-                    <div class="price-item"><span>Juvederm Volite</span><span class="price-item__val">25 000 &#8381;</span></div>
-                    <div class="price-item"><span>Ejal 40</span><span class="price-item__val">16 000 &#8381;</span></div>
-                    <div class="price-item"><span>RADIESSE</span><span class="price-item__val">50 000 &#8381;</span></div>
+                    <div class="price-item"><span>REVI Strong (2 мл.)</span><span class="price-item__val">18 000 &#8381;</span></div>
+                    <div class="price-item"><span>Novacutan (2 мл.)</span><span class="price-item__val">17 000 &#8381;</span></div>
+                    <div class="price-item"><span>Neauvia Hydro (2 мл.)</span><span class="price-item__val">17 000 &#8381;</span></div>
+                    <div class="price-item"><span>Neauvia Stimulate</span><span class="price-item__val">20 000 &#8381;</span></div>
+                    <div class="price-item"><span>Сферогель</span><span class="price-item__val">15 000 — 20 000 &#8381;</span></div>
+                    <div class="price-item"><span>COLLOST micro</span><span class="price-item__val">20 000 &#8381;</span></div>
+                    <div class="price-item"><span>Mesoskulpt</span><span class="price-item__val">24 000 &#8381;</span></div>
+                    <div class="price-item"><span>Mesoeys</span><span class="price-item__val">22 000 &#8381;</span></div>
+                    <div class="price-item"><span>Profhilo (2 мл.)</span><span class="price-item__val">19 000 &#8381;</span></div>
+                    <div class="price-item"><span>Meso-Xanthin F199 (1,5 мл.)</span><span class="price-item__val">22 000 &#8381;</span></div>
+                    <div class="price-item"><span>Meso-Wharton P199 (1,5 мл.)</span><span class="price-item__val">22 000 &#8381;</span></div>
+                    <div class="price-item"><span>RADIESSE (1,5 мл.)</span><span class="price-item__val">35 000 &#8381;</span></div>
+                    <div class="price-item"><span>RADIESSE (3 мл.)</span><span class="price-item__val">50 000 &#8381;</span></div>
+                    <div class="price-item"><span>PLINEST (2 мл.)</span><span class="price-item__val">20 000 &#8381;</span></div>
+                    <div class="price-item"><span>Полимолочная кислота</span><span class="price-item__val">30 000 — 50 000 &#8381;</span></div>
                 </div>
             </div>
 
@@ -338,10 +353,10 @@
                     <svg class="accordion-icon" width="20" height="20" viewBox="0 0 20 20"><polyline points="5 8 10 13 15 8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
                 </button>
                 <div class="accordion-body">
-                    <div class="price-item"><span>Мезотерапия волос</span><span class="price-item__val">5 000 &#8381;</span></div>
-                    <div class="price-item"><span>Мезотерапия глаз</span><span class="price-item__val">6 000 &#8381;</span></div>
-                    <div class="price-item"><span>HCTF 135 (лицо)</span><span class="price-item__val">12 000 &#8381;</span></div>
-                    <div class="price-item"><span>HCTF 135 (лицо + шея)</span><span class="price-item__val">14 000 &#8381;</span></div>
+                    <div class="price-item"><span>Мезотерапия (волосы)</span><span class="price-item__val">5 000 &#8381;</span></div>
+                    <div class="price-item"><span>Мезотерапия (глаза)</span><span class="price-item__val">6 000 &#8381;</span></div>
+                    <div class="price-item"><span>НСТF 135 — биомезо (3 мл.)</span><span class="price-item__val">12 000 &#8381;</span></div>
+                    <div class="price-item"><span>НСТF 135 НА (3 мл.)</span><span class="price-item__val">14 000 &#8381;</span></div>
                 </div>
             </div>
 
@@ -353,21 +368,24 @@
                 </button>
                 <div class="accordion-body">
                     <div class="price-subheader">Губы / Носогубки</div>
-                    <div class="price-item"><span>Stylage M</span><span class="price-item__val">22 000 &#8381;</span></div>
-                    <div class="price-item"><span>Stylage Special Lips</span><span class="price-item__val">22 000 &#8381;</span></div>
-                    <div class="price-item"><span>Belotero Lips</span><span class="price-item__val">20 000 &#8381;</span></div>
-                    <div class="price-item"><span>Juvederm Smile</span><span class="price-item__val">26 000 &#8381;</span></div>
-                    <div class="price-item"><span>Juvederm 3</span><span class="price-item__val">30 000 &#8381;</span></div>
+                    <div class="price-item"><span>STYLAGE M (1 мл.)</span><span class="price-item__val">22 000 &#8381;</span></div>
+                    <div class="price-item"><span>STYLAGE L (1 мл.)</span><span class="price-item__val">24 000 &#8381;</span></div>
+                    <div class="price-item"><span>Juvederm Smile (0,55 мл.)</span><span class="price-item__val">25 000 &#8381;</span></div>
+                    <div class="price-item"><span>Juvederm 3 (1 мл.)</span><span class="price-item__val">30 000 &#8381;</span></div>
+                    <div class="price-item"><span>LUMOS VOLUME (1 мл.)</span><span class="price-item__val">18 000 &#8381;</span></div>
+                    <div class="price-item"><span>LUMOS DEEP (1 мл.)</span><span class="price-item__val">18 000 &#8381;</span></div>
                     <div class="price-subheader">Скулы / Подбородок</div>
-                    <div class="price-item"><span>Stylage L / XL</span><span class="price-item__val">22 000 — 25 000 &#8381;</span></div>
-                    <div class="price-item"><span>Juvederm Voluma</span><span class="price-item__val">35 000 &#8381;</span></div>
+                    <div class="price-item"><span>STYLAGE L-XL (1 мл.)</span><span class="price-item__val">24 000 &#8381;</span></div>
+                    <div class="price-item"><span>LUMOS VOLUME (1 мл.)</span><span class="price-item__val">18 000 &#8381;</span></div>
                     <div class="price-subheader">Носослёзная борозда</div>
-                    <div class="price-item"><span>Belotero Balance</span><span class="price-item__val">19 000 &#8381;</span></div>
-                    <div class="price-subheader">Кольца Венеры</div>
-                    <div class="price-item"><span>Belotero Balance</span><span class="price-item__val">19 000 &#8381;</span></div>
-                    <div class="price-item"><span>Belotero Intense</span><span class="price-item__val">20 000 &#8381;</span></div>
+                    <div class="price-item"><span>STYLAGE S (0,8 мл.) — канюля входит в стоимость</span><span class="price-item__val">18 000 &#8381;</span></div>
+                    <div class="price-item"><span>Teosyal Redensity 2 (1 мл.) — канюля входит в стоимость</span><span class="price-item__val">22 000 &#8381;</span></div>
+                    <div class="price-subheader">Заполнение колец Венеры</div>
+                    <div class="price-item"><span>Belotero Soft (1 мл.)</span><span class="price-item__val">19 000 &#8381;</span></div>
+                    <div class="price-item"><span>Belotero Balance (1 мл.)</span><span class="price-item__val">20 000 &#8381;</span></div>
                     <div class="price-subheader">Сужение носа</div>
-                    <div class="price-item"><span>Безоперационная ринопластика</span><span class="price-item__val">8 000 &#8381;</span></div>
+                    <div class="price-item"><span>Липолитик + ботулотоксин</span><span class="price-item__val">8 000 &#8381;</span></div>
+                    <div class="price-item price-item--note"><span>* Анестезия входит в стоимость. Цена за филлер зависит от объёма и производства</span></div>
                 </div>
             </div>
 
@@ -378,24 +396,31 @@
                     <svg class="accordion-icon" width="20" height="20" viewBox="0 0 20 20"><polyline points="5 8 10 13 15 8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
                 </button>
                 <div class="accordion-body">
-                    <div class="price-item"><span>Nithya (1 мл)</span><span class="price-item__val">19 000 &#8381;</span></div>
-                    <div class="price-item"><span>COLLOST (гель 7%)</span><span class="price-item__val">20 000 &#8381;</span></div>
+                    <div class="price-item"><span>Nithya</span><span class="price-item__val">19 000 &#8381;</span></div>
+                    <div class="price-item"><span>COLLOST micro</span><span class="price-item__val">20 000 &#8381;</span></div>
                     <div class="price-item"><span>LUMOS</span><span class="price-item__val">20 000 &#8381;</span></div>
-                    <div class="price-item"><span>KARISMA</span><span class="price-item__val">25 000 &#8381;</span></div>
+                    <div class="price-item"><span>KARISMA RH COLLAGEN</span><span class="price-item__val">25 000 &#8381;</span></div>
                 </div>
             </div>
 
-            <!-- Пептиды (биохакинг) -->
+            <!-- Ботулинотерапия -->
             <div class="accordion-item">
                 <button class="accordion-header" aria-expanded="false">
-                    <span>Пептиды (биохакинг)</span>
+                    <span>Ботулинотерапия (Релатокс / Миотокс)</span>
                     <svg class="accordion-icon" width="20" height="20" viewBox="0 0 20 20"><polyline points="5 8 10 13 15 8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
                 </button>
                 <div class="accordion-body">
-                    <div class="price-item"><span>Пептидная терапия (лицо)</span><span class="price-item__val">15 000 &#8381;</span></div>
-                    <div class="price-item"><span>Пептидная терапия (лицо + шея)</span><span class="price-item__val">20 000 &#8381;</span></div>
-                    <div class="price-item"><span>Anti-age биохакинг протокол</span><span class="price-item__val">25 000 &#8381;</span></div>
-                    <div class="price-item"><span>Регенеративный курс (3 процедуры)</span><span class="price-item__val">60 000 &#8381;</span></div>
+                    <div class="price-item"><span>Лоб</span><span class="price-item__val">5 000 &#8381;</span></div>
+                    <div class="price-item"><span>Межбровье</span><span class="price-item__val">5 000 &#8381;</span></div>
+                    <div class="price-item"><span>Зона вокруг глаз</span><span class="price-item__val">5 000 &#8381;</span></div>
+                    <div class="price-item"><span>Все 3 зоны вместе</span><span class="price-item__val">15 000 &#8381;</span></div>
+                    <div class="price-item"><span>Мезоботокс</span><span class="price-item__val">8 000 &#8381;</span></div>
+                    <div class="price-item"><span>Гипергидроз (излишняя потливость)</span><span class="price-item__val">18 000 &#8381;</span></div>
+                    <div class="price-item"><span>Лифтинг Нефертити</span><span class="price-item__val">15 000 &#8381;</span></div>
+                    <div class="price-item"><span>Жевательные мышцы</span><span class="price-item__val">10 000 &#8381;</span></div>
+                    <div class="price-item"><span>Лифтинг бровей (лисьи глазки)</span><span class="price-item__val">10 000 &#8381;</span></div>
+                    <div class="price-item"><span>FULL FACE всего лица</span><span class="price-item__val">35 000 &#8381;</span></div>
+                    <div class="price-item"><span>FULL FACE всего лица + шея</span><span class="price-item__val">45 000 &#8381;</span></div>
                 </div>
             </div>
 
@@ -406,26 +431,46 @@
                     <svg class="accordion-icon" width="20" height="20" viewBox="0 0 20 20"><polyline points="5 8 10 13 15 8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
                 </button>
                 <div class="accordion-body">
-                    <div class="price-item"><span>«Фотошоп» (лицо + шея)</span><span class="price-item__val">24 000 &#8381;</span></div>
+                    <div class="price-item"><span>«Фотошоп» (авторский)</span><span class="price-item__val">24 000 &#8381;</span></div>
                     <div class="price-item"><span>«Глянцевая кожа»</span><span class="price-item__val">17 000 &#8381;</span></div>
                     <div class="price-item"><span>«Королевский лифтинг»</span><span class="price-item__val">17 000 &#8381;</span></div>
-                    <div class="price-item"><span>PDRN (лицо)</span><span class="price-item__val">15 000 &#8381;</span></div>
-                    <div class="price-item"><span>PDRN (лицо + шея + декольте)</span><span class="price-item__val">25 000 &#8381;</span></div>
+                    <div class="price-item"><span>Препараты с PDRN</span><span class="price-item__val">15 000 — 25 000 &#8381;</span></div>
                 </div>
             </div>
 
-            <!-- Аппаратная косметология -->
+            <!-- Пептиды (биохакинг) -->
+            <div class="accordion-item">
+                <button class="accordion-header" aria-expanded="false">
+                    <span>Пептиды (биохакинг)</span>
+                    <svg class="accordion-icon" width="20" height="20" viewBox="0 0 20 20"><polyline points="5 8 10 13 15 8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                </button>
+                <div class="accordion-body">
+                    <div class="price-item"><span>Консультация офлайн / онлайн</span><span class="price-item__val">30 000 &#8381;</span></div>
+                    <div class="price-item"><span>Вход в закрытый канал (схемы, дозировки, анализы)</span><span class="price-item__val">2 000 &#8381;/мес.</span></div>
+                </div>
+            </div>
+
+            <!-- SMAS-лифтинг -->
             <div class="accordion-item">
                 <button class="accordion-header" aria-expanded="false">
                     <span>SMAS-лифтинг</span>
                     <svg class="accordion-icon" width="20" height="20" viewBox="0 0 20 20"><polyline points="5 8 10 13 15 8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
                 </button>
                 <div class="accordion-body">
-                    <div class="price-item"><span>150 линий</span><span class="price-item__val">15 000 &#8381;</span></div>
-                    <div class="price-item"><span>300 линий</span><span class="price-item__val">25 000 &#8381;</span></div>
-                    <div class="price-item"><span>600 линий</span><span class="price-item__val">45 000 &#8381;</span></div>
-                    <div class="price-item"><span>900 линий</span><span class="price-item__val">65 000 &#8381;</span></div>
-                    <div class="price-item"><span>1 200 линий</span><span class="price-item__val">85 000 &#8381;</span></div>
+                    <div class="price-item"><span>Периорбитальная зона (150 линий)</span><span class="price-item__val">15 000 &#8381;</span></div>
+                    <div class="price-item"><span>Второй подбородок (200 линий)</span><span class="price-item__val">20 000 &#8381;</span></div>
+                    <div class="price-item"><span>Зона декольте (200 линий)</span><span class="price-item__val">20 000 &#8381;</span></div>
+                    <div class="price-item"><span>Овал лица, нижняя треть (300 линий)</span><span class="price-item__val">30 000 &#8381;</span></div>
+                    <div class="price-item"><span>Шея (300 линий)</span><span class="price-item__val">30 000 &#8381;</span></div>
+                    <div class="price-item"><span>Лицо (500 линий)</span><span class="price-item__val">42 500 &#8381;</span></div>
+                    <div class="price-item"><span>Лицо, интенсив (700 линий)</span><span class="price-item__val">52 500 &#8381;</span></div>
+                    <div class="price-item"><span>Лицо + подбородок (800 линий)</span><span class="price-item__val">60 000 &#8381;</span></div>
+                    <div class="price-item"><span>Лицо + шея (1 000 линий)</span><span class="price-item__val">75 000 &#8381;</span></div>
+                    <div class="price-item"><span>Лицо + шея, интенсив (1 200 линий)</span><span class="price-item__val">85 000 &#8381;</span></div>
+                    <div class="price-item"><span>Тело (600 линий)</span><span class="price-item__val">35 000 &#8381;</span></div>
+                    <div class="price-item"><span>Тело (1 000 линий)</span><span class="price-item__val">55 000 &#8381;</span></div>
+                    <div class="price-item"><span>Тело (1 500 линий)</span><span class="price-item__val">80 000 &#8381;</span></div>
+                    <div class="price-item price-item--note"><span>* Дополнительные линии к любой зоне — 100 &#8381;/линия</span></div>
                 </div>
             </div>
 
@@ -436,16 +481,18 @@
                     <svg class="accordion-icon" width="20" height="20" viewBox="0 0 20 20"><polyline points="5 8 10 13 15 8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
                 </button>
                 <div class="accordion-body">
-                    <div class="price-item"><span>Лицо</span><span class="price-item__val">18 000 &#8381;</span></div>
-                    <div class="price-item"><span>Лицо + шея</span><span class="price-item__val">25 000 &#8381;</span></div>
-                    <div class="price-item"><span>Лицо + шея + декольте</span><span class="price-item__val">35 000 &#8381;</span></div>
+                    <div class="price-item"><span>Лицо + подбородок</span><span class="price-item__val">24 000 &#8381;</span></div>
+                    <div class="price-item"><span>Шея и зона декольте</span><span class="price-item__val">18 000 &#8381;</span></div>
+                    <div class="price-item"><span>Лицо + подбородок + шея + зона декольте</span><span class="price-item__val">35 000 &#8381;</span></div>
+                    <div class="price-item"><span>Тело (любая зона)</span><span class="price-item__val">20 000 &#8381;</span></div>
+                    <div class="price-item price-item--note"><span>* Дополнительные линии к любой зоне — 100 &#8381;/линия</span></div>
                 </div>
             </div>
 
             <!-- IPL Фотоомоложение -->
             <div class="accordion-item">
                 <button class="accordion-header" aria-expanded="false">
-                    <span>IPL Фотоомоложение</span>
+                    <span>IPL (Фотоомоложение)</span>
                     <svg class="accordion-icon" width="20" height="20" viewBox="0 0 20 20"><polyline points="5 8 10 13 15 8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
                 </button>
                 <div class="accordion-body">
@@ -456,7 +503,7 @@
                     <div class="price-item"><span>Лоб</span><span class="price-item__val">4 500 &#8381;</span></div>
                     <div class="price-item"><span>Шея</span><span class="price-item__val">6 500 &#8381;</span></div>
                     <div class="price-item"><span>Декольте</span><span class="price-item__val">7 500 &#8381;</span></div>
-                    <div class="price-item"><span>Лицо + шея</span><span class="price-item__val">14 500 &#8381;</span></div>
+                    <div class="price-item"><span>Шея + декольте</span><span class="price-item__val">11 500 &#8381;</span></div>
                     <div class="price-item"><span>Лицо + шея + декольте</span><span class="price-item__val">19 500 &#8381;</span></div>
                     <div class="price-item"><span>Интимное отбеливание</span><span class="price-item__val">5 000 &#8381;</span></div>
                 </div>
@@ -469,10 +516,11 @@
                     <svg class="accordion-icon" width="20" height="20" viewBox="0 0 20 20"><polyline points="5 8 10 13 15 8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
                 </button>
                 <div class="accordion-body">
-                    <div class="price-item"><span>1 пробирка</span><span class="price-item__val">6 000 &#8381;</span></div>
-                    <div class="price-item"><span>2 пробирки</span><span class="price-item__val">10 000 &#8381;</span></div>
-                    <div class="price-item"><span>Плазмо + мезо</span><span class="price-item__val">14 000 &#8381;</span></div>
-                    <div class="price-item"><span>Плазмо + коллаген</span><span class="price-item__val">24 000 &#8381;</span></div>
+                    <div class="price-item"><span>1 пробирка (лицо)</span><span class="price-item__val">6 000 &#8381;</span></div>
+                    <div class="price-item"><span>2 пробирки</span><span class="price-item__val">9 000 &#8381;</span></div>
+                    <div class="price-item"><span>3 пробирки</span><span class="price-item__val">12 000 &#8381;</span></div>
+                    <div class="price-item"><span>1 пробирка (волосы)</span><span class="price-item__val">5 000 &#8381;</span></div>
+                    <div class="price-item"><span>Плазмолифтинг + коллаген</span><span class="price-item__val">24 000 &#8381;</span></div>
                 </div>
             </div>
 
@@ -483,23 +531,27 @@
                     <svg class="accordion-icon" width="20" height="20" viewBox="0 0 20 20"><polyline points="5 8 10 13 15 8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
                 </button>
                 <div class="accordion-body">
-                    <div class="price-item"><span>2 мл</span><span class="price-item__val">5 000 &#8381;</span></div>
-                    <div class="price-item"><span>5 мл</span><span class="price-item__val">8 000 &#8381;</span></div>
-                    <div class="price-item"><span>Программа «Стройность»</span><span class="price-item__val">15 000 &#8381;</span></div>
+                    <div class="price-item"><span>2 мл.</span><span class="price-item__val">5 000 &#8381;</span></div>
+                    <div class="price-item"><span>4 мл.</span><span class="price-item__val">8 000 &#8381;</span></div>
+                    <div class="price-item"><span>8 мл.</span><span class="price-item__val">10 000 &#8381;</span></div>
+                    <div class="price-item"><span>Липолитик «Стройность»</span><span class="price-item__val">15 000 &#8381;</span></div>
                 </div>
             </div>
 
             <!-- Бионити -->
             <div class="accordion-item">
                 <button class="accordion-header" aria-expanded="false">
-                    <span>Бионити</span>
+                    <span>Бионити (жидкие нити)</span>
                     <svg class="accordion-icon" width="20" height="20" viewBox="0 0 20 20"><polyline points="5 8 10 13 15 8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
                 </button>
                 <div class="accordion-body">
                     <div class="price-item"><span>Подбородок</span><span class="price-item__val">10 000 &#8381;</span></div>
-                    <div class="price-item"><span>Лицо</span><span class="price-item__val">20 000 &#8381;</span></div>
+                    <div class="price-item"><span>Овал лица</span><span class="price-item__val">12 000 &#8381;</span></div>
+                    <div class="price-item"><span>Лицо</span><span class="price-item__val">22 000 &#8381;</span></div>
                     <div class="price-item"><span>Живот</span><span class="price-item__val">27 000 &#8381;</span></div>
-                    <div class="price-item"><span>Нить (1 шт.)</span><span class="price-item__val">1 000 — 1 500 &#8381;</span></div>
+                    <div class="price-item"><span>Руки</span><span class="price-item__val">12 000 &#8381;</span></div>
+                    <div class="price-item"><span>Линейные нити (1 шт.)</span><span class="price-item__val">1 000 &#8381;</span></div>
+                    <div class="price-item"><span>Скрученные нити (1 шт.)</span><span class="price-item__val">1 500 &#8381;</span></div>
                 </div>
             </div>
 
@@ -510,23 +562,52 @@
                     <svg class="accordion-icon" width="20" height="20" viewBox="0 0 20 20"><polyline points="5 8 10 13 15 8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
                 </button>
                 <div class="accordion-body">
-                    <div class="price-item"><span>Глутатион</span><span class="price-item__val">5 000 &#8381;</span></div>
-                    <div class="price-item"><span>Ремаксол</span><span class="price-item__val">4 000 &#8381;</span></div>
-                    <div class="price-item"><span>Феринжект</span><span class="price-item__val">5 000 &#8381;</span></div>
+                    <div class="price-item"><span>В/В инфузия Глутатион</span><span class="price-item__val">5 000 &#8381;</span></div>
+                    <div class="price-item"><span>В/В инфузия Ремаксол</span><span class="price-item__val">4 000 &#8381;</span></div>
+                    <div class="price-item"><span>В/В инфузия Феринжект</span><span class="price-item__val">5 000 &#8381;</span></div>
                 </div>
             </div>
 
             <!-- Лечение акне -->
             <div class="accordion-item">
                 <button class="accordion-header" aria-expanded="false">
-                    <span>Лечение акне</span>
+                    <span>Лечение акне / Сужение пор / Жирность кожи</span>
                     <svg class="accordion-icon" width="20" height="20" viewBox="0 0 20 20"><polyline points="5 8 10 13 15 8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
                 </button>
                 <div class="accordion-body">
-                    <div class="price-item"><span>Коктейль против акне</span><span class="price-item__val">10 000 &#8381;</span></div>
+                    <div class="price-item"><span>Противовоспалительный коктейль (2 мл.)</span><span class="price-item__val">10 000 &#8381;</span></div>
                     <div class="price-item"><span>Фотодинамическая терапия</span><span class="price-item__val">8 000 &#8381;</span></div>
-                    <div class="price-item"><span>Микронидлинг (лицо)</span><span class="price-item__val">10 000 &#8381;</span></div>
-                    <div class="price-item"><span>Микронидлинг (лицо + шея)</span><span class="price-item__val">15 000 &#8381;</span></div>
+                    <div class="price-item"><span>Микронидлинг</span><span class="price-item__val">10 000 &#8381;</span></div>
+                    <div class="price-item"><span>Микронидлинг с мезо</span><span class="price-item__val">15 000 &#8381;</span></div>
+                </div>
+            </div>
+
+            <!-- Пилинги -->
+            <div class="accordion-item">
+                <button class="accordion-header" aria-expanded="false">
+                    <span>Пилинги</span>
+                    <svg class="accordion-icon" width="20" height="20" viewBox="0 0 20 20"><polyline points="5 8 10 13 15 8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                </button>
+                <div class="accordion-body">
+                    <div class="price-item"><span>Пилинг Джесснера</span><span class="price-item__val">4 000 &#8381;</span></div>
+                    <div class="price-item"><span>Миндалевый</span><span class="price-item__val">4 000 &#8381;</span></div>
+                    <div class="price-item"><span>Гликолевый</span><span class="price-item__val">4 000 &#8381;</span></div>
+                    <div class="price-item"><span>Салициловый</span><span class="price-item__val">4 000 &#8381;</span></div>
+                    <div class="price-item"><span>Ретиноевый (жёлтый)</span><span class="price-item__val">5 000 &#8381;</span></div>
+                    <div class="price-item"><span>PRX-T33</span><span class="price-item__val">5 000 &#8381;</span></div>
+                    <div class="price-item"><span>BioRePeel</span><span class="price-item__val">5 000 &#8381;</span></div>
+                    <div class="price-item"><span>Интимный пилинг</span><span class="price-item__val">4 500 — 7 000 &#8381;</span></div>
+                </div>
+            </div>
+
+            <!-- Интимная пластика -->
+            <div class="accordion-item">
+                <button class="accordion-header" aria-expanded="false">
+                    <span>Интимная пластика</span>
+                    <svg class="accordion-icon" width="20" height="20" viewBox="0 0 20 20"><polyline points="5 8 10 13 15 8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                </button>
+                <div class="accordion-body">
+                    <div class="price-item"><span>Интимная пластика</span><span class="price-item__val">от 20 000 &#8381;</span></div>
                 </div>
             </div>
 
@@ -537,30 +618,45 @@
                     <svg class="accordion-icon" width="20" height="20" viewBox="0 0 20 20"><polyline points="5 8 10 13 15 8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
                 </button>
                 <div class="accordion-body">
-                    <div class="price-item"><span>Верхняя губа</span><span class="price-item__val">1 000 &#8381;</span></div>
-                    <div class="price-item"><span>Подбородок</span><span class="price-item__val">1 000 &#8381;</span></div>
-                    <div class="price-item"><span>Лицо полностью</span><span class="price-item__val">2 500 &#8381;</span></div>
+                    <div class="price-item"><span>Лицо полностью</span><span class="price-item__val">1 000 &#8381;</span></div>
+                    <div class="price-item"><span>Подбородок + усики</span><span class="price-item__val">800 &#8381;</span></div>
+                    <div class="price-item"><span>Усики</span><span class="price-item__val">500 &#8381;</span></div>
+                    <div class="price-item"><span>Белая линия живота</span><span class="price-item__val">500 &#8381;</span></div>
                     <div class="price-item"><span>Подмышки</span><span class="price-item__val">1 500 &#8381;</span></div>
-                    <div class="price-item"><span>Бикини</span><span class="price-item__val">2 000 &#8381;</span></div>
-                    <div class="price-item"><span>Глубокое бикини</span><span class="price-item__val">2 500 &#8381;</span></div>
-                    <div class="price-item"><span>Руки полностью</span><span class="price-item__val">2 000 &#8381;</span></div>
+                    <div class="price-item"><span>Руки до локтя</span><span class="price-item__val">1 500 &#8381;</span></div>
+                    <div class="price-item"><span>Руки полностью</span><span class="price-item__val">1 800 &#8381;</span></div>
+                    <div class="price-item"><span>Бикини классика / глубокое</span><span class="price-item__val">1 500 / 2 500 &#8381;</span></div>
+                    <div class="price-item"><span>Паховые складки</span><span class="price-item__val">800 &#8381;</span></div>
+                    <div class="price-item"><span>Голени / бёдра</span><span class="price-item__val">1 800 &#8381;</span></div>
                     <div class="price-item"><span>Ноги полностью</span><span class="price-item__val">2 800 &#8381;</span></div>
-                    <div class="price-item"><span>Комбо (подмышки + бикини)</span><span class="price-item__val">3 500 &#8381;</span></div>
-                    <div class="price-item"><span>Комбо (всё тело)</span><span class="price-item__val">6 800 &#8381;</span></div>
+                    <div class="price-item"><span>Ягодицы</span><span class="price-item__val">1 500 &#8381;</span></div>
+                    <div class="price-item"><span>Живот / поясница</span><span class="price-item__val">2 000 &#8381;</span></div>
+                    <div class="price-item"><span>Пальцы рук / ног</span><span class="price-item__val">500 &#8381;</span></div>
+                    <div class="price-item"><span>Задняя поверхность бедра</span><span class="price-item__val">1 800 &#8381;</span></div>
+                    <div class="price-subheader">Комплексы</div>
+                    <div class="price-item"><span>Подмышки + бикини</span><span class="price-item__val">3 000 &#8381;</span></div>
+                    <div class="price-item"><span>Подмышки + бикини + голени</span><span class="price-item__val">3 900 &#8381;</span></div>
+                    <div class="price-item"><span>Подмышки + бикини + ноги полностью</span><span class="price-item__val">4 900 &#8381;</span></div>
+                    <div class="price-item"><span>Подмышки + голени / бёдра</span><span class="price-item__val">2 800 &#8381;</span></div>
+                    <div class="price-item"><span>Подмышки + ноги полностью</span><span class="price-item__val">3 800 &#8381;</span></div>
+                    <div class="price-item"><span>Бикини + голени / бёдра</span><span class="price-item__val">2 800 &#8381;</span></div>
+                    <div class="price-item"><span>Бикини + ноги полностью</span><span class="price-item__val">3 900 &#8381;</span></div>
+                    <div class="price-item"><span>Всё тело до 8 зон</span><span class="price-item__val">6 800 &#8381;</span></div>
+                    <div class="price-item price-item--note"><span>* Любой комплекс + руки + 1 000 &#8381;</span></div>
                 </div>
             </div>
 
             <!-- Чистки лица -->
             <div class="accordion-item">
                 <button class="accordion-header" aria-expanded="false">
-                    <span>Чистки лица (Врач Дина)</span>
+                    <span>Чистки лица (Косметолог-эстетист Дина)</span>
                     <svg class="accordion-icon" width="20" height="20" viewBox="0 0 20 20"><polyline points="5 8 10 13 15 8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
                 </button>
                 <div class="accordion-body">
-                    <div class="price-item"><span>Атравматическая чистка</span><span class="price-item__val">6 500 &#8381;</span></div>
-                    <div class="price-item"><span>Комбинированная чистка</span><span class="price-item__val">5 000 &#8381;</span></div>
-                    <div class="price-item"><span>Механическая чистка</span><span class="price-item__val">5 000 &#8381;</span></div>
-                    <div class="price-item"><span>Ультразвуковая чистка</span><span class="price-item__val">4 000 &#8381;</span></div>
+                    <div class="price-item"><span>Атравматическая чистка лица (12 этапов)</span><span class="price-item__val">6 500 &#8381;</span></div>
+                    <div class="price-item"><span>Комбинированная чистка лица</span><span class="price-item__val">5 000 &#8381;</span></div>
+                    <div class="price-item"><span>Механическая чистка лица</span><span class="price-item__val">5 000 &#8381;</span></div>
+                    <div class="price-item"><span>Ультразвуковая чистка лица</span><span class="price-item__val">4 000 &#8381;</span></div>
                     <div class="price-item"><span>Криотерапия</span><span class="price-item__val">2 500 &#8381;</span></div>
                 </div>
             </div>
@@ -572,10 +668,23 @@
                     <svg class="accordion-icon" width="20" height="20" viewBox="0 0 20 20"><polyline points="5 8 10 13 15 8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
                 </button>
                 <div class="accordion-body">
-                    <div class="price-item"><span>BIOGEL (базовый)</span><span class="price-item__val">6 000 &#8381;</span></div>
-                    <div class="price-item"><span>BIOGEL Premium</span><span class="price-item__val">12 000 &#8381;</span></div>
-                    <div class="price-item"><span>BIOGEL Intensive</span><span class="price-item__val">18 000 &#8381;</span></div>
-                    <div class="price-item"><span>BIOGEL Pro Max</span><span class="price-item__val">23 000 &#8381;</span></div>
+                    <div class="price-item"><span>BIOGEL БАРХАТ</span><span class="price-item__val">15 000 &#8381;</span></div>
+                    <div class="price-item"><span>BIOGEL СТРОЙНОСТЬ</span><span class="price-item__val">15 000 &#8381;</span></div>
+                    <div class="price-item"><span>BIOGEL NAD+</span><span class="price-item__val">15 000 &#8381;</span></div>
+                    <div class="price-item"><span>DOM BIOGEL</span><span class="price-item__val">15 000 &#8381;</span></div>
+                    <div class="price-item"><span>BIOGEL ТВОЯ ХАРИЗМА</span><span class="price-item__val">23 000 &#8381;</span></div>
+                    <div class="price-item"><span>BIOGEL T LINE</span><span class="price-item__val">15 000 &#8381;</span></div>
+                    <div class="price-item"><span>BIOGEL THE STAR</span><span class="price-item__val">15 000 &#8381;</span></div>
+                    <div class="price-item"><span>BIOGEL СИЯНИЕ</span><span class="price-item__val">15 000 &#8381;</span></div>
+                    <div class="price-item"><span>BIOGEL BLUE</span><span class="price-item__val">15 000 &#8381;</span></div>
+                    <div class="price-item"><span>BIOGEL WHITE</span><span class="price-item__val">13 000 &#8381;</span></div>
+                    <div class="price-item"><span>BIOGEL SILVER</span><span class="price-item__val">13 000 &#8381;</span></div>
+                    <div class="price-item"><span>BIOGEL GREEN</span><span class="price-item__val">15 000 &#8381;</span></div>
+                    <div class="price-item"><span>BIOGEL RED</span><span class="price-item__val">15 000 &#8381;</span></div>
+                    <div class="price-item"><span>BIOGEL GOLD</span><span class="price-item__val">15 000 &#8381;</span></div>
+                    <div class="price-item"><span>BIOGEL PDRN EYES</span><span class="price-item__val">10 000 &#8381;</span></div>
+                    <div class="price-item"><span>BIOGEL HAIR B BIOTIN</span><span class="price-item__val">6 000 &#8381;</span></div>
+                    <div class="price-item"><span>BIOGEL LOVE YOUR SKIN</span><span class="price-item__val">13 000 &#8381;</span></div>
                 </div>
             </div>
 
@@ -586,12 +695,17 @@
                     <svg class="accordion-icon" width="20" height="20" viewBox="0 0 20 20"><polyline points="5 8 10 13 15 8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
                 </button>
                 <div class="accordion-body">
-                    <div class="price-item"><span>Семинар (1 день)</span><span class="price-item__val">30 000 &#8381;</span></div>
-                    <div class="price-item"><span>Базовый курс</span><span class="price-item__val">500 000 &#8381;</span></div>
-                    <div class="price-item"><span>Биоревитализация / Мезотерапия</span><span class="price-item__val">50 000 &#8381;</span></div>
-                    <div class="price-item"><span>Контурная пластика</span><span class="price-item__val">80 000 &#8381;</span></div>
-                    <div class="price-item"><span>Нитевой лифтинг</span><span class="price-item__val">100 000 &#8381;</span></div>
-                    <div class="price-item"><span>Аппаратная косметология</span><span class="price-item__val">120 000 &#8381;</span></div>
+                    <div class="price-item"><span>Семинары по всем процедурам (вы — слушатель)</span><span class="price-item__val">30 000 &#8381;</span></div>
+                    <div class="price-item"><span>Базовый курс по косметологии (1 неделя)</span><span class="price-item__val">500 000 &#8381;</span></div>
+                    <div class="price-subheader">Обучение (1 день, с практикой, сертификат)</div>
+                    <div class="price-item"><span>Верхняя треть ботокс</span><span class="price-item__val">50 000 &#8381;</span></div>
+                    <div class="price-item"><span>Фул фейс (ботокс)</span><span class="price-item__val">120 000 &#8381;</span></div>
+                    <div class="price-item"><span>Плазмотерапия</span><span class="price-item__val">50 000 &#8381;</span></div>
+                    <div class="price-item"><span>Интимная пластика</span><span class="price-item__val">100 000 &#8381;</span></div>
+                    <div class="price-item"><span>Авторский коктейль</span><span class="price-item__val">70 000 &#8381;</span></div>
+                    <div class="price-item"><span>Бланширование колец Венеры</span><span class="price-item__val">50 000 &#8381;</span></div>
+                    <div class="price-item"><span>Увеличение губ</span><span class="price-item__val">100 000 &#8381;</span></div>
+                    <div class="price-item"><span>Микроигольчатый РФ</span><span class="price-item__val">50 000 &#8381;</span></div>
                 </div>
             </div>
 
@@ -604,39 +718,25 @@
     <div class="container">
         <span class="section-label">Результаты</span>
         <h2 class="section-title">До / После</h2>
-        <div class="results__grid">
-            <div class="portfolio-item">
-                <div class="portfolio-item__before-after">
-                    <div class="ba-side ba-side--before" style="background:linear-gradient(135deg,#4a1010,#5a1818)"><span>До</span></div>
-                    <div class="ba-side ba-side--after" style="background:linear-gradient(135deg,#c4a265,#d4b278)"><span>После</span></div>
-                    <input type="range" class="ba-slider" min="0" max="100" value="50" aria-label="До/После">
-                </div>
-                <p class="portfolio-item__caption">Биоревитализация Profhilo &bull; Код Роскоши</p>
-            </div>
-            <div class="portfolio-item">
-                <div class="portfolio-item__before-after">
-                    <div class="ba-side ba-side--before" style="background:linear-gradient(135deg,#3d0c0c,#4a1010)"><span>До</span></div>
-                    <div class="ba-side ba-side--after" style="background:linear-gradient(135deg,#8b6e5a,#c4a265)"><span>После</span></div>
-                    <input type="range" class="ba-slider" min="0" max="100" value="50" aria-label="До/После">
-                </div>
-                <p class="portfolio-item__caption">Контурная пластика губ &bull; Код Роскоши</p>
-            </div>
-            <div class="portfolio-item">
-                <div class="portfolio-item__before-after">
-                    <div class="ba-side ba-side--before" style="background:linear-gradient(135deg,#4a1010,#5a1818)"><span>До</span></div>
-                    <div class="ba-side ba-side--after" style="background:linear-gradient(135deg,#b8956e,#d4b888)"><span>После</span></div>
-                    <input type="range" class="ba-slider" min="0" max="100" value="50" aria-label="До/После">
-                </div>
-                <p class="portfolio-item__caption">SMAS-лифтинг 900 линий &bull; Код Роскоши</p>
-            </div>
-            <div class="portfolio-item">
-                <div class="portfolio-item__before-after">
-                    <div class="ba-side ba-side--before" style="background:linear-gradient(135deg,#3d0c0c,#4a1010)"><span>До</span></div>
-                    <div class="ba-side ba-side--after" style="background:linear-gradient(135deg,#c4a265,#b8956e)"><span>После</span></div>
-                    <input type="range" class="ba-slider" min="0" max="100" value="50" aria-label="До/После">
-                </div>
-                <p class="portfolio-item__caption">Коктейль «Фотошоп» &bull; Код Роскоши</p>
-            </div>
+        <div class="results__gallery">
+            <a href="img/before-after/photo_2026-05-02 00.34.25.jpeg" target="_blank" rel="noopener"><img src="img/before-after/photo_2026-05-02 00.34.25.jpeg" alt="Результат процедуры" loading="lazy"></a>
+            <a href="img/before-after/photo_2026-05-02 00.34.28.jpeg" target="_blank" rel="noopener"><img src="img/before-after/photo_2026-05-02 00.34.28.jpeg" alt="Результат процедуры" loading="lazy"></a>
+            <a href="img/before-after/photo_2026-05-02 00.34.30.jpeg" target="_blank" rel="noopener"><img src="img/before-after/photo_2026-05-02 00.34.30.jpeg" alt="Результат процедуры" loading="lazy"></a>
+            <a href="img/before-after/photo_2026-05-02 00.34.32.jpeg" target="_blank" rel="noopener"><img src="img/before-after/photo_2026-05-02 00.34.32.jpeg" alt="Результат процедуры" loading="lazy"></a>
+            <a href="img/before-after/photo_2026-05-02 00.34.34.jpeg" target="_blank" rel="noopener"><img src="img/before-after/photo_2026-05-02 00.34.34.jpeg" alt="Результат процедуры" loading="lazy"></a>
+            <a href="img/before-after/photo_2026-05-02 00.34.36.jpeg" target="_blank" rel="noopener"><img src="img/before-after/photo_2026-05-02 00.34.36.jpeg" alt="Результат процедуры" loading="lazy"></a>
+            <a href="img/before-after/photo_2026-05-02 00.34.38.jpeg" target="_blank" rel="noopener"><img src="img/before-after/photo_2026-05-02 00.34.38.jpeg" alt="Результат процедуры" loading="lazy"></a>
+            <a href="img/before-after/photo_2026-05-02 00.34.40.jpeg" target="_blank" rel="noopener"><img src="img/before-after/photo_2026-05-02 00.34.40.jpeg" alt="Результат процедуры" loading="lazy"></a>
+            <a href="img/before-after/photo_2026-05-02 00.34.42.jpeg" target="_blank" rel="noopener"><img src="img/before-after/photo_2026-05-02 00.34.42.jpeg" alt="Результат процедуры" loading="lazy"></a>
+            <a href="img/before-after/photo_2026-05-02 00.34.49.jpeg" target="_blank" rel="noopener"><img src="img/before-after/photo_2026-05-02 00.34.49.jpeg" alt="Результат процедуры" loading="lazy"></a>
+            <a href="img/before-after/photo_2026-05-02 00.34.51.jpeg" target="_blank" rel="noopener"><img src="img/before-after/photo_2026-05-02 00.34.51.jpeg" alt="Результат процедуры" loading="lazy"></a>
+            <a href="img/before-after/photo_2026-05-02 00.34.52.jpeg" target="_blank" rel="noopener"><img src="img/before-after/photo_2026-05-02 00.34.52.jpeg" alt="Результат процедуры" loading="lazy"></a>
+            <a href="img/before-after/photo_2026-05-02 00.34.55.jpeg" target="_blank" rel="noopener"><img src="img/before-after/photo_2026-05-02 00.34.55.jpeg" alt="Результат процедуры" loading="lazy"></a>
+            <a href="img/before-after/photo_2026-05-02 00.34.57.jpeg" target="_blank" rel="noopener"><img src="img/before-after/photo_2026-05-02 00.34.57.jpeg" alt="Результат процедуры" loading="lazy"></a>
+            <a href="img/before-after/photo_2026-05-02 00.35.08.jpeg" target="_blank" rel="noopener"><img src="img/before-after/photo_2026-05-02 00.35.08.jpeg" alt="Результат процедуры" loading="lazy"></a>
+            <a href="img/before-after/photo_2026-05-02 00.35.10.jpeg" target="_blank" rel="noopener"><img src="img/before-after/photo_2026-05-02 00.35.10.jpeg" alt="Результат процедуры" loading="lazy"></a>
+            <a href="img/before-after/photo_2026-05-02 00.35.13.jpeg" target="_blank" rel="noopener"><img src="img/before-after/photo_2026-05-02 00.35.13.jpeg" alt="Результат процедуры" loading="lazy"></a>
+            <a href="img/before-after/photo_2026-05-02 00.35.14.jpeg" target="_blank" rel="noopener"><img src="img/before-after/photo_2026-05-02 00.35.14.jpeg" alt="Результат процедуры" loading="lazy"></a>
         </div>
     </div>
 </section>
@@ -797,12 +897,12 @@
         <h2 class="section-title">@dr.elima</h2>
         <p class="insta-subtitle">Результаты процедур, советы по уходу, закулисье клиники</p>
         <div class="insta-grid">
-            <a href="https://www.instagram.com/dr.elima/" target="_blank" rel="noopener" class="insta-cell" style="background:linear-gradient(135deg,#4a1010,#5a1818)"><svg width="28" height="28" viewBox="0 0 28 28"><circle cx="14" cy="14" r="8" fill="#c4a265" opacity="0.15"/></svg></a>
-            <a href="https://www.instagram.com/dr.elima/" target="_blank" rel="noopener" class="insta-cell" style="background:linear-gradient(135deg,#3d0c0c,#4a1010)"><svg width="28" height="28" viewBox="0 0 28 28"><rect x="4" y="4" width="20" height="20" rx="4" fill="#c4a265" opacity="0.1"/></svg></a>
-            <a href="https://www.instagram.com/dr.elima/" target="_blank" rel="noopener" class="insta-cell" style="background:linear-gradient(135deg,#5a1818,#6a2020)"><svg width="28" height="28" viewBox="0 0 28 28"><circle cx="14" cy="12" r="5" fill="#c4a265" opacity="0.1"/></svg></a>
-            <a href="https://www.instagram.com/dr.elima/" target="_blank" rel="noopener" class="insta-cell" style="background:linear-gradient(135deg,#4a1010,#3d0c0c)"><svg width="28" height="28" viewBox="0 0 28 28"><ellipse cx="14" cy="14" rx="7" ry="9" fill="#8b4a4a" opacity="0.12"/></svg></a>
-            <a href="https://www.instagram.com/dr.elima/" target="_blank" rel="noopener" class="insta-cell" style="background:linear-gradient(135deg,#3d0c0c,#5a1818)"><svg width="28" height="28" viewBox="0 0 28 28"><path d="M14 4l2.5 5 5.5.8-4 3.9.9 5.5L14 16l-4.9 3.2.9-5.5-4-3.9 5.5-.8z" fill="#c4a265" opacity="0.1"/></svg></a>
-            <a href="https://www.instagram.com/dr.elima/" target="_blank" rel="noopener" class="insta-cell" style="background:linear-gradient(135deg,#5a1818,#4a1010)"><svg width="28" height="28" viewBox="0 0 28 28"><circle cx="14" cy="14" r="10" fill="#c4a265" opacity="0.08"/></svg></a>
+            <a href="https://www.instagram.com/dr.elima/" target="_blank" rel="noopener" class="insta-cell insta-cell--photo"><img src="img/before-after/photo_2026-05-02 00.34.30.jpeg" alt="@dr.elima" loading="lazy"></a>
+            <a href="https://www.instagram.com/dr.elima/" target="_blank" rel="noopener" class="insta-cell insta-cell--photo"><img src="img/before-after/photo_2026-05-02 00.34.32.jpeg" alt="@dr.elima" loading="lazy"></a>
+            <a href="https://www.instagram.com/dr.elima/" target="_blank" rel="noopener" class="insta-cell insta-cell--photo"><img src="img/before-after/photo_2026-05-02 00.34.34.jpeg" alt="@dr.elima" loading="lazy"></a>
+            <a href="https://www.instagram.com/dr.elima/" target="_blank" rel="noopener" class="insta-cell insta-cell--photo"><img src="img/before-after/photo_2026-05-02 00.34.38.jpeg" alt="@dr.elima" loading="lazy"></a>
+            <a href="https://www.instagram.com/dr.elima/" target="_blank" rel="noopener" class="insta-cell insta-cell--photo"><img src="img/before-after/photo_2026-05-02 00.34.40.jpeg" alt="@dr.elima" loading="lazy"></a>
+            <a href="https://www.instagram.com/dr.elima/" target="_blank" rel="noopener" class="insta-cell insta-cell--photo"><img src="img/before-after/photo_2026-05-02 00.34.42.jpeg" alt="@dr.elima" loading="lazy"></a>
         </div>
     </div>
 </section>
