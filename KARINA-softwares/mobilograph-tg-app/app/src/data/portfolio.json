@@ -1,0 +1,17 @@
+[
+  { "id": 1, "category": "events", "image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80", "caption": "Корпоратив — Hilton Astana" },
+  { "id": 2, "category": "events", "image": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&q=80", "caption": "День рождения — ресторан Barley" },
+  { "id": 3, "category": "events", "image": "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&q=80", "caption": "Выпускной 2025" },
+  { "id": 4, "category": "love-story", "image": "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&q=80", "caption": "Love Story — Парк Президента" },
+  { "id": 5, "category": "love-story", "image": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=600&q=80", "caption": "Love Story — набережная Есиль" },
+  { "id": 6, "category": "love-story", "image": "https://images.unsplash.com/photo-1621112904887-419379ce6824?w=600&q=80", "caption": "Предложение руки и сердца" },
+  { "id": 7, "category": "content", "image": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&q=80", "caption": "Reels для кофейни Brew Bar" },
+  { "id": 8, "category": "content", "image": "https://images.unsplash.com/photo-1563986768609-322da13575f2?w=600&q=80", "caption": "Instagram контент — фитнес" },
+  { "id": 9, "category": "content", "image": "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=600&q=80", "caption": "Stories для салона красоты" },
+  { "id": 10, "category": "product", "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80", "caption": "Наушники — предметная съёмка" },
+  { "id": 11, "category": "product", "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80", "caption": "Часы — lifestyle съёмка" },
+  { "id": 12, "category": "product", "image": "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=600&q=80", "caption": "Косметика — flat lay" },
+  { "id": 13, "category": "portrait", "image": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80", "caption": "Портрет — естественный свет" },
+  { "id": 14, "category": "portrait", "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80", "caption": "Деловой портрет" },
+  { "id": 15, "category": "portrait", "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&q=80", "caption": "Портрет — golden hour" }
+]

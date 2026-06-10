@@ -1,0 +1,147 @@
+[
+  {
+    "id": "events",
+    "title": "Съёмка мероприятий",
+    "shortDescription": "Дни рождения, корпоративы, выпускные",
+    "fullDescription": "Профессиональная мобильная съёмка ваших мероприятий. Ловлю живые эмоции и создаю динамичный контент, который передаёт атмосферу праздника.",
+    "emoji": "🎉",
+    "image": "/images/services/events.jpg",
+    "pricing": [
+      {
+        "name": "Базовый",
+        "price": 25000,
+        "duration": "1 час",
+        "includes": ["20 обработанных фото", "1 Reels до 60 сек", "Сдача за 3 дня"]
+      },
+      {
+        "name": "Стандарт",
+        "price": 40000,
+        "duration": "2 часа",
+        "includes": ["40 обработанных фото", "3 Reels", "5 Stories", "Сдача за 3 дня"]
+      },
+      {
+        "name": "Премиум",
+        "price": 60000,
+        "duration": "4 часа",
+        "includes": ["Все фото без лимита", "5 Reels", "10 Stories", "Highlight-обложки", "Сдача за 2 дня"]
+      }
+    ],
+    "portfolioCategories": ["events"]
+  },
+  {
+    "id": "love-story",
+    "title": "Love Story",
+    "shortDescription": "Парная съёмка для влюблённых",
+    "fullDescription": "Нежная и естественная съёмка вашей истории любви. Нахожу красивые локации и создаю атмосферу, в которой вы будете чувствовать себя свободно.",
+    "emoji": "💕",
+    "image": "/images/services/love-story.jpg",
+    "pricing": [
+      {
+        "name": "Базовый",
+        "price": 20000,
+        "duration": "1 час",
+        "includes": ["15 обработанных фото", "1 Reels", "Сдача за 3 дня"]
+      },
+      {
+        "name": "Стандарт",
+        "price": 35000,
+        "duration": "1.5 часа",
+        "includes": ["30 обработанных фото", "2 Reels", "3 Stories", "Сдача за 3 дня"]
+      },
+      {
+        "name": "Премиум",
+        "price": 50000,
+        "duration": "2 часа",
+        "includes": ["Все фото", "3 Reels", "5 Stories", "Мини-фильм до 3 мин", "Сдача за 2 дня"]
+      }
+    ],
+    "portfolioCategories": ["love-story"]
+  },
+  {
+    "id": "content",
+    "title": "Контент для Instagram",
+    "shortDescription": "Reels, Stories, фото для ленты",
+    "fullDescription": "Создаю вовлекающий контент для вашего Instagram. Reels с трендовыми переходами, эстетичные Stories и фото, которые набирают охваты.",
+    "emoji": "📱",
+    "image": "/images/services/content.jpg",
+    "pricing": [
+      {
+        "name": "Базовый",
+        "price": 15000,
+        "duration": "1 час",
+        "includes": ["10 фото для ленты", "1 Reels", "Сдача за 3 дня"]
+      },
+      {
+        "name": "Стандарт",
+        "price": 30000,
+        "duration": "2 часа",
+        "includes": ["20 фото", "3 Reels", "5 Stories", "Сдача за 3 дня"]
+      },
+      {
+        "name": "Премиум",
+        "price": 50000,
+        "duration": "3 часа",
+        "includes": ["30+ фото", "5 Reels", "10 Stories", "Контент-план на неделю", "Сдача за 2 дня"]
+      }
+    ],
+    "portfolioCategories": ["content"]
+  },
+  {
+    "id": "product",
+    "title": "Предметная съёмка",
+    "shortDescription": "Товары, еда, аксессуары",
+    "fullDescription": "Снимаю товары так, чтобы их хотелось купить. Работаю с ресторанами, магазинами и брендами. Каждый кадр продуман для максимальной конверсии.",
+    "emoji": "📦",
+    "image": "/images/services/product.jpg",
+    "pricing": [
+      {
+        "name": "Базовый",
+        "price": 10000,
+        "duration": "До 5 товаров",
+        "includes": ["3 ракурса на товар", "Базовая обработка", "Сдача за 2 дня"]
+      },
+      {
+        "name": "Стандарт",
+        "price": 20000,
+        "duration": "До 10 товаров",
+        "includes": ["5 ракурсов на товар", "1 Reels-обзор", "Сдача за 2 дня"]
+      },
+      {
+        "name": "Премиум",
+        "price": 35000,
+        "duration": "До 20 товаров",
+        "includes": ["Неограниченные ракурсы", "3 Reels", "Lifestyle-фото", "Сдача за 2 дня"]
+      }
+    ],
+    "portfolioCategories": ["product"]
+  },
+  {
+    "id": "portrait",
+    "title": "Портретная съёмка",
+    "shortDescription": "Индивидуальная портретная фотосессия",
+    "fullDescription": "Портретная съёмка, которая раскрывает вашу индивидуальность. Работаю со светом и локациями, чтобы каждый кадр был как обложка журнала.",
+    "emoji": "🤳",
+    "image": "/images/services/portrait.jpg",
+    "pricing": [
+      {
+        "name": "Базовый",
+        "price": 15000,
+        "duration": "45 минут",
+        "includes": ["10 обработанных фото", "1 образ", "Сдача за 3 дня"]
+      },
+      {
+        "name": "Стандарт",
+        "price": 25000,
+        "duration": "1.5 часа",
+        "includes": ["20 обработанных фото", "2 образа", "1 Reels", "Сдача за 3 дня"]
+      },
+      {
+        "name": "Премиум",
+        "price": 40000,
+        "duration": "2.5 часа",
+        "includes": ["30+ фото", "3 образа", "2 Reels", "Мини-фильм", "Сдача за 2 дня"]
+      }
+    ],
+    "portfolioCategories": ["portrait"]
+  }
+]

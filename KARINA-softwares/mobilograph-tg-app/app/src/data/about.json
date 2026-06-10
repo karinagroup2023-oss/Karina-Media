@@ -1,0 +1,14 @@
+{
+  "name": "Карина",
+  "title": "Мобилограф в Астане",
+  "bio": "Снимаю на iPhone уже более 3 лет. Создаю контент, который цепляет. Специализируюсь на Reels, мероприятиях и love story съёмках. Каждый кадр — это история, которую хочется пересматривать.",
+  "experience": "3+ лет",
+  "shoots": 200,
+  "equipment": ["iPhone 15 Pro Max", "DJI OM 7", "Aputure MC Pro", "Rode Wireless ME"],
+  "photo": "/images/about.jpg",
+  "instagram": "https://instagram.com/karina_mobilograph",
+  "telegram": "https://t.me/karina_mobilograph",
+  "phone": "+7 700 123 4567",
+  "kaspiPhone": "+7 700 123 4567",
+  "city": "Астана"
+}
