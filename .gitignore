@@ -3,3 +3,6 @@
 .vscode/
 node_modules/
 .gstack/
+
+# Отдельный проект со своим git-репозиторием и .env-секретами — не включать в этот репо
+epc-progress-hub/
