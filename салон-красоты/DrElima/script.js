@@ -86,6 +86,7 @@ if (reviewsSlider && dotsContainer) {
     reviewCards.forEach((_, i) => {
         const dot = document.createElement('button');
         dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', `Отзыв ${i + 1}`);
         dot.addEventListener('click', () => {
             reviewCards[i].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
         });
