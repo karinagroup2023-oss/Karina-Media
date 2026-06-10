@@ -4,6 +4,8 @@ const burger = document.getElementById('burger');
 const nav = document.getElementById('nav');
 const stickyCta = document.getElementById('stickyCta');
 
+document.documentElement.classList.add('js-loaded');
+
 window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.scrollY > 50);
     if (stickyCta) stickyCta.classList.toggle('visible', window.scrollY > 600);
@@ -21,6 +23,16 @@ document.addEventListener('click', e => {
         nav.classList.remove('active');
         burger.classList.remove('active');
         burger.setAttribute('aria-expanded', 'false');
+    }
+});
+
+/* Close mobile nav on Escape */
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && nav.classList.contains('active')) {
+        nav.classList.remove('active');
+        burger.classList.remove('active');
+        burger.setAttribute('aria-expanded', 'false');
+        burger.focus();
     }
 });
 
@@ -67,6 +79,13 @@ if (reviewsSlider && dotsContainer) {
     }, { passive: true });
 }
 
+/* ===== DYNAMIC YEARS ===== */
+const yearsEl = document.getElementById('yearsExperience');
+if (yearsEl) {
+    const years = new Date().getFullYear() - 2018;
+    yearsEl.textContent = years + ' ' + (years === 1 ? 'год' : (years >= 2 && years <= 4) ? 'года' : 'лет');
+}
+
 /* ===== BOOKING FORM ===== */
 const bookingForm = document.getElementById('bookingForm');
 const bookingProgram = document.getElementById('bookingProgram');
@@ -92,14 +111,77 @@ if (bookingProgram && bookingCountry) {
     });
 }
 
+/* Form validation helpers */
+function validatePhone(phone) {
+    return /^\+?[\d\s\-()]{7,15}$/.test(phone.trim());
+}
+
+function validateEmail(email) {
+    if (!email.trim()) return true;
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+}
+
+function showFieldError(input, message) {
+    clearFieldError(input);
+    input.classList.add('input--error');
+    const err = document.createElement('span');
+    err.className = 'field-error';
+    err.textContent = message;
+    input.parentNode.appendChild(err);
+}
+
+function clearFieldError(input) {
+    input.classList.remove('input--error');
+    const existing = input.parentNode.querySelector('.field-error');
+    if (existing) existing.remove();
+}
+
 if (bookingForm) {
+    const submitBtn = bookingForm.querySelector('button[type="submit"]');
+
     bookingForm.addEventListener('submit', e => {
         e.preventDefault();
-        const name = document.getElementById('bookingName').value;
-        const phone = document.getElementById('bookingPhone').value;
-        const email = document.getElementById('bookingEmail').value;
-        const program = document.getElementById('bookingProgram').value;
+
+        const nameInput = document.getElementById('bookingName');
+        const phoneInput = document.getElementById('bookingPhone');
+        const emailInput = document.getElementById('bookingEmail');
+        const programSelect = document.getElementById('bookingProgram');
+        const consentCheckbox = document.getElementById('bookingConsent');
+        const name = nameInput.value.trim();
+        const phone = phoneInput.value.trim();
+        const email = emailInput.value.trim();
+        const program = programSelect.value;
         const country = document.getElementById('bookingCountry').value || 'Не определился';
+
+        /* Clear previous errors */
+        [nameInput, phoneInput, emailInput, programSelect].forEach(clearFieldError);
+        let hasError = false;
+
+        if (!name) {
+            showFieldError(nameInput, 'Введите ваше имя');
+            hasError = true;
+        }
+        if (!validatePhone(phone)) {
+            showFieldError(phoneInput, 'Введите корректный номер телефона');
+            hasError = true;
+        }
+        if (!validateEmail(email)) {
+            showFieldError(emailInput, 'Введите корректный email');
+            hasError = true;
+        }
+        if (!program) {
+            showFieldError(programSelect, 'Выберите программу');
+            hasError = true;
+        }
+        if (!consentCheckbox.checked) {
+            showFieldError(consentCheckbox, 'Необходимо согласие на обработку данных');
+            hasError = true;
+        }
+        if (hasError) return;
+
+        /* Disable button to prevent double submit */
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Отправка...';
 
         // Build modal content safely
         const modal = document.getElementById('successModal');
@@ -121,16 +203,23 @@ if (bookingForm) {
         modalText.appendChild(document.createElement('br'));
         modalText.appendChild(document.createTextNode('Мы свяжемся с вами в течение 24 часов.'));
 
-        // Open WhatsApp with details
+        // Build WhatsApp URL
         const waText = encodeURIComponent(
             `Здравствуйте! Хочу получить консультацию.\n` +
             `Программа: ${program}\nСтрана: ${country}\n` +
             `Имя: ${name}\nТелефон: ${phone}\nEmail: ${email}`
         );
-        window.open(`https://wa.me/77009633931?text=${waText}`, '_blank');
+        const waUrl = `https://wa.me/77009633931?text=${waText}`;
 
+        // Show modal first, then open WhatsApp
         openModal(modal);
         bookingForm.reset();
+
+        setTimeout(() => {
+            window.open(waUrl, '_blank', 'noopener');
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Отправить заявку';
+        }, 1500);
     });
 }
 
@@ -196,16 +285,12 @@ document.addEventListener('keydown', e => {
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            entry.target.classList.add('is-visible');
             observer.unobserve(entry.target);
         }
     });
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
 document.querySelectorAll('.program-card, .country-card, .camp-feature, .camp-card, .process-step, .review-card, .contact-item').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);
 });

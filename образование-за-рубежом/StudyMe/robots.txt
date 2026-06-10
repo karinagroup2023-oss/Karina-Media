@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://studyme.org.kz/sitemap.xml

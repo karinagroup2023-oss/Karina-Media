@@ -28,7 +28,7 @@
 
 /* ===== RESET ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; overflow-x: clip; }
 body {
     font-family: var(--font-body);
     font-size: 16px;
@@ -36,6 +36,7 @@ body {
     color: var(--gray-800);
     background: var(--white);
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
 }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
@@ -52,8 +53,8 @@ button, input, select, textarea {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
 }
-.form-group input:focus-visible,
-.form-group select:focus-visible {
+.form-group input:focus,
+.form-group select:focus {
     outline: none;
 }
 
@@ -92,6 +93,8 @@ button, input, select, textarea {
     color: var(--white);
 }
 .btn--primary:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,138,76,0.35); }
+.btn--primary:active { transform: translateY(1px); box-shadow: none; }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 .btn--outline {
     border: 2px solid rgba(255,255,255,0.3);
     color: var(--white);
@@ -157,7 +160,7 @@ button, input, select, textarea {
 .nav__link:hover { color: var(--white); background: rgba(255,255,255,0.1); }
 .nav__link--cta {
     background: var(--accent);
-    color: var(--white) !important;
+    color: var(--white);
 }
 .nav__link--cta:hover { background: var(--accent-hover); }
 
@@ -174,6 +177,8 @@ button, input, select, textarea {
     gap: 4px;
     border-bottom: 1px solid rgba(255,255,255,0.1);
     box-shadow: var(--shadow-lg);
+    max-height: calc(100vh - 64px);
+    overflow-y: auto;
 }
 
 .burger {
@@ -181,7 +186,11 @@ button, input, select, textarea {
     flex-direction: column;
     gap: 5px;
     cursor: pointer;
-    padding: 8px;
+    padding: 10px;
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
+    align-items: center;
     z-index: 10;
 }
 .burger span {
@@ -271,7 +280,7 @@ button, input, select, textarea {
 }
 .stat__number {
     font-family: var(--font-heading);
-    font-size: 32px;
+    font-size: clamp(24px, 7vw, 32px);
     font-weight: 800;
     color: var(--accent);
 }
@@ -284,6 +293,7 @@ button, input, select, textarea {
 /* ===== SECTIONS ===== */
 .section {
     padding: 80px 0;
+    scroll-margin-top: 80px;
 }
 .section--dark {
     background: var(--primary-dark);
@@ -398,10 +408,13 @@ button, input, select, textarea {
     font-weight: 700;
 }
 .program-card__link {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     color: var(--accent);
     font-weight: 600;
     font-size: 14px;
+    padding: 10px 0;
+    min-height: 44px;
     transition: var(--transition);
 }
 .program-card__link:hover { transform: translateX(4px); }
@@ -447,7 +460,7 @@ button, input, select, textarea {
     background: rgba(255,138,76,0.15);
     color: var(--accent);
     border-radius: 50px;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -507,6 +520,7 @@ button, input, select, textarea {
 }
 .camp-card__image { position: relative; }
 .camp-card__image svg { width: 100%; height: auto; display: block; }
+.camp-card__img { width: 100%; height: 240px; object-fit: cover; display: block; }
 
 .camp-card__body { padding: 24px; }
 .camp-card__tags {
@@ -539,6 +553,7 @@ button, input, select, textarea {
 }
 .camp-card__meta {
     display: flex;
+    flex-wrap: wrap;
     gap: 16px;
     font-size: 13px;
     color: var(--gray-600);
@@ -596,11 +611,10 @@ button, input, select, textarea {
 .about__photo {
     max-width: 360px;
     margin: 0 auto;
-}
-.about__photo svg {
-    width: 100%;
-    height: auto;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
     border-radius: var(--radius-lg);
+    flex-shrink: 0;
 }
 .about__role {
     color: var(--accent);
@@ -661,7 +675,7 @@ button, input, select, textarea {
 .reviews__slider::-webkit-scrollbar { display: none; }
 
 .review-card {
-    min-width: 270px;
+    min-width: min(270px, calc(100vw - 60px));
     max-width: 360px;
     flex-shrink: 0;
     scroll-snap-align: start;
@@ -724,8 +738,10 @@ button, input, select, textarea {
     border: none;
     cursor: pointer;
     transition: var(--transition);
+    padding: 17px 5px;
+    background-clip: content-box;
 }
-.dot.active { background: var(--accent); width: 28px; border-radius: 5px; }
+.dot.active { background: var(--accent); width: 28px; border-radius: 5px; background-clip: content-box; }
 
 /* ===== BOOKING ===== */
 .booking {
@@ -774,7 +790,8 @@ button, input, select, textarea {
 .form-group input,
 .form-group select {
     width: 100%;
-    padding: 12px 16px;
+    padding: 13px 16px;
+    min-height: 44px;
     border: 1px solid var(--gray-200);
     border-radius: var(--radius-sm);
     font-size: 15px;
@@ -793,6 +810,8 @@ button, input, select, textarea {
     cursor: pointer;
     font-size: 13px;
     color: var(--gray-600);
+    padding: 12px 0;
+    min-height: 44px;
 }
 .form-group--checkbox input[type="checkbox"] {
     width: 18px;
@@ -873,9 +892,11 @@ button, input, select, textarea {
     margin-bottom: 12px;
 }
 .footer__links a {
-    display: block;
+    display: flex;
+    align-items: center;
     font-size: 14px;
-    padding: 4px 0;
+    padding: 10px 0;
+    min-height: 44px;
     color: rgba(255,255,255,0.5);
     transition: var(--transition);
 }
@@ -956,20 +977,58 @@ button, input, select, textarea {
 .modal.active .modal__content { transform: scale(1); }
 .modal__close {
     position: absolute;
-    top: 12px;
-    right: 16px;
+    top: 8px;
+    right: 8px;
     font-size: 28px;
     cursor: pointer;
     color: var(--gray-400);
     background: none;
     border: none;
     line-height: 1;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .modal__icon { margin-bottom: 16px; }
 #modalText {
     font-size: 16px;
     line-height: 1.6;
     margin-bottom: 24px;
+}
+
+/* ===== RESPONSIVE — TINY MOBILE (<360px) ===== */
+@media (max-width: 359px) {
+    .hero__title { font-size: 26px; }
+    .hero__badge { font-size: 12px; padding: 6px 14px; }
+    .container { padding: 0 16px; }
+    .booking__form { padding: 16px; }
+    .hero__actions {
+        flex-direction: column;
+    }
+    .hero__actions .btn--lg {
+        width: 100%;
+        padding: 14px 20px;
+        font-size: 15px;
+    }
+}
+
+/* ===== RESPONSIVE — MOBILE (<480px) ===== */
+@media (max-width: 479px) {
+    .hero__actions {
+        flex-direction: column;
+    }
+    .hero__actions .btn--lg {
+        width: 100%;
+    }
+    .footer__inner {
+        gap: 24px;
+    }
+    .footer__links a {
+        padding: 8px 0;
+        min-height: 40px;
+    }
 }
 
 /* ===== RESPONSIVE — SMALL MOBILE (480px+) ===== */
@@ -999,16 +1058,20 @@ button, input, select, textarea {
     .camps__grid { grid-template-columns: repeat(2, 1fr); }
 
     .about__inner { flex-direction: row; align-items: center; }
-    .about__photo { min-width: 280px; }
+    .about__photo { min-width: 280px; max-width: 320px; flex-shrink: 0; }
     .about__highlights { grid-template-columns: repeat(3, 1fr); }
 
-    .booking__form { padding: 32px; }
+    .booking__form { padding: 32px; max-width: 540px; margin: 0 auto; }
     .modal__content { padding: 40px; }
 
     .contact__grid { grid-template-columns: repeat(2, 1fr); }
 
     .footer__inner { grid-template-columns: 2fr 1fr 1fr 1fr; }
+    .footer { padding-bottom: 72px; }
+}
 
+/* ===== RESPONSIVE — TABLET NAV (960px+) ===== */
+@media (min-width: 960px) {
     .nav { display: flex; align-items: center; }
     .burger { display: none; }
 }
@@ -1027,12 +1090,13 @@ button, input, select, textarea {
 
     .booking__inner { flex-direction: row; align-items: flex-start; }
     .booking__info { flex: 1; }
-    .booking__form { flex: 1; min-width: 360px; }
+    .booking__form { flex: 1; min-width: 360px; max-width: none; }
 
-    .about__photo { min-width: 340px; }
+    .about__photo { min-width: 340px; max-width: 400px; }
 
     .sticky-cta { display: none; }
     .whatsapp-widget { bottom: 24px; }
+    .footer { padding-bottom: 0; }
 
     .review-card { min-width: 340px; }
 }
@@ -1040,4 +1104,63 @@ button, input, select, textarea {
 @media (min-width: 1200px) {
     .hero__stats { grid-template-columns: repeat(4, 1fr); max-width: 720px; }
     .stat__number { font-size: 38px; }
+}
+
+/* ===== SCROLL ANIMATIONS (JS-driven) ===== */
+.js-loaded .program-card,
+.js-loaded .country-card,
+.js-loaded .camp-feature,
+.js-loaded .camp-card,
+.js-loaded .process-step,
+.js-loaded .review-card,
+.js-loaded .contact-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.js-loaded .is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===== IMAGE CLASSES ===== */
+.about__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+}
+
+/* ===== FORM VALIDATION ===== */
+.input--error {
+    border-color: #e53e3e !important;
+    box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.15);
+}
+.field-error {
+    display: block;
+    color: #e53e3e;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+/* ===== VISUALLY HIDDEN ===== */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
