@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NŪRA — Личный кабинет</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230a0a0a'/><text x='50' y='64' text-anchor='middle' font-family='Georgia,serif' font-size='36' font-weight='400' letter-spacing='4' fill='%23b8956a'>NR</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a; --white: #ffffff; --cream: #f8f6f3; --gold: #b8956a;
+            --gray: #6b6b6b; --gray-light: #a0a0a0; --gray-lighter: #e5e5e5;
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --radius: 2px; --shadow: 0 4px 24px rgba(0,0,0,0.08);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-body); color: var(--black); background: var(--cream); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        a { color: inherit; text-decoration: none; }
+        button { cursor: pointer; border: none; background: none; font-family: inherit; }
+        img { max-width: 100%; display: block; }
+        input, select { font-family: inherit; }
+
+        /* Header */
+        .acc-header {
+            background: var(--white); border-bottom: 1px solid var(--gray-lighter);
+            padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between;
+        }
+        .acc-header__logo img { height: 28px; }
+        .acc-header__nav { display: flex; gap: 24px; align-items: center; }
+        .acc-header__link { font-size: 12px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--gray); transition: color 0.3s; }
+        .acc-header__link:hover { color: var(--black); }
+        .acc-header__user { font-size: 13px; color: var(--gray); }
+
+        /* Container */
+        .acc-container { max-width: 960px; margin: 0 auto; padding: 40px 24px; }
+
+        /* Login */
+        .acc-login { max-width: 420px; margin: 80px auto; background: var(--white); padding: 48px 40px; box-shadow: var(--shadow); text-align: center; }
+        .acc-login h2 { font-family: var(--font-display); font-size: 24px; font-weight: 400; margin-bottom: 8px; }
+        .acc-login p { font-size: 14px; color: var(--gray); margin-bottom: 32px; }
+        .acc-field { text-align: left; margin-bottom: 20px; }
+        .acc-field label { display: block; font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: var(--gray); margin-bottom: 8px; }
+        .acc-field input { width: 100%; padding: 12px 16px; font-size: 14px; border: 1px solid var(--gray-lighter); outline: none; transition: border-color 0.3s; }
+        .acc-field input:focus { border-color: var(--gold); }
+        .acc-error { font-size: 13px; color: #c0392b; margin-bottom: 16px; min-height: 20px; }
+        .acc-btn { width: 100%; padding: 14px; font-size: 13px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; background: var(--black); color: var(--white); border: none; transition: background 0.3s; }
+        .acc-btn:hover { background: var(--gold); }
+        .acc-toggle { margin-top: 20px; font-size: 13px; color: var(--gray); }
+        .acc-toggle a { color: var(--gold); text-decoration: underline; cursor: pointer; }
+
+        /* Page title */
+        .acc-title { font-family: var(--font-display); font-size: 28px; font-weight: 400; margin-bottom: 32px; }
+
+        /* Tabs */
+        .acc-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--gray-lighter); margin-bottom: 32px; }
+        .acc-tab {
+            padding: 12px 24px; font-size: 13px; font-weight: 500; letter-spacing: 1px;
+            text-transform: uppercase; color: var(--gray); position: relative; transition: color 0.3s;
+        }
+        .acc-tab:hover { color: var(--black); }
+        .acc-tab.active { color: var(--black); }
+        .acc-tab.active::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 2px; background: var(--gold); }
+
+        /* Cards */
+        .acc-card { background: var(--white); box-shadow: var(--shadow); margin-bottom: 20px; }
+        .acc-card__header { padding: 20px 24px; border-bottom: 1px solid var(--gray-lighter); display: flex; align-items: center; justify-content: space-between; }
+        .acc-card__title { font-size: 14px; font-weight: 500; }
+        .acc-card__body { padding: 24px; }
+
+        /* Order card */
+        .order-card { background: var(--white); box-shadow: var(--shadow); margin-bottom: 16px; }
+        .order-card__header {
+            padding: 20px 24px; display: flex; align-items: center; justify-content: space-between;
+            border-bottom: 1px solid var(--gray-lighter); flex-wrap: wrap; gap: 12px;
+        }
+        .order-card__id { font-weight: 600; font-size: 15px; }
+        .order-card__date { font-size: 13px; color: var(--gray); }
+        .order-card__status {
+            display: inline-block; padding: 4px 12px; font-size: 11px; font-weight: 600;
+            letter-spacing: 0.5px; border-radius: 12px; text-transform: uppercase;
+        }
+        .order-card__status--new { background: #e3f2fd; color: #1565c0; }
+        .order-card__status--processing { background: #fff3e0; color: #e65100; }
+        .order-card__status--shipped { background: #e8f5e9; color: #2e7d32; }
+        .order-card__status--delivered { background: #e0f2f1; color: #00695c; }
+        .order-card__status--cancelled { background: #fce4ec; color: #c62828; }
+        .order-card__items { padding: 16px 24px; }
+        .order-card__item { display: flex; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--gray-lighter); align-items: center; }
+        .order-card__item:last-child { border-bottom: none; }
+        .order-card__thumb { width: 56px; height: 70px; background: var(--cream); overflow: hidden; flex-shrink: 0; }
+        .order-card__thumb img { width: 100%; height: 100%; object-fit: cover; }
+        .order-card__item-info { flex: 1; }
+        .order-card__item-name { font-size: 14px; font-weight: 500; }
+        .order-card__item-meta { font-size: 12px; color: var(--gray); margin-top: 2px; }
+        .order-card__item-price { font-size: 14px; font-weight: 500; white-space: nowrap; }
+        .order-card__footer { padding: 16px 24px; border-top: 1px solid var(--gray-lighter); display: flex; justify-content: flex-end; gap: 24px; font-size: 14px; }
+        .order-card__total { font-weight: 600; }
+
+        /* Progress tracker */
+        .progress-tracker { display: flex; gap: 0; margin: 20px 24px; position: relative; }
+        .progress-step { flex: 1; text-align: center; position: relative; }
+        .progress-step__dot {
+            width: 28px; height: 28px; border-radius: 50%; background: var(--gray-lighter);
+            display: flex; align-items: center; justify-content: center; margin: 0 auto 8px;
+            font-size: 12px; font-weight: 600; color: var(--gray); position: relative; z-index: 1;
+        }
+        .progress-step.active .progress-step__dot { background: var(--gold); color: var(--white); }
+        .progress-step.done .progress-step__dot { background: #27ae60; color: var(--white); }
+        .progress-step__label { font-size: 11px; color: var(--gray); }
+        .progress-step.active .progress-step__label,
+        .progress-step.done .progress-step__label { color: var(--black); }
+        .progress-step:not(:last-child)::after {
+            content: ''; position: absolute; top: 14px; left: 50%; right: -50%; height: 2px;
+            background: var(--gray-lighter); z-index: 0;
+        }
+        .progress-step.done:not(:last-child)::after { background: #27ae60; }
+
+        /* Profile form */
+        .profile-form { max-width: 500px; }
+        .profile-form .form-group { margin-bottom: 20px; }
+        .profile-form label { display: block; font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: var(--gray); margin-bottom: 8px; }
+        .profile-form input, .profile-form select { width: 100%; padding: 12px 16px; font-size: 14px; border: 1px solid var(--gray-lighter); outline: none; transition: border-color 0.3s; }
+        .profile-form input:focus { border-color: var(--gold); }
+        .profile-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+        /* Empty */
+        .acc-empty { text-align: center; padding: 60px 20px; color: var(--gray); }
+        .acc-empty p { font-size: 16px; margin-bottom: 8px; color: var(--black); }
+        .acc-empty span { font-size: 14px; }
+        .acc-empty a { display: inline-block; margin-top: 20px; padding: 12px 32px; font-size: 13px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; background: var(--black); color: var(--white); transition: background 0.3s; }
+        .acc-empty a:hover { background: var(--gold); }
+
+        /* Toast */
+        .acc-toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(20px); z-index: 100; padding: 14px 28px; background: var(--black); color: var(--white); font-size: 14px; opacity: 0; visibility: hidden; transition: all 0.35s; }
+        .acc-toast.visible { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+
+        @media (max-width: 768px) {
+            .acc-container { padding: 24px 16px; }
+            .acc-title { font-size: 22px; }
+            .acc-tab { padding: 10px 16px; font-size: 12px; }
+            .acc-login { margin: 40px 16px; padding: 32px 24px; }
+            .profile-form .form-row { grid-template-columns: 1fr; }
+            .order-card__header { flex-direction: column; align-items: flex-start; }
+            .progress-tracker { margin: 16px; }
+            .progress-step__label { font-size: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="acc-header">
+    <a href="index.html" class="acc-header__logo"><img src="logo.svg" alt="NŪRA"></a>
+    <nav class="acc-header__nav" id="accNav">
+        <a href="index.html" class="acc-header__link">Каталог</a>
+        <span class="acc-header__user" id="accUser"></span>
+        <button class="acc-header__link" id="accLogout" style="display:none">Выйти</button>
+    </nav>
+</header>
+
+<!-- Login / Register -->
+<div id="authScreen">
+    <div class="acc-login" id="loginView">
+        <h2>Вход в кабинет</h2>
+        <p>Введите логин и пароль для входа</p>
+        <form id="loginForm">
+            <div class="acc-field">
+                <label>Логин (телефон или email)</label>
+                <input type="text" id="loginUser" placeholder="Телефон или email" required autocomplete="username">
+            </div>
+            <div class="acc-field">
+                <label>Пароль</label>
+                <input type="password" id="loginPass" placeholder="Введите пароль" required autocomplete="current-password">
+            </div>
+            <div class="acc-error" id="loginError"></div>
+            <button type="submit" class="acc-btn">Войти</button>
+        </form>
+        <div class="acc-toggle">Новый клиент? <a id="showRegister">Зарегистрироваться</a></div>
+    </div>
+    <div class="acc-login" id="registerView" style="display:none">
+        <h2>Регистрация</h2>
+        <p>Создайте аккаунт для отслеживания заказов</p>
+        <form id="registerForm">
+            <div class="acc-field">
+                <label>Имя</label>
+                <input type="text" id="regName" placeholder="Введите имя" required>
+            </div>
+            <div class="acc-field">
+                <label>Фамилия</label>
+                <input type="text" id="regSurname" placeholder="Введите фамилию" required>
+            </div>
+            <div class="acc-field">
+                <label>Телефон</label>
+                <input type="tel" id="regPhone" placeholder="+7 (___) ___-__-__" required>
+            </div>
+            <div class="acc-field">
+                <label>Email</label>
+                <input type="email" id="regEmail" placeholder="email@example.com">
+            </div>
+            <div class="acc-field">
+                <label>Пароль</label>
+                <input type="password" id="regPass" placeholder="Минимум 6 символов" required autocomplete="new-password" minlength="6">
+            </div>
+            <div class="acc-field">
+                <label>Повторите пароль</label>
+                <input type="password" id="regPassConfirm" placeholder="Повторите пароль" required autocomplete="new-password">
+            </div>
+            <div class="acc-error" id="regError"></div>
+            <button type="submit" class="acc-btn">Зарегистрироваться</button>
+        </form>
+        <div class="acc-toggle">Уже есть аккаунт? <a id="showLogin">Войти</a></div>
+    </div>
+</div>
+
+<!-- Account Content -->
+<div id="accountContent" style="display:none">
+    <div class="acc-container">
+        <h1 class="acc-title" id="accTitle">Мои заказы</h1>
+        <div class="acc-tabs">
+            <button class="acc-tab active" data-tab="orders">Заказы</button>
+            <button class="acc-tab" data-tab="profile">Профиль</button>
+        </div>
+        <div id="tabContent"></div>
+    </div>
+</div>
+
+<div class="acc-toast" id="accToast"></div>
+
+<script src="products.js"></script>
+<script>
+/* ===== PRODUCTS loaded from products.js ===== */
+
+function esc(s) { if (typeof s !== 'string') return s; const m={'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}; return s.replace(/[&<>"']/g,c=>m[c]); }
+function formatPrice(p) { return p.toString().replace(/\B(?=(\d{3})+(?!\d))/g,' ')+' ₸'; }
+function formatDate(iso) { return new Date(iso).toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric'}); }
+function formatPhone(v) {
+    const d=v.replace(/\D/g,'').slice(0,11); if(!d.length)return '';
+    let r='+7'; if(d.length>1)r+=' ('+d.slice(1,4); if(d.length>4)r+=') '+d.slice(4,7);
+    if(d.length>7)r+='-'+d.slice(7,9); if(d.length>9)r+='-'+d.slice(9,11); return r;
+}
+function showToast(msg) { const t=document.getElementById('accToast'); t.textContent=msg; t.classList.add('visible'); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('visible'),2500); }
+
+const statusLabels = { new:'Новый', processing:'В обработке', shipped:'Отправлен', delivered:'Доставлен', cancelled:'Отменён' };
+const statusSteps = ['new','processing','shipped','delivered'];
+const paymentLabels = { kaspi:'Kaspi Pay', halyk:'Halyk Bank', card:'Банковская карта' };
+
+let currentCustomer = null;
+let activeTab = 'orders';
+
+/* ===== INIT ===== */
+document.addEventListener('DOMContentLoaded', () => {
+    // Check session
+    const saved = sessionStorage.getItem('nura_account');
+    if (saved) {
+        try { currentCustomer = JSON.parse(saved); showAccount(); } catch {}
+    }
+
+    // Phone formatting
+    const regPhoneEl = document.getElementById('regPhone');
+    if (regPhoneEl) regPhoneEl.addEventListener('input', () => { regPhoneEl.value = formatPhone(regPhoneEl.value); });
+
+    // Login
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const userInput = document.getElementById('loginUser').value.trim();
+        const password = document.getElementById('loginPass').value;
+        const errorEl = document.getElementById('loginError');
+
+        if (!userInput || !password) { errorEl.textContent = 'Заполните все поля'; return; }
+
+        try {
+            const customers = JSON.parse(localStorage.getItem('nura_customers') || '[]');
+            // Match by phone digits or email
+            const inputDigits = userInput.replace(/\D/g, '');
+            const found = customers.find(c => {
+                const phoneMatch = c.phone && inputDigits.length >= 10 && c.phone.replace(/\D/g, '') === inputDigits;
+                const emailMatch = c.email && c.email.toLowerCase() === userInput.toLowerCase();
+                return (phoneMatch || emailMatch) && c.password === password;
+            });
+
+            if (found) {
+                currentCustomer = found;
+                sessionStorage.setItem('nura_account', JSON.stringify(found));
+                showAccount();
+            } else {
+                // Check if user exists but wrong password
+                const userExists = customers.find(c => {
+                    const phoneMatch = c.phone && inputDigits.length >= 10 && c.phone.replace(/\D/g, '') === inputDigits;
+                    const emailMatch = c.email && c.email.toLowerCase() === userInput.toLowerCase();
+                    return phoneMatch || emailMatch;
+                });
+                if (userExists && !userExists.password) {
+                    errorEl.textContent = 'У этого аккаунта нет пароля. Зарегистрируйтесь заново.';
+                } else if (userExists) {
+                    errorEl.textContent = 'Неверный пароль';
+                } else {
+                    errorEl.textContent = 'Аккаунт не найден. Зарегистрируйтесь.';
+                }
+            }
+        } catch { errorEl.textContent = 'Ошибка загрузки данных'; }
+    });
+
+    // Register
+    document.getElementById('registerForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('regName').value.trim();
+        const surname = document.getElementById('regSurname').value.trim();
+        const phone = document.getElementById('regPhone').value;
+        const email = document.getElementById('regEmail').value.trim();
+        const password = document.getElementById('regPass').value;
+        const passConfirm = document.getElementById('regPassConfirm').value;
+        const digits = phone.replace(/\D/g,'');
+        const errorEl = document.getElementById('regError');
+
+        if (!name || !surname) { errorEl.textContent = 'Заполните имя и фамилию'; return; }
+        if (digits.length !== 11) { errorEl.textContent = 'Введите корректный номер телефона'; return; }
+        if (password.length < 6) { errorEl.textContent = 'Пароль должен содержать минимум 6 символов'; return; }
+        if (password !== passConfirm) { errorEl.textContent = 'Пароли не совпадают'; return; }
+
+        try {
+            const customers = JSON.parse(localStorage.getItem('nura_customers') || '[]');
+            if (customers.find(c => c.phone && c.phone.replace(/\D/g,'') === digits)) {
+                errorEl.textContent = 'Этот номер уже зарегистрирован. Войдите.';
+                return;
+            }
+            const customer = { name, surname, phone, email, password, city: '', address: '', registered: new Date().toISOString() };
+            customers.push(customer);
+            localStorage.setItem('nura_customers', JSON.stringify(customers));
+            currentCustomer = customer;
+            sessionStorage.setItem('nura_account', JSON.stringify(customer));
+            showAccount();
+        } catch { errorEl.textContent = 'Ошибка сохранения'; }
+    });
+
+    // Toggle login/register
+    document.getElementById('showRegister').addEventListener('click', () => {
+        document.getElementById('loginView').style.display = 'none';
+        document.getElementById('registerView').style.display = '';
+    });
+    document.getElementById('showLogin').addEventListener('click', () => {
+        document.getElementById('registerView').style.display = 'none';
+        document.getElementById('loginView').style.display = '';
+    });
+
+    // Tabs
+    document.querySelectorAll('.acc-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            activeTab = tab.dataset.tab;
+            document.querySelectorAll('.acc-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            document.getElementById('accTitle').textContent = activeTab === 'orders' ? 'Мои заказы' : 'Профиль';
+            renderTab();
+        });
+    });
+
+    // Logout
+    document.getElementById('accLogout').addEventListener('click', () => {
+        sessionStorage.removeItem('nura_account');
+        currentCustomer = null;
+        location.reload();
+    });
+});
+
+function showAccount() {
+    document.getElementById('authScreen').style.display = 'none';
+    document.getElementById('accountContent').style.display = '';
+    document.getElementById('accUser').textContent = esc(currentCustomer.name || '');
+    document.getElementById('accLogout').style.display = '';
+    renderTab();
+}
+
+function renderTab() {
+    const el = document.getElementById('tabContent');
+    if (activeTab === 'orders') renderOrders(el);
+    else renderProfile(el);
+}
+
+function renderOrders(el) {
+    const phone = currentCustomer.phone?.replace(/\D/g,'') || '';
+    let orders = [];
+    try { orders = JSON.parse(localStorage.getItem('nura_orders') || '[]'); } catch {}
+    const myOrders = orders.filter(o => o.customer?.phone?.replace(/\D/g,'') === phone);
+
+    if (myOrders.length === 0) {
+        el.innerHTML = `
+            <div class="acc-empty">
+                <p>У вас пока нет заказов</p>
+                <span>Ваши заказы появятся здесь после оформления</span>
+                <br><a href="index.html">Перейти в каталог</a>
+            </div>`;
+        return;
+    }
+
+    el.innerHTML = myOrders.map(o => {
+        const stepIdx = statusSteps.indexOf(o.status);
+        const isCancelled = o.status === 'cancelled';
+
+        return `
+        <div class="order-card">
+            <div class="order-card__header">
+                <div>
+                    <span class="order-card__id">${esc(o.id)}</span>
+                    <span class="order-card__date">&nbsp;от ${formatDate(o.date)}</span>
+                </div>
+                <span class="order-card__status order-card__status--${o.status}">${statusLabels[o.status] || o.status}</span>
+            </div>
+            ${!isCancelled ? `
+            <div class="progress-tracker">
+                ${statusSteps.map((s, i) => `
+                    <div class="progress-step ${i < stepIdx ? 'done' : ''} ${i === stepIdx ? 'active' : ''}">
+                        <div class="progress-step__dot">${i < stepIdx ? '&#10003;' : i + 1}</div>
+                        <div class="progress-step__label">${statusLabels[s]}</div>
+                    </div>`).join('')}
+            </div>` : ''}
+            <div class="order-card__items">
+                ${(o.items || []).map(item => {
+                    const prod = PRODUCTS.find(p => p.id === item.id);
+                    return `
+                    <div class="order-card__item">
+                        <div class="order-card__thumb">
+                            ${prod?.image ? `<img src="${esc(prod.image)}" alt="${esc(item.name)}">` : ''}
+                        </div>
+                        <div class="order-card__item-info">
+                            <div class="order-card__item-name">${esc(item.brand || '')} ${esc(item.name || '')}</div>
+                            <div class="order-card__item-meta">Размер: ${esc(item.size || '—')}${item.color ? ' · ' + esc(item.color) : ''} · ${item.qty} шт.</div>
+                        </div>
+                        <div class="order-card__item-price">${formatPrice(item.price * item.qty)}</div>
+                    </div>`;
+                }).join('')}
+            </div>
+            <div class="order-card__footer">
+                <span style="color:var(--gray)">Доставка: ${o.deliveryFee ? formatPrice(o.deliveryFee) : 'Бесплатно'}</span>
+                <span class="order-card__total">Итого: ${formatPrice((o.total || 0) + (o.deliveryFee || 0))}</span>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function renderProfile(el) {
+    el.innerHTML = `
+        <div class="acc-card">
+            <div class="acc-card__header"><span class="acc-card__title">Личные данные</span></div>
+            <div class="acc-card__body">
+                <form class="profile-form" id="profileForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Имя</label>
+                            <input type="text" id="profName" value="${esc(currentCustomer.name || '')}">
+                        </div>
+                        <div class="form-group">
+                            <label>Фамилия</label>
+                            <input type="text" id="profSurname" value="${esc(currentCustomer.surname || '')}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Телефон</label>
+                        <input type="tel" id="profPhone" value="${esc(currentCustomer.phone || '')}" readonly style="background:#f4f4f4">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="profEmail" value="${esc(currentCustomer.email || '')}">
+                    </div>
+                    <div class="form-group">
+                        <label>Город</label>
+                        <select id="profCity">
+                            <option value="">Выберите город</option>
+                            <option value="almaty" ${currentCustomer.city==='almaty'?'selected':''}>Алматы</option>
+                            <option value="astana" ${currentCustomer.city==='astana'?'selected':''}>Астана</option>
+                            <option value="shymkent" ${currentCustomer.city==='shymkent'?'selected':''}>Шымкент</option>
+                            <option value="karaganda" ${currentCustomer.city==='karaganda'?'selected':''}>Караганда</option>
+                            <option value="aktobe" ${currentCustomer.city==='aktobe'?'selected':''}>Актобе</option>
+                            <option value="other" ${currentCustomer.city==='other'?'selected':''}>Другой город</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Адрес доставки</label>
+                        <input type="text" id="profAddress" value="${esc(currentCustomer.address || '')}">
+                    </div>
+                    <button type="submit" class="acc-btn" style="max-width:200px">Сохранить</button>
+                </form>
+            </div>
+        </div>
+        <div class="acc-card" style="margin-top:24px">
+            <div class="acc-card__header"><span class="acc-card__title">Изменить пароль</span></div>
+            <div class="acc-card__body">
+                <form class="profile-form" id="passwordForm">
+                    <div class="form-group">
+                        <label>Текущий пароль</label>
+                        <input type="password" id="profOldPass" placeholder="Введите текущий пароль" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Новый пароль</label>
+                            <input type="password" id="profNewPass" placeholder="Минимум 6 символов" required minlength="6">
+                        </div>
+                        <div class="form-group">
+                            <label>Повторите пароль</label>
+                            <input type="password" id="profNewPassConfirm" placeholder="Повторите новый пароль" required>
+                        </div>
+                    </div>
+                    <div id="passError" style="font-size:13px;color:#c0392b;margin-bottom:12px;min-height:20px"></div>
+                    <button type="submit" class="acc-btn" style="max-width:240px">Сменить пароль</button>
+                </form>
+            </div>
+        </div>`;
+
+    document.getElementById('profileForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const updated = {
+            ...currentCustomer,
+            name: document.getElementById('profName').value.trim(),
+            surname: document.getElementById('profSurname').value.trim(),
+            email: document.getElementById('profEmail').value.trim(),
+            city: document.getElementById('profCity').value,
+            address: document.getElementById('profAddress').value.trim(),
+        };
+
+        try {
+            const customers = JSON.parse(localStorage.getItem('nura_customers') || '[]');
+            const phone = currentCustomer.phone?.replace(/\D/g,'') || '';
+            const idx = customers.findIndex(c => c.phone?.replace(/\D/g,'') === phone);
+            if (idx > -1) { Object.assign(customers[idx], updated); updated.password = customers[idx].password; }
+            localStorage.setItem('nura_customers', JSON.stringify(customers));
+        } catch {}
+
+        currentCustomer = updated;
+        sessionStorage.setItem('nura_account', JSON.stringify(updated));
+        document.getElementById('accUser').textContent = esc(updated.name);
+        showToast('Профиль сохранён');
+    });
+
+    document.getElementById('passwordForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const oldPass = document.getElementById('profOldPass').value;
+        const newPass = document.getElementById('profNewPass').value;
+        const confirmPass = document.getElementById('profNewPassConfirm').value;
+        const errorEl = document.getElementById('passError');
+
+        if (oldPass !== currentCustomer.password) { errorEl.textContent = 'Неверный текущий пароль'; return; }
+        if (newPass.length < 6) { errorEl.textContent = 'Новый пароль должен быть минимум 6 символов'; return; }
+        if (newPass !== confirmPass) { errorEl.textContent = 'Пароли не совпадают'; return; }
+
+        try {
+            const customers = JSON.parse(localStorage.getItem('nura_customers') || '[]');
+            const phone = currentCustomer.phone?.replace(/\D/g,'') || '';
+            const idx = customers.findIndex(c => c.phone?.replace(/\D/g,'') === phone);
+            if (idx > -1) customers[idx].password = newPass;
+            localStorage.setItem('nura_customers', JSON.stringify(customers));
+            currentCustomer.password = newPass;
+            sessionStorage.setItem('nura_account', JSON.stringify(currentCustomer));
+        } catch {}
+
+        errorEl.textContent = '';
+        document.getElementById('profOldPass').value = '';
+        document.getElementById('profNewPass').value = '';
+        document.getElementById('profNewPassConfirm').value = '';
+        showToast('Пароль изменён');
+    });
+}
+</script>
+</body>
+</html>
