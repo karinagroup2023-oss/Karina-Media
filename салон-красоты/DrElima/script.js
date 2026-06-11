@@ -103,6 +103,62 @@ if (reviewsSlider && dotsContainer) {
     });
 }
 
+/* ===== BOOKING: связь «процедура ↔ врач» ===== */
+const serviceSelect = document.getElementById('bookingService');
+const masterSelect = document.getElementById('bookingMaster');
+
+if (serviceSelect && masterSelect) {
+    const doctorNames = { elima: 'Элима Зайналабдинова', dina: 'Врач Дина' };
+    // Полный набор опций процедур запоминаем, чтобы пересобирать список под врача
+    const fullServiceHTML = serviceSelect.innerHTML;
+
+    const keyByName = name =>
+        name === doctorNames.elima ? 'elima' :
+        name === doctorNames.dina ? 'dina' : '';
+
+    // Пересобрать список процедур под выбранного врача (docKey === '' → все)
+    function rebuildServices(docKey, keepValue) {
+        serviceSelect.innerHTML = fullServiceHTML;
+        if (docKey) {
+            serviceSelect.querySelectorAll('option[data-doctor]').forEach(opt => {
+                if (opt.dataset.doctor !== docKey) opt.remove();
+            });
+            serviceSelect.querySelectorAll('optgroup').forEach(g => {
+                if (!g.querySelector('option')) g.remove();
+            });
+        }
+        // Сохранить прежний выбор, если процедура осталась доступна
+        if (keepValue && [...serviceSelect.options].some(o => o.value === keepValue)) {
+            serviceSelect.value = keepValue;
+        } else {
+            serviceSelect.value = '';
+        }
+    }
+
+    // Выбрали процедуру → автоматически подставляем её врача и сужаем список
+    serviceSelect.addEventListener('change', () => {
+        const opt = serviceSelect.selectedOptions[0];
+        const docKey = opt ? opt.dataset.doctor : '';
+        if (docKey) {
+            masterSelect.value = doctorNames[docKey];
+            rebuildServices(docKey, serviceSelect.value);
+        }
+    });
+
+    // Выбрали врача → показываем только его процедуры
+    masterSelect.addEventListener('change', () => {
+        rebuildServices(keyByName(masterSelect.value), serviceSelect.value);
+    });
+
+    // После сброса формы возвращаем полный список процедур
+    const bookingFormEl = document.getElementById('bookingForm');
+    if (bookingFormEl) {
+        bookingFormEl.addEventListener('reset', () => {
+            setTimeout(() => rebuildServices('', ''), 0);
+        });
+    }
+}
+
 /* ===== BOOKING FORM ===== */
 const bookingForm = document.getElementById('bookingForm');
 const bookingDate = document.getElementById('bookingDate');
