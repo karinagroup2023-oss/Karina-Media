@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Код Роскоши — Telegram Mini App (прототип)</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#10024;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#c4a265; --primary-dark:#a8893e; --primary-light:#d4b278;
+  --cream:#f5ede4; --cream-dark:#e8ddd0;
+  --burgundy:#4a1010; --burgundy-deep:#2a0808; --burgundy-light:#5a1818;
+  --bg:#3d0c0c; --bg-section:#350a0a; --bg-card:#4a1010;
+  --border:rgba(196,162,101,0.18); --border-soft:rgba(196,162,101,0.10);
+  --gray:#b9a79c; --gray-dim:#8b7d75;
+  --font-display:'Playfair Display',Georgia,serif;
+  --font-body:'Inter',-apple-system,sans-serif;
+  --gold-grad:linear-gradient(135deg,#d4b278,#c4a265 45%,#a8893e);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:var(--font-body);
+  background:radial-gradient(circle at 30% 0%,#1c0606,#0c0303 70%);
+  color:var(--cream); min-height:100vh;
+  display:flex; flex-direction:column; align-items:center;
+  padding:32px 16px 48px; -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+ul{list-style:none}
+
+/* ===== Desktop caption ===== */
+.stage-caption{text-align:center;margin-bottom:24px;max-width:420px}
+.stage-caption .tag{
+  display:inline-block;font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--burgundy-deep);background:var(--gold-grad);padding:5px 14px;border-radius:30px;font-weight:600;
+}
+.stage-caption h1{font-family:var(--font-display);font-weight:600;font-size:24px;margin:14px 0 6px;color:var(--cream)}
+.stage-caption p{font-size:13px;color:var(--gray);line-height:1.5}
+
+/* ===== Phone frame ===== */
+.phone{
+  width:390px;max-width:100%;height:780px;
+  background:var(--bg);border-radius:44px;
+  border:1px solid rgba(196,162,101,0.25);
+  box-shadow:0 40px 120px rgba(0,0,0,0.6),0 0 0 11px #0a0202,0 0 0 12px rgba(196,162,101,0.15);
+  position:relative;overflow:hidden;display:flex;flex-direction:column;
+}
+/* Telegram top bar */
+.tg-bar{
+  flex-shrink:0;height:54px;display:flex;align-items:center;gap:10px;
+  padding:0 16px;background:rgba(42,8,8,0.96);
+  border-bottom:1px solid var(--border-soft);position:relative;z-index:5;
+}
+.tg-bar .tg-close{font-size:22px;color:var(--gray);line-height:1}
+.tg-bar .tg-logo{width:30px;height:30px;border-radius:8px;object-fit:cover;background:#2a0808;border:1px solid var(--border)}
+.tg-bar .tg-title{font-size:14px;font-weight:600}
+.tg-bar .tg-title small{display:block;font-size:11px;font-weight:400;color:#7fc77f;margin-top:1px}
+.tg-bar .tg-more{margin-left:auto;font-size:20px;color:var(--gray)}
+
+/* Screen container */
+.screens{flex:1;position:relative;overflow:hidden}
+.screen{
+  position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;
+  background:var(--bg);
+  padding:18px 16px 96px;opacity:0;transform:translateX(12px);
+  pointer-events:none;transition:opacity .28s ease,transform .28s ease;
+  scrollbar-width:none;z-index:1;
+}
+.screen::-webkit-scrollbar{display:none}
+.screen.active{opacity:1;transform:none;pointer-events:auto;z-index:2}
+
+/* ===== Reusable ===== */
+.eyebrow{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--primary);font-weight:600}
+.h-title{font-family:var(--font-display);font-weight:600;font-size:21px;line-height:1.2;margin:4px 0}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;margin:24px 0 12px}
+.sec-head h3{font-family:var(--font-display);font-weight:600;font-size:17px}
+.sec-head a{font-size:12px;color:var(--primary)}
+.card{background:var(--bg-card);border:1px solid var(--border-soft);border-radius:18px;padding:16px}
+.divider{height:1px;background:var(--border-soft);margin:16px 0}
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;width:100%;
+  padding:15px;border-radius:14px;font-size:15px;font-weight:600;
+  background:var(--gold-grad);color:var(--burgundy-deep);
+  box-shadow:0 8px 24px rgba(196,162,101,0.22);transition:transform .15s ease,opacity .2s;
+}
+.btn:active{transform:scale(.97)}
+.btn--ghost{background:transparent;color:var(--cream);border:1px solid var(--border);box-shadow:none}
+.btn[disabled]{opacity:.4;pointer-events:none;filter:grayscale(.3)}
+
+/* ===== HOME ===== */
+.greet{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.greet img{width:44px;height:44px;border-radius:50%;object-fit:cover;border:1.5px solid var(--primary)}
+.greet .hi{font-size:13px;color:var(--gray)}
+.greet .name{font-family:var(--font-display);font-size:19px;font-weight:600}
+
+/* loyalty card */
+.loyalty{
+  margin-top:16px;border-radius:20px;padding:18px;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#5a1818,#2a0808);
+  border:1px solid var(--border);
+}
+.loyalty::after{content:"";position:absolute;top:-40px;right:-30px;width:160px;height:160px;
+  background:radial-gradient(circle,rgba(196,162,101,0.22),transparent 70%)}
+.loyalty .lbl{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--primary);position:relative}
+.loyalty .pts{font-family:var(--font-display);font-size:34px;font-weight:600;margin:4px 0 2px;position:relative}
+.loyalty .pts span{font-size:15px;color:var(--gray);font-family:var(--font-body)}
+.loyalty .sub{font-size:12px;color:var(--gray);position:relative}
+.loyalty .tier{position:absolute;top:18px;right:18px;font-size:11px;padding:4px 11px;border-radius:20px;
+  background:rgba(196,162,101,0.15);border:1px solid var(--border);color:var(--primary-light);font-weight:600}
+.lbar{height:6px;border-radius:6px;background:rgba(0,0,0,0.35);margin-top:12px;overflow:hidden;position:relative}
+.lbar i{display:block;height:100%;width:72%;background:var(--gold-grad);border-radius:6px}
+.lhint{font-size:11px;color:var(--gray);margin-top:7px;position:relative}
+
+/* smart reminder banner */
+.reminder{
+  margin-top:16px;display:flex;gap:12px;align-items:flex-start;
+  background:linear-gradient(135deg,rgba(196,162,101,0.14),rgba(196,162,101,0.04));
+  border:1px solid var(--border);border-radius:16px;padding:14px;
+}
+.reminder .ico{font-size:22px;line-height:1.2}
+.reminder .t{font-size:13.5px;font-weight:600;margin-bottom:3px}
+.reminder .d{font-size:12px;color:var(--gray);line-height:1.45}
+.reminder .r-act{margin-top:10px;display:flex;gap:8px}
+.reminder .r-act button{font-size:12px;font-weight:600;padding:8px 14px;border-radius:10px}
+.r-yes{background:var(--gold-grad);color:var(--burgundy-deep)}
+.r-no{border:1px solid var(--border);color:var(--gray)}
+
+/* quick actions */
+.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
+.quick button{display:flex;flex-direction:column;align-items:center;gap:7px;padding:12px 4px;
+  background:var(--bg-card);border:1px solid var(--border-soft);border-radius:14px;font-size:10.5px;color:var(--cream-dark);line-height:1.2;text-align:center}
+.quick .qi{font-size:21px}
+
+/* service chips horizontal */
+.hscroll{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:0 16px 4px}
+.hscroll::-webkit-scrollbar{display:none}
+.svc{flex:0 0 150px;background:var(--bg-card);border:1px solid var(--border-soft);border-radius:16px;overflow:hidden}
+.svc .svc-top{height:84px;background:linear-gradient(135deg,#5a1818,#2a0808);display:flex;align-items:center;justify-content:center;font-size:30px}
+.svc .svc-b{padding:11px 12px}
+.svc .svc-b .n{font-size:13px;font-weight:600;line-height:1.25}
+.svc .svc-b .p{font-size:12px;color:var(--primary);margin-top:5px}
+
+/* before/after */
+.ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ba-grid .ba{border-radius:14px;overflow:hidden;aspect-ratio:3/4;position:relative;background:#2a0808}
+.ba-grid .ba img{width:100%;height:100%;object-fit:cover}
+.ba-grid .ba span{position:absolute;left:8px;bottom:8px;font-size:10px;padding:3px 9px;border-radius:20px;
+  background:rgba(10,2,2,0.7);border:1px solid var(--border);color:var(--primary-light);font-weight:600;backdrop-filter:blur(4px)}
+
+/* ===== BOOKING ===== */
+.steps{display:flex;align-items:center;gap:6px;margin:6px 0 18px}
+.steps .st{flex:1;height:4px;border-radius:4px;background:rgba(196,162,101,0.18)}
+.steps .st.on{background:var(--gold-grad)}
+.step{display:none}
+.step.show{display:block;animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.opt{display:flex;align-items:center;gap:13px;padding:14px;border:1px solid var(--border-soft);
+  border-radius:14px;margin-bottom:10px;background:var(--bg-card);transition:border-color .2s,background .2s}
+.opt.sel{border-color:var(--primary);background:rgba(196,162,101,0.08)}
+.opt .oi{width:42px;height:42px;border-radius:11px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-size:22px;background:linear-gradient(135deg,#5a1818,#2a0808)}
+.opt img.oi{object-fit:cover}
+.opt .ot{flex:1}
+.opt .ot .n{font-size:14.5px;font-weight:600}
+.opt .ot .d{font-size:12px;color:var(--gray);margin-top:2px}
+.opt .op{font-size:13px;color:var(--primary);font-weight:600}
+.opt .chk{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--burgundy-deep)}
+.opt.sel .chk{background:var(--gold-grad);border-color:transparent}
+.daygrid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:18px}
+.day{padding:11px 4px;border-radius:12px;border:1px solid var(--border-soft);text-align:center;background:var(--bg-card)}
+.day.sel{border-color:var(--primary);background:rgba(196,162,101,0.1)}
+.day .dn{font-size:11px;color:var(--gray)}
+.day .dd{font-size:17px;font-weight:600;font-family:var(--font-display);margin-top:2px}
+.timegrid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.time{padding:11px 4px;border-radius:11px;border:1px solid var(--border-soft);text-align:center;font-size:13px;font-weight:500;background:var(--bg-card)}
+.time.sel{border-color:var(--primary);background:rgba(196,162,101,0.1);color:var(--primary-light)}
+.time.off{opacity:.3;text-decoration:line-through;pointer-events:none}
+.summary{background:var(--bg-card);border:1px solid var(--border-soft);border-radius:14px;padding:14px;margin:6px 0 16px}
+.summary .row{display:flex;justify-content:space-between;font-size:13px;padding:7px 0}
+.summary .row .k{color:var(--gray)}
+.summary .row .v{font-weight:600;text-align:right}
+.summary .row.tot{border-top:1px solid var(--border-soft);margin-top:6px;padding-top:12px}
+.summary .row.tot .v{color:var(--primary);font-size:16px}
+.bonus-note{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--primary-light);
+  background:rgba(196,162,101,0.08);border:1px dashed var(--border);border-radius:11px;padding:10px 12px;margin-bottom:14px}
+.bottom-cta{position:sticky;bottom:0;padding-top:10px}
+
+/* success */
+.done{text-align:center;padding:30px 8px}
+.done .ring{width:88px;height:88px;border-radius:50%;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;
+  font-size:42px;background:linear-gradient(135deg,rgba(196,162,101,0.2),rgba(196,162,101,0.05));border:1.5px solid var(--primary)}
+.done h2{font-family:var(--font-display);font-size:24px;font-weight:600;margin-bottom:8px}
+.done p{font-size:13.5px;color:var(--gray);line-height:1.5;margin-bottom:22px}
+
+/* ===== BONUSES ===== */
+.earn{display:flex;gap:12px;align-items:center;padding:13px 0}
+.earn .ei{width:40px;height:40px;border-radius:11px;background:rgba(196,162,101,0.1);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
+.earn .et{flex:1;font-size:13.5px;font-weight:500}
+.earn .et small{display:block;color:var(--gray);font-weight:400;font-size:12px;margin-top:2px}
+.earn .ev{font-size:13px;font-weight:600;color:var(--primary)}
+.refer{margin-top:18px;text-align:center;padding:20px 16px;border-radius:18px;
+  background:linear-gradient(135deg,rgba(196,162,101,0.12),rgba(196,162,101,0.02));border:1px solid var(--border)}
+.refer .ico{font-size:30px}
+.refer h3{font-family:var(--font-display);font-size:18px;margin:8px 0 6px}
+.refer p{font-size:12.5px;color:var(--gray);line-height:1.5;margin-bottom:14px}
+.refcode{display:flex;align-items:center;gap:10px;justify-content:center;background:var(--bg-card);
+  border:1px dashed var(--border);border-radius:12px;padding:11px;font-weight:600;letter-spacing:1px}
+.hist .hrow{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border-soft)}
+.hist .hrow:last-child{border:none}
+.hist .hn{font-size:13.5px;font-weight:500}
+.hist .hd{font-size:11.5px;color:var(--gray);margin-top:2px}
+.hist .hv{font-size:14px;font-weight:600}
+.hist .hv.plus{color:#7fc77f}
+.hist .hv.minus{color:var(--gray)}
+
+/* ===== PROFILE ===== */
+.prof-head{display:flex;align-items:center;gap:14px}
+.prof-head img{width:60px;height:60px;border-radius:50%;object-fit:cover;border:2px solid var(--primary)}
+.prof-head .pn{font-family:var(--font-display);font-size:20px;font-weight:600}
+.prof-head .pm{font-size:12px;color:var(--gray);margin-top:2px}
+.minicards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:16px}
+.minicards .mc{background:var(--bg-card);border:1px solid var(--border-soft);border-radius:14px;padding:13px 8px;text-align:center}
+.minicards .mc .mv{font-family:var(--font-display);font-size:20px;font-weight:600;color:var(--primary)}
+.minicards .mc .ml{font-size:10.5px;color:var(--gray);margin-top:3px;line-height:1.2}
+.timeline .tl{display:flex;gap:13px;padding-bottom:18px;position:relative}
+.timeline .tl::before{content:"";position:absolute;left:7px;top:18px;bottom:-4px;width:1.5px;background:var(--border)}
+.timeline .tl:last-child::before{display:none}
+.timeline .dot{width:15px;height:15px;border-radius:50%;border:2px solid var(--primary);background:var(--bg);flex-shrink:0;margin-top:2px;z-index:1}
+.timeline .ti .tn{font-size:13.5px;font-weight:600}
+.timeline .ti .td{font-size:12px;color:var(--gray);margin-top:2px}
+.timeline .ti .tnote{font-size:12px;color:var(--cream-dark);margin-top:5px;background:var(--bg-card);border:1px solid var(--border-soft);border-radius:10px;padding:8px 11px}
+.skin-ba{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+.skin-ba figure{border-radius:14px;overflow:hidden;position:relative;aspect-ratio:3/4;background:#2a0808}
+.skin-ba img{width:100%;height:100%;object-fit:cover}
+.skin-ba figcaption{position:absolute;left:8px;bottom:8px;font-size:10px;padding:3px 9px;border-radius:20px;
+  background:rgba(10,2,2,0.72);border:1px solid var(--border);color:var(--primary-light);font-weight:600;backdrop-filter:blur(4px)}
+.lock-note{display:flex;gap:8px;align-items:center;font-size:11.5px;color:var(--gray);margin-top:10px;justify-content:center}
+
+/* ===== Bottom nav ===== */
+.tabbar{
+  position:absolute;bottom:0;left:0;right:0;height:78px;
+  background:rgba(34,6,6,0.97);backdrop-filter:blur(20px);
+  border-top:1px solid var(--border-soft);
+  display:flex;padding:8px 6px 16px;z-index:10;
+}
+.tabbar button{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10.5px;color:var(--gray-dim);transition:color .2s}
+.tabbar button .ti{font-size:21px;transition:transform .2s}
+.tabbar button.on{color:var(--primary)}
+.tabbar button.on .ti{transform:translateY(-1px)}
+
+/* toast */
+.toast{position:absolute;left:50%;bottom:96px;transform:translateX(-50%) translateY(20px);
+  background:#2a0808;border:1px solid var(--border);color:var(--cream);
+  font-size:13px;font-weight:500;padding:12px 18px;border-radius:13px;
+  box-shadow:0 12px 40px rgba(0,0,0,0.5);opacity:0;pointer-events:none;transition:all .3s ease;z-index:30;max-width:300px;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+.foot-note{margin-top:26px;font-size:11px;color:var(--gray-dim);text-align:center;max-width:380px;line-height:1.6}
+.foot-note b{color:var(--primary)}
+@media(max-width:440px){
+  body{padding:16px 0 32px}
+  .phone{height:88vh;border-radius:0;border:none;box-shadow:none}
+  .stage-caption{padding:0 16px}
+}
+</style>
+</head>
+<body>
+
+<div class="stage-caption">
+  <span class="tag">Прототип • Telegram Mini App</span>
+  <h1>Код Роскоши</h1>
+  <p>Кликабельный демо пакета «Премиум»: запись, бонусы, умные напоминания и личная карта кожи. Нажимайте — всё интерактивно.</p>
+</div>
+
+<div class="phone">
+  <!-- Telegram top bar -->
+  <div class="tg-bar">
+    <span class="tg-close">‹</span>
+    <img class="tg-logo" src="img/logo.png" alt="">
+    <div class="tg-title">Код Роскоши<small>mini app</small></div>
+    <span class="tg-more">⋮</span>
+  </div>
+
+  <div class="screens">
+
+    <!-- ============ HOME ============ -->
+    <section class="screen active" id="s-home">
+      <div class="greet">
+        <img src="img/elima-card.jpeg" alt="">
+        <div>
+          <div class="hi">Добрый день,</div>
+          <div class="name">Анна ✦</div>
+        </div>
+      </div>
+
+      <!-- loyalty -->
+      <div class="loyalty">
+        <span class="tier">Platinum</span>
+        <div class="lbl">Бонусный счёт</div>
+        <div class="pts">3 480 <span>баллов</span></div>
+        <div class="sub">1 балл = 1 ₽ · оплатите до 30% процедуры</div>
+        <div class="lbar"><i></i></div>
+        <div class="lhint">До статуса «VIP» осталось 1 520 ₽ к покупкам</div>
+      </div>
+
+      <!-- smart reminder -->
+      <div class="reminder">
+        <div class="ico">⏳</div>
+        <div style="flex:1">
+          <div class="t">Пора освежить губы</div>
+          <div class="d">С вашей процедуры «Филлеры (губы)» прошло 6 месяцев. Рекомендуем коррекцию, чтобы сохранить результат.</div>
+          <div class="r-act">
+            <button class="r-yes" onclick="gotoBook('Филлеры (губы)')">Записаться</button>
+            <button class="r-no" onclick="toast('Напомним через неделю')">Позже</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- quick actions -->
+      <div class="quick">
+        <button onclick="go('book')"><span class="qi">📅</span>Записаться</button>
+        <button onclick="go('bonus')"><span class="qi">💎</span>Бонусы</button>
+        <button onclick="go('profile')"><span class="qi">🪞</span>Карта кожи</button>
+        <button onclick="toast('Открываю чат с клиникой…')"><span class="qi">💬</span>Вопрос</button>
+      </div>
+
+      <!-- services -->
+      <div class="sec-head"><h3>Популярные услуги</h3><a onclick="go('book')">Все →</a></div>
+      <div class="hscroll">
+        <div class="svc" onclick="gotoBook('Биоревитализация')"><div class="svc-top">💧</div><div class="svc-b"><div class="n">Биоревитализация</div><div class="p">от 12 000 ₽</div></div></div>
+        <div class="svc" onclick="gotoBook('SMAS-лифтинг')"><div class="svc-top">✨</div><div class="svc-b"><div class="n">SMAS-лифтинг</div><div class="p">от 35 000 ₽</div></div></div>
+        <div class="svc" onclick="gotoBook('Пептидная терапия')"><div class="svc-top">🧬</div><div class="svc-b"><div class="n">Пептиды · биохакинг</div><div class="p">от 18 000 ₽</div></div></div>
+        <div class="svc" onclick="gotoBook('«Королевский лифтинг»')"><div class="svc-top">👑</div><div class="svc-b"><div class="n">Королевский лифтинг</div><div class="p">от 49 000 ₽</div></div></div>
+      </div>
+
+      <!-- before after -->
+      <div class="sec-head"><h3>До / После</h3><a onclick="go('profile')">Мои фото →</a></div>
+      <div class="ba-grid">
+        <div class="ba"><img src="img/before-after/photo_2026-05-02%2000.34.25.jpeg" alt=""><span>Контуринг</span></div>
+        <div class="ba"><img src="img/before-after/photo_2026-05-02%2000.34.32.jpeg" alt=""><span>Лифтинг</span></div>
+      </div>
+    </section>
+
+    <!-- ============ BOOKING ============ -->
+    <section class="screen" id="s-book">
+      <span class="eyebrow">Онлайн-запись</span>
+      <h2 class="h-title" id="bookTitle">Выберите процедуру</h2>
+      <div class="steps">
+        <div class="st on" data-st="1"></div><div class="st" data-st="2"></div>
+        <div class="st" data-st="3"></div><div class="st" data-st="4"></div>
+      </div>
+
+      <!-- step 1 service -->
+      <div class="step show" id="step1">
+        <div class="opt" data-svc="Биоревитализация" data-price="12 000 ₽" onclick="pickSvc(this)">
+          <div class="oi">💧</div><div class="ot"><div class="n">Биоревитализация</div><div class="d">Глубокое увлажнение · 45 мин</div></div><div class="op">12 000 ₽</div>
+        </div>
+        <div class="opt" data-svc="Филлеры (губы)" data-price="22 000 ₽" onclick="pickSvc(this)">
+          <div class="oi">💋</div><div class="ot"><div class="n">Филлеры (губы)</div><div class="d">Объём и контур · 60 мин</div></div><div class="op">22 000 ₽</div>
+        </div>
+        <div class="opt" data-svc="SMAS-лифтинг" data-price="35 000 ₽" onclick="pickSvc(this)">
+          <div class="oi">✨</div><div class="ot"><div class="n">SMAS-лифтинг</div><div class="d">Аппаратное омоложение · 90 мин</div></div><div class="op">35 000 ₽</div>
+        </div>
+        <div class="opt" data-svc="Пептидная терапия" data-price="18 000 ₽" onclick="pickSvc(this)">
+          <div class="oi">🧬</div><div class="ot"><div class="n">Пептидная терапия</div><div class="d">Биохакинг · 50 мин</div></div><div class="op">18 000 ₽</div>
+        </div>
+        <div class="opt" data-svc="«Королевский лифтинг»" data-price="49 000 ₽" onclick="pickSvc(this)">
+          <div class="oi">👑</div><div class="ot"><div class="n">«Королевский лифтинг»</div><div class="d">Авторская программа · 120 мин</div></div><div class="op">49 000 ₽</div>
+        </div>
+      </div>
+
+      <!-- step 2 doctor -->
+      <div class="step" id="step2">
+        <div class="opt" data-doc="Элима Зайналабдинова" onclick="pickDoc(this)">
+          <img class="oi" src="img/elima.jpeg" alt=""><div class="ot"><div class="n">Элима Зайналабдинова</div><div class="d">Основатель · 18+ лет опыта</div></div><div class="chk">✓</div>
+        </div>
+        <div class="opt" data-doc="Врач Дина" onclick="pickDoc(this)">
+          <img class="oi" src="img/dina.jpeg" alt=""><div class="ot"><div class="n">Врач Дина</div><div class="d">Косметолог · инъекции, уход</div></div><div class="chk">✓</div>
+        </div>
+        <div class="opt" data-doc="Любой врач" onclick="pickDoc(this)">
+          <div class="oi">✦</div><div class="ot"><div class="n">Любой свободный врач</div><div class="d">Ближайшее окно записи</div></div><div class="chk">✓</div>
+        </div>
+      </div>
+
+      <!-- step 3 date/time -->
+      <div class="step" id="step3">
+        <div class="daygrid" id="daygrid"></div>
+        <div style="font-size:12px;color:var(--gray);margin-bottom:10px">Свободное время</div>
+        <div class="timegrid" id="timegrid"></div>
+      </div>
+
+      <!-- step 4 confirm -->
+      <div class="step" id="step4">
+        <div class="summary" id="summary"></div>
+        <div class="bonus-note">💎 <span>Спишем до <b id="bonusUse">0</b> ₽ бонусами · начислим <b id="bonusEarn">0</b> новых баллов</span></div>
+      </div>
+
+      <div class="bottom-cta">
+        <button class="btn" id="bookNext" disabled onclick="nextStep()">Продолжить</button>
+        <button class="btn btn--ghost" id="bookBack" style="margin-top:9px;display:none" onclick="prevStep()">Назад</button>
+      </div>
+    </section>
+
+    <!-- ============ BOOKING SUCCESS ============ -->
+    <section class="screen" id="s-done">
+      <div class="done">
+        <div class="ring">✓</div>
+        <h2>Вы записаны!</h2>
+        <p id="doneText">Ждём вас в клинике «Код Роскоши».<br>Москва, м. Сокол</p>
+        <div class="summary" id="doneSummary" style="text-align:left"></div>
+        <button class="btn" style="margin-top:18px" onclick="toast('Добавлено в календарь 📅')">Добавить в календарь</button>
+        <button class="btn btn--ghost" style="margin-top:9px" onclick="go('home');resetBooking()">На главную</button>
+        <div class="lock-note">🔔 Напомним за день и за 2 часа до визита</div>
+      </div>
+    </section>
+
+    <!-- ============ BONUSES ============ -->
+    <section class="screen" id="s-bonus">
+      <span class="eyebrow">Программа лояльности</span>
+      <h2 class="h-title">Бонусы и привилегии</h2>
+
+      <div class="loyalty" style="margin-top:14px">
+        <span class="tier">Platinum</span>
+        <div class="lbl">Доступно к списанию</div>
+        <div class="pts">3 480 <span>₽</span></div>
+        <div class="sub">Оплачивайте до 30% любой процедуры</div>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <div style="font-size:13px;font-weight:600;margin-bottom:4px">Как копить баллы</div>
+        <div class="earn"><div class="ei">💳</div><div class="et">Кэшбэк с каждого визита<small>Возвращаем баллами</small></div><div class="ev">7%</div></div>
+        <div class="earn"><div class="ei">⭐</div><div class="et">Первая запись через приложение<small>Разовый бонус</small></div><div class="ev">+1 000</div></div>
+        <div class="earn"><div class="ei">🎂</div><div class="et">Подарок на день рождения<small>За 7 дней до даты</small></div><div class="ev">+2 000</div></div>
+        <div class="earn"><div class="ei">📝</div><div class="et">Отзыв после процедуры<small>С фото результата</small></div><div class="ev">+300</div></div>
+      </div>
+
+      <!-- referral -->
+      <div class="refer">
+        <div class="ico">🤝</div>
+        <h3>Приведите подругу</h3>
+        <p>Ей — 1 500 ₽ на первый визит, вам — 1 500 баллов после её записи.</p>
+        <div class="refcode"><span>ELIMA-ANNA</span><button onclick="toast('Промокод скопирован')" style="color:var(--primary);font-size:18px">⧉</button></div>
+        <button class="btn" style="margin-top:12px" onclick="toast('Открываю «Поделиться» Telegram…')">Поделиться приглашением</button>
+      </div>
+
+      <!-- history -->
+      <div class="sec-head"><h3>История баллов</h3></div>
+      <div class="card hist">
+        <div class="hrow"><div><div class="hn">SMAS-лифтинг</div><div class="hd">2 июня 2026</div></div><div class="hv plus">+2 450</div></div>
+        <div class="hrow"><div><div class="hn">Оплата бонусами</div><div class="hd">2 июня 2026</div></div><div class="hv minus">−1 500</div></div>
+        <div class="hrow"><div><div class="hn">Биоревитализация</div><div class="hd">12 мая 2026</div></div><div class="hv plus">+840</div></div>
+        <div class="hrow"><div><div class="hn">Приглашение подруги</div><div class="hd">28 апреля 2026</div></div><div class="hv plus">+1 500</div></div>
+      </div>
+    </section>
+
+    <!-- ============ PROFILE / SKIN CARD ============ -->
+    <section class="screen" id="s-profile">
+      <div class="prof-head">
+        <img src="img/elima-card.jpeg" alt="">
+        <div><div class="pn">Анна ✦</div><div class="pm">Клиент с апреля 2025 · Platinum</div></div>
+      </div>
+
+      <div class="minicards">
+        <div class="mc"><div class="mv">14</div><div class="ml">визитов</div></div>
+        <div class="mc"><div class="mv">3 480</div><div class="ml">баллов</div></div>
+        <div class="mc"><div class="mv">2</div><div class="ml">курса</div></div>
+      </div>
+
+      <!-- next recommendation -->
+      <div class="reminder" style="margin-top:18px">
+        <div class="ico">🎯</div>
+        <div style="flex:1">
+          <div class="t">Ваш план ухода</div>
+          <div class="d">Следующий шаг курса — <b>биоревитализация</b> ориентировочно 26 июня. Поддерживаем результат SMAS-лифтинга.</div>
+          <div class="r-act"><button class="r-yes" onclick="gotoBook('Биоревитализация')">Записаться на курс</button></div>
+        </div>
+      </div>
+
+      <!-- skin diary before/after -->
+      <div class="sec-head"><h3>Моя карта кожи</h3></div>
+      <div class="skin-ba">
+        <figure><img src="img/before-after/photo_2026-05-02%2000.34.28.jpeg" alt=""><figcaption>Апрель · до</figcaption></figure>
+        <figure><img src="img/before-after/photo_2026-05-02%2000.34.36.jpeg" alt=""><figcaption>Июнь · после</figcaption></figure>
+      </div>
+      <div class="lock-note">🔒 Фото видны только вам и вашему врачу</div>
+
+      <!-- procedure history -->
+      <div class="sec-head"><h3>История процедур</h3></div>
+      <div class="timeline card">
+        <div class="tl"><div class="dot"></div><div class="ti"><div class="tn">SMAS-лифтинг</div><div class="td">2 июня 2026 · Элима</div><div class="tnote">Зона: овал лица, шея. Контроль через 6 мес.</div></div></div>
+        <div class="tl"><div class="dot"></div><div class="ti"><div class="tn">Биоревитализация</div><div class="td">12 мая 2026 · Врач Дина</div><div class="tnote">Препарат подобран по типу кожи. Курс 1/3.</div></div></div>
+        <div class="tl"><div class="dot"></div><div class="ti"><div class="tn">Филлеры (губы)</div><div class="td">10 декабря 2025 · Элима</div><div class="tnote">Рекомендована коррекция ~через 6 мес.</div></div></div>
+      </div>
+    </section>
+
+  </div><!-- /screens -->
+
+  <!-- bottom nav -->
+  <nav class="tabbar">
+    <button class="on" data-tab="home" onclick="go('home')"><span class="ti">⌂</span>Главная</button>
+    <button data-tab="book" onclick="go('book')"><span class="ti">📅</span>Запись</button>
+    <button data-tab="bonus" onclick="go('bonus')"><span class="ti">💎</span>Бонусы</button>
+    <button data-tab="profile" onclick="go('profile')"><span class="ti">🪞</span>Профиль</button>
+  </nav>
+
+  <div class="toast" id="toast"></div>
+</div>
+
+<div class="foot-note">
+  Демонстрационный прототип для презентации. Данные клиента вымышлены.<br>
+  Пакет <b>«Премиум»</b>: онлайн-запись · бонусы и кэшбэк · умные напоминания о повторе · карта кожи с фото до/после · push.<br>
+  © Karina Media для клиники «Код Роскоши»
+</div>
+
+<script>
+/* ---------- tab / screen navigation ---------- */
+const screens={home:'s-home',book:'s-book',bonus:'s-bonus',profile:'s-profile',done:'s-done'};
+function go(tab){
+  Object.values(screens).forEach(id=>document.getElementById(id).classList.remove('active'));
+  document.getElementById(screens[tab]).classList.add('active');
+  document.querySelectorAll('.tabbar button').forEach(b=>b.classList.toggle('on',b.dataset.tab===tab));
+  document.querySelector('.screens').scrollTop=0;
+  document.getElementById(screens[tab]).scrollTop=0;
+  haptic();
+}
+function gotoBook(svc){
+  go('book');
+  // preselect service if matches
+  const opt=[...document.querySelectorAll('#step1 .opt')].find(o=>o.dataset.svc===svc);
+  if(opt){pickSvc(opt);}
+  else { B.service=svc; B.price='—'; }
+}
+
+/* ---------- toast + fake haptic ---------- */
+let tT;
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(tT);tT=setTimeout(()=>t.classList.remove('show'),1900);haptic();}
+function haptic(){if(navigator.vibrate)navigator.vibrate(8);}
+
+/* ---------- booking state machine ---------- */
+const B={step:1,service:null,price:null,doc:null,day:null,time:null};
+const days=[['Сб','21'],['Вс','22'],['Пн','23'],['Вт','24'],['Ср','25'],['Чт','26'],['Пт','27'],['Сб','28']];
+const times=['10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00'];
+const offTimes=['11:00','14:00','18:00'];
+
+function pickSvc(el){
+  document.querySelectorAll('#step1 .opt').forEach(o=>o.classList.remove('sel'));
+  el.classList.add('sel');B.service=el.dataset.svc;B.price=el.dataset.price;
+  enableNext();haptic();
+}
+function pickDoc(el){
+  document.querySelectorAll('#step2 .opt').forEach(o=>o.classList.remove('sel'));
+  el.classList.add('sel');B.doc=el.dataset.doc;enableNext();haptic();
+}
+function buildDays(){
+  const g=document.getElementById('daygrid');g.innerHTML='';
+  days.forEach((d,i)=>{
+    const el=document.createElement('div');el.className='day';el.innerHTML=`<div class="dn">${d[0]}</div><div class="dd">${d[1]}</div>`;
+    el.onclick=()=>{document.querySelectorAll('#daygrid .day').forEach(x=>x.classList.remove('sel'));el.classList.add('sel');B.day=d[0]+' '+d[1]+' июня';checkDateTime();haptic();};
+    g.appendChild(el);
+  });
+}
+function buildTimes(){
+  const g=document.getElementById('timegrid');g.innerHTML='';
+  times.forEach(t=>{
+    const el=document.createElement('div');el.className='time'+(offTimes.includes(t)?' off':'');el.textContent=t;
+    if(!offTimes.includes(t))el.onclick=()=>{document.querySelectorAll('#timegrid .time').forEach(x=>x.classList.remove('sel'));el.classList.add('sel');B.time=t;checkDateTime();haptic();};
+    g.appendChild(el);
+  });
+}
+function checkDateTime(){ if(B.day&&B.time)enableNext(); }
+
+function enableNext(){document.getElementById('bookNext').removeAttribute('disabled');}
+function disableNext(){document.getElementById('bookNext').setAttribute('disabled','');}
+
+function showStep(n){
+  B.step=n;
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('show'));
+  document.getElementById('step'+n).classList.add('show');
+  document.querySelectorAll('.steps .st').forEach(s=>s.classList.toggle('on',+s.dataset.st<=n));
+  document.getElementById('bookBack').style.display=n>1?'block':'none';
+  const titles=['Выберите процедуру','Выберите врача','Дата и время','Подтверждение'];
+  document.getElementById('bookTitle').textContent=titles[n-1];
+  const nextBtn=document.getElementById('bookNext');
+  nextBtn.textContent=n===4?'Подтвердить запись':'Продолжить';
+  // re-evaluate next button availability
+  disableNext();
+  if(n===1&&B.service)enableNext();
+  if(n===2&&B.doc)enableNext();
+  if(n===3&&B.day&&B.time)enableNext();
+  if(n===4)enableNext();
+  document.getElementById('s-book').scrollTop=0;
+}
+function nextStep(){
+  if(B.step===1){if(!B.service)return;showStep(2);}
+  else if(B.step===2){if(!B.doc)return;buildDays();buildTimes();showStep(3);}
+  else if(B.step===3){if(!(B.day&&B.time))return;buildSummary();showStep(4);}
+  else if(B.step===4){confirmBooking();}
+  haptic();
+}
+function prevStep(){ if(B.step>1)showStep(B.step-1); haptic(); }
+
+function priceNum(){return parseInt((B.price||'0').replace(/\D/g,''))||0;}
+function buildSummary(){
+  const price=priceNum();
+  const useBonus=Math.min(3480,Math.round(price*0.30));
+  const earn=Math.round((price-useBonus)*0.07);
+  document.getElementById('summary').innerHTML=`
+    <div class="row"><span class="k">Процедура</span><span class="v">${B.service}</span></div>
+    <div class="row"><span class="k">Врач</span><span class="v">${B.doc}</span></div>
+    <div class="row"><span class="k">Дата</span><span class="v">${B.day}, ${B.time}</span></div>
+    <div class="row"><span class="k">Адрес</span><span class="v">Москва, м. Сокол</span></div>
+    <div class="row tot"><span class="k">Стоимость</span><span class="v">${B.price}</span></div>`;
+  document.getElementById('bonusUse').textContent=useBonus.toLocaleString('ru-RU');
+  document.getElementById('bonusEarn').textContent=earn.toLocaleString('ru-RU');
+}
+function confirmBooking(){
+  document.getElementById('doneText').innerHTML=`${B.service} · ${B.doc}<br>${B.day}, ${B.time} · Москва, м. Сокол`;
+  document.getElementById('doneSummary').innerHTML=`
+    <div class="row"><span class="k">Подтверждение</span><span class="v">отправлено в чат ✓</span></div>
+    <div class="row"><span class="k">Статус</span><span class="v" style="color:var(--primary)">Ожидает визита</span></div>`;
+  go('done');toast('Запись подтверждена ✓');
+}
+function resetBooking(){
+  Object.assign(B,{step:1,service:null,price:null,doc:null,day:null,time:null});
+  document.querySelectorAll('#s-book .opt').forEach(o=>o.classList.remove('sel'));
+  showStep(1);
+}
+
+/* init */
+showStep(1);
+</script>
+</body>
+</html>
