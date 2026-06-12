@@ -64,15 +64,16 @@ select, input { font-family: var(--font-body); }
 .logo--footer { color: var(--cream); }
 .logo--footer span { color: var(--primary); }
 
-.nav { display: none; gap: 28px; }
+.nav { display: none; gap: 20px; }
 .nav__link {
     font-size: 12px; font-weight: 500; color: var(--gray-light);
     letter-spacing: 0.5px; text-transform: uppercase; transition: color var(--transition);
+    white-space: nowrap;
 }
 .nav__link:hover { color: var(--primary); }
 
 .header__right { display: flex; align-items: center; gap: 12px; }
-.header__phone { display: none; font-size: 13px; font-weight: 500; color: var(--cream-dark); }
+.header__phone { display: none; font-size: 13px; font-weight: 500; color: var(--cream-dark); white-space: nowrap; }
 .header__phone:hover { color: var(--primary); }
 
 .burger { display: flex; flex-direction: column; gap: 5px; padding: 8px; }
@@ -496,11 +497,13 @@ select, input { font-family: var(--font-body); }
     .sticky-cta { display: none; }
 }
 
+/* Телефон в шапке показываем только на широких десктопах, иначе nav не помещается */
+@media (min-width: 1200px) { .header__phone { display: block; } }
+
 /* ===== DESKTOP ===== */
 @media (min-width: 1024px) {
     .nav { display: flex; }
     .burger { display: none; }
-    .header__phone { display: block; }
 
     .hero__title { font-size: 88px; white-space: nowrap; }
     .hero { padding: 140px 0 100px; }
