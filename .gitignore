@@ -4,5 +4,9 @@
 node_modules/
 .gstack/
 
+# Архитектура Агента Jarvis — её .claude (настройки + скиллы) нужно сохранять в репо
+!jarvis/.claude/
+!jarvis/.claude/**
+
 # Отдельный проект со своим git-репозиторием и .env-секретами — не включать в этот репо
 epc-progress-hub/
