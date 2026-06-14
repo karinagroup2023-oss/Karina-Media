@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Код Роскоши — Диагностика кожи (прототип квиза)</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#10024;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root{
+  --primary:#c4a265; --primary-dark:#a8893e; --primary-light:#d4b278;
+  --cream:#f5ede4; --cream-dark:#e8ddd0;
+  --burgundy:#4a1010; --burgundy-deep:#2a0808; --burgundy-light:#5a1818;
+  --bg:#3d0c0c; --bg-card:#4a1010;
+  --border:rgba(196,162,101,0.18); --border-soft:rgba(196,162,101,0.10);
+  --gray:#b9a79c; --gray-dim:#8b7d75;
+  --font-display:'Playfair Display',Georgia,serif;
+  --font-body:'Inter',-apple-system,sans-serif;
+  --gold-grad:linear-gradient(135deg,#d4b278,#c4a265 45%,#a8893e);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:var(--font-body);
+  background:radial-gradient(circle at 30% 0%,#1c0606,#0c0303 70%);
+  color:var(--cream); min-height:100vh;
+  display:flex; flex-direction:column; align-items:center;
+  padding:32px 16px 48px; -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+
+.stage-caption{text-align:center;margin-bottom:24px;max-width:430px}
+.stage-caption .tag{display:inline-block;font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--burgundy-deep);background:var(--gold-grad);padding:5px 14px;border-radius:30px;font-weight:600}
+.stage-caption h1{font-family:var(--font-display);font-weight:600;font-size:24px;margin:14px 0 6px}
+.stage-caption p{font-size:13px;color:var(--gray);line-height:1.5}
+
+/* phone */
+.phone{
+  width:390px;max-width:100%;height:780px;background:var(--bg);border-radius:44px;
+  border:1px solid rgba(196,162,101,0.25);
+  box-shadow:0 40px 120px rgba(0,0,0,0.6),0 0 0 11px #0a0202,0 0 0 12px rgba(196,162,101,0.15);
+  position:relative;overflow:hidden;display:flex;flex-direction:column;
+}
+.tg-bar{flex-shrink:0;height:54px;display:flex;align-items:center;gap:10px;padding:0 16px;
+  background:rgba(42,8,8,0.96);border-bottom:1px solid var(--border-soft);position:relative;z-index:5}
+.tg-bar .tg-close{font-size:22px;color:var(--gray)}
+.tg-bar .tg-logo{width:30px;height:30px;border-radius:8px;object-fit:cover;background:#2a0808;border:1px solid var(--border)}
+.tg-bar .tg-title{font-size:14px;font-weight:600}
+.tg-bar .tg-title small{display:block;font-size:11px;font-weight:400;color:#7fc77f;margin-top:1px}
+.tg-bar .tg-more{margin-left:auto;font-size:20px;color:var(--gray)}
+
+/* progress */
+.progress{flex-shrink:0;height:3px;background:rgba(196,162,101,0.12);position:relative;z-index:5}
+.progress i{display:block;height:100%;width:0;background:var(--gold-grad);transition:width .35s ease}
+
+/* screens */
+.screens{flex:1;position:relative;overflow:hidden}
+.screen{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;background:var(--bg);
+  padding:22px 20px 24px;opacity:0;transform:translateX(14px);pointer-events:none;
+  transition:opacity .3s ease,transform .3s ease;scrollbar-width:none;z-index:1;
+  display:flex;flex-direction:column}
+.screen::-webkit-scrollbar{display:none}
+.screen.active{opacity:1;transform:none;pointer-events:auto;z-index:2}
+
+.eyebrow{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--primary);font-weight:600}
+.spacer{flex:1;min-height:8px}
+
+/* buttons */
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:16px;border-radius:14px;
+  font-size:15px;font-weight:600;background:var(--gold-grad);color:var(--burgundy-deep);
+  box-shadow:0 8px 24px rgba(196,162,101,0.22);transition:transform .15s ease}
+.btn:active{transform:scale(.97)}
+.btn--ghost{background:transparent;color:var(--cream);border:1px solid var(--border);box-shadow:none}
+.btn[disabled]{opacity:.4;pointer-events:none;filter:grayscale(.3)}
+
+/* ===== WELCOME ===== */
+.welcome{text-align:center;align-items:center;justify-content:center}
+.welcome .mono{width:84px;height:84px;border-radius:50%;margin:0 auto 22px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#5a1818,#2a0808);border:1.5px solid var(--primary);padding:16px}
+.welcome .mono img{width:100%;height:100%;object-fit:contain}
+.welcome h2{font-family:var(--font-display);font-size:28px;font-weight:600;line-height:1.18;margin-bottom:12px}
+.welcome h2 em{font-style:italic;color:var(--primary-light)}
+.welcome p{font-size:14px;color:var(--gray);line-height:1.6;margin-bottom:24px;padding:0 4px}
+.trust{display:flex;align-items:center;gap:11px;background:var(--bg-card);border:1px solid var(--border-soft);
+  border-radius:16px;padding:12px 14px;margin-bottom:22px;text-align:left}
+.trust img{width:46px;height:46px;border-radius:50%;object-fit:cover;border:1.5px solid var(--primary);flex-shrink:0}
+.trust .tn{font-size:13.5px;font-weight:600}
+.trust .td{font-size:11.5px;color:var(--gray);margin-top:2px;line-height:1.4}
+.welcome .meta-line{font-size:11px;color:var(--gray-dim);margin-top:14px}
+
+/* ===== QUESTION ===== */
+.qhead{margin-bottom:18px}
+.qhead .qnum{font-size:11px;color:var(--primary);font-weight:600;letter-spacing:.5px}
+.qhead h2{font-family:var(--font-display);font-size:22px;font-weight:600;line-height:1.25;margin-top:8px}
+.qhead .qhint{font-size:12px;color:var(--gray-dim);margin-top:7px}
+.opts{display:flex;flex-direction:column;gap:11px}
+.opt{display:flex;align-items:center;gap:13px;padding:15px 16px;border:1px solid var(--border-soft);border-radius:14px;
+  background:var(--bg-card);transition:border-color .2s,background .2s,transform .12s}
+.opt:active{transform:scale(.985)}
+.opt.sel{border-color:var(--primary);background:rgba(196,162,101,0.09)}
+.opt .oi{font-size:22px;width:30px;text-align:center;flex-shrink:0}
+.opt .ot{flex:1;font-size:14.5px;font-weight:500;line-height:1.3}
+.opt .chk{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--border);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--burgundy-deep)}
+.opt.sel .chk{background:var(--gold-grad);border-color:transparent}
+.qnav{display:flex;gap:10px;margin-top:18px}
+.qback{flex:0 0 auto;width:54px;border:1px solid var(--border);border-radius:14px;color:var(--gray);font-size:20px;
+  display:flex;align-items:center;justify-content:center}
+
+/* ===== LEAD ===== */
+.lead h2{font-family:var(--font-display);font-size:24px;font-weight:600;line-height:1.2;margin-bottom:8px}
+.lead .sub{font-size:13.5px;color:var(--gray);line-height:1.55;margin-bottom:22px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--primary);margin-bottom:7px;font-weight:600}
+.field input{width:100%;padding:14px 15px;border-radius:13px;background:var(--bg-card);border:1px solid var(--border-soft);
+  color:var(--cream);font-size:15px;transition:border-color .2s}
+.field input:focus{outline:none;border-color:var(--primary)}
+.field input::placeholder{color:var(--gray-dim)}
+.contact-tabs{display:flex;gap:8px;margin-bottom:14px}
+.contact-tabs button{flex:1;padding:11px;border-radius:11px;border:1px solid var(--border-soft);background:var(--bg-card);
+  font-size:13px;font-weight:500;color:var(--gray);display:flex;align-items:center;justify-content:center;gap:7px}
+.contact-tabs button.on{border-color:var(--primary);background:rgba(196,162,101,0.1);color:var(--primary-light)}
+.contact-input{display:flex;gap:8px}
+.ccode{flex:0 0 auto;padding:14px 26px 14px 11px;border-radius:13px;background:var(--bg-card);border:1px solid var(--border-soft);color:var(--cream);font-size:14px;font-family:inherit;appearance:none;-webkit-appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23c4a265' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+.ccode:focus{outline:none;border-color:var(--primary)}
+.contact-input input{flex:1;width:auto}
+.lead .privacy{font-size:11px;color:var(--gray-dim);text-align:center;margin-top:14px;line-height:1.5}
+
+/* ===== ANALYZING ===== */
+.analyze{text-align:center;align-items:center;justify-content:center}
+.ring{width:74px;height:74px;border-radius:50%;border:3px solid rgba(196,162,101,0.18);
+  border-top-color:var(--primary);animation:spin 0.9s linear infinite;margin-bottom:22px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.analyze h2{font-family:var(--font-display);font-size:21px;font-weight:600;margin-bottom:8px}
+.analyze p{font-size:13px;color:var(--gray);min-height:20px;transition:opacity .3s}
+
+/* ===== RESULT ===== */
+.result .rtop{text-align:center;margin-bottom:18px}
+.result .rtop .badge{display:inline-block;font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--burgundy-deep);background:var(--gold-grad);padding:5px 14px;border-radius:20px;font-weight:600}
+.result .rtop h2{font-family:var(--font-display);font-size:24px;font-weight:600;margin-top:13px;line-height:1.2}
+.rcard{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:14px}
+.rcard .rlbl{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--primary);font-weight:600;margin-bottom:10px}
+.rchips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:13px}
+.rchip{font-size:12.5px;font-weight:600;padding:8px 13px;border-radius:11px;background:rgba(196,162,101,0.12);
+  border:1px solid var(--border);color:var(--primary-light)}
+.rcard .rtext{font-size:13.5px;color:var(--cream-dark);line-height:1.6}
+.rwhy{background:linear-gradient(135deg,rgba(196,162,101,0.1),rgba(196,162,101,0.02));border:1px solid var(--border-soft);
+  border-radius:14px;padding:13px 15px;margin-bottom:14px}
+.rwhy .t{font-size:12px;font-weight:600;color:var(--primary-light);margin-bottom:5px}
+.rwhy .d{font-size:12.5px;color:var(--gray);line-height:1.5}
+.rba{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px}
+.rba figure{border-radius:13px;overflow:hidden;aspect-ratio:3/4;position:relative;background:#2a0808}
+.rba img{width:100%;height:100%;object-fit:cover}
+.rba figcaption{position:absolute;left:8px;bottom:8px;font-size:10px;padding:3px 9px;border-radius:20px;
+  background:rgba(10,2,2,0.72);border:1px solid var(--border);color:var(--primary-light);font-weight:600}
+.rba-note{font-size:11px;color:var(--gray-dim);text-align:center;margin-bottom:16px}
+.rdoc{display:flex;align-items:center;gap:12px;background:var(--bg-card);border:1px solid var(--border-soft);
+  border-radius:14px;padding:12px 14px;margin-bottom:18px}
+.rdoc img{width:44px;height:44px;border-radius:50%;object-fit:cover;border:1.5px solid var(--primary)}
+.rdoc .rt{font-size:13px;font-weight:600}
+.rdoc .rd{font-size:11.5px;color:var(--gray);margin-top:2px;line-height:1.4}
+
+/* ===== DONE ===== */
+.done{text-align:center;align-items:center;justify-content:center}
+.done .ok{width:88px;height:88px;border-radius:50%;margin-bottom:20px;display:flex;align-items:center;justify-content:center;
+  font-size:42px;background:linear-gradient(135deg,rgba(196,162,101,0.2),rgba(196,162,101,0.05));border:1.5px solid var(--primary)}
+.done h2{font-family:var(--font-display);font-size:25px;font-weight:600;margin-bottom:10px}
+.done p{font-size:13.5px;color:var(--gray);line-height:1.6;margin-bottom:8px;padding:0 6px}
+.done .rec-mini{background:var(--bg-card);border:1px solid var(--border-soft);border-radius:14px;padding:13px 15px;margin:14px 0 4px;font-size:13px}
+.done .rec-mini b{color:var(--primary-light)}
+
+.foot-note{margin-top:26px;font-size:11px;color:var(--gray-dim);text-align:center;max-width:400px;line-height:1.6}
+.foot-note b{color:var(--primary)}
+
+@media(max-width:440px){
+  body{padding:16px 0 32px}
+  .phone{height:90vh;border-radius:0;border:none;box-shadow:none}
+  .stage-caption{padding:0 16px}
+}
+</style>
+</head>
+<body>
+
+<div class="stage-caption">
+  <span class="tag">Прототип • Квиз-диагностика</span>
+  <h1>Код Роскоши</h1>
+  <p>Воронка привлечения: клиент проходит диагностику кожи → получает персональную программу → записывается на бесплатную консультацию. Нажимайте — всё интерактивно.</p>
+</div>
+
+<div class="phone">
+  <div class="tg-bar">
+    <span class="tg-close">‹</span>
+    <img class="tg-logo" src="img/logo.png" alt="">
+    <div class="tg-title">Код Роскоши<small>диагностика кожи</small></div>
+    <span class="tg-more">⋮</span>
+  </div>
+  <div class="progress"><i id="bar"></i></div>
+
+  <div class="screens">
+
+    <!-- WELCOME -->
+    <section class="screen welcome active" id="s-welcome">
+      <div class="spacer"></div>
+      <div class="mono"><img src="img/logo.png" alt=""></div>
+      <h2>Диагностика кожи<br><em>за 1 минуту</em></h2>
+      <p>Ответьте на 6 вопросов — и Элима подберёт вашу персональную программу ухода и омоложения.</p>
+      <div class="trust">
+        <img src="img/elima.jpeg" alt="">
+        <div>
+          <div class="tn">Элима Зайналабдинова</div>
+          <div class="td">Врач-косметолог · 18+ лет опыта · клиника «Код Роскоши», м. Сокол</div>
+        </div>
+      </div>
+      <button class="btn" onclick="start()">Пройти диагностику →</button>
+      <div class="meta-line">Бесплатно · без регистрации · 1 минута</div>
+      <div class="spacer"></div>
+    </section>
+
+    <!-- QUESTION (single dynamic screen) -->
+    <section class="screen" id="s-question">
+      <div class="qhead">
+        <div class="qnum" id="qnum">Вопрос 1 из 6</div>
+        <h2 id="qtitle"></h2>
+        <div class="qhint" id="qhint"></div>
+      </div>
+      <div class="opts" id="qopts"></div>
+      <div class="qnav">
+        <button class="qback" onclick="prevQ()">‹</button>
+        <button class="btn" id="qcontinue" disabled onclick="nextFromMulti()">Продолжить</button>
+      </div>
+      <div class="spacer"></div>
+    </section>
+
+    <!-- LEAD CAPTURE -->
+    <section class="screen lead" id="s-lead">
+      <div class="eyebrow">Последний шаг</div>
+      <h2 style="margin-top:8px">Куда прислать вашу программу?</h2>
+      <div class="sub">Элима подберёт процедуры под ваши ответы и пришлёт персональную программу + пригласит на бесплатную консультацию.</div>
+      <div class="field">
+        <label>Как вас зовут</label>
+        <input id="leadName" type="text" placeholder="Ваше имя" oninput="checkLead()">
+      </div>
+      <div class="contact-tabs">
+        <button class="on" id="tabTg" onclick="setContact('tg')">✈️ Telegram</button>
+        <button id="tabPhone" onclick="setContact('phone')">📞 Телефон</button>
+      </div>
+      <div class="field">
+        <label id="contactLabel">Ваш Telegram</label>
+        <div class="contact-input">
+          <select id="leadCountry" class="ccode" style="display:none" onchange="checkLead()" aria-label="Код страны">
+            <option value="+7" selected>🇷🇺 +7</option>
+            <option value="+7">🇰🇿 +7</option>
+            <option value="+375">🇧🇾 +375</option>
+            <option value="+998">🇺🇿 +998</option>
+            <option value="+996">🇰🇬 +996</option>
+            <option value="+994">🇦🇿 +994</option>
+            <option value="+374">🇦🇲 +374</option>
+            <option value="+995">🇬🇪 +995</option>
+            <option value="+992">🇹🇯 +992</option>
+            <option value="+380">🇺🇦 +380</option>
+            <option value="+971">🇦🇪 +971</option>
+            <option value="+90">🇹🇷 +90</option>
+            <option value="+972">🇮🇱 +972</option>
+            <option value="+49">🇩🇪 +49</option>
+            <option value="+44">🇬🇧 +44</option>
+            <option value="+1">🇺🇸 +1</option>
+          </select>
+          <input id="leadContact" type="text" placeholder="@username" oninput="checkLead()">
+        </div>
+      </div>
+      <button class="btn" id="leadBtn" disabled onclick="submitLead()">Получить мою программу →</button>
+      <div class="privacy">Нажимая кнопку, вы соглашаетесь на обработку данных. Никакого спама — только ваша программа.</div>
+      <div class="spacer"></div>
+    </section>
+
+    <!-- ANALYZING -->
+    <section class="screen analyze" id="s-analyze">
+      <div class="spacer"></div>
+      <div class="ring"></div>
+      <h2>Анализируем ваши ответы…</h2>
+      <p id="analyzeStep">Подбираем процедуры под ваш тип кожи</p>
+      <div class="spacer"></div>
+    </section>
+
+    <!-- RESULT -->
+    <section class="screen result" id="s-result">
+      <div class="rtop">
+        <span class="badge">Ваша персональная программа</span>
+        <h2 id="resTitle"></h2>
+      </div>
+      <div class="rcard">
+        <div class="rlbl">Рекомендуем</div>
+        <div class="rchips" id="resChips"></div>
+        <div class="rtext" id="resText"></div>
+      </div>
+      <div class="rwhy">
+        <div class="t">Почему вам подходит</div>
+        <div class="d" id="resWhy"></div>
+      </div>
+      <div class="rba">
+        <figure><img src="img/before-after/photo_2026-05-02%2000.34.32.jpeg" alt=""><figcaption>До</figcaption></figure>
+        <figure><img src="img/before-after/photo_2026-05-02%2000.34.36.jpeg" alt=""><figcaption>После</figcaption></figure>
+      </div>
+      <div class="rba-note">Реальные результаты пациентов клиники «Код Роскоши»</div>
+      <div class="rdoc">
+        <img src="img/elima.jpeg" alt="">
+        <div><div class="rt">Программу проведёт Элима</div><div class="rd">Точный план и стоимость — на бесплатной консультации</div></div>
+      </div>
+      <button class="btn" onclick="book()">Записаться на бесплатную консультацию</button>
+      <button class="btn btn--ghost" style="margin-top:10px" onclick="restart()">Пройти заново</button>
+      <div class="spacer"></div>
+    </section>
+
+    <!-- DONE -->
+    <section class="screen done" id="s-done">
+      <div class="spacer"></div>
+      <div class="ok">✓</div>
+      <h2>Заявка принята!</h2>
+      <p>Элима свяжется с вами в ближайшее время, чтобы согласовать удобное время бесплатной консультации.</p>
+      <div class="rec-mini">Ваша программа: <b id="doneRec">—</b></div>
+      <p style="margin-top:14px;font-size:12px">А пока можете посмотреть работы Элимы в Telegram-канале клиники.</p>
+      <div class="spacer"></div>
+    </section>
+
+  </div>
+</div>
+
+<div class="foot-note">
+  Демонстрационный прототип воронки привлечения. Данные вымышлены.<br>
+  Работает как <b>отдельная ссылка</b> (сторис, шапка профиля, реклама) и как <b>экран внутри мини-аппа «Код Роскоши»</b>.<br>
+  © Karina Media для клиники «Код Роскоши»
+</div>
+
+<script>
+/* ---------- quiz data ---------- */
+const QUESTIONS=[
+  {id:'age',title:'Ваш возраст?',hint:'От этого зависит выбор: профилактика или коррекция',type:'single',
+    opts:[['🌱','До 30'],['✨','30–40'],['💫','40–50'],['👑','50+']]},
+  {id:'concern',title:'Что беспокоит больше всего?',hint:'Выберите главное',type:'single',
+    opts:[
+      ['💧','Сухость, тусклость, обезвоженность','dry'],
+      ['〰️','Морщины, потеря тонуса','wrinkles'],
+      ['⏳','«Поплыл» овал лица, брыли','oval'],
+      ['✦','Пигментация, постакне, неровный тон','pigment'],
+      ['💋','Хочу объём и форму губ','lips'],
+      ['🌿','Всё ок — хочу сияние и профилактику','prevention'],
+    ]},
+  {id:'skin',title:'Ваш тип кожи?',hint:'Если не уверены — выберите ближайшее',type:'single',
+    opts:[['🌸','Сухая'],['☘️','Нормальная'],['💠','Жирная'],['🌗','Комбинированная'],['🪶','Чувствительная']]},
+  {id:'exp',title:'Делали процедуры раньше?',type:'single',
+    opts:[['⭐','Хожу к косметологу регулярно'],['🌟','Пробовала пару раз'],['✨','Ни разу, впервые']]},
+  {id:'goal',title:'Какой результат хотите?',type:'single',
+    opts:[['🤍','Лёгкое естественное освежение'],['💎','Заметное омоложение'],['🎯','Коррекцию конкретной зоны'],['🔁','Поддержать текущий результат']]},
+  {id:'speed',title:'Как срочно нужен результат?',type:'single',
+    opts:[['⚡','К событию — нужно быстро'],['📅','Готова пройти курс'],['🧘','Не тороплюсь, важно качество']]},
+];
+
+const RESULTS={
+  dry:{title:'Программа «Сияние и увлажнение»',chips:['Биоревитализация','«Глянцевая кожа»'],
+    text:'Глубокое увлажнение и восстановление барьера кожи. Вернём свежесть, ровный тон и здоровый блеск.'},
+  wrinkles:{title:'Программа «Молодость кожи»',chips:['Биоревитализация','Пептидная терапия'],
+    text:'Стимулируем синтез коллагена и разглаживаем мелкие морщины — естественно, без перегруза лица.'},
+  oval:{title:'Программа «Королевский лифтинг»',chips:['SMAS-лифтинг','«Королевский лифтинг»'],
+    text:'Подтянем овал и вернём чёткость контура без операции и долгого восстановления.'},
+  pigment:{title:'Программа «Ровный тон»',chips:['IPL Фотоомоложение','Чистка и уход'],
+    text:'Выровняем тон, уберём пигментацию и следы постакне. Кожа становится чище и сияет.'},
+  lips:{title:'Программа «Идеальные губы»',chips:['Филлеры (губы)','Биоревитализация губ'],
+    text:'Деликатный объём и красивый контур по вашей анатомии — естественно, без «перекача».'},
+  prevention:{title:'Программа «Профилактика и сияние»',chips:['Биоревитализация (курс)','Пептидный биохакинг'],
+    text:'Поддержим молодость кожи и предупредим возрастные изменения заранее — это умное решение.'},
+};
+
+/* ---------- state ---------- */
+const A={}; let qi=0; let contactType='tg';
+const totalSteps=QUESTIONS.length+1; // questions + lead
+
+function setBar(){
+  let step=qi; // questions answered position
+  if(document.getElementById('s-lead').classList.contains('active')) step=QUESTIONS.length;
+  if(document.getElementById('s-result').classList.contains('active')||document.getElementById('s-done').classList.contains('active')) step=totalSteps;
+  document.getElementById('bar').style.width=(step/totalSteps*100)+'%';
+}
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelector('.screens').scrollTop=0;
+  document.getElementById(id).scrollTop=0;
+  setBar(); haptic();
+}
+function haptic(){if(navigator.vibrate)navigator.vibrate(7);}
+
+/* ---------- flow ---------- */
+function start(){ qi=0; renderQ(); show('s-question'); }
+
+function renderQ(){
+  const q=QUESTIONS[qi];
+  document.getElementById('qnum').textContent='Вопрос '+(qi+1)+' из '+QUESTIONS.length;
+  document.getElementById('qtitle').textContent=q.title;
+  document.getElementById('qhint').textContent=q.hint||'';
+  document.getElementById('qhint').style.display=q.hint?'block':'none';
+  const box=document.getElementById('qopts'); box.innerHTML='';
+  q.opts.forEach((o,idx)=>{
+    const val=o[2]||o[1];
+    const el=document.createElement('div');
+    el.className='opt'+(A[q.id]===val?' sel':'');
+    el.innerHTML=`<span class="oi">${o[0]}</span><span class="ot">${o[1]}</span><span class="chk">✓</span>`;
+    el.onclick=()=>pick(q,val,el);
+    box.appendChild(el);
+  });
+  // single-select auto-advances → hide continue, show back only when needed
+  document.getElementById('qcontinue').style.display='none';
+  setBar();
+}
+function pick(q,val,el){
+  document.querySelectorAll('#qopts .opt').forEach(o=>o.classList.remove('sel'));
+  el.classList.add('sel'); A[q.id]=val; haptic();
+  setTimeout(()=>{ qi++; if(qi<QUESTIONS.length){ renderQ(); } else { show('s-lead'); checkLead(); } }, 260);
+}
+function nextFromMulti(){ /* reserved for multi-select questions */ }
+function prevQ(){
+  if(qi>0){ qi--; renderQ(); }
+  else { show('s-welcome'); }
+}
+
+/* ---------- lead ---------- */
+function setContact(t){
+  contactType=t;
+  document.getElementById('tabTg').classList.toggle('on',t==='tg');
+  document.getElementById('tabPhone').classList.toggle('on',t==='phone');
+  const inp=document.getElementById('leadContact');
+  const cc=document.getElementById('leadCountry');
+  if(t==='tg'){ document.getElementById('contactLabel').textContent='Ваш Telegram'; inp.placeholder='@username'; inp.type='text'; cc.style.display='none'; }
+  else { document.getElementById('contactLabel').textContent='Ваш телефон'; inp.placeholder='900 000-00-00'; inp.type='tel'; cc.style.display='block'; }
+  inp.value=''; checkLead(); haptic();
+}
+function checkLead(){
+  const name=document.getElementById('leadName').value.trim().length>1;
+  let contact;
+  if(contactType==='phone'){ contact=document.getElementById('leadContact').value.replace(/\D/g,'').length>=7; }
+  else { contact=document.getElementById('leadContact').value.trim().length>2; }
+  document.getElementById('leadBtn').disabled=!(name&&contact);
+}
+function submitLead(){
+  A.name=document.getElementById('leadName').value.trim();
+  if(contactType==='phone'){ A.contact=document.getElementById('leadCountry').value+' '+document.getElementById('leadContact').value.trim(); }
+  else { A.contact=document.getElementById('leadContact').value.trim(); }
+  show('s-analyze'); runAnalyze();
+}
+
+/* ---------- analyze + result ---------- */
+function runAnalyze(){
+  const steps=['Подбираем процедуры под ваш тип кожи','Учитываем возраст и пожелания','Формируем персональную программу…'];
+  let i=0; const p=document.getElementById('analyzeStep'); p.textContent=steps[0];
+  const t=setInterval(()=>{ i++; if(i<steps.length){p.style.opacity=0;setTimeout(()=>{p.textContent=steps[i];p.style.opacity=1;},150);} },750);
+  setTimeout(()=>{ clearInterval(t); buildResult(); show('s-result'); }, 2400);
+}
+function buildResult(){
+  const key=A.concern||'wrinkles';
+  const r=RESULTS[key];
+  document.getElementById('resTitle').textContent=r.title;
+  document.getElementById('resChips').innerHTML=r.chips.map(c=>`<span class="rchip">${c}</span>`).join('');
+  document.getElementById('resText').textContent=r.text;
+  // personalized "why"
+  const skin=(A.skin||'').toLowerCase();
+  const age=A.age||'';
+  let why=`Вы отметили: «${concernLabel(key)}»`;
+  if(A.skin) why+=`, тип кожи — ${skin}`;
+  if(age) why+=`, возраст ${age}`;
+  why+='. Программа подобрана именно под это сочетание и даёт естественный результат без перегруза.';
+  document.getElementById('resWhy').textContent=why;
+  document.getElementById('doneRec').textContent=r.title;
+}
+function concernLabel(key){
+  const m={dry:'сухость и тусклость',wrinkles:'морщины и потеря тонуса',oval:'овал лица',
+    pigment:'пигментация и тон',lips:'форма губ',prevention:'профилактика и сияние'};
+  return m[key]||'омоложение';
+}
+
+function book(){ show('s-done'); }
+function restart(){ for(const k in A) delete A[k]; qi=0; show('s-welcome');
+  document.getElementById('leadName').value=''; document.getElementById('leadContact').value='';
+  document.getElementById('leadBtn').disabled=true; }
+
+/* Telegram Mini App: auto-fill name + @username when opened inside Telegram */
+(function tgInit(){
+  try{
+    const tg=window.Telegram&&window.Telegram.WebApp;
+    if(tg){ tg.ready&&tg.ready(); tg.expand&&tg.expand(); }
+    const u=tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user;
+    if(u){
+      if(u.first_name) document.getElementById('leadName').value=(u.first_name+(u.last_name?' '+u.last_name:'')).trim();
+      if(u.username){ setContact('tg'); document.getElementById('leadContact').value='@'+u.username; }
+      checkLead();
+    }
+  }catch(e){}
+})();
+
+setBar();
+</script>
+</body>
+</html>
