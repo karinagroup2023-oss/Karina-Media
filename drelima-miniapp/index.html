@@ -398,6 +398,7 @@ ul{list-style:none}
       <div class="step" id="step4">
         <div class="summary" id="summary"></div>
         <div class="bonus-note">💎 <span>Спишем до <b id="bonusUse">0</b> ₽ бонусами · начислим <b id="bonusEarn">0</b> новых баллов</span></div>
+        <div class="bonus-note" style="color:var(--primary-light)">🔗 <span>Запись добавится в вашу систему <b>YClients</b> автоматически</span></div>
       </div>
 
       <div class="bottom-cta">
@@ -513,7 +514,7 @@ ul{list-style:none}
 
 <div class="foot-note">
   Демонстрационный прототип для презентации. Данные клиента вымышлены.<br>
-  Пакет <b>«Премиум»</b>: онлайн-запись · бонусы и кэшбэк · умные напоминания о повторе · карта кожи с фото до/после · push.<br>
+  Пакет <b>«Премиум»</b>: запись с синхронизацией в <b>YClients</b> · бонусы и кэшбэк · умные напоминания о повторе · карта кожи с фото до/после · push.<br>
   © Karina Media для клиники «Код Роскоши»
 </div>
 
@@ -622,7 +623,8 @@ function confirmBooking(){
   document.getElementById('doneText').innerHTML=`${B.service} · ${B.doc}<br>${B.day}, ${B.time} · Москва, м. Сокол`;
   document.getElementById('doneSummary').innerHTML=`
     <div class="row"><span class="k">Подтверждение</span><span class="v">отправлено в чат ✓</span></div>
-    <div class="row"><span class="k">Статус</span><span class="v" style="color:var(--primary)">Ожидает визита</span></div>`;
+    <div class="row"><span class="k">Статус</span><span class="v" style="color:var(--primary)">Ожидает визита</span></div>
+    <div class="row"><span class="k">Запись в YClients</span><span class="v">добавлена ✓</span></div>`;
   go('done');toast('Запись подтверждена ✓');
 }
 function resetBooking(){
