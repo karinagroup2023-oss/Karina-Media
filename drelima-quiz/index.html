@@ -377,7 +377,7 @@ const RESULTS={
 };
 
 /* ---------- state ---------- */
-const A={}; let qi=0; let contactType='tg';
+const A={}; let qi=0; let contactType='tg'; let cval={tg:'',phone:''};
 const totalSteps=QUESTIONS.length+1; // questions + lead
 
 function setBar(){
@@ -430,14 +430,16 @@ function prevQ(){
 
 /* ---------- lead ---------- */
 function setContact(t){
+  const inp=document.getElementById('leadContact');
+  cval[contactType]=inp.value;                 // запомнить вкладку, которую покидаем
   contactType=t;
   document.getElementById('tabTg').classList.toggle('on',t==='tg');
   document.getElementById('tabPhone').classList.toggle('on',t==='phone');
-  const inp=document.getElementById('leadContact');
   const cc=document.getElementById('leadCountry');
   if(t==='tg'){ document.getElementById('contactLabel').textContent='Ваш Telegram'; inp.placeholder='@username'; inp.type='text'; cc.style.display='none'; }
   else { document.getElementById('contactLabel').textContent='Ваш телефон'; inp.placeholder='900 000-00-00'; inp.type='tel'; cc.style.display='block'; }
-  inp.value=''; checkLead(); haptic();
+  inp.value=cval[t]||'';                        // восстановить вкладку, в которую входим
+  checkLead(); haptic();
 }
 function checkLead(){
   const name=document.getElementById('leadName').value.trim().length>1;
@@ -483,7 +485,7 @@ function concernLabel(key){
 }
 
 function book(){ show('s-done'); }
-function restart(){ for(const k in A) delete A[k]; qi=0; show('s-welcome');
+function restart(){ for(const k in A) delete A[k]; qi=0; cval={tg:'',phone:''}; show('s-welcome');
   document.getElementById('leadName').value=''; document.getElementById('leadContact').value='';
   document.getElementById('leadBtn').disabled=true; }
 
@@ -495,7 +497,7 @@ function restart(){ for(const k in A) delete A[k]; qi=0; show('s-welcome');
     const u=tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user;
     if(u){
       if(u.first_name) document.getElementById('leadName').value=(u.first_name+(u.last_name?' '+u.last_name:'')).trim();
-      if(u.username){ setContact('tg'); document.getElementById('leadContact').value='@'+u.username; }
+      if(u.username){ cval.tg='@'+u.username; document.getElementById('leadContact').value='@'+u.username; }
       checkLead();
     }
   }catch(e){}
