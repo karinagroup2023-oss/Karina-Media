@@ -20,7 +20,7 @@ const storage = {
   },
 };
 
-const shot = (img) => `${BASE}/shots/${img}`;
+const shot = (img) => `${BASE}/shots/${img}?v=2`;
 
 // --- Работы по нишам ---
 const NICHES = {
