@@ -65,7 +65,7 @@ const NICHES = {
     works: [
       { name: "DrElima — мини-апп", desc: "Telegram мини-апп приёма заявок.", img: "drelima-miniapp.png", url: "https://drelima-miniapp.vercel.app", kind: "мини-апп" },
       { name: "NURA — магазин", desc: "Сайт-магазин с каталогом.", img: "nura-store.png", url: "https://nura-store-liard.vercel.app", kind: "сайт" },
-      { name: "Финансовый Компас — веб-сервис", desc: "Дашборд учёта финансов бизнеса.", img: "financial-compass.png", url: "https://financial-compass-omega.vercel.app", kind: "сервис" },
+      { name: "Сымбат — лендинг услуг", desc: "Двуязычный лендинг с формой заявки.", img: "symbat.png", url: "https://symbat-website.vercel.app", kind: "сайт" },
     ],
   },
 };
