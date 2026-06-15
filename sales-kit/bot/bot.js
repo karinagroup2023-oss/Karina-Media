@@ -145,7 +145,9 @@ bot.use(createConversation(callConversation, "call"));
 // --- Хендлеры ---
 bot.command("start", (ctx) => ctx.reply(WELCOME, { parse_mode: "HTML", reply_markup: mainMenu() }));
 
-bot.command("id", (ctx) => ctx.reply(`Ваш chat_id: <code>${ctx.from?.id}</code>`, { parse_mode: "HTML" }));
+bot.command("id", (ctx) =>
+  ctx.reply(`chat_id этого чата: <code>${ctx.chat.id}</code>`, { parse_mode: "HTML" })
+);
 
 bot.callbackQuery("demo", async (ctx) => {
   await ctx.answerCallbackQuery();

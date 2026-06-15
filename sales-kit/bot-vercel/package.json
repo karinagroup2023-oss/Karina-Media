@@ -1,0 +1,10 @@
+{
+  "name": "karina-sales-bot-vercel",
+  "version": "1.0.0",
+  "description": "KARINA Media бот-воронка — Vercel webhook + Supabase",
+  "type": "module",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0",
+    "grammy": "^1.30.0"
+  }
+}
