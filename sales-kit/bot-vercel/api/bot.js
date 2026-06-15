@@ -48,8 +48,9 @@ const NICHES = {
   education: {
     label: "🎓 Образование",
     works: [
+      { name: "Академия Гениев — мини-апп", desc: "Курсы, направления, рейтинг, запись — прямо в Telegram.", img: "agenio-miniapp.png", url: "https://agenio-website.vercel.app/miniapp.html", kind: "мини-апп" },
+      { name: "Agenio — сайт центра", desc: "Программы, запись на занятия, заявки в WhatsApp.", img: "agenio.png", url: "https://agenio-website.vercel.app", kind: "сайт" },
       { name: "StudyMe — образование за рубежом", desc: "Программы, страны, заявка на консультацию.", img: "studyme.png", url: "https://studyme-self.vercel.app", kind: "сайт" },
-      { name: "Agenio — детское образование", desc: "Программы, запись на занятия, заявки.", img: "agenio.png", url: "https://agenio-website.vercel.app", kind: "сайт" },
     ],
   },
   construction: {
