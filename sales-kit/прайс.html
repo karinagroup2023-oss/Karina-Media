@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KARINA Media — Прайс на Telegram мини-аппы и боты</title>
+<title>KARINA Media — Прайс</title>
 <style>
   :root{
     --bg:#0b0d12; --card:#141821; --line:#222836; --ink:#eef1f6;
@@ -11,94 +11,90 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:-apple-system,'Segoe UI',Roboto,Inter,sans-serif;background:radial-gradient(1200px 600px at 50% -10%,#1a2030,transparent),var(--bg);color:var(--ink);padding:48px 20px;line-height:1.5}
-  .wrap{max-width:1040px;margin:0 auto}
+  .wrap{max-width:920px;margin:0 auto}
   .head{text-align:center;margin-bottom:14px}
   .brand{font-size:13px;letter-spacing:.28em;color:var(--accent);text-transform:uppercase;font-weight:700}
-  h1{font-size:clamp(28px,4vw,42px);margin:10px 0 8px;font-weight:800;letter-spacing:-.02em}
-  .sub{color:var(--muted);font-size:17px;max-width:640px;margin:0 auto}
-  .guarantee{display:inline-block;margin:22px auto 36px;background:var(--pop);border:1px solid var(--line);
+  h1{font-size:clamp(28px,4vw,40px);margin:10px 0 8px;font-weight:800;letter-spacing:-.02em}
+  .sub{color:var(--muted);font-size:16px;max-width:600px;margin:0 auto}
+  .guarantee{display:inline-block;margin:22px auto 32px;background:var(--pop);border:1px solid var(--line);
     border-radius:999px;padding:10px 20px;color:var(--ink);font-weight:600;font-size:14px}
   .guarantee b{color:var(--accent)}
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  @media(max-width:820px){.grid{grid-template-columns:1fr}}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 24px;display:flex;flex-direction:column}
-  .card.feat{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 20px 50px rgba(232,176,75,.12);position:relative}
-  .tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:#1a1300;
-    font-size:12px;font-weight:800;padding:5px 14px;border-radius:999px;letter-spacing:.04em}
-  .pname{font-size:14px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700}
-  .price{font-size:34px;font-weight:800;margin:10px 0 4px}
-  .price span{font-size:16px;color:var(--muted);font-weight:600}
-  .term{font-size:13px;color:var(--accent2);font-weight:600;margin-bottom:16px}
-  ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:6px}
-  li{padding-left:26px;position:relative;font-size:15px;color:#d6dbe6}
-  li::before{content:"✓";position:absolute;left:0;color:var(--accent);font-weight:800}
-  .foot{margin-top:34px;text-align:center;color:var(--muted);font-size:14px}
-  .pay{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:26px 0 8px}
+  .list{display:flex;flex-direction:column;gap:12px}
+  .row{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+  .row.feat{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+  .left{flex:1}
+  .pname{font-size:19px;font-weight:800;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .tag{background:var(--accent);color:#1a1300;font-size:11px;font-weight:800;padding:3px 9px;border-radius:999px}
+  .pdesc{color:#cdd4e2;font-size:14px;margin-top:4px}
+  .right{text-align:right;white-space:nowrap}
+  .price{font-size:24px;font-weight:800}
+  .price span{font-size:14px;color:var(--muted);font-weight:600}
+  .term{font-size:13px;color:var(--accent2);font-weight:600;margin-top:2px}
+  .pay{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:28px 0 8px}
   .chip{background:var(--pop);border:1px solid var(--line);border-radius:10px;padding:10px 16px;font-size:13px;color:#cdd4e2}
   .chip b{color:var(--accent)}
-  .sign{margin-top:30px;text-align:center;font-size:13px;color:var(--muted)}
+  .sign{margin-top:28px;text-align:center;font-size:13px;color:var(--muted)}
   .sign a{color:var(--accent2);text-decoration:none}
+  @media(max-width:560px){.row{flex-direction:column;align-items:flex-start}.right{text-align:left}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="head">
     <div class="brand">KARINA Media</div>
-    <h1>Telegram мини-апп для приёма заявок</h1>
-    <p class="sub">Клиенты оставляют заявки и записываются 24/7 — без менеджера. Заявка сразу у вас. Запуск под ключ за 5 дней.</p>
-    <div class="guarantee">🛡 Гарантия: <b>не запущу за 5 дней — верну предоплату</b></div>
+    <h1>Сайты и мини-аппы для бизнеса</h1>
+    <p class="sub">Под ключ, быстро, с фокусом на заявки и продажи. Премиум-качество — без студийных сроков.</p>
+    <div class="guarantee">🛡 Гарантия: <b>не сдам в срок — верну предоплату</b></div>
   </div>
 
-  <div class="grid">
-    <div class="card">
-      <div class="pname">Старт</div>
-      <div class="price">250 000 <span>₸</span></div>
-      <div class="term">запуск за 3 дня</div>
-      <ul>
-        <li>Telegram-бот приёма заявок</li>
-        <li>Меню: услуги / каталог</li>
-        <li>Форма заявки</li>
-        <li>Уведомления владельцу</li>
-        <li>Кнопка перехода в WhatsApp</li>
-      </ul>
+  <div class="list">
+    <div class="row">
+      <div class="left">
+        <div class="pname">🟢 Лендинг</div>
+        <div class="pdesc">Одностраничный сайт под рекламу / Instagram, заявка в WhatsApp.</div>
+      </div>
+      <div class="right"><div class="price">150 000 <span>₸</span></div><div class="term">3 дня</div></div>
     </div>
 
-    <div class="card feat">
-      <div class="tag">ХИТ</div>
-      <div class="pname">Бизнес</div>
-      <div class="price">490 000 <span>₸</span></div>
-      <div class="term">запуск за 5 дней</div>
-      <ul>
-        <li>Telegram мини-апп (витрина)</li>
-        <li>Каталог с фото и ценами</li>
-        <li>Корзина / онлайн-заявка</li>
-        <li>Админка заявок</li>
-        <li>Интеграция WhatsApp / Kaspi</li>
-        <li>Уведомления + база клиентов</li>
-      </ul>
+    <div class="row">
+      <div class="left">
+        <div class="pname">🌐 Сайт</div>
+        <div class="pdesc">Многостраничный: услуги, о нас, контакты, блог.</div>
+      </div>
+      <div class="right"><div class="price">300 000 <span>₸</span></div><div class="term">5–7 дней</div></div>
     </div>
 
-    <div class="card">
-      <div class="pname">Премиум</div>
-      <div class="price">900 000 <span>₸</span></div>
-      <div class="term">запуск за 7–10 дней</div>
-      <ul>
-        <li>Всё из пакета «Бизнес»</li>
-        <li>+ Продающий лендинг</li>
-        <li>+ Бот-прогрев и автоворонка</li>
-        <li>+ Настройка приёма оплаты</li>
-        <li>+ Приоритетная поддержка</li>
-      </ul>
+    <div class="row">
+      <div class="left">
+        <div class="pname">🛍 Интернет-магазин</div>
+        <div class="pdesc">Каталог, корзина, оплата Kaspi.</div>
+      </div>
+      <div class="right"><div class="price">от 600 000 <span>₸</span></div><div class="term">10–14 дней</div></div>
+    </div>
+
+    <div class="row feat">
+      <div class="left">
+        <div class="pname">⭐️ Telegram мини-апп <span class="tag">ХИТ</span></div>
+        <div class="pdesc">Витрина / запись / приём заявок прямо внутри Telegram.</div>
+      </div>
+      <div class="right"><div class="price">490 000 <span>₸</span></div><div class="term">5 дней</div></div>
+    </div>
+
+    <div class="row">
+      <div class="left">
+        <div class="pname">🤖 Telegram бот</div>
+        <div class="pdesc">Меню, услуги, форма заявки, уведомления владельцу.</div>
+      </div>
+      <div class="right"><div class="price">250 000 <span>₸</span></div><div class="term">3 дня</div></div>
     </div>
   </div>
 
   <div class="pay">
     <div class="chip">Предоплата <b>50%</b> — старт работы</div>
-    <div class="chip">Оплата <b>100% сегодня</b> — скидка <b>15%</b></div>
+    <div class="chip">Оплата <b>100% сразу</b> — скидка <b>15%</b></div>
     <div class="chip">Оплата на <b>Kaspi</b> / счёт ИП</div>
   </div>
 
-  <p class="foot">Делаем быстро и под ключ. Ваш продукт продаёт за вас.</p>
   <p class="sign">Сделано в KARINA Media · <a href="https://wa.me/77066567765">wa.me/77066567765</a></p>
 </div>
 </body>
