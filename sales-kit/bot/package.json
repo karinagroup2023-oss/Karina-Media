@@ -1,0 +1,15 @@
+{
+  "name": "karina-sales-bot",
+  "version": "1.0.0",
+  "description": "Telegram бот-воронка KARINA Media — приём заявок на digital-услуги",
+  "type": "module",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "@grammyjs/conversations": "^1.2.0",
+    "dotenv": "^16.4.5",
+    "grammy": "^1.30.0"
+  }
+}
