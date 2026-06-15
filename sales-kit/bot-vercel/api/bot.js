@@ -1,6 +1,8 @@
 import { Bot, InlineKeyboard, session, webhookCallback } from "grammy";
 import { createClient } from "@supabase/supabase-js";
 
+export const maxDuration = 60;
+
 const bot = new Bot(process.env.BOT_TOKEN);
 const OWNER = process.env.OWNER_CHAT_ID;
 const BASE = process.env.PUBLIC_BASE || "https://bot-vercel-five.vercel.app";
@@ -143,7 +145,23 @@ ${d.time ? "🕐 Удобное время: " + d.time + "\n" : ""}💬 Конт
   }
 }
 
+// --- Учёт всех пользователей бота (для рассылок) ---
+bot.use(async (ctx, next) => {
+  const u = ctx.from;
+  if (u && !u.is_bot) {
+    try {
+      await sb.from("bot_users").upsert(
+        { tg_id: u.id, username: u.username ? "@" + u.username : null, first_name: u.first_name ?? null, last_seen: new Date().toISOString() },
+        { onConflict: "tg_id" }
+      );
+    } catch (e) { console.error("track user:", e.message); }
+  }
+  await next();
+});
+
 bot.use(session({ initial: () => ({ step: "idle", data: {} }), storage }));
+
+const isAdmin = (ctx) => String(ctx.chat?.id) === String(OWNER);
 
 bot.command("start", async (ctx) => {
   ctx.session.step = "idle"; ctx.session.data = {};
@@ -152,6 +170,34 @@ bot.command("start", async (ctx) => {
 bot.command("id", (ctx) =>
   ctx.reply(`chat_id этого чата: <code>${ctx.chat.id}</code>`, { parse_mode: "HTML" })
 );
+
+// --- Админ-команды (только из группы заявок) ---
+bot.command("stats", async (ctx) => {
+  if (!isAdmin(ctx)) return;
+  const all = await sb.from("bot_users").select("*", { count: "exact", head: true });
+  const act = await sb.from("bot_users").select("*", { count: "exact", head: true }).eq("active", true);
+  const leads = await sb.from("bot_leads").select("*", { count: "exact", head: true });
+  await ctx.reply(`📊 <b>Статистика</b>\n\n👥 Пользователей: ${all.count ?? 0}\n✅ Активных: ${act.count ?? 0}\n📝 Заявок: ${leads.count ?? 0}`, { parse_mode: "HTML" });
+});
+
+bot.command("broadcast", async (ctx) => {
+  if (!isAdmin(ctx)) return;
+  const text = ctx.match?.trim();
+  if (!text) return ctx.reply("Использование:\n/broadcast текст сообщения\n\nПоддерживается HTML: <b>жирный</b>, <i>курсив</i>, <a href=\"...\">ссылка</a>.", { parse_mode: "HTML" });
+  const { data: users } = await sb.from("bot_users").select("tg_id").eq("active", true);
+  await ctx.reply(`📣 Рассылка ${users?.length ?? 0} пользователям...`);
+  let ok = 0, fail = 0;
+  for (const u of users ?? []) {
+    try {
+      await bot.api.sendMessage(u.tg_id, text, { parse_mode: "HTML" });
+      ok++;
+    } catch (e) {
+      fail++;
+      if (e?.error_code === 403) await sb.from("bot_users").update({ active: false }).eq("tg_id", u.tg_id);
+    }
+  }
+  await ctx.reply(`✅ Доставлено: ${ok}\n🚫 Не доставлено: ${fail}`);
+});
 
 // --- Демо по нишам ---
 bot.callbackQuery("demo", async (ctx) => {
