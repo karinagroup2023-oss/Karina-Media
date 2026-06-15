@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000}
+.avatar{
+  width:512px;height:512px;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;
+  background:radial-gradient(circle at 50% 40%,#5a1818 0%,#3d0c0c 52%,#2a0808 100%);
+}
+.avatar::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-54%);
+  width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(196,162,101,0.22),transparent 68%)}
+.ring{width:300px;height:300px;border-radius:50%;border:1.5px solid rgba(196,162,101,0.45);
+  display:flex;align-items:center;justify-content:center;position:relative;z-index:2;
+  box-shadow:0 0 0 14px rgba(196,162,101,0.06)}
+.ring img{width:180px;height:180px;object-fit:contain}
+.wordmark{position:relative;z-index:2;margin-top:30px;color:#d4b278;font-size:30px;font-weight:600;
+  letter-spacing:6px;text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="avatar" id="avatar">
+  <div class="ring"><img src="img/logo.png" alt=""></div>
+  <div class="wordmark">Код&nbsp;Роскоши</div>
+</div>
+</body>
+</html>

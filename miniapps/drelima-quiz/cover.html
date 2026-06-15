@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000}
+.cover{
+  width:640px;height:360px;position:relative;overflow:hidden;display:flex;
+  font-family:'Inter',sans-serif;color:#f5ede4;
+  background:linear-gradient(135deg,#4a1010 0%,#2a0808 55%,#3d0c0c 100%);
+}
+.cover::before{content:"";position:absolute;top:-80px;right:160px;width:300px;height:300px;
+  background:radial-gradient(circle,rgba(196,162,101,0.18),transparent 70%)}
+.left{flex:1;padding:38px 34px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2}
+.logo{display:flex;align-items:center;gap:10px;margin-bottom:auto}
+.logo img{width:40px;height:40px;border-radius:9px;border:1px solid rgba(196,162,101,0.4);object-fit:cover;background:#2a0808}
+.logo .ln{font-family:'Playfair Display',serif;font-size:16px;font-weight:600;letter-spacing:.5px}
+.eyebrow{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#c4a265;font-weight:600;margin-bottom:11px}
+h1{font-family:'Playfair Display',serif;font-size:38px;font-weight:600;line-height:1.05}
+h1 em{font-style:italic;color:#d4b278}
+.sub{font-size:13.5px;color:#cbb9ae;margin-top:13px;line-height:1.45;max-width:300px}
+.pill{display:inline-flex;align-items:center;gap:7px;margin-top:18px;align-self:flex-start;
+  background:linear-gradient(135deg,#d4b278,#c4a265 45%,#a8893e);color:#2a0808;font-weight:700;
+  font-size:12.5px;padding:9px 16px;border-radius:30px}
+.right{width:236px;position:relative;flex-shrink:0}
+.right img{width:100%;height:100%;object-fit:cover;object-position:center 22%}
+.right::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,#3d0c0c 0%,rgba(61,12,12,0.25) 28%,transparent 60%)}
+.right .credit{position:absolute;left:14px;bottom:14px;z-index:2;font-size:11px;color:#f5ede4;
+  text-shadow:0 1px 6px rgba(0,0,0,.7)}
+.right .credit b{display:block;font-family:'Playfair Display',serif;font-size:14px;font-weight:600}
+.right .credit span{color:#d4b278}
+</style>
+</head>
+<body>
+<div class="cover" id="cover">
+  <div class="left">
+    <div class="logo"><img src="img/logo.png" alt=""><span class="ln">Код Роскоши</span></div>
+    <div class="eyebrow">Клиника косметологии · м. Сокол</div>
+    <h1>Диагностика кожи<br><em>за 1 минуту</em></h1>
+    <div class="sub">Ответьте на 6 вопросов — подберём вашу персональную программу ухода и омоложения</div>
+    <span class="pill">Пройти бесплатно →</span>
+  </div>
+  <div class="right">
+    <img src="img/elima.jpeg" alt="">
+    <div class="credit"><b>Элима Зайналабдинова</b><span>врач-косметолог · 18+ лет</span></div>
+  </div>
+</div>
+</body>
+</html>
