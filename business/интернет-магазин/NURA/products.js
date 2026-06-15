@@ -145,17 +145,17 @@ const PRODUCTS = [
         "oldPrice": null,
         "color": "#1a1a1a",
         "colorName": "Чёрный",
-        "image": "https://images.unsplash.com/photo-1771580425956-d99eb2088223?w=600&h=800&fit=crop",
+        "image": "https://images.unsplash.com/photo-1583278828941-7904abc0268f?w=600&h=800&fit=crop",
         "colors": [
             {
                 "name": "Чёрный",
                 "hex": "#1a1a1a",
-                "image": "https://images.unsplash.com/photo-1771580425956-d99eb2088223?w=600&h=800&fit=crop"
+                "image": "https://images.unsplash.com/photo-1583278828941-7904abc0268f?w=600&h=800&fit=crop"
             },
             {
                 "name": "Шоколад",
                 "hex": "#3d2b1f",
-                "image": "https://images.unsplash.com/photo-1771580425956-d99eb2088223?w=600&h=800&fit=crop"
+                "image": "https://images.unsplash.com/photo-1583278828941-7904abc0268f?w=600&h=800&fit=crop"
             }
         ],
         "sizes": [
@@ -166,7 +166,7 @@ const PRODUCTS = [
         ],
         "desc": "Юбка-миди из мягкой натуральной кожи. А-силуэт, потайная молния, подкладка из вискозы. Актуальная длина ниже колена.",
         "badge": "Новинка",
-        "imageHover": "https://images.unsplash.com/photo-1771580425956-d99eb2088223?w=600&h=800&fit=crop"
+        "imageHover": "https://images.unsplash.com/photo-1583278828941-7904abc0268f?w=600&h=800&fit=crop"
     },
     {
         "id": 6,
@@ -375,22 +375,22 @@ const PRODUCTS = [
         "oldPrice": null,
         "color": "#f5f5f5",
         "colorName": "Белый",
-        "image": "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=600&h=800&fit=crop",
+        "image": "https://images.unsplash.com/photo-1771092358890-0db24db44e56?w=600&h=800&fit=crop",
         "colors": [
             {
                 "name": "Белый",
                 "hex": "#f5f5f5",
-                "image": "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=600&h=800&fit=crop"
+                "image": "https://images.unsplash.com/photo-1771092358890-0db24db44e56?w=600&h=800&fit=crop"
             },
             {
                 "name": "Тёмно-синий",
                 "hex": "#2c3e50",
-                "image": "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=600&h=800&fit=crop"
+                "image": "https://images.unsplash.com/photo-1771092358890-0db24db44e56?w=600&h=800&fit=crop"
             },
             {
                 "name": "Бежевый",
                 "hex": "#d4c4b0",
-                "image": "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=600&h=800&fit=crop"
+                "image": "https://images.unsplash.com/photo-1771092358890-0db24db44e56?w=600&h=800&fit=crop"
             }
         ],
         "sizes": [
@@ -401,7 +401,7 @@ const PRODUCTS = [
         ],
         "desc": "Свитер из 100% кашемира с круглым вырезом. Тонкая вязка, мягкая текстура. Базовая вещь для сезонного гардероба.",
         "badge": null,
-        "imageHover": "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=600&h=800&fit=crop"
+        "imageHover": "https://images.unsplash.com/photo-1771092358890-0db24db44e56?w=600&h=800&fit=crop"
     },
     {
         "id": 13,
