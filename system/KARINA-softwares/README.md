@@ -1,2 +1,0 @@
-# KARINA_softwares
-Projects
