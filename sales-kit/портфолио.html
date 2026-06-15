@@ -12,20 +12,25 @@
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:-apple-system,'Segoe UI',Roboto,Inter,sans-serif;background:radial-gradient(1200px 600px at 50% -10%,#1a2030,transparent),var(--bg);color:var(--ink);padding:48px 20px;line-height:1.55}
   .wrap{max-width:1080px;margin:0 auto}
-  .head{text-align:center;margin-bottom:40px}
+  .head{text-align:center;margin-bottom:36px}
   .brand{font-size:13px;letter-spacing:.28em;color:var(--accent);text-transform:uppercase;font-weight:700}
   h1{font-size:clamp(28px,4vw,44px);margin:10px 0 8px;font-weight:800;letter-spacing:-.02em}
   .sub{color:var(--muted);font-size:17px;max-width:680px;margin:0 auto}
   .sec{font-size:14px;text-transform:uppercase;letter-spacing:.12em;color:var(--accent2);font-weight:700;margin:36px 0 16px}
-  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-  @media(max-width:760px){.grid{grid-template-columns:1fr}}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:8px}
-  .ptype{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
-  .pname{font-size:21px;font-weight:800}
-  .pdesc{color:#cdd4e2;font-size:15px}
-  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
-  .t{background:#1c2331;border:1px solid var(--line);border-radius:8px;padding:5px 10px;font-size:12px;color:#aeb7c7}
-  .stats{display:flex;gap:28px;justify-content:center;margin:30px 0 6px;flex-wrap:wrap}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .grid.web{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.grid,.grid.web{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+  .shot{width:100%;height:230px;object-fit:cover;object-position:top center;background:#0f1219;border-bottom:1px solid var(--line)}
+  .web .shot{height:200px}
+  .body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:7px}
+  .ptype{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+  .pname{font-size:18px;font-weight:800}
+  .pdesc{color:#cdd4e2;font-size:14px}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+  .t{background:#1c2331;border:1px solid var(--line);border-radius:7px;padding:4px 9px;font-size:11px;color:#aeb7c7}
+  .stats{display:flex;gap:28px;justify-content:center;margin:26px 0 6px;flex-wrap:wrap}
   .stat b{display:block;font-size:30px;font-weight:800;color:var(--accent)}
   .stat span{font-size:13px;color:var(--muted)}
   .cta{margin-top:42px;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px}
@@ -34,7 +39,6 @@
   .btn{display:inline-block;background:var(--accent);color:#1a1300;font-weight:800;text-decoration:none;padding:13px 26px;border-radius:12px}
   .sign{margin-top:26px;text-align:center;font-size:13px;color:var(--muted)}
   .sign a{color:var(--accent2);text-decoration:none}
-  .note{text-align:center;color:var(--muted);font-size:13px;margin-top:14px}
 </style>
 </head>
 <body>
@@ -42,7 +46,7 @@
   <div class="head">
     <div class="brand">KARINA Media</div>
     <h1>Портфолио</h1>
-    <p class="sub">Мини-аппы, сайты и веб-сервисы для бизнеса. Делаем быстро, под ключ, с фокусом на результат — заявки и продажи.</p>
+    <p class="sub">Telegram мини-аппы, сайты и веб-сервисы для бизнеса. Делаем быстро, под ключ, с фокусом на результат — заявки и продажи.</p>
   </div>
 
   <div class="stats">
@@ -54,60 +58,62 @@
   <div class="sec">Telegram мини-аппы</div>
   <div class="grid">
     <div class="card">
-      <div class="ptype">Бьюти · косметология</div>
-      <div class="pname">DrElima «Код Роскоши»</div>
-      <div class="pdesc">Премиальный мини-апп для салона: услуги, запись, презентация бренда. Чистый дорогой визуал под нишу красоты.</div>
-      <div class="tags"><span class="t">Telegram Mini App</span><span class="t">Запись</span><span class="t">Каталог услуг</span></div>
+      <img class="shot" src="screenshots/drelima-miniapp.png" alt="DrElima мини-апп">
+      <div class="body">
+        <div class="ptype">Бьюти · косметология</div>
+        <div class="pname">DrElima «Код Роскоши»</div>
+        <div class="pdesc">Премиальный мини-апп салона: запись, бонусы, карта кожи, услуги.</div>
+        <div class="tags"><span class="t">Запись</span><span class="t">Бонусы</span></div>
+      </div>
     </div>
     <div class="card">
-      <div class="ptype">Услуги · фотограф</div>
-      <div class="pname">Mobilograf — мини-апп фотографа</div>
-      <div class="pdesc">Полноценный мини-апп: портфолио, услуги, онлайн-бронирование съёмок, отзывы. С интеграцией приёма заявок.</div>
-      <div class="tags"><span class="t">Бронирование</span><span class="t">Портфолио</span><span class="t">React</span></div>
+      <img class="shot" src="screenshots/mobilograf.png" alt="Mobilograf мини-апп">
+      <div class="body">
+        <div class="ptype">Услуги · фотограф</div>
+        <div class="pname">Mobilograf</div>
+        <div class="pdesc">Мини-апп фотографа: портфолио, услуги, онлайн-запись на съёмку.</div>
+        <div class="tags"><span class="t">Бронирование</span><span class="t">Портфолио</span></div>
+      </div>
     </div>
     <div class="card">
-      <div class="ptype">Бьюти · вовлечение</div>
-      <div class="pname">DrElima Quiz</div>
-      <div class="pdesc">Интерактивный квиз-мини-апп для подбора услуги и сбора контактов клиента — инструмент лидогенерации.</div>
-      <div class="tags"><span class="t">Квиз-воронка</span><span class="t">Сбор лидов</span></div>
+      <img class="shot" src="screenshots/drelima-quiz.png" alt="DrElima квиз">
+      <div class="body">
+        <div class="ptype">Бьюти · лидогенерация</div>
+        <div class="pname">DrElima Quiz</div>
+        <div class="pdesc">Квиз-воронка диагностики кожи: подбор услуги и сбор контактов.</div>
+        <div class="tags"><span class="t">Квиз-воронка</span><span class="t">Лиды</span></div>
+      </div>
     </div>
     <div class="card">
-      <div class="ptype">E-com · услуги</div>
-      <div class="pname">Plix</div>
-      <div class="pdesc">Мини-апп-витрина с каталогом и приёмом заявок — типовое решение под товарный и сервисный бизнес.</div>
-      <div class="tags"><span class="t">Витрина</span><span class="t">Заявки</span></div>
+      <img class="shot" src="screenshots/plix.png" alt="Plix мини-апп">
+      <div class="body">
+        <div class="ptype">Стройматериалы · B2B</div>
+        <div class="pname">Plix</div>
+        <div class="pdesc">Мини-апп заявок и предложений по стройматериалам с категориями.</div>
+        <div class="tags"><span class="t">Заявки</span><span class="t">Каталог</span></div>
+      </div>
     </div>
   </div>
 
   <div class="sec">Сайты и лендинги</div>
-  <div class="grid">
+  <div class="grid web">
     <div class="card">
-      <div class="ptype">Digital-агентство</div>
-      <div class="pname">KARINA Media</div>
-      <div class="pdesc">Лендинг агентства: современный дизайн, чёткая структура, акцент на услугах и заявке.</div>
-      <div class="tags"><span class="t">Лендинг</span><span class="t">React + Vite</span></div>
+      <img class="shot" src="screenshots/symbat.png" alt="Symbat лендинг">
+      <div class="body">
+        <div class="ptype">Налоговый консалтинг</div>
+        <div class="pname">Сымбат — налоговый консультант</div>
+        <div class="pdesc">Двуязычный (RU/KZ) лендинг услуг: экспертное позиционирование, понятная структура, форма обращения.</div>
+        <div class="tags"><span class="t">Лендинг</span><span class="t">RU / KZ</span><span class="t">React</span></div>
+      </div>
     </div>
     <div class="card">
-      <div class="ptype">Налоговый консалтинг</div>
-      <div class="pname">Сымбат — налоговый консультант</div>
-      <div class="pdesc">Двуязычный (RU/KZ) лендинг услуг: экспертное позиционирование, понятная структура, форма обращения.</div>
-      <div class="tags"><span class="t">Лендинг</span><span class="t">RU / KZ</span></div>
-    </div>
-  </div>
-
-  <div class="sec">Веб-сервисы и приложения</div>
-  <div class="grid">
-    <div class="card">
-      <div class="ptype">Строительство · SaaS</div>
-      <div class="pname">EPC Progress Hub</div>
-      <div class="pdesc">Веб-сервис учёта прогресса строительных проектов: отчёты, дашборды, экспорт. Сложная бизнес-логика под отрасль.</div>
-      <div class="tags"><span class="t">SaaS</span><span class="t">Дашборды</span><span class="t">Отчёты</span></div>
-    </div>
-    <div class="card">
-      <div class="ptype">Финансы · инструмент</div>
-      <div class="pname">Калькулятор юнит-экономики</div>
-      <div class="pdesc">Интерактивный калькулятор для расчёта экономики бизнеса — полезный лид-магнит и рабочий инструмент.</div>
-      <div class="tags"><span class="t">Калькулятор</span><span class="t">Лид-магнит</span></div>
+      <img class="shot" src="screenshots/agenio.png" alt="Agenio лендинг">
+      <div class="body">
+        <div class="ptype">Детское образование</div>
+        <div class="pname">Agenio</div>
+        <div class="pdesc">Лендинг центра образования: программы, запись на занятия, заявки в WhatsApp.</div>
+        <div class="tags"><span class="t">Лендинг</span><span class="t">Запись</span></div>
+      </div>
     </div>
   </div>
 
@@ -117,7 +123,6 @@
     <a class="btn" href="https://wa.me/77066567765">Написать в WhatsApp →</a>
   </div>
 
-  <p class="note">Живые демо проектов покажу по запросу.</p>
   <p class="sign">Сделано в KARINA Media · <a href="https://wa.me/77066567765">wa.me/77066567765</a></p>
 </div>
 </body>
