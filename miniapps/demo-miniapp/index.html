@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Живое демо · KARINA Media</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📲</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root{
+  --bg:#0e1014; --card:#181b22; --card2:#1f232c; --line:rgba(255,255,255,.08);
+  --ink:#f2f4f8; --muted:#9aa3b2; --dim:#69707d;
+  --accent:#e8b04b; --accent-ink:#1a1300;
+  --font:'Inter',-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);background:radial-gradient(900px 500px at 50% -8%,#1b2233,transparent),var(--bg);
+  color:var(--ink);min-height:100vh;display:flex;flex-direction:column;align-items:center;
+  padding:30px 16px 44px;-webkit-font-smoothing:antialiased}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+
+.cap{text-align:center;max-width:430px;margin-bottom:22px}
+.cap .tag{display:inline-block;font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;
+  color:var(--accent-ink);background:var(--accent);padding:5px 13px;border-radius:30px}
+.cap h1{font-size:23px;font-weight:700;margin:13px 0 6px;letter-spacing:-.01em}
+.cap p{font-size:13.5px;color:var(--muted);line-height:1.55}
+
+.phone{width:392px;max-width:100%;height:760px;background:var(--bg);border-radius:42px;
+  border:1px solid rgba(255,255,255,.14);box-shadow:0 40px 110px rgba(0,0,0,.6),0 0 0 10px #07080b,0 0 0 11px rgba(255,255,255,.06);
+  position:relative;overflow:hidden;display:flex;flex-direction:column}
+
+.tg-bar{flex-shrink:0;height:52px;display:flex;align-items:center;gap:10px;padding:0 15px;
+  background:rgba(13,15,19,.96);border-bottom:1px solid var(--line);z-index:5}
+.tg-bar .x{font-size:22px;color:var(--muted)}
+.tg-bar .lg{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;background:var(--card2);border:1px solid var(--line)}
+.tg-bar .tt{font-size:14px;font-weight:600;line-height:1.15}
+.tg-bar .tt small{display:block;font-size:11px;font-weight:400;color:#5fc97f;margin-top:1px}
+.tg-bar .more{margin-left:auto;font-size:19px;color:var(--muted)}
+
+.seg{flex-shrink:0;display:flex;gap:6px;padding:11px 14px 4px;background:rgba(13,15,19,.96)}
+.seg button{flex:1;font-size:12px;font-weight:600;padding:9px 4px;border-radius:11px;color:var(--muted);
+  background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;gap:3px;line-height:1.1}
+.seg button .si{font-size:17px}
+.seg button.on{color:var(--accent-ink);background:var(--accent);border-color:transparent}
+
+.view{flex:1;overflow-y:auto;overflow-x:hidden;padding:16px 15px 24px;scrollbar-width:none}
+.view::-webkit-scrollbar{display:none}
+
+.eyebrow{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.vtitle{font-size:20px;font-weight:700;margin:5px 0 14px;letter-spacing:-.01em}
+.steps{display:flex;gap:6px;margin:0 0 16px}
+.steps i{flex:1;height:4px;border-radius:4px;background:rgba(255,255,255,.1)}
+.steps i.on{background:var(--accent)}
+
+.item{display:flex;align-items:center;gap:13px;padding:13px;border:1px solid var(--line);border-radius:15px;
+  margin-bottom:10px;background:var(--card);transition:border-color .18s,background .18s}
+.item.sel{border-color:var(--accent);background:rgba(232,176,75,.08)}
+.item .ic{width:46px;height:46px;border-radius:13px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:24px}
+.item .tx{flex:1;min-width:0}
+.item .tx .n{font-size:14.5px;font-weight:600}
+.item .tx .d{font-size:12px;color:var(--muted);margin-top:2px}
+.item .pr{font-size:13px;font-weight:700;color:var(--accent);white-space:nowrap}
+.item .chk{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--accent-ink)}
+.item.sel .chk{background:var(--accent);border-color:transparent}
+
+.optgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.opt{padding:13px 4px;border:1px solid var(--line);border-radius:12px;text-align:center;background:var(--card);
+  font-size:13.5px;font-weight:600;transition:border-color .18s,background .18s}
+.opt small{display:block;font-size:11px;font-weight:400;color:var(--muted);margin-top:2px}
+.opt.sel{border-color:var(--accent);background:rgba(232,176,75,.1)}
+
+.sum{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:15px;margin-bottom:6px}
+.sum .row{display:flex;justify-content:space-between;font-size:13.5px;padding:6px 0}
+.sum .row .k{color:var(--muted)}
+.sum .row .v{font-weight:600;text-align:right}
+.hint{display:flex;gap:8px;font-size:12px;color:var(--muted);line-height:1.45;margin:14px 2px 0}
+
+.btn{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;padding:15px;border-radius:14px;
+  font-size:15px;font-weight:700;background:var(--accent);color:var(--accent-ink);transition:transform .12s,opacity .2s;margin-top:16px}
+.btn:active{transform:scale(.98)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);font-weight:600}
+.btn[disabled]{opacity:.35;pointer-events:none}
+
+.done{text-align:center;padding:14px 4px 0}
+.done .ring{width:84px;height:84px;border-radius:50%;margin:6px auto 16px;display:flex;align-items:center;justify-content:center;
+  font-size:40px;background:rgba(95,201,127,.12);border:1.5px solid #5fc97f}
+.done h2{font-size:22px;font-weight:700;margin-bottom:7px}
+.done .sub{font-size:13.5px;color:var(--muted);line-height:1.5;margin-bottom:20px}
+
+.owner{text-align:left;border-radius:16px;padding:15px;margin-top:4px;
+  background:linear-gradient(135deg,rgba(95,201,127,.12),rgba(95,201,127,.03));border:1px solid rgba(95,201,127,.28)}
+.owner .ohd{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#7fd99a;font-weight:700;margin-bottom:9px}
+.owner .obody{background:#0c1411;border:1px solid rgba(95,201,127,.18);border-radius:12px;padding:12px 13px;font-size:13px;line-height:1.5}
+.owner .obody b{color:#aef0c1}
+.owner .obody .when{display:block;font-size:11px;color:var(--dim);margin-top:7px}
+.note{font-size:12px;color:var(--muted);line-height:1.5;margin-top:14px}
+
+.toast{position:absolute;left:50%;bottom:24px;transform:translateX(-50%) translateY(16px);
+  background:var(--card2);border:1px solid var(--line);font-size:13px;font-weight:500;padding:11px 18px;border-radius:12px;
+  box-shadow:0 12px 36px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:all .28s;z-index:30;max-width:300px;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+.foot{margin-top:22px;font-size:11px;color:var(--dim);text-align:center;max-width:420px;line-height:1.6}
+.foot b{color:var(--accent)}
+.foot a{color:#6ea8fe;text-decoration:none}
+@media(max-width:440px){
+  body{padding:14px 0 30px}
+  .phone{height:90vh;border-radius:0;border:none;box-shadow:none}
+  .cap{padding:0 16px}
+}
+</style>
+</head>
+<body>
+
+<div class="cap">
+  <span class="tag">Живое демо</span>
+  <h1>Так это работает у вашего клиента</h1>
+  <p>Выберите нишу и пройдите путь сами — как будто вы клиент. В конце увидите, что в этот момент падает владельцу.</p>
+</div>
+
+<div class="phone">
+  <div class="tg-bar">
+    <span class="x">‹</span>
+    <span class="lg" id="brandIcon">💇</span>
+    <div class="tt"><span id="brandName">Студия красоты</span><small>mini app · demo</small></div>
+    <span class="more">⋮</span>
+  </div>
+
+  <div class="seg">
+    <button class="on" data-niche="salon" onclick="setNiche('salon')"><span class="si">💇</span>Салон</button>
+    <button data-niche="shop" onclick="setNiche('shop')"><span class="si">🛍</span>Магазин</button>
+    <button data-niche="service" onclick="setNiche('service')"><span class="si">📸</span>Услуги</button>
+  </div>
+
+  <div class="view" id="view"></div>
+  <div class="toast" id="toast"></div>
+</div>
+
+<div class="foot">
+  Демонстрационный пример. Бренды и данные вымышлены. <br>
+  Хотите такой же мини-апп под свою нишу — <b>KARINA Media</b> · <a href="https://t.me/karina_media_bot">@karina_media_bot</a>
+</div>
+
+<script>
+const tg=window.Telegram&&window.Telegram.WebApp;
+if(tg){tg.ready();tg.expand();}
+
+const NICHES={
+  salon:{
+    icon:'💇',name:'Студия красоты',eyebrow:'Онлайн-запись',
+    pickTitle:'Выберите услугу',optTitle:'Выберите время',action:'Записаться',
+    items:[
+      {ic:'💅',g:'#d96ba0,#7a2f55',n:'Маникюр + покрытие',d:'90 мин',p:'9 000 ₸'},
+      {ic:'✂️',g:'#6ea8fe,#2a4a8a',n:'Стрижка и укладка',d:'60 мин',p:'12 000 ₸'},
+      {ic:'🎨',g:'#e8b04b,#9c6f1d',n:'Окрашивание',d:'от 150 мин',p:'25 000 ₸'},
+      {ic:'👁',g:'#9d7bf0,#4a2f8a',n:'Брови + ламинирование',d:'45 мин',p:'8 000 ₸'},
+    ],
+    opts:['10:00','12:30','15:00','17:30','19:00','20:00'],optLabel:'сегодня',
+    owner:(s)=>`🔔 <b>Новая запись</b><br>${s.item.n} · ${s.opt}, сегодня<br>Клиент: Айгерим Н. · +7 707 ··· 41 09<span class="when">упала вам в Telegram через 0 сек после записи</span>`,
+    doneSub:'Клиент записался за 20 секунд — без звонка и переписки.'
+  },
+  shop:{
+    icon:'🛍',name:'Магазин одежды',eyebrow:'Каталог · заказ',
+    pickTitle:'Выберите товар',optTitle:'Выберите размер',action:'Заказать',
+    items:[
+      {ic:'👗',g:'#d96ba0,#7a2f55',n:'Платье миди',d:'Вискоза · 3 цвета',p:'24 900 ₸'},
+      {ic:'🧥',g:'#6ea8fe,#2a4a8a',n:'Пальто-халат',d:'Шерсть · oversize',p:'58 000 ₸'},
+      {ic:'👜',g:'#e8b04b,#9c6f1d',n:'Сумка кожаная',d:'Натуральная кожа',p:'42 000 ₸'},
+      {ic:'👟',g:'#7fd99a,#2f7a4f',n:'Кроссовки',d:'Кожа · унисекс',p:'33 000 ₸'},
+    ],
+    opts:['XS','S','M','L','XL','42'],optLabel:'размер',
+    owner:(s)=>`🔔 <b>Новый заказ</b><br>${s.item.n} · размер ${s.opt}<br>Оплата: Kaspi · ${s.item.p}<br>Клиент: Дана Т. · +7 701 ··· 88 23<span class="when">упал вам в Telegram через 0 сек после оформления</span>`,
+    doneSub:'Клиент собрал заказ сам — цена и размер сразу, без «напишите в директ».'
+  },
+  service:{
+    icon:'📸',name:'Фотограф',eyebrow:'Бронирование съёмки',
+    pickTitle:'Выберите формат',optTitle:'Выберите дату',action:'Оставить заявку',
+    items:[
+      {ic:'🤍',g:'#d96ba0,#7a2f55',n:'Индивидуальная',d:'1 час · 1 локация',p:'45 000 ₸'},
+      {ic:'👨‍👩‍👧',g:'#6ea8fe,#2a4a8a',n:'Семейная',d:'1.5 часа · студия',p:'65 000 ₸'},
+      {ic:'🛍',g:'#e8b04b,#9c6f1d',n:'Lookbook для бренда',d:'2 часа · 20 кадров',p:'90 000 ₸'},
+      {ic:'🎉',g:'#7fd99a,#2f7a4f',n:'Репортаж события',d:'3 часа',p:'120 000 ₸'},
+    ],
+    opts:['26 июн','27 июн','28 июн','30 июн','2 июл','5 июл'],optLabel:'дата',
+    owner:(s)=>`🔔 <b>Новая заявка на съёмку</b><br>${s.item.n} · ${s.opt}<br>Бюджет: ${s.item.p}<br>Клиент: Мадина Е. · +7 705 ··· 12 76<span class="when">упала вам в Telegram через 0 сек после заявки</span>`,
+    doneSub:'Клиент оставил заявку в момент, когда захотел — а не «когда-нибудь потом».'
+  }
+};
+
+let S={niche:'salon',step:1,item:null,opt:null};
+
+function setNiche(n){
+  S={niche:n,step:1,item:null,opt:null};
+  document.querySelectorAll('.seg button').forEach(b=>b.classList.toggle('on',b.dataset.niche===n));
+  document.getElementById('brandIcon').textContent=NICHES[n].icon;
+  document.getElementById('brandName').textContent=NICHES[n].name;
+  render();haptic();
+}
+function pickItem(i){S.item=NICHES[S.niche].items[i];render();haptic();}
+function pickOpt(o){S.opt=o;render();haptic();}
+function next(){if(S.step<3){S.step++;render();haptic();}}
+function back(){if(S.step>1){S.step--;render();haptic();}}
+function restart(){S={niche:S.niche,step:1,item:null,opt:null};render();haptic();}
+
+function render(){
+  const N=NICHES[S.niche],v=document.getElementById('view');
+  v.scrollTop=0;
+  if(S.step==='done'){renderDone();return;}
+  let h=`<span class="eyebrow">${N.eyebrow}</span>`;
+  const dots=[1,2,3].map(i=>`<i class="${i<=S.step?'on':''}"></i>`).join('');
+  if(S.step===1){
+    h+=`<div class="vtitle">${N.pickTitle}</div><div class="steps">${dots}</div>`;
+    h+=N.items.map((it,i)=>`
+      <div class="item ${S.item===it?'sel':''}" onclick="pickItem(${i})">
+        <div class="ic" style="background:linear-gradient(135deg,${it.g})">${it.ic}</div>
+        <div class="tx"><div class="n">${it.n}</div><div class="d">${it.d}</div></div>
+        <div class="pr">${it.p}</div>
+      </div>`).join('');
+    h+=`<button class="btn" ${S.item?'':'disabled'} onclick="next()">Далее</button>`;
+  }
+  else if(S.step===2){
+    h+=`<div class="vtitle">${N.optTitle}</div><div class="steps">${dots}</div>`;
+    h+=`<div style="font-size:12px;color:var(--muted);margin-bottom:10px">${N.optLabel}</div>`;
+    h+=`<div class="optgrid">`+N.opts.map(o=>`<button class="opt ${S.opt===o?'sel':''}" onclick="pickOpt('${o}')">${o}</button>`).join('')+`</div>`;
+    h+=`<button class="btn" ${S.opt?'':'disabled'} onclick="next()">Далее</button>`;
+    h+=`<button class="btn ghost" onclick="back()">Назад</button>`;
+  }
+  else if(S.step===3){
+    h+=`<div class="vtitle">Подтверждение</div><div class="steps">${dots}</div>`;
+    h+=`<div class="sum">
+        <div class="row"><span class="k">${S.niche==='shop'?'Товар':S.niche==='service'?'Формат':'Услуга'}</span><span class="v">${S.item.n}</span></div>
+        <div class="row"><span class="k">${S.niche==='shop'?'Размер':S.niche==='service'?'Дата':'Время'}</span><span class="v">${S.opt}${S.niche==='salon'?', сегодня':''}</span></div>
+        <div class="row"><span class="k">Сумма</span><span class="v" style="color:var(--accent)">${S.item.p}</span></div>
+      </div>
+      <div class="hint">⚡<span>Никаких переписок и ожидания ответа — клиент оформляет сам, в момент, когда захотел.</span></div>`;
+    h+=`<button class="btn" onclick="finish()">${N.action}</button>`;
+    h+=`<button class="btn ghost" onclick="back()">Назад</button>`;
+  }
+  v.innerHTML=h;
+}
+function renderDone(){
+  const N=NICHES[S.niche],v=document.getElementById('view');
+  v.innerHTML=`
+    <div class="done">
+      <div class="ring">✓</div>
+      <h2>Готово!</h2>
+      <div class="sub">${N.doneSub}</div>
+      <div class="owner">
+        <div class="ohd">📥 А вот что в этот момент пришло владельцу</div>
+        <div class="obody">${N.owner(S)}</div>
+      </div>
+      <div class="note">Ни один готовый клиент не потерялся в переписке. Так это работает 24/7 — ночью, в выходные, в час пик.</div>
+      <button class="btn" onclick="wantSame()">Хочу такой же под свою нишу</button>
+      <button class="btn ghost" onclick="restart()">🔁 Пройти ещё раз</button>
+    </div>`;
+  v.scrollTop=0;
+}
+function finish(){S.step='done';render();haptic();toast('Заявка отправлена ✓');}
+function wantSame(){
+  if(tg){tg.close();}
+  else{location.href='https://t.me/karina_media_bot';}
+}
+
+let tT;
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(tT);tT=setTimeout(()=>t.classList.remove('show'),1800);}
+function haptic(){if(tg&&tg.HapticFeedback)tg.HapticFeedback.impactOccurred('light');else if(navigator.vibrate)navigator.vibrate(8);}
+
+setNiche('salon');
+</script>
+</body>
+</html>
