@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1280px;height:880px;overflow:hidden}
+body{font-family:'Inter',-apple-system,sans-serif;background:#eef1f5;
+  display:flex;flex-direction:column;padding:38px 40px 26px}
+.top{text-align:center;margin-bottom:24px}
+.top h1{font-size:38px;font-weight:900;color:#161a22;letter-spacing:-.02em}
+.top p{font-size:19px;color:#5a6472;font-weight:500;margin-top:7px}
+
+.cols{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:26px;min-height:0}
+.card{border-radius:26px;padding:26px 26px 22px;display:flex;flex-direction:column;position:relative}
+.card.bad{background:#fdeceb;border:2px solid #f6c9c5}
+.card.good{background:#e9f7ee;border:2px solid #bfe7cd}
+
+.badge{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;
+  font-size:18px;font-weight:800;padding:9px 18px;border-radius:30px;margin-bottom:20px}
+.badge.bad{background:#e8453a;color:#fff}
+.badge.good{background:#1fa85a;color:#fff}
+
+.chat{flex:1;display:flex;flex-direction:column;gap:15px;justify-content:flex-start;padding-top:8px}
+.bub{max-width:80%;padding:13px 16px;border-radius:18px;font-size:19px;font-weight:500;line-height:1.35;position:relative}
+.bub .tm{display:block;font-size:13px;color:#9aa3b0;font-weight:500;margin-top:5px;text-align:right}
+.bub.in{align-self:flex-start;background:#fff;border:1px solid #e6e0df;color:#222;border-bottom-left-radius:5px}
+.bub.silence{align-self:flex-end;background:transparent;border:1px dashed #e0a59f;color:#c2473d;font-weight:600;font-size:17px;text-align:center;max-width:88%}
+
+/* good side phone */
+.phone{flex:1;display:flex;flex-direction:column;justify-content:flex-start;gap:15px;padding-top:8px}
+.scr{background:#fff;border:1px solid #d6e7dd;border-radius:18px;padding:18px 18px;box-shadow:0 8px 22px rgba(31,168,90,.10)}
+.scr .ttl{font-size:16px;font-weight:700;color:#161a22;margin-bottom:13px}
+.bigbtn{background:#1fa85a;color:#fff;font-size:21px;font-weight:800;text-align:center;padding:16px;border-radius:14px}
+.okrow{display:flex;align-items:center;gap:11px;margin-top:13px;font-size:18px;font-weight:700;color:#1fa85a}
+.okrow .ck{width:30px;height:30px;border-radius:50%;background:#1fa85a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px}
+.notif{display:flex;gap:13px;align-items:flex-start;background:#fff;border:1px solid #d6e7dd;border-radius:16px;padding:15px 16px;box-shadow:0 8px 22px rgba(31,168,90,.10)}
+.notif .bell{font-size:26px}
+.notif .nt{font-size:14px;font-weight:800;color:#1fa85a;letter-spacing:.02em;text-transform:uppercase}
+.notif .nd{font-size:18px;font-weight:600;color:#161a22;margin-top:3px}
+.notif .ns{font-size:14px;color:#7a8493;margin-top:4px}
+
+.concl{margin-top:18px;font-size:21px;font-weight:800;line-height:1.3}
+.concl.bad{color:#c2473d}
+.concl.good{color:#15904c}
+
+.foot{text-align:center;margin-top:20px;font-size:16px;color:#8a93a1;font-weight:600}
+.foot b{color:#161a22}
+</style>
+</head>
+<body>
+  <div class="top">
+    <h1>Клиент готов купить прямо сейчас</h1>
+    <p>Один написал ночью и ушёл. Другой — записался сам за 20 секунд. Разница только в одном.</p>
+  </div>
+
+  <div class="cols">
+    <!-- БЫЛО -->
+    <div class="card bad">
+      <span class="badge bad">❌ Как обычно</span>
+      <div class="chat">
+        <div class="bub in">Здравствуйте! Можно записаться?<span class="tm">23:14</span></div>
+        <div class="bub silence">…вы спите. Ответить некому.</div>
+        <div class="bub in">Уже не надо, записалась в другом месте 😔<span class="tm">09:02</span></div>
+      </div>
+      <div class="concl bad">Написал ночью — вы ответили утром.<br>Клиент ушёл, деньги мимо.</div>
+    </div>
+
+    <!-- СТАЛО -->
+    <div class="card good">
+      <span class="badge good">✅ Как у вас будет</span>
+      <div class="phone">
+        <div class="scr">
+          <div class="ttl">Запись · сегодня 19:00</div>
+          <div class="bigbtn">Записаться</div>
+          <div class="okrow"><span class="ck">✓</span> Готово! Вы записаны</div>
+        </div>
+        <div class="notif">
+          <span class="bell">🔔</span>
+          <div>
+            <div class="nt">Вам пришло сразу</div>
+            <div class="nd">Новая запись: сегодня в 19:00</div>
+            <div class="ns">Клиент: Айгерим · +7 707 ··· 41 09</div>
+          </div>
+        </div>
+      </div>
+      <div class="concl good">Клиент записался сам, за 20 секунд.<br>Вы при этом ничего не делали.</div>
+    </div>
+  </div>
+
+  <div class="foot">Сделано в <b>KARINA Media</b> · wa.me/77066567765</div>
+</body>
+</html>
