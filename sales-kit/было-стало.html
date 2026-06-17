@@ -26,20 +26,25 @@ body{font-family:'Inter',-apple-system,sans-serif;background:#eef1f5;
 .bub{max-width:80%;padding:13px 16px;border-radius:18px;font-size:19px;font-weight:500;line-height:1.35;position:relative}
 .bub .tm{display:block;font-size:13px;color:#9aa3b0;font-weight:500;margin-top:5px;text-align:right}
 .bub.in{align-self:flex-start;background:#fff;border:1px solid #e6e0df;color:#222;border-bottom-left-radius:5px}
-.bub.silence{align-self:flex-end;background:transparent;border:1px dashed #e0a59f;color:#c2473d;font-weight:600;font-size:17px;text-align:center;max-width:88%}
+.bub.out{align-self:flex-end;background:#dcf5e3;border:1px solid #c4ebd0;color:#173a26;border-bottom-right-radius:5px}
+.bub.silence{align-self:flex-end;background:transparent;border:1px dashed #e0a59f;color:#c2473d;font-weight:600;font-size:16px;text-align:center;max-width:88%}
 
 /* good side phone */
 .phone{flex:1;display:flex;flex-direction:column;justify-content:flex-start;gap:15px;padding-top:8px}
 .scr{background:#fff;border:1px solid #d6e7dd;border-radius:18px;padding:18px 18px;box-shadow:0 8px 22px rgba(31,168,90,.10)}
-.scr .ttl{font-size:16px;font-weight:700;color:#161a22;margin-bottom:13px}
-.bigbtn{background:#1fa85a;color:#fff;font-size:21px;font-weight:800;text-align:center;padding:16px;border-radius:14px}
-.okrow{display:flex;align-items:center;gap:11px;margin-top:13px;font-size:18px;font-weight:700;color:#1fa85a}
-.okrow .ck{width:30px;height:30px;border-radius:50%;background:#1fa85a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px}
+.scr .ttl{font-size:16px;font-weight:700;color:#161a22;margin-bottom:11px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.chip{font-size:14px;font-weight:600;padding:7px 13px;border-radius:30px;background:#f1f4f7;color:#5a6472;border:1px solid #e3e8ee}
+.chip.on{background:#1fa85a;color:#fff;border-color:#1fa85a}
+.daterow{display:flex;align-items:center;gap:9px;font-size:16px;font-weight:600;color:#161a22;margin-bottom:13px}
+.bigbtn{background:#1fa85a;color:#fff;font-size:20px;font-weight:800;text-align:center;padding:15px;border-radius:14px}
 .notif{display:flex;gap:13px;align-items:flex-start;background:#fff;border:1px solid #d6e7dd;border-radius:16px;padding:15px 16px;box-shadow:0 8px 22px rgba(31,168,90,.10)}
 .notif .bell{font-size:26px}
 .notif .nt{font-size:14px;font-weight:800;color:#1fa85a;letter-spacing:.02em;text-transform:uppercase}
 .notif .nd{font-size:18px;font-weight:600;color:#161a22;margin-top:3px}
 .notif .ns{font-size:14px;color:#7a8493;margin-top:4px}
+.confirmrow{display:flex;align-items:center;gap:11px;font-size:17px;font-weight:700;color:#15904c}
+.confirmrow .ck{width:30px;height:30px;border-radius:50%;background:#1fa85a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
 
 .concl{margin-top:18px;font-size:21px;font-weight:800;line-height:1.3}
 .concl.bad{color:#c2473d}
@@ -51,8 +56,8 @@ body{font-family:'Inter',-apple-system,sans-serif;background:#eef1f5;
 </head>
 <body>
   <div class="top">
-    <h1>Клиент готов купить прямо сейчас</h1>
-    <p>Один написал ночью и ушёл. Другой — записался сам за 20 секунд. Разница только в одном.</p>
+    <h1>Клиент готов записаться прямо сейчас</h1>
+    <p>Один не дождался ответа и ушёл. Другой — выбрал и забронировал сам. Разница только в одном.</p>
   </div>
 
   <div class="cols">
@@ -62,9 +67,10 @@ body{font-family:'Inter',-apple-system,sans-serif;background:#eef1f5;
       <div class="chat">
         <div class="bub in">Здравствуйте! Можно записаться?<span class="tm">23:14</span></div>
         <div class="bub silence">…вы спите. Ответить некому.</div>
+        <div class="bub out">Здравствуйте! В какое время вам удобно?<span class="tm">09:00</span></div>
         <div class="bub in">Уже не надо, записалась в другом месте 😔<span class="tm">09:02</span></div>
       </div>
-      <div class="concl bad">Написал ночью — вы ответили утром.<br>Клиент ушёл, деньги мимо.</div>
+      <div class="concl bad">Вы ответили утром — но клиент<br>уже ушёл к конкуренту.</div>
     </div>
 
     <!-- СТАЛО -->
@@ -72,20 +78,25 @@ body{font-family:'Inter',-apple-system,sans-serif;background:#eef1f5;
       <span class="badge good">✅ Как у вас будет</span>
       <div class="phone">
         <div class="scr">
-          <div class="ttl">Запись · сегодня 19:00</div>
-          <div class="bigbtn">Записаться</div>
-          <div class="okrow"><span class="ck">✓</span> Готово! Вы записаны</div>
+          <div class="ttl">Клиент выбирает сам — что нужно:</div>
+          <div class="chips">
+            <span class="chip on">Стрижка</span><span class="chip">Маникюр</span>
+            <span class="chip">Косметология</span><span class="chip">Товар</span>
+          </div>
+          <div class="daterow">📅 Завтра, 11:00</div>
+          <div class="bigbtn">Забронировать</div>
         </div>
         <div class="notif">
           <span class="bell">🔔</span>
           <div>
-            <div class="nt">Вам пришло сразу</div>
-            <div class="nd">Новая запись: сегодня в 19:00</div>
+            <div class="nt">Наутро запись уже у вас</div>
+            <div class="nd">Стрижка · завтра в 11:00</div>
             <div class="ns">Клиент: Айгерим · +7 707 ··· 41 09</div>
           </div>
         </div>
+        <div class="confirmrow"><span class="ck">✓</span> Остаётся подтвердить клиенту</div>
       </div>
-      <div class="concl good">Клиент записался сам, за 20 секунд.<br>Вы при этом ничего не делали.</div>
+      <div class="concl good">Клиент выбрал и забронировал сам.<br>Вы просто подтверждаете запись.</div>
     </div>
   </div>
 
