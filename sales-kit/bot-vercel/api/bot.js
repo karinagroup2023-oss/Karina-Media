@@ -106,6 +106,7 @@ const PRICES = `💰 <b>Цены KARINA Media</b>
 // --- Клавиатуры ---
 function mainMenu() {
   return new InlineKeyboard()
+    .webApp("Открыть мини-апп KARINA", "https://bot-vercel-five.vercel.app/app/").row()
     .text("🎬 Показать работы под вашу сферу", "demo").row()
     .text("💰 Цены", "prices").text("📝 Оставить заявку", "lead").row()
     .text("📞 Записаться на созвон", "call");
