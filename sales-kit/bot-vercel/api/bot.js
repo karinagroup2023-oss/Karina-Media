@@ -116,8 +116,8 @@ function nicheMenu() {
   kb.text("⬅️ Назад", "back");
   return kb;
 }
-const afterDemo = () => new InlineKeyboard().text("📝 Оставить заявку", "lead").row().text("🎬 Другая сфера", "demo").text("⬅️ Меню", "back");
-const backMenu = () => new InlineKeyboard().text("📝 Оставить заявку", "lead").text("⬅️ Меню", "back");
+const afterDemo = () => new InlineKeyboard().text("📝 Оставить заявку", "lead").row().text("💬 Скинуть контакт", "quickcontact").row().text("🎬 Другая сфера", "demo").text("⬅️ Меню", "back");
+const backMenu = () => new InlineKeyboard().text("📝 Оставить заявку", "lead").row().text("💬 Скинуть контакт", "quickcontact").row().text("⬅️ Меню", "back");
 const toMenu = () => new InlineKeyboard().text("⬅️ В меню", "back");
 function productMenu() {
   return new InlineKeyboard()
@@ -262,6 +262,13 @@ bot.callbackQuery("call", async (ctx) => {
   await ctx.reply("📞 Запишемся на короткий созвон (15 мин).\n\n<b>1/3.</b> Как вас зовут?", { parse_mode: "HTML" });
 });
 
+// --- Быстрый контакт (для тех, кто посмотрел и завис) ---
+bot.callbackQuery("quickcontact", async (ctx) => {
+  ctx.session.step = "quick_phone"; ctx.session.data = { type: "quick" };
+  await ctx.answerCallbackQuery();
+  await ctx.reply("Скинь телефон (WhatsApp) или @ник — Еркин вечером лично пришлёт пример под твою нишу. Без спама.");
+});
+
 // --- FSM по тексту ---
 bot.on("message:text", async (ctx) => {
   if (ctx.message.text.startsWith("/")) return;
@@ -291,6 +298,11 @@ bot.on("message:text", async (ctx) => {
       const name = s.data.name;
       await saveLead(ctx, s.data); s.data = {};
       return ctx.reply(`Готово, ${name}! 📞 Еркин лично спишется с вами в указанное время.`, { reply_markup: toMenu() });
+    }
+    case "quick_phone": {
+      s.data.phone = text; s.step = "idle";
+      await saveLead(ctx, s.data); s.data = {};
+      return ctx.reply("Принял 🙌 Еркин свяжется лично сегодня вечером и пришлёт пример под твою нишу.", { reply_markup: toMenu() });
     }
     default:
       return ctx.reply("Нажмите кнопку в меню 👇", { reply_markup: mainMenu() });
