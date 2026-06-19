@@ -13,8 +13,6 @@ const NICHES = [
   { key:"education", name:"Обучение", img:"img/education.jpg", demo:"https://agenio-website.vercel.app/miniapp.html" },
 ];
 
-function openDemo(url){ tg?.openLink ? tg.openLink(url) : window.open(url,"_blank"); }
-
 const screens = {};
 
 screens.showroom = function(){
@@ -30,10 +28,21 @@ screens.showroom = function(){
   app.querySelectorAll(".tile").forEach(t => t.onclick = () => {
     const n = NICHES.find(x => x.key === t.dataset.key);
     state.niche = n.name;
-    openDemo(n.demo);
-    go(screens.template);
+    state.demoUrl = n.demo;
+    go(screens.demo);
   });
-  document.getElementById("wantBtn").onclick = () => go(screens.lead);
+  document.getElementById("wantBtn").onclick = () => go(screens.template);
+};
+
+screens.demo = function(){
+  sub.textContent = state.niche ? `Пример: ${state.niche}` : "Живой пример";
+  tg?.BackButton?.show(); tg?.BackButton?.onClick(()=>go(screens.showroom));
+  app.innerHTML = `
+    <div class="demobar"><button class="back" id="backNiches">← Ниши</button><span>Так это работает вживую</span></div>
+    <div class="frame"><iframe src="${state.demoUrl}" title="demo" loading="lazy"></iframe></div>
+    <button class="cta sticky" id="wantThis">Сделать такой мне</button>`;
+  document.getElementById("backNiches").onclick = () => go(screens.showroom);
+  document.getElementById("wantThis").onclick = () => go(screens.lead);
 };
 
 screens.template = function(){
