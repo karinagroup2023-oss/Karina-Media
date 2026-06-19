@@ -140,7 +140,9 @@ async function saveLead(ctx, d) {
     });
   } catch (e) { console.error("insert lead:", e.message); }
   if (OWNER) {
-    const text = `🔥 <b>Новая ${d.type === "call" ? "запись на созвон" : "заявка"}!</b>
+    const hot = d.urgency === "Срочно";
+    const kind = d.type === "call" ? "запись на созвон" : d.type === "quick" ? "контакт" : "заявка";
+    const text = `${hot ? "🔥🔥 СРОЧНО — " : "🔥 "}<b>Новая ${kind}!</b>
 
 🎯 Продукт: ${d.product || "—"}
 🏢 Ниша: ${d.niche || "—"}
