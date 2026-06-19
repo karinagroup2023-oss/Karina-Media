@@ -30,7 +30,13 @@
 
 > Сюда дописывайте: серверы (VPS, IP, доступы), домены, базы данных, ключевые шаблоны deploy-команд. Чтобы Агент мог работать с инфраструктурой не переспрашивая.
 
-*Пока пусто. Появится когда заведёте свой сервер или домен.*
+**Бот-воронка продаж @karina_media_bot** (приём заявок, кассовый спринт):
+- Код: `Karina-Media/sales-kit/bot-vercel` (webhook-версия на grammY). Long-polling-копия — `sales-kit/bot` (локальная, не использовать одновременно с webhook).
+- Хостинг: Vercel, проект `bot-vercel` (team karinagroup2023-6262), прод-домен `https://bot-vercel-five.vercel.app`, webhook `/api/bot`. Деплой: `cd sales-kit/bot-vercel && vercel --prod --yes` (CLI авторизован).
+- БД: Supabase проект `epc-progress-hub` (id kvhzixsmbqaoxdkofdbi), таблицы `bot_sessions/bot_leads/bot_users` (RLS + anon-политики). Заявки также падают в TG-группу «Заявки KARINA Media» (OWNER_CHAT_ID -5408311639). TODO: вынести таблицы бота в отдельный Supabase-проект.
+- Меню-кнопка бота открывает портфолио как mini-app: `https://karina-portfolio-two-tawny.vercel.app`.
+
+**Kaspi оплата (приём денег):** https://pay.kaspi.kz/pay/quynakyc — ссылка для оплаты клиентами. Условие: 100% сразу → скидка 10% (решение по спринту), иначе 50/50.
 
 ---
 
@@ -74,7 +80,7 @@
 Пример формата:
 > `knowledge/brandbook.md` — стиль и голос автора. Читать когда пишу пост, презентацию или любой публичный текст.
 
-*Пока пусто.*
+> `knowledge/audience-mentality.md` — менталитет аудитории по гео (Казахстан vs Россия vs Запад, по Хофстеде). Читать перед оффером, продающим текстом или кампанией на конкретное гео. Поддерживает karina-research.
 
 ---
 
