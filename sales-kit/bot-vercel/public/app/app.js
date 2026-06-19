@@ -2,15 +2,28 @@ const tg = window.Telegram?.WebApp;
 tg?.ready(); tg?.expand();
 const app = document.getElementById("app");
 const sub = document.getElementById("hdSub");
-const state = { niche: null };
+const state = { niche: null, nicheObj: null, demoUrl: null, demoLabel: null };
 
 function go(screen){ window.scrollTo(0,0); screen(); }
 
+// В каждой нише — варианты по формату (мини-апп / сайт). Только реальные демо.
 const NICHES = [
-  { key:"beauty",    name:"Бьюти",    img:"img/beauty.jpg",    demo:"https://drelima-miniapp.vercel.app" },
-  { key:"shop",      name:"Магазин",  img:"img/shop.jpg",      demo:"https://nura-store-liard.vercel.app" },
-  { key:"services",  name:"Услуги",   img:"img/services.jpg",  demo:"https://app-ivory-five-19.vercel.app" },
-  { key:"education", name:"Обучение", img:"img/education.jpg", demo:"https://agenio-website.vercel.app/miniapp.html" },
+  { key:"beauty", name:"Бьюти", img:"img/beauty.jpg", demos:[
+    { kind:"Мини-апп", url:"https://drelima-miniapp.vercel.app" },
+    { kind:"Сайт",     url:"https://velvet-studio-eight.vercel.app" },
+  ]},
+  { key:"shop", name:"Магазин", img:"img/shop.jpg", demos:[
+    { kind:"Сайт — одежда",   url:"https://nura-store-liard.vercel.app" },
+    { kind:"Сайт — косметика", url:"https://glowseoul-ruby.vercel.app" },
+  ]},
+  { key:"services", name:"Услуги", img:"img/services.jpg", demos:[
+    { kind:"Мини-апп", url:"https://app-ivory-five-19.vercel.app" },
+    { kind:"Сайт",     url:"https://symbat-website.vercel.app" },
+  ]},
+  { key:"education", name:"Обучение", img:"img/education.jpg", demos:[
+    { kind:"Мини-апп", url:"https://agenio-website.vercel.app/miniapp.html" },
+    { kind:"Сайт",     url:"https://studyme-self.vercel.app" },
+  ]},
 ];
 
 const screens = {};
@@ -22,31 +35,52 @@ screens.showroom = function(){
     `<div class="tile" data-key="${n.key}"><img src="${n.img}" alt=""><div class="ov"></div><div class="nm">${n.name}</div></div>`
   ).join("");
   app.innerHTML = `
-    <p class="lbl">Выбери свою сферу — покажу живой пример</p>
+    <p class="lbl">Выбери свою сферу — покажу живые примеры</p>
     <div class="grid2">${tiles}</div>
     <button class="cta sticky" id="wantBtn">Хочу себе такой</button>`;
   app.querySelectorAll(".tile").forEach(t => t.onclick = () => {
-    const n = NICHES.find(x => x.key === t.dataset.key);
-    state.niche = n.name;
-    state.demoUrl = n.demo;
-    go(screens.demo);
+    state.nicheObj = NICHES.find(x => x.key === t.dataset.key);
+    state.niche = state.nicheObj.name;
+    go(screens.niche);
   });
   document.getElementById("wantBtn").onclick = () => go(screens.template);
 };
 
-screens.demo = function(){
-  sub.textContent = state.niche ? `Пример: ${state.niche}` : "Живой пример";
+screens.niche = function(){
+  const n = state.nicheObj;
+  sub.textContent = `Пример: ${n.name}`;
   tg?.BackButton?.show(); tg?.BackButton?.onClick(()=>go(screens.showroom));
+  const opts = n.demos.map((d,i) =>
+    `<div class="opt" data-i="${i}"><img class="th" src="${n.img}" alt=""><div><div class="ot">${d.kind}</div><div class="os">посмотреть вживую</div></div><div class="ar">→</div></div>`
+  ).join("");
   app.innerHTML = `
-    <div class="demobar"><button class="back" id="backNiches">← Ниши</button><span>Так это работает вживую</span></div>
-    <div class="frame"><iframe src="${state.demoUrl}" title="demo" loading="lazy"></iframe></div>
-    <button class="cta sticky" id="wantThis">Сделать такой мне</button>`;
-  document.getElementById("backNiches").onclick = () => go(screens.showroom);
+    <p class="lbl">Два формата — посмотри оба и выбери</p>
+    ${opts}
+    <button class="cta sticky" id="mineBtn">Сделать такой мне</button>`;
+  app.querySelectorAll(".opt").forEach(o => o.onclick = () => {
+    const d = n.demos[+o.dataset.i];
+    state.demoUrl = d.url;
+    state.demoLabel = `${n.name} · ${d.kind}`;
+    go(screens.demo);
+  });
+  document.getElementById("mineBtn").onclick = () => go(screens.lead);
+};
+
+screens.demo = function(){
+  sub.textContent = state.demoLabel || "Живой пример";
+  tg?.BackButton?.show(); tg?.BackButton?.onClick(()=>go(screens.niche));
+  app.innerHTML = `
+    <div class="demoview">
+      <div class="dbar"><button class="back" id="backNiche">← Назад</button><span>${state.demoLabel||""}</span></div>
+      <iframe src="${state.demoUrl}" title="demo" loading="lazy"></iframe>
+      <button class="cta" id="wantThis">Сделать такой мне</button>
+    </div>`;
+  document.getElementById("backNiche").onclick = () => go(screens.niche);
   document.getElementById("wantThis").onclick = () => go(screens.lead);
 };
 
 screens.template = function(){
-  sub.textContent = state.niche ? `Пример: ${state.niche}` : "Так это будет у тебя";
+  sub.textContent = "Так это будет у тебя";
   tg?.BackButton?.show(); tg?.BackButton?.onClick(()=>go(screens.showroom));
   app.innerHTML = `
     <p class="lbl">Каталог / услуги</p>
@@ -101,6 +135,7 @@ async function submitLead(){
     });
     const j = await r.json();
     if(j.ok){
+      tg?.BackButton?.hide();
       app.innerHTML = `<div class="ok"><h2>Заявка принята</h2><p>Еркин свяжется с вами лично сегодня вечером. Место и условия придержим.</p><button class="cta" id="backBtn">В начало</button></div>`;
       document.getElementById("backBtn").onclick = () => go(screens.showroom);
     } else { throw new Error(j.error||"fail"); }
