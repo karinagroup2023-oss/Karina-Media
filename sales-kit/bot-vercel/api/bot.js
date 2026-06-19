@@ -99,7 +99,9 @@ const PRICES = `💰 <b>Цены KARINA Media</b>
 Меню, услуги, форма заявки, уведомления.
 
 ⚡️ <b>Срок — от старта работ:</b> отсчёт с момента получения материалов и согласований. Чем быстрее ваши ответы — тем быстрее запуск.
-Оплата 100% сразу — <b>скидка 15%</b>. Kaspi / счёт ТОО.`;
+
+💳 <b>Оплата:</b> Kaspi 👉 https://pay.kaspi.kz/pay/quynakyc
+100% сразу — <b>скидка 10%</b> (или счёт ТОО).`;
 
 // --- Клавиатуры ---
 function mainMenu() {
@@ -276,7 +278,7 @@ bot.on("message:text", async (ctx) => {
       s.data.phone = text; s.step = "idle";
       const name = s.data.name;
       await saveLead(ctx, s.data); s.data = {};
-      return ctx.reply(`Спасибо, ${name}! 🙌 Заявка принята.\n\nСвяжусь с вами в ближайшее время, покажу демо под вашу нишу и обсудим детали.`, { reply_markup: toMenu() });
+      return ctx.reply(`Спасибо, ${name}! 🙌 Заявка принята.\n\nЕркин свяжется с вами лично сегодня вечером — покажет пример под вашу нишу и обсудит детали. Место и условия придержим.`, { reply_markup: toMenu() });
     }
     case "call_name":
       s.data.name = text; s.step = "call_phone";
@@ -288,7 +290,7 @@ bot.on("message:text", async (ctx) => {
       s.data.time = text; s.step = "idle";
       const name = s.data.name;
       await saveLead(ctx, s.data); s.data = {};
-      return ctx.reply(`Готово, ${name}! 📞 Спишемся в указанное время.`, { reply_markup: toMenu() });
+      return ctx.reply(`Готово, ${name}! 📞 Еркин лично спишется с вами в указанное время.`, { reply_markup: toMenu() });
     }
     default:
       return ctx.reply("Нажмите кнопку в меню 👇", { reply_markup: mainMenu() });
