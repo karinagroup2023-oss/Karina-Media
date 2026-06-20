@@ -11,3 +11,4 @@ node_modules/
 # Отдельный проект со своим git-репозиторием и .env-секретами — не включать в этот репо
 projects/epc-progress-hub/
 .superpowers/
+sales-kit/Сбор_заявок_без_потерь.mp4
