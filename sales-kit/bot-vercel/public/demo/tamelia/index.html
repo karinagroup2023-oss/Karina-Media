@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tamelia — женская одежда 42–62 | Астана · Демо KARINA Media</title>
+<meta name="description" content="Tamelia — женская одежда размеров 42–62. Подберём одежду под любую фигуру. Каталог, доставка по Казахстану, оплата Kaspi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Fashion catalog — marketplace product grid. Couture-light. */
+:root{--bg:#faf6f1;--surface:#fffdfa;--ink:#241c1a;--muted:#8a7d76;--line:#ece3da;--wine:#9d3b52;--wine-soft:#f4e6ea}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Manrope",sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+.serif{font-family:"Prata",serif;font-weight:400}
+h1,h2,h3{font-family:"Prata",serif;font-weight:400;line-height:1.1;letter-spacing:.005em}
+h1{font-size:clamp(40px,7vw,78px);line-height:1.04}
+h2{font-size:clamp(28px,4vw,46px)}
+h3{font-size:19px}
+section{padding:clamp(56px,8vw,100px) 0}
+.wine{color:var(--wine)}
+.kick{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--wine);font-weight:600}
+.lead{font-size:clamp(17px,2vw,21px);color:var(--muted);max-width:46ch}
+.btn{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:15px;padding:14px 28px;border-radius:100px;transition:.25s;cursor:pointer;border:1.5px solid var(--ink)}
+.btn:hover{transform:translateY(-2px)}
+.btn-dark{background:var(--ink);color:var(--bg)}
+.btn-dark:hover{background:var(--wine);border-color:var(--wine)}
+.btn-wa{background:#25d366;border-color:#25d366;color:#fff}
+.btn-line{background:transparent}
+.btn-line:hover{background:var(--ink);color:var(--bg)}
+nav{position:sticky;top:0;z-index:30;background:rgba(250,246,241,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav .row{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+nav .logo{font-family:"Prata",serif;font-size:26px;letter-spacing:.06em}
+nav .links{display:flex;gap:30px}
+nav .links a{font-size:14px;color:var(--muted);font-weight:500}
+nav .links a:hover{color:var(--ink)}
+.hero{padding:clamp(50px,7vw,90px) 0 clamp(40px,5vw,60px)}
+.hero .grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+.hero .art{aspect-ratio:4/5;border-radius:8px;background:
+  linear-gradient(150deg,#caa39c,#9d3b52 70%);position:relative;overflow:hidden}
+.hero .art::after{content:"TAMELIA";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:"Prata",serif;font-size:clamp(28px,4vw,46px);color:rgba(255,255,255,.85);letter-spacing:.1em}
+.pills{display:flex;gap:18px;flex-wrap:wrap;margin-top:20px}
+.pill-stat b{font-family:"Prata",serif;font-size:30px}
+.pill-stat span{color:var(--muted);font-size:14px;display:block}
+/* catalog */
+.cats{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 30px}
+.cat{background:var(--surface);border:1px solid var(--line);border-radius:100px;padding:10px 20px;font-weight:600;font-size:14px;cursor:pointer;transition:.2s}
+.cat.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.prod{background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;transition:.25s}
+.prod:hover{transform:translateY(-5px);box-shadow:0 20px 40px -24px rgba(36,28,26,.45)}
+.prod .ph{aspect-ratio:3/4}
+.prod .info{padding:16px}
+.prod .nm{font-family:"Prata",serif;font-size:17px}
+.prod .pr{font-weight:700;margin-top:4px}
+.prod .sz{color:var(--muted);font-size:12px;margin-top:6px;letter-spacing:.02em}
+.stock{display:inline-block;font-size:11px;color:#2e7d4f;background:#e6f4ec;border-radius:100px;padding:3px 9px;margin-top:8px}
+/* why */
+.why{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.feat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:26px}
+.feat .ic{font-size:26px}
+.feat h3{margin:12px 0 6px}
+.feat p{color:var(--muted);font-size:14px}
+/* reviews */
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+.rev{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px}
+.rev .stars{color:#e0a92b;letter-spacing:2px}
+.rev p{margin:10px 0;font-size:15px}
+.rev .who{color:var(--muted);font-size:13px}
+.cta{background:var(--wine);color:#fff;border-radius:18px;padding:clamp(40px,7vw,76px);text-align:center}
+.cta h2{color:#fff}
+footer{background:var(--ink);color:var(--bg);margin-top:40px}
+footer .grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:34px;padding:56px 0 30px}
+footer a{color:#e7ddd6}
+footer .col strong{display:block;margin-bottom:12px}
+footer .col a{display:block;color:#c9bdb4;margin-bottom:8px;font-size:15px}
+footer .bottom{border-top:1px solid #392e2a;padding:20px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;color:#9a8d84;font-size:13px}
+.badge{display:inline-block;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#9a8d84;border:1px solid #392e2a;padding:5px 11px;border-radius:100px}
+@media(max-width:980px){.products{grid-template-columns:repeat(2,1fr)}.why{grid-template-columns:1fr 1fr}}
+@media(max-width:760px){.hero .grid{grid-template-columns:1fr}.hero .art{order:-1}.revs,footer .grid{grid-template-columns:1fr}nav .links{display:none}}
+@media(max-width:520px){.products,.why{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap row">
+  <div class="logo">Tamelia</div>
+  <div class="links"><a href="#catalog">Каталог</a><a href="#why">О нас</a><a href="#reviews">Отзывы</a><a href="#contact">Контакты</a></div>
+  <a class="btn btn-wa" href="https://wa.me/77027315093" target="_blank" rel="noopener" style="padding:9px 18px">WhatsApp</a>
+</div></nav>
+
+<header class="hero"><div class="wrap grid">
+  <div>
+    <span class="kick">Женская одежда · Астана</span>
+    <h1 style="margin:18px 0 0">Одежда, в которой вы — <span class="wine">главная</span></h1>
+    <p class="lead" style="margin-top:22px">Размерный ряд 42–62. Подберём образ под любую фигуру — элегантно и по фигуре.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:30px">
+      <a class="btn btn-dark" href="#catalog">Смотреть каталог</a>
+      <a class="btn btn-line" href="https://wa.me/77027315093" target="_blank" rel="noopener">Написать в WhatsApp</a>
+    </div>
+    <div class="pills">
+      <div class="pill-stat"><b>42–62</b><span>размеры</span></div>
+      <div class="pill-stat"><b>5,0★</b><span>28 оценок в 2ГИС</span></div>
+      <div class="pill-stat"><b>Kaspi</b><span>оплата и рассрочка</span></div>
+    </div>
+  </div>
+  <div class="art"></div>
+</div></header>
+
+<section id="catalog" style="padding-top:20px"><div class="wrap">
+  <span class="kick">Каталог</span>
+  <h2 style="margin:12px 0 26px">Новая коллекция</h2>
+  <div class="cats" id="cats">
+    <button class="cat on" data-cat="all">Все</button>
+    <button class="cat" data-cat="dress">Платья</button>
+    <button class="cat" data-cat="blouse">Блузки</button>
+    <button class="cat" data-cat="suit">Костюмы</button>
+    <button class="cat" data-cat="outer">Верхняя одежда</button>
+  </div>
+  <div class="products" id="products">
+    <div class="prod" data-cat="dress"><div class="ph" style="background:linear-gradient(160deg,#b98a86,#7a3b4f)"></div><div class="info"><div class="nm">Платье миди «Аврора»</div><div class="pr">24 900 ₸</div><div class="sz">Размеры 42–60</div><br><span class="stock">В наличии</span></div></div>
+    <div class="prod" data-cat="blouse"><div class="ph" style="background:linear-gradient(160deg,#e3d3c4,#c2a98f)"></div><div class="info"><div class="nm">Блуза «Шёлк»</div><div class="pr">15 900 ₸</div><div class="sz">Размеры 42–62</div><br><span class="stock">В наличии</span></div></div>
+    <div class="prod" data-cat="suit"><div class="ph" style="background:linear-gradient(160deg,#9aa0a6,#565d63)"></div><div class="info"><div class="nm">Костюм «Бизнес»</div><div class="pr">39 900 ₸</div><div class="sz">Размеры 44–58</div><br><span class="stock">В наличии</span></div></div>
+    <div class="prod" data-cat="outer"><div class="ph" style="background:linear-gradient(160deg,#c2b29a,#7c6a4f)"></div><div class="info"><div class="nm">Пальто «Осень»</div><div class="pr">49 900 ₸</div><div class="sz">Размеры 42–60</div><br><span class="stock">В наличии</span></div></div>
+    <div class="prod" data-cat="dress"><div class="ph" style="background:linear-gradient(160deg,#8d6f86,#4f2f4a)"></div><div class="info"><div class="nm">Платье-футляр «Нур»</div><div class="pr">27 900 ₸</div><div class="sz">Размеры 44–62</div><br><span class="stock">В наличии</span></div></div>
+    <div class="prod" data-cat="blouse"><div class="ph" style="background:linear-gradient(160deg,#d8c0c2,#a8767e)"></div><div class="info"><div class="nm">Блуза «Астана»</div><div class="pr">17 900 ₸</div><div class="sz">Размеры 42–58</div><br><span class="stock">В наличии</span></div></div>
+    <div class="prod" data-cat="suit"><div class="ph" style="background:linear-gradient(160deg,#a99f93,#5f574c)"></div><div class="info"><div class="nm">Брючный костюм «Леди»</div><div class="pr">44 900 ₸</div><div class="sz">Размеры 44–60</div><br><span class="stock">Под заказ</span></div></div>
+    <div class="prod" data-cat="outer"><div class="ph" style="background:linear-gradient(160deg,#9d8f88,#564b46)"></div><div class="info"><div class="nm">Тренч «Классик»</div><div class="pr">42 900 ₸</div><div class="sz">Размеры 42–56</div><br><span class="stock">В наличии</span></div></div>
+  </div>
+</div></section>
+
+<section id="why" style="background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap">
+  <span class="kick">Почему Tamelia</span>
+  <h2 style="margin:12px 0 30px;max-width:20ch">Одеваем красиво — любую фигуру</h2>
+  <div class="why">
+    <div class="feat"><div class="ic">📏</div><h3>Размеры 42–62</h3><p>Полный ряд в наличии — от S до plus-size.</p></div>
+    <div class="feat"><div class="ic">👗</div><h3>Подбор по фигуре</h3><p>Поможем собрать образ, который сидит идеально.</p></div>
+    <div class="feat"><div class="ic">🚚</div><h3>Доставка по РК</h3><p>Отправляем по всему Казахстану, примерка при получении.</p></div>
+    <div class="feat"><div class="ic">💳</div><h3>Оплата Kaspi</h3><p>Картой, переводом или в рассрочку 0-0-12.</p></div>
+  </div>
+</div></section>
+
+<section id="reviews"><div class="wrap">
+  <span class="kick">Отзывы · 5,0★ в 2ГИС</span>
+  <h2 style="margin:12px 0 0">Нас рекомендуют</h2>
+  <div class="revs">
+    <div class="rev"><div class="stars">★★★★★</div><p>Наконец-то магазин, где есть мой размер и всё красиво. Консультант подобрала идеальное платье.</p><div class="who">Айгуль, Астана</div></div>
+    <div class="rev"><div class="stars">★★★★★</div><p>Качество тканей супер, сидит по фигуре. Заказывала с доставкой — всё быстро.</p><div class="who">Динара, Караганда</div></div>
+    <div class="rev"><div class="stars">★★★★★</div><p>Беру здесь костюмы на работу. Размер 58 — выбор реально большой. Рекомендую!</p><div class="who">Сауле, Астана</div></div>
+  </div>
+</div></section>
+
+<section id="contact" style="padding-top:0"><div class="wrap">
+  <div class="cta">
+    <h2 style="max-width:18ch;margin:0 auto">Подберём образ под вашу фигуру</h2>
+    <p class="lead" style="color:#f3d9df;margin:16px auto 28px">Напишите в WhatsApp — пришлём актуальные модели в вашем размере и поможем с выбором.</p>
+    <a class="btn btn-wa" href="https://wa.me/77027315093" target="_blank" rel="noopener" style="font-size:16px">Написать в WhatsApp →</a>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="grid">
+    <div class="col">
+      <div class="logo serif" style="font-size:26px">Tamelia</div>
+      <p style="color:#c9bdb4;margin-top:12px;max-width:30ch">Женская одежда 42–62. Подберём одежду под любую фигуру.</p>
+    </div>
+    <div class="col"><strong>Контакты</strong>
+      <a href="tel:+77027315093">+7 702 731 5093</a>
+      <a href="https://wa.me/77027315093" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="https://instagram.com/tamelia_official" target="_blank" rel="noopener">Instagram @tamelia_official</a>
+    </div>
+    <div class="col"><strong>Магазин</strong>
+      <a href="https://2gis.kz/astana/firm/70000001111703023" target="_blank" rel="noopener">пр. Мангилик Ел, 59, Астана</a>
+      <span style="color:#c9bdb4;font-size:15px">Ежедневно 11:00–21:00</span>
+    </div>
+  </div>
+  <div class="bottom">
+    <span class="badge">Демо-проект</span>
+    <span>Сделано в <a href="https://bot-vercel-five.vercel.app" target="_blank" rel="noopener" style="color:#fff">KARINA Media</a> — сайты за 5 дней</span>
+  </div>
+</div></footer>
+
+<script>
+// Фильтр каталога по категориям
+document.querySelectorAll("#cats .cat").forEach(c => c.addEventListener("click", () => {
+  document.querySelectorAll("#cats .cat").forEach(x => x.classList.remove("on"));
+  c.classList.add("on");
+  const cat = c.dataset.cat;
+  document.querySelectorAll("#products .prod").forEach(p => {
+    p.style.display = (cat === "all" || p.dataset.cat === cat) ? "" : "none";
+  });
+}));
+</script>
+
+</body>
+</html>
