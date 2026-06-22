@@ -74,9 +74,9 @@ section{padding:clamp(64px,9vw,120px) 0}
 .marquee span i{color:var(--accent);font-style:normal}
 @keyframes scroll{to{transform:translateX(-50%)}}
 
-/* Появление при скролле */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
-.reveal.in{opacity:1;transform:none}
+/* Появление при скролле (прячем только если JS активен) */
+html.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+html.js .reveal.in{opacity:1;transform:none}
 
 /* Подвал */
 footer{background:var(--ink);color:var(--bg);border-radius:var(--r-lg) var(--r-lg) 0 0;margin-top:40px}
