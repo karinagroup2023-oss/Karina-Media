@@ -23,10 +23,10 @@ img{max-width:100%;display:block}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
 
 /* Типографика */
-h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.02;letter-spacing:-.02em;margin:0}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.02;letter-spacing:-.02em;margin:0;overflow-wrap:break-word;hyphens:auto}
 h1{font-size:clamp(40px,7vw,84px)}
 h2{font-size:clamp(30px,4.6vw,54px)}
-h3{font-size:clamp(20px,2.4vw,27px);letter-spacing:-.01em}
+h3{font-size:clamp(19px,2.1vw,24px);letter-spacing:-.01em}
 .lead{font-size:clamp(18px,2.1vw,23px);color:var(--ink-soft);line-height:1.5;max-width:40ch}
 .kicker{font-family:var(--body);font-weight:700;font-size:12px;letter-spacing:.18em;
   text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:8px}
@@ -52,8 +52,8 @@ h3{font-size:clamp(20px,2.4vw,27px);letter-spacing:-.01em}
 .brand{font-family:var(--display);font-weight:800;font-size:21px;letter-spacing:-.03em}
 .brand b{color:var(--accent)}
 .menu{display:flex;gap:30px;align-items:center}
-.menu a{font-weight:600;font-size:15px;color:var(--ink-soft);transition:color .2s}
-.menu a:hover,.menu a.active{color:var(--ink)}
+.menu a:not(.btn){font-weight:600;font-size:15px;color:var(--ink-soft);transition:color .2s}
+.menu a:not(.btn):hover,.menu a:not(.btn).active{color:var(--ink)}
 .burger{display:none;background:none;border:0;font-size:26px;cursor:pointer;color:var(--ink)}
 
 /* Секции */
