@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Контакты — KARINA Media | оставить заявку</title>
+<meta name="description" content="Оставьте заявку KARINA Media — покажем пример под вашу нишу и посчитаем стоимость. Сайты и Telegram мини-аппы за 3–5 дней.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/site.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap row">
+    <a class="brand" href="/">KARINA<b>.</b>Media</a>
+    <nav class="menu">
+      <a href="/">Главная</a>
+      <a href="/services.html">Услуги</a>
+      <a href="/cases.html">Кейсы</a>
+      <a href="/about.html">О нас</a>
+      <a href="/contacts.html" class="active">Контакты</a>
+      <a class="btn btn-primary" href="/contacts.html">Оставить заявку</a>
+    </nav>
+    <button class="burger" aria-label="Меню">☰</button>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap" style="display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:start">
+
+      <div class="reveal">
+        <span class="kicker">Контакты</span>
+        <h1 style="margin:18px 0 0;max-width:14ch">Оставьте заявку</h1>
+        <p class="lead" style="margin-top:22px">Покажем пример под вашу нишу и посчитаем стоимость. Свяжемся в удобное вам время.</p>
+        <div style="margin-top:34px;display:grid;gap:14px">
+          <a class="card" href="https://t.me/karina_media_bot" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:14px;padding:18px 22px">
+            <span style="font-size:24px">✈️</span><div><div style="font-weight:700">Telegram</div><div style="color:var(--muted);font-size:15px">@karina_media_bot</div></div>
+          </a>
+          <div class="card" style="display:flex;align-items:center;gap:14px;padding:18px 22px">
+            <span style="font-size:24px">⚡</span><div><div style="font-weight:700">Ответим быстро</div><div style="color:var(--muted);font-size:15px">Заявки обрабатываем в тот же день</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card reveal" id="formCard" style="padding:clamp(24px,4vw,38px)">
+        <form id="leadForm" autocomplete="on">
+          <div class="field">
+            <label for="fName">Как вас зовут?</label>
+            <input id="fName" name="name" placeholder="Ваше имя" required>
+          </div>
+          <div class="field">
+            <label for="fPhone">Телефон / WhatsApp</label>
+            <div class="phone-row">
+              <select id="fCode" aria-label="Код страны">
+                <option value="7" selected>🇰🇿 +7</option>
+                <option value="7">🇷🇺 +7</option>
+                <option value="996">🇰🇬 +996</option>
+                <option value="998">🇺🇿 +998</option>
+                <option value="992">🇹🇯 +992</option>
+                <option value="1">🇺🇸 +1</option>
+              </select>
+              <input id="fPhone" name="phone" placeholder="706 656 7765" inputmode="tel" required>
+            </div>
+          </div>
+          <div class="field">
+            <label>Что нужно?</label>
+            <div class="chips" id="prodChips">
+              <button type="button" class="chip" data-v="Сайт">Сайт</button>
+              <button type="button" class="chip" data-v="Мини-апп">Мини-апп</button>
+              <button type="button" class="chip" data-v="Магазин">Магазин</button>
+              <button type="button" class="chip" data-v="Бот">Бот</button>
+              <button type="button" class="chip" data-v="Пока не знаю">Пока не знаю</button>
+            </div>
+          </div>
+          <div class="field">
+            <label for="fNiche">Ваша ниша / бизнес</label>
+            <input id="fNiche" name="niche" placeholder="Например: салон красоты">
+          </div>
+          <div class="field">
+            <label>Когда удобно связаться?</label>
+            <div class="chips" id="dayChips">
+              <button type="button" class="chip" data-v="Сегодня">Сегодня</button>
+              <button type="button" class="chip" data-v="Завтра">Завтра</button>
+              <button type="button" class="chip" data-v="Послезавтра">Послезавтра</button>
+              <button type="button" class="chip" data-v="На неделе">На неделе</button>
+            </div>
+          </div>
+          <div class="field">
+            <label>Время</label>
+            <div class="chips" id="slotChips">
+              <button type="button" class="chip" data-v="утро (9–12)">🌅 Утро</button>
+              <button type="button" class="chip" data-v="день (12–17)">☀️ День</button>
+              <button type="button" class="chip" data-v="вечер (17–21)">🌆 Вечер</button>
+            </div>
+          </div>
+          <input type="text" id="fCompany" name="company" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+          <button type="submit" class="btn btn-accent" id="sendBtn" style="width:100%;justify-content:center;margin-top:8px">Отправить заявку →</button>
+          <p style="color:var(--muted);font-size:13px;margin:12px 0 0;text-align:center">Нажимая, вы соглашаетесь на обработку контактов для связи.</p>
+        </form>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <div class="brand" style="color:var(--bg);font-size:24px">KARINA<b style="color:var(--accent)">.</b>Media</div>
+      <p class="muted" style="margin-top:14px;max-width:32ch">Сайты, магазины и Telegram мини-аппы под ключ. Казахстан.</p>
+    </div>
+    <div class="foot-links"><strong>Навигация</strong><a href="/services.html">Услуги</a><a href="/cases.html">Кейсы</a><a href="/about.html">О нас</a><a href="/contacts.html">Контакты</a></div>
+    <div class="foot-links"><strong>Связаться</strong><a href="https://t.me/karina_media_bot" target="_blank" rel="noopener">Telegram-бот</a><a href="/contacts.html">Оставить заявку</a></div>
+  </div>
+  <div class="wrap foot-bottom"><span>© 2026 KARINA Media</span><span>Сделано в Казахстане</span></div>
+</footer>
+
+<script src="/js/site.js"></script>
+<script src="/js/contacts.js"></script>
+</body>
+</html>
