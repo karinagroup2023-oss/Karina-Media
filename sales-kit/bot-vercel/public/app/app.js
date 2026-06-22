@@ -103,7 +103,17 @@ screens.lead = function(){
     <p class="lbl">Имя</p>
     <input class="fld" id="fName" placeholder="Ваше имя" value="${fullName}">
     <p class="lbl">Телефон / WhatsApp</p>
-    <input class="fld" id="fPhone" placeholder="+7 …" inputmode="tel">
+    <div class="phone">
+      <select class="fld code" id="fCode">
+        <option value="7" selected>🇰🇿 +7</option>
+        <option value="7">🇷🇺 +7</option>
+        <option value="996">🇰🇬 +996</option>
+        <option value="998">🇺🇿 +998</option>
+        <option value="992">🇹🇯 +992</option>
+        <option value="1">🇺🇸 +1</option>
+      </select>
+      <input class="fld" id="fPhone" placeholder="706 656 7765" inputmode="tel">
+    </div>
     <button class="cta ghost" id="pullPhone" style="margin-top:8px">Подтянуть телефон из Telegram</button>
     <p class="lbl">Сфера</p>
     <input class="fld" id="fNiche" placeholder="Например: салон красоты" value="${state.niche||""}">
@@ -145,11 +155,22 @@ screens.lead = function(){
   document.getElementById("sendBtn").onclick = submitLead;
 };
 
+function normalizePhone(code, raw){
+  let d = (raw || "").replace(/\D/g, "");
+  if(code === "7"){
+    if(d.length === 11 && (d[0] === "8" || d[0] === "7")) d = d.slice(1);
+  } else if(d.startsWith(code)){
+    d = d.slice(code.length);
+  }
+  return "+" + code + d;
+}
+
 async function submitLead(){
   const name = document.getElementById("fName").value.trim();
-  const phone = document.getElementById("fPhone").value.trim();
+  const rawPhone = document.getElementById("fPhone").value.trim();
   const niche = document.getElementById("fNiche").value.trim();
-  if(!name || !phone){ tg?.showAlert?.("Заполните имя и телефон"); return; }
+  if(!name || !rawPhone){ tg?.showAlert?.("Заполните имя и телефон"); return; }
+  const phone = normalizePhone(document.getElementById("fCode").value, rawPhone);
   if(!state.day || !state.slot){ tg?.showAlert?.("Выберите удобный день и время"); return; }
   const time = `${state.day}, ${state.slot}`;
   const btn = document.getElementById("sendBtn"); btn.disabled = true; btn.textContent = "Отправляю…";
