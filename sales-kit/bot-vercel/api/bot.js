@@ -74,6 +74,8 @@ const NICHES = {
 
 const PRODUCTS = { product_miniapp: "Мини-апп", product_site: "Сайт", product_bot: "Бот", product_unknown: "Пока не знаю" };
 const URGENCY = { urgency_now: "Срочно", urgency_month: "2-4 недели", urgency_interest: "Просто интересуюсь" };
+const DAYS = { day_today: "Сегодня", day_tomorrow: "Завтра", day_after: "Послезавтра", day_week: "На неделе" };
+const SLOTS = { slot_morning: "утро (9–12)", slot_day: "день (12–17)", slot_evening: "вечер (17–21)" };
 
 const WELCOME = `<b>KARINA Media</b> — мини-аппы и сайты для бизнеса 🚀
 
@@ -129,6 +131,17 @@ function urgencyMenu() {
   return new InlineKeyboard()
     .text("🔥 Срочно", "urgency_now").row()
     .text("📅 2-4 недели", "urgency_month").text("👀 Просто интересуюсь", "urgency_interest");
+}
+function dayMenu() {
+  return new InlineKeyboard()
+    .text("Сегодня", "day_today").text("Завтра", "day_tomorrow").row()
+    .text("Послезавтра", "day_after").text("На неделе", "day_week");
+}
+function slotMenu() {
+  return new InlineKeyboard()
+    .text("🌅 Утро (9–12)", "slot_morning").row()
+    .text("☀️ День (12–17)", "slot_day").row()
+    .text("🌆 Вечер (17–21)", "slot_evening");
 }
 
 async function saveLead(ctx, d) {
@@ -241,28 +254,60 @@ bot.callbackQuery("back", async (ctx) => {
 bot.callbackQuery("lead", async (ctx) => {
   ctx.session.step = "lead_product"; ctx.session.data = { type: "lead" };
   await ctx.answerCallbackQuery();
-  await ctx.reply("📝 Пара вопросов, отвечу быстро.\n\n<b>1/5.</b> Что вас интересует?", { parse_mode: "HTML", reply_markup: productMenu() });
+  await ctx.reply("📝 Пара вопросов, отвечу быстро.\n\n<b>1/7.</b> Что вас интересует?", { parse_mode: "HTML", reply_markup: productMenu() });
 });
 bot.callbackQuery(/^product_(.+)$/, async (ctx) => {
   await ctx.answerCallbackQuery();
   if (ctx.session.step !== "lead_product") return;
   ctx.session.data.product = PRODUCTS["product_" + ctx.match[1]];
   ctx.session.step = "lead_niche";
-  await ctx.reply("<b>2/5.</b> Какая у вас ниша / бизнес?", { parse_mode: "HTML" });
+  await ctx.reply("<b>2/7.</b> Какая у вас ниша / бизнес?", { parse_mode: "HTML" });
 });
 bot.callbackQuery(/^urgency_(.+)$/, async (ctx) => {
   await ctx.answerCallbackQuery();
   if (ctx.session.step !== "lead_urgency") return;
   ctx.session.data.urgency = URGENCY["urgency_" + ctx.match[1]];
   ctx.session.step = "lead_name";
-  await ctx.reply("<b>4/5.</b> Как вас зовут?", { parse_mode: "HTML" });
+  await ctx.reply("<b>4/7.</b> Как вас зовут?", { parse_mode: "HTML" });
+});
+
+// --- Выбор дня и времени связи (общий для заявки и созвона) ---
+bot.callbackQuery(/^day_(.+)$/, async (ctx) => {
+  await ctx.answerCallbackQuery();
+  const s = ctx.session;
+  const label = DAYS["day_" + ctx.match[1]];
+  if (!label) return;
+  if (s.step === "lead_day") {
+    s.data.day = label; s.step = "lead_slot";
+    return ctx.reply("<b>7/7.</b> В какое время удобно?", { parse_mode: "HTML", reply_markup: slotMenu() });
+  }
+  if (s.step === "call_day") {
+    s.data.day = label; s.step = "call_slot";
+    return ctx.reply("<b>4/4.</b> В какое время удобно?", { parse_mode: "HTML", reply_markup: slotMenu() });
+  }
+});
+bot.callbackQuery(/^slot_(.+)$/, async (ctx) => {
+  await ctx.answerCallbackQuery();
+  const s = ctx.session;
+  const slot = SLOTS["slot_" + ctx.match[1]];
+  if (!slot) return;
+  if (s.step !== "lead_slot" && s.step !== "call_slot") return;
+  const isCall = s.step === "call_slot";
+  s.data.time = `${s.data.day}, ${slot}`;
+  const name = s.data.name, time = s.data.time;
+  s.step = "idle";
+  await saveLead(ctx, s.data); s.data = {};
+  const msg = isCall
+    ? `Готово, ${name}! 📞 Еркин лично спишется с вами: ${time}.`
+    : `Спасибо, ${name}! 🙌 Заявка принята.\n\nЕркин свяжется с вами в выбранное время — ${time}. Покажет пример под вашу нишу и обсудит детали. Место и условия придержим.`;
+  return ctx.reply(msg, { reply_markup: toMenu() });
 });
 
 // --- Запись на созвон ---
 bot.callbackQuery("call", async (ctx) => {
   ctx.session.step = "call_name"; ctx.session.data = { type: "call" };
   await ctx.answerCallbackQuery();
-  await ctx.reply("📞 Запишемся на короткий созвон (15 мин).\n\n<b>1/3.</b> Как вас зовут?", { parse_mode: "HTML" });
+  await ctx.reply("📞 Запишемся на короткий созвон (15 мин).\n\n<b>1/4.</b> Как вас зовут?", { parse_mode: "HTML" });
 });
 
 // --- Быстрый контакт (для тех, кто посмотрел и завис) ---
@@ -283,25 +328,16 @@ bot.on("message:text", async (ctx) => {
       return ctx.reply("<b>3/5.</b> Когда нужно?", { parse_mode: "HTML", reply_markup: urgencyMenu() });
     case "lead_name":
       s.data.name = text; s.step = "lead_phone";
-      return ctx.reply("<b>5/5.</b> Ваш телефон (WhatsApp) для связи?", { parse_mode: "HTML" });
-    case "lead_phone": {
-      s.data.phone = text; s.step = "idle";
-      const name = s.data.name;
-      await saveLead(ctx, s.data); s.data = {};
-      return ctx.reply(`Спасибо, ${name}! 🙌 Заявка принята.\n\nЕркин свяжется с вами лично сегодня вечером — покажет пример под вашу нишу и обсудит детали. Место и условия придержим.`, { reply_markup: toMenu() });
-    }
+      return ctx.reply("<b>5/7.</b> Ваш телефон (WhatsApp) для связи?", { parse_mode: "HTML" });
+    case "lead_phone":
+      s.data.phone = text; s.step = "lead_day";
+      return ctx.reply("<b>6/7.</b> Когда удобно, чтобы Еркин связался?", { parse_mode: "HTML", reply_markup: dayMenu() });
     case "call_name":
       s.data.name = text; s.step = "call_phone";
-      return ctx.reply("<b>2/3.</b> Ваш телефон (WhatsApp)?", { parse_mode: "HTML" });
+      return ctx.reply("<b>2/4.</b> Ваш телефон (WhatsApp)?", { parse_mode: "HTML" });
     case "call_phone":
-      s.data.phone = text; s.step = "call_time";
-      return ctx.reply("<b>3/3.</b> Когда удобно? (например: сегодня после 18:00 / завтра утром)", { parse_mode: "HTML" });
-    case "call_time": {
-      s.data.time = text; s.step = "idle";
-      const name = s.data.name;
-      await saveLead(ctx, s.data); s.data = {};
-      return ctx.reply(`Готово, ${name}! 📞 Еркин лично спишется с вами в указанное время.`, { reply_markup: toMenu() });
-    }
+      s.data.phone = text; s.step = "call_day";
+      return ctx.reply("<b>3/4.</b> Когда удобно?", { parse_mode: "HTML", reply_markup: dayMenu() });
     case "quick_phone": {
       s.data.phone = text; s.step = "idle";
       await saveLead(ctx, s.data); s.data = {};
