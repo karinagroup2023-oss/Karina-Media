@@ -107,7 +107,30 @@ screens.lead = function(){
     <button class="cta ghost" id="pullPhone" style="margin-top:8px">Подтянуть телефон из Telegram</button>
     <p class="lbl">Сфера</p>
     <input class="fld" id="fNiche" placeholder="Например: салон красоты" value="${state.niche||""}">
+    <p class="lbl" style="margin-top:14px">Когда удобно связаться?</p>
+    <div class="chips" id="dayChips">
+      <button class="chip" data-day="Сегодня">Сегодня</button>
+      <button class="chip" data-day="Завтра">Завтра</button>
+      <button class="chip" data-day="Послезавтра">Послезавтра</button>
+      <button class="chip" data-day="На неделе">На неделе</button>
+    </div>
+    <p class="lbl" style="margin-top:10px">Время</p>
+    <div class="chips" id="slotChips">
+      <button class="chip" data-slot="утро (9–12)">🌅 Утро</button>
+      <button class="chip" data-slot="день (12–17)">☀️ День</button>
+      <button class="chip" data-slot="вечер (17–21)">🌆 Вечер</button>
+    </div>
     <button class="cta sticky" id="sendBtn" style="margin-top:12px">Отправить заявку</button>`;
+
+  state.day = null; state.slot = null;
+  document.querySelectorAll("#dayChips .chip").forEach(c => c.onclick = () => {
+    document.querySelectorAll("#dayChips .chip").forEach(x => x.classList.remove("sel"));
+    c.classList.add("sel"); state.day = c.dataset.day;
+  });
+  document.querySelectorAll("#slotChips .chip").forEach(c => c.onclick = () => {
+    document.querySelectorAll("#slotChips .chip").forEach(x => x.classList.remove("sel"));
+    c.classList.add("sel"); state.slot = c.dataset.slot;
+  });
 
   document.getElementById("pullPhone").onclick = () => {
     if(!tg?.requestContact){ tg?.showAlert?.("Введите номер вручную"); return; }
@@ -127,16 +150,18 @@ async function submitLead(){
   const phone = document.getElementById("fPhone").value.trim();
   const niche = document.getElementById("fNiche").value.trim();
   if(!name || !phone){ tg?.showAlert?.("Заполните имя и телефон"); return; }
+  if(!state.day || !state.slot){ tg?.showAlert?.("Выберите удобный день и время"); return; }
+  const time = `${state.day}, ${state.slot}`;
   const btn = document.getElementById("sendBtn"); btn.disabled = true; btn.textContent = "Отправляю…";
   try{
     const r = await fetch("/api/lead", {
       method:"POST", headers:{"content-type":"application/json"},
-      body: JSON.stringify({ name, phone, niche, initData: tg?.initData || "" })
+      body: JSON.stringify({ name, phone, niche, time, initData: tg?.initData || "" })
     });
     const j = await r.json();
     if(j.ok){
       tg?.BackButton?.hide();
-      app.innerHTML = `<div class="ok"><h2>Заявка принята</h2><p>Еркин свяжется с вами лично сегодня вечером. Место и условия придержим.</p><button class="cta" id="backBtn">В начало</button></div>`;
+      app.innerHTML = `<div class="ok"><h2>Заявка принята</h2><p>Еркин свяжется с вами в выбранное время — ${time}. Место и условия придержим.</p><button class="cta" id="backBtn">В начало</button></div>`;
       document.getElementById("backBtn").onclick = () => go(screens.showroom);
     } else { throw new Error(j.error||"fail"); }
   }catch(e){ tg?.showAlert?.("Не отправилось, попробуйте ещё раз"); btn.disabled=false; btn.textContent="Отправить заявку"; }

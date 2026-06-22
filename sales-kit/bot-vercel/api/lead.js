@@ -19,7 +19,7 @@ function validInitData(initData) {
 
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).json({ ok: false });
-  const { name, phone, niche, initData } = req.body || {};
+  const { name, phone, niche, time, initData } = req.body || {};
   const user = validInitData(initData);
   if (!user) return res.status(401).json({ ok: false, error: "bad initData" });
 
@@ -28,12 +28,12 @@ export default async function handler(req, res) {
     await sb.from("bot_leads").insert({
       type: "miniapp", niche: niche || null,
       name: name || user.first_name || null, phone: phone || null,
-      tg_user, tg_id: user.id || null,
+      call_time: time || null, tg_user, tg_id: user.id || null,
     });
   } catch (e) { console.error("lead insert:", e.message); }
 
   if (OWNER) {
-    const text = `🔥 <b>Новая заявка из мини-аппа!</b>\n\n🏢 Ниша: ${niche || "—"}\n👤 Имя: ${name || user.first_name || "—"}\n📱 Телефон: ${phone || "—"}\n💬 Контакт: ${tg_user || "—"}`;
+    const text = `🔥 <b>Новая заявка из мини-аппа!</b>\n\n🏢 Ниша: ${niche || "—"}\n👤 Имя: ${name || user.first_name || "—"}\n📱 Телефон: ${phone || "—"}\n${time ? "🕐 Удобное время: " + time + "\n" : ""}💬 Контакт: ${tg_user || "—"}`;
     try {
       await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
         method: "POST", headers: { "content-type": "application/json" },
