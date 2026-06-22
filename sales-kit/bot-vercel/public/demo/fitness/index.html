@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PULSE — фитнес-клуб | Демо KARINA Media</title>
+<meta name="description" content="PULSE — фитнес-клуб: тренажёрный зал, бокс, йога, кроссфит. Абонементы и пробная тренировка.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Стиль по DESIGN.md Linear (Refero): midnight command deck — acid-lime */
+:root{--canvas:#08090a;--nav:#0f1011;--card:#161718;--line:#23252a;--iron:#323334;
+  --slate:#62666d;--fog:#8a8f98;--snow:#f7f8f8;--lime:#e4f222;--indigo:#5e6ad2}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--canvas);color:var(--snow);font-family:"Inter",sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-weight:700;letter-spacing:-.03em;line-height:1.05}
+h1{font-size:clamp(48px,9vw,104px);font-weight:800;text-transform:uppercase}
+h2{font-size:clamp(30px,4.5vw,52px);text-transform:uppercase}
+h3{font-size:20px}
+section{padding:clamp(64px,9vw,110px) 0}
+.lime{color:var(--lime)}
+.fog{color:var(--fog)}
+.lead{font-size:clamp(17px,2vw,20px);color:var(--fog);max-width:48ch}
+.btn{display:inline-block;font-weight:600;font-size:15px;padding:12px 24px;border-radius:6px;transition:.2s}
+.btn-lime{background:var(--lime);color:#030404}
+.btn-lime:hover{filter:brightness(1.08)}
+.btn-ghost{border:1px solid var(--iron);color:var(--snow)}
+.btn-ghost:hover{border-color:var(--fog)}
+nav{position:sticky;top:0;z-index:20;height:56px;background:var(--nav);border-bottom:1px solid var(--line)}
+nav .row{display:flex;align-items:center;justify-content:space-between;height:56px}
+nav .logo{font-weight:800;letter-spacing:.04em;font-size:20px}
+nav .links{display:flex;gap:28px}
+nav .links a{font-size:14px;color:var(--fog)}
+nav .links a:hover{color:var(--snow)}
+.hero{padding:clamp(70px,11vw,140px) 0;position:relative;
+  background:radial-gradient(90% 70% at 80% 0%,rgba(228,242,34,.08),transparent 55%)}
+.stats{display:flex;gap:48px;flex-wrap:wrap;margin-top:60px;border-top:1px solid var(--line);padding-top:32px}
+.stats .n{font-size:40px;font-weight:800;letter-spacing:-.03em}
+.grid{display:grid;gap:14px}
+.c3{grid-template-columns:repeat(3,1fr)}
+.c4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--nav);border-radius:12px;padding:26px;box-shadow:inset 0 0 0 1px var(--line)}
+.dir .ic{font-size:30px;margin-bottom:14px}
+.dir p{color:var(--fog);font-size:14px;margin-top:6px}
+.plan{background:var(--card);border-radius:12px;padding:30px;box-shadow:inset 0 0 0 1px var(--line);display:flex;flex-direction:column}
+.plan.hot{box-shadow:inset 0 0 0 1px var(--lime)}
+.plan .price{font-size:40px;font-weight:800;letter-spacing:-.03em;margin:14px 0}
+.plan ul{list-style:none;margin:0 0 22px;padding:0;color:var(--fog);font-size:14px}
+.plan li{padding:7px 0;border-bottom:1px solid var(--line)}
+.plan li::before{content:"→ ";color:var(--lime)}
+.trainer{background:var(--nav);border-radius:12px;padding:24px;box-shadow:inset 0 0 0 1px var(--line)}
+.trainer .av{width:56px;height:56px;border-radius:9999px;background:linear-gradient(135deg,#e4f222,#9aa80f);color:#030404;display:flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:14px}
+footer{border-top:1px solid var(--line);padding:40px 0;text-align:center;color:var(--slate);font-size:14px}
+footer a{color:var(--lime)}
+.badge{display:inline-block;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--fog);border:1px solid var(--line);padding:6px 12px;border-radius:9999px;margin-bottom:10px}
+@media(max-width:860px){.c3,.c4{grid-template-columns:1fr 1fr}nav .links{display:none}}
+@media(max-width:560px){.c3,.c4{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap row">
+  <div class="logo">PULSE<span class="lime">.</span></div>
+  <div class="links"><a href="#dirs">Направления</a><a href="#plans">Абонементы</a><a href="#team">Тренеры</a><a href="#trial">Пробная</a></div>
+  <a class="btn btn-lime" href="#trial" style="padding:8px 16px">Пробная тренировка</a>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <span class="badge">Фитнес-клуб · Алматы</span>
+  <h1 style="margin-top:18px;max-width:14ch">Стань <span class="lime">сильнее</span> версии себя</h1>
+  <p class="lead" style="margin-top:24px">Зал, бокс, йога и кроссфит под одной крышей. Тренеры, которые доведут до результата.</p>
+  <div style="margin-top:34px;display:flex;gap:12px;flex-wrap:wrap">
+    <a class="btn btn-lime" href="#trial">Первая тренировка бесплатно</a>
+    <a class="btn btn-ghost" href="#plans">Абонементы</a>
+  </div>
+  <div class="stats">
+    <div><div class="n lime">2 400+</div><div class="fog">активных членов</div></div>
+    <div><div class="n">18</div><div class="fog">тренеров</div></div>
+    <div><div class="n">24/7</div><div class="fog">доступ в зал</div></div>
+  </div>
+</div></header>
+
+<section id="dirs"><div class="wrap">
+  <h2 style="margin-bottom:34px">Направления</h2>
+  <div class="grid c4">
+    <div class="card dir"><div class="ic">🏋️</div><h3>Тренажёрный зал</h3><p>Новое оборудование Technogym.</p></div>
+    <div class="card dir"><div class="ic">🥊</div><h3>Бокс</h3><p>Группы и персональные бои.</p></div>
+    <div class="card dir"><div class="ic">🧘</div><h3>Йога</h3><p>Хатха, виньяса, растяжка.</p></div>
+    <div class="card dir"><div class="ic">⚡</div><h3>Кроссфит</h3><p>Функциональные WOD-тренировки.</p></div>
+  </div>
+</div></section>
+
+<section id="plans"><div class="wrap">
+  <h2 style="margin-bottom:34px">Абонементы</h2>
+  <div class="grid c3">
+    <div class="plan"><h3>Старт</h3><div class="price">19 900 ₸<span class="fog" style="font-size:15px;font-weight:400">/мес</span></div><ul><li>Тренажёрный зал</li><li>Раздевалка, душ</li><li>1 заморозка</li></ul><a class="btn btn-ghost" href="#trial" style="margin-top:auto;text-align:center">Выбрать</a></div>
+    <div class="plan hot"><span class="badge" style="color:var(--lime);border-color:var(--lime)">Хит</span><h3>Полный</h3><div class="price">34 900 ₸<span class="fog" style="font-size:15px;font-weight:400">/мес</span></div><ul><li>Все направления</li><li>Групповые занятия</li><li>2 заморозки</li><li>Сауна</li></ul><a class="btn btn-lime" href="#trial" style="margin-top:auto;text-align:center">Выбрать</a></div>
+    <div class="plan"><h3>Premium</h3><div class="price">59 900 ₸<span class="fog" style="font-size:15px;font-weight:400">/мес</span></div><ul><li>Всё из «Полный»</li><li>Персональный тренер</li><li>План питания</li><li>Гостевые визиты</li></ul><a class="btn btn-ghost" href="#trial" style="margin-top:auto;text-align:center">Выбрать</a></div>
+  </div>
+</div></section>
+
+<section id="team"><div class="wrap">
+  <h2 style="margin-bottom:34px">Тренеры</h2>
+  <div class="grid c4">
+    <div class="trainer"><div class="av">ЕР</div><h3>Ербол Р.</h3><p class="fog" style="font-size:14px;margin-top:4px">Силовые · 10 лет</p></div>
+    <div class="trainer"><div class="av">АС</div><h3>Алина С.</h3><p class="fog" style="font-size:14px;margin-top:4px">Йога · 8 лет</p></div>
+    <div class="trainer"><div class="av">ТК</div><h3>Тимур К.</h3><p class="fog" style="font-size:14px;margin-top:4px">Бокс · 12 лет</p></div>
+    <div class="trainer"><div class="av">ДМ</div><h3>Дана М.</h3><p class="fog" style="font-size:14px;margin-top:4px">Кроссфит · 6 лет</p></div>
+  </div>
+</div></section>
+
+<section id="trial"><div class="wrap">
+  <div class="card" style="text-align:center;padding:clamp(40px,7vw,72px)">
+    <h2>Первая тренировка — бесплатно</h2>
+    <p class="lead" style="margin:16px auto 28px">Оставьте контакты — забронируем пробную и проведём по клубу.</p>
+    <a class="btn btn-lime" href="#" onclick="alert('Демо: здесь форма записи на пробную');return false">Записаться на пробную</a>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <span class="badge">Демо-проект</span><br>
+  Сделано в <a href="https://bot-vercel-five.vercel.app" target="_blank" rel="noopener">KARINA Media</a> — сайты и мини-аппы за 5 дней
+</div></footer>
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Türgen — ресторан современной кухни | Демо KARINA Media</title>
+<meta name="description" content="Türgen — ресторан современной казахской кухни. Меню, бронь столика, доставка.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#15110d;--panel:#1e1812;--ink:#f3ecdf;--mut:#a99b86;--gold:#e0a440;--line:#322a20}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Manrope",sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.serif{font-family:"Playfair Display",serif}
+h1,h2,h3{font-family:"Playfair Display",serif;font-weight:700;line-height:1.05}
+h1{font-size:clamp(44px,8vw,92px);font-weight:500}
+h2{font-size:clamp(30px,4.5vw,50px)}
+.gold{color:var(--gold)}
+.kick{font-size:13px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);font-weight:600}
+section{padding:clamp(70px,10vw,120px) 0}
+.btn{display:inline-block;font-weight:600;padding:15px 30px;border-radius:2px;border:1px solid var(--gold);
+  color:var(--gold);transition:.3s;letter-spacing:.04em}
+.btn:hover{background:var(--gold);color:var(--bg)}
+.btn-fill{background:var(--gold);color:var(--bg)}
+.btn-fill:hover{background:transparent;color:var(--gold)}
+nav{position:absolute;top:0;left:0;right:0;z-index:5}
+nav .row{display:flex;justify-content:space-between;align-items:center;padding:26px 0}
+nav .logo{font-family:"Playfair Display",serif;font-size:26px;letter-spacing:.06em}
+nav .links{display:flex;gap:32px}
+nav .links a{color:var(--mut);font-size:14px;letter-spacing:.05em}
+nav .links a:hover{color:var(--ink)}
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;
+  background:radial-gradient(120% 80% at 70% 20%,rgba(224,164,64,.16),transparent 60%),var(--bg)}
+.hero .in{max-width:760px}
+.hero p.sub{color:var(--mut);font-size:clamp(17px,2vw,21px);margin:26px 0 36px;max-width:48ch}
+.grid-menu{display:grid;grid-template-columns:1fr 1fr;gap:14px 50px;margin-top:46px}
+.dish{display:flex;justify-content:space-between;gap:16px;border-bottom:1px dashed var(--line);padding:16px 0;align-items:baseline}
+.dish .n{font-family:"Playfair Display",serif;font-size:20px}
+.dish .d{color:var(--mut);font-size:14px}
+.dish .p{color:var(--gold);font-weight:700;white-space:nowrap;font-family:"Playfair Display",serif}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;margin-top:50px}
+.feat{background:var(--panel);border:1px solid var(--line);padding:30px;border-radius:4px}
+.feat .ic{font-size:30px}
+.feat h3{font-size:22px;margin:14px 0 8px}
+.feat p{color:var(--mut);font-size:15px}
+.cta{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center}
+footer{padding:40px 0;border-top:1px solid var(--line);text-align:center;color:var(--mut);font-size:14px}
+footer a{color:var(--gold)}
+.badge{display:inline-block;margin-bottom:10px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+  border:1px solid var(--line);padding:6px 12px;border-radius:100px;color:var(--mut)}
+@media(max-width:720px){nav .links{display:none}.grid-menu{grid-template-columns:1fr;gap:0 0}}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap row">
+  <div class="logo gold">Türgen</div>
+  <div class="links"><a href="#menu">Меню</a><a href="#about">О нас</a><a href="#visit">Контакты</a></div>
+  <a class="btn" href="#book" style="padding:11px 22px">Забронировать</a>
+</div></nav>
+
+<header class="hero"><div class="wrap in">
+  <span class="kick">Современная кухня · Алматы</span>
+  <h1 style="margin-top:22px">Вкус, который <span class="gold">помнят</span></h1>
+  <p class="sub">Сезонные блюда из местных продуктов, авторская подача и атмосфера, в которую хочется возвращаться.</p>
+  <div style="display:flex;gap:14px;flex-wrap:wrap">
+    <a class="btn-fill btn" href="#book">Забронировать стол</a>
+    <a class="btn" href="#menu">Смотреть меню</a>
+  </div>
+</div></header>
+
+<section id="menu"><div class="wrap">
+  <span class="kick">Меню</span>
+  <h2 style="margin-top:14px">Избранное от шефа</h2>
+  <div class="grid-menu">
+    <div class="dish"><div><div class="n">Бешбармак по-домашнему</div><div class="d">Конина, тесто, лук-соус</div></div><div class="p">3 900 ₸</div></div>
+    <div class="dish"><div><div class="n">Тыквенный крем-суп</div><div class="d">С трюфельным маслом</div></div><div class="p">2 200 ₸</div></div>
+    <div class="dish"><div><div class="n">Стейк рибай</div><div class="d">Зерновой откорм, 300 г</div></div><div class="p">8 500 ₸</div></div>
+    <div class="dish"><div><div class="n">Манты с тыквой</div><div class="d">Топлёное масло, зелень</div></div><div class="p">2 600 ₸</div></div>
+    <div class="dish"><div><div class="n">Салат с томлёной уткой</div><div class="d">Микс-зелень, гранат</div></div><div class="p">3 400 ₸</div></div>
+    <div class="dish"><div><div class="n">Чизкейк «Алматы»</div><div class="d">С облепихой</div></div><div class="p">1 900 ₸</div></div>
+  </div>
+</div></section>
+
+<section id="about" style="background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap">
+  <span class="kick">О нас</span>
+  <h2 style="margin:14px 0 0;max-width:16ch">Кухня, где традиция встречает современность</h2>
+  <div class="cols">
+    <div class="feat"><div class="ic">🌿</div><h3>Локальные продукты</h3><p>Фермерское мясо и сезонные овощи от проверенных поставщиков.</p></div>
+    <div class="feat"><div class="ic">👨‍🍳</div><h3>Авторская подача</h3><p>Каждое блюдо — работа шефа с 12-летним опытом.</p></div>
+    <div class="feat"><div class="ic">🍷</div><h3>Винная карта</h3><p>120 позиций и сомелье, который подберёт пару к ужину.</p></div>
+  </div>
+</div></section>
+
+<section id="book" class="cta"><div class="wrap">
+  <span class="kick">Бронь</span>
+  <h2 style="margin:14px 0 18px">Забронируйте стол</h2>
+  <p style="color:var(--mut);max-width:44ch;margin:0 auto 30px">Оставьте контакты — перезвоним и подтвердим бронь в удобное время.</p>
+  <a class="btn-fill btn" href="#" onclick="alert('Демо: здесь форма брони столика');return false">Забронировать сейчас</a>
+  <p id="visit" style="color:var(--mut);margin-top:34px;font-size:15px">Ежедневно 10:00–24:00 · ул. Достык 132, Алматы · +7 707 000 00 00</p>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="badge">Демо-проект</div><br>
+  Сделано в <a href="https://bot-vercel-five.vercel.app" target="_blank" rel="noopener">KARINA Media</a> — сайты и мини-аппы за 5 дней
+</div></footer>
+
+</body>
+</html>
