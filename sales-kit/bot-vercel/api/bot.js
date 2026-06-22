@@ -144,6 +144,13 @@ function slotMenu() {
     .text("🌆 Вечер (17–21)", "slot_evening");
 }
 
+function normPhone(raw) {
+  const d = String(raw || "").replace(/\D/g, "");
+  if (d.length === 10) return "+7" + d;
+  if (d.length === 11 && (d[0] === "8" || d[0] === "7")) return "+7" + d.slice(1);
+  return String(raw || "").trim();
+}
+
 async function saveLead(ctx, d) {
   const tg_user = ctx.from?.username ? "@" + ctx.from.username : ctx.from?.first_name;
   try {
@@ -330,16 +337,16 @@ bot.on("message:text", async (ctx) => {
       s.data.name = text; s.step = "lead_phone";
       return ctx.reply("<b>5/7.</b> Ваш телефон (WhatsApp) для связи?", { parse_mode: "HTML" });
     case "lead_phone":
-      s.data.phone = text; s.step = "lead_day";
+      s.data.phone = normPhone(text); s.step = "lead_day";
       return ctx.reply("<b>6/7.</b> Когда удобно, чтобы Еркин связался?", { parse_mode: "HTML", reply_markup: dayMenu() });
     case "call_name":
       s.data.name = text; s.step = "call_phone";
       return ctx.reply("<b>2/4.</b> Ваш телефон (WhatsApp)?", { parse_mode: "HTML" });
     case "call_phone":
-      s.data.phone = text; s.step = "call_day";
+      s.data.phone = normPhone(text); s.step = "call_day";
       return ctx.reply("<b>3/4.</b> Когда удобно?", { parse_mode: "HTML", reply_markup: dayMenu() });
     case "quick_phone": {
-      s.data.phone = text; s.step = "idle";
+      s.data.phone = normPhone(text); s.step = "idle";
       await saveLead(ctx, s.data); s.data = {};
       return ctx.reply("Принял 🙌 Еркин свяжется лично сегодня вечером и пришлёт пример под твою нишу.", { reply_markup: toMenu() });
     }
