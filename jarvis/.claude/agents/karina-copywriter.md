@@ -79,3 +79,4 @@ tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
 
 ---
 Профиль-источник: karina-hq/ai-team/Копирайтер.md. Часть команды AI-субагентов KARINA Media под оркестрацией Jarvis.
+Контракт вход/выход (JSON) — `knowledge/marketing-org.md`, роль Copy_Creator. Бери концепцию у Creative_Director (Лейла).

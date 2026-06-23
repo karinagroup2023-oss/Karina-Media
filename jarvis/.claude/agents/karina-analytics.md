@@ -26,3 +26,4 @@ tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch
 
 ---
 Профиль-источник: karina-hq/ai-team/Аналитик-данных.md. Команда AI-субагентов KARINA Media под оркестрацией Jarvis.
+Контракт вход/выход (JSON) для маркетинг-задач — `knowledge/marketing-org.md`, роль Marketing_Analytics.

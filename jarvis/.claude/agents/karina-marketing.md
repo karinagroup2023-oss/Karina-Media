@@ -61,3 +61,4 @@ tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
 
 ---
 Профиль-источник: karina-hq/ai-team/Маркетолог.md (отдельный репо, синхронизировать при правке роли). Команда AI-субагентов KARINA Media под оркестрацией Jarvis.
+Контракт вход/выход (JSON) — `knowledge/marketing-org.md`, роль Funnel_Designer. Полная схема отдела и делегирования — там же.

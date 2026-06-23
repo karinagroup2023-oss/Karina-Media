@@ -39,3 +39,4 @@ tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
 
 ---
 Профиль-источник: karina-hq/ai-team/SEO-специалист.md. Команда AI-субагентов KARINA Media под оркестрацией Jarvis.
+Контракт вход/выход (JSON) — `knowledge/marketing-org.md`, роль Content_SEO_Social (SEO-часть: кластеры/ключи/мета; контент — София).

@@ -53,3 +53,4 @@ tools: WebSearch, WebFetch, Read, Write, Grep, Glob
 
 ---
 Профиль-источник: karina-hq/ai-team/Web-Парсер.md (отдельный репо, синхронизировать при правке роли — роль расширена до Insights). Команда AI-субагентов KARINA Media под оркестрацией Jarvis.
+Контракт вход/выход (JSON) — `knowledge/marketing-org.md`, роли Audience_Insights и Positioning_Brand. Возвращай строго по схеме, не эссе.
