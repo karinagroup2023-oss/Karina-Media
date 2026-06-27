@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>КП — Елена Звёздная</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --cream:#f7f3ec; --paper:#fffdf9; --ink:#1c1a17; --ink-soft:#5e584e; --ink-faint:#8c8576;
+    --line:#e6ddce; --jade:#1e4d3b; --jade-deep:#163b2d; --brass:#9a7634; --brass-soft:#b9924a;
+    --serif:"Fraunces",Georgia,serif; --sans:"Inter",system-ui,sans-serif;
+  }
+  @page{ size:A4; margin:16mm 15mm; }
+  *{ box-sizing:border-box; }
+  html{ background:var(--cream); }
+  body{ margin:0; font-family:var(--sans); color:var(--ink); font-size:11.5pt; line-height:1.6; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  h1,h2,h3{ font-family:var(--serif); font-weight:500; line-height:1.08; letter-spacing:-.01em; margin:0; }
+  p{ margin:0 0 .8em; }
+  .eyebrow{ font-size:8pt; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--brass); margin:0 0 10px; }
+  .muted{ color:var(--ink-soft); }
+  strong{ font-weight:600; }
+  a{ color:var(--jade); text-decoration:none; border-bottom:1px solid var(--line); }
+
+  /* Обложка */
+  .cover{ min-height:262mm; display:flex; flex-direction:column; break-after:page; }
+  .cover__top{ display:flex; justify-content:space-between; align-items:center; font-size:8.5pt; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-faint); }
+  .cover__star{ width:26px; height:26px; }
+  .cover__mid{ margin-top:auto; margin-bottom:auto; }
+  .cover h1{ font-size:42pt; line-height:1.02; margin:0 0 18px; }
+  .cover h1 em{ font-style:italic; color:var(--jade); }
+  .cover__sub{ font-size:14pt; color:var(--ink-soft); max-width:30ch; margin:0; }
+  .cover__rule{ width:64px; height:3px; background:var(--brass); margin:26px 0; border:0; }
+  .cover__meta{ font-size:10pt; color:var(--ink-soft); }
+  .cover__meta b{ color:var(--ink); }
+  .cover__foot{ border-top:1px solid var(--line); padding-top:14px; display:flex; justify-content:space-between; font-size:9pt; color:var(--ink-faint); }
+
+  /* Секции */
+  section.block{ break-inside:avoid; margin-bottom:24px; }
+  h2.sec{ font-size:19pt; margin:0 0 14px; }
+  h2.sec .n{ color:var(--brass); font-size:13pt; margin-right:10px; }
+  .lead-line{ border-left:3px solid var(--brass); padding-left:16px; font-size:12pt; color:var(--ink); margin:0 0 6px; }
+
+  /* Карточки офферов */
+  .offers{ display:flex; gap:14px; }
+  .offer{ flex:1; background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:18px 18px 16px; break-inside:avoid; }
+  .offer__tag{ font-size:8pt; letter-spacing:.18em; text-transform:uppercase; color:var(--brass); font-weight:600; }
+  .offer h3{ font-size:15pt; margin:8px 0 4px; }
+  .offer__price{ font-family:var(--serif); font-size:20pt; color:var(--jade); margin:6px 0 10px; }
+  .offer ul{ margin:0; padding:0; list-style:none; }
+  .offer li{ position:relative; padding-left:18px; font-size:10pt; color:var(--ink-soft); margin-bottom:6px; }
+  .offer li::before{ content:""; position:absolute; left:0; top:.62em; width:9px; height:1px; background:var(--brass); }
+
+  /* Таблица покрытия */
+  table{ width:100%; border-collapse:collapse; font-size:10pt; break-inside:avoid; }
+  thead th{ background:var(--jade); color:#f1efe6; text-align:left; font-family:var(--sans); font-weight:600; font-size:8.5pt; letter-spacing:.06em; text-transform:uppercase; padding:9px 12px; }
+  tbody td{ padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+  tbody tr:nth-child(even){ background:var(--paper); }
+  td.task{ font-weight:600; width:30%; }
+  .pill{ display:inline-block; font-size:8pt; font-weight:600; letter-spacing:.04em; padding:2px 9px; border-radius:100px; }
+  .pill--now{ background:#e2efe7; color:var(--jade-deep); }
+  .pill--later{ background:#f3e7cf; color:#7a5d21; }
+
+  /* Прайс-итог */
+  .pricing{ background:var(--paper); border:1px solid var(--line); border-radius:6px; overflow:hidden; }
+  .pricing .row{ display:flex; justify-content:space-between; padding:11px 18px; border-bottom:1px solid var(--line); font-size:11pt; }
+  .pricing .row:last-child{ border-bottom:0; }
+  .pricing .row.total{ background:#f3e7cf; font-weight:600; }
+  .pricing .row.total .v{ color:var(--jade-deep); }
+  .pricing .v{ font-variant-numeric:tabular-nums; }
+
+  /* Заметка-вывод */
+  .note{ background:#eef2ee; border:1px solid #d6e1d8; border-radius:6px; padding:14px 16px; font-size:10.5pt; margin-top:12px; }
+  .note b{ color:var(--jade-deep); }
+
+  /* win-win + условия */
+  .checklist{ list-style:none; margin:0; padding:0; }
+  .checklist li{ position:relative; padding-left:20px; margin-bottom:7px; color:var(--ink-soft); }
+  .checklist li::before{ content:""; position:absolute; left:0; top:.62em; width:11px; height:1px; background:var(--brass); }
+
+  /* P.S. */
+  .ps{ background:var(--jade); color:#e9efe9; border-radius:6px; padding:20px 22px; break-inside:avoid; }
+  .ps .eyebrow{ color:var(--brass-soft); }
+  .ps h3{ color:#fbf8f1; font-size:15pt; margin:0 0 8px; }
+  .ps p{ color:#d2dcd2; margin:0 0 .6em; font-size:10.5pt; }
+  .ps p:last-child{ margin:0; }
+
+  .credit{ text-align:center; font-size:9pt; color:var(--ink-faint); margin-top:22px; font-style:italic; }
+  .next{ font-size:11.5pt; }
+</style>
+</head>
+<body>
+
+<!-- ОБЛОЖКА -->
+<div class="cover">
+  <div class="cover__top">
+    <span>KARINA MEDIA</span>
+    <svg class="cover__star" viewBox="0 0 32 32"><path d="M16 4l2.8 8.2L27 15l-8.2 2.8L16 26l-2.8-8.2L5 15l8.2-2.8z" fill="#1e4d3b"/></svg>
+    <span>Коммерческое предложение</span>
+  </div>
+  <div class="cover__mid">
+    <p class="eyebrow">Для Елены Звёздной</p>
+    <h1>Сайт и личный <em>AI-агент</em>, который заменяет техспеца</h1>
+    <hr class="cover__rule">
+    <p class="cover__sub">Многостраничный сайт-журнал и агент, которым вы управляете прямо из Telegram.</p>
+  </div>
+  <div class="cover__meta">
+    <p><b>Кому:</b> Елена Звёздная — эксперт по фэншуй недвижимости и денежный астролог<br>
+    <b>От:</b> KARINA Media (ТОО) · 27 июня 2026</p>
+  </div>
+  <div class="cover__foot">
+    <span>Подготовил: AI-агент Jarvis по поручению Еркина</span>
+    <span>wa.me/77066567765</span>
+  </div>
+</div>
+
+<!-- СУТЬ -->
+<section class="block">
+  <h2 class="sec"><span class="n">01</span>Коротко, в чём суть</h2>
+  <p>У вас уходит технический специалист, а на нём висел целый пласт: апка, продажи курсов, оплаты через Каспи, сайты, презентации. Искать и онбордить нового человека — это месяцы, деньги и риск, что снова уйдёт.</p>
+  <p class="lead-line">Предлагаю другое: <strong>персональный AI-агент, который закрывает большинство этих функций и работает 24/7 через Telegram</strong>, плюс новый сайт как первый осязаемый результат его работы.</p>
+  <p class="muted">Вы уже видели второй вариант сайта — его собрал как раз этот агент. Так что это не обещание «потом», а то, что работает сейчас.</p>
+</section>
+
+<!-- ОФФЕРЫ -->
+<section class="block">
+  <h2 class="sec"><span class="n">02</span>Что предлагаю</h2>
+  <div class="offers">
+    <div class="offer">
+      <span class="offer__tag">Блок 1 · Сайт</span>
+      <h3>Сайт-журнал под ключ</h3>
+      <div class="offer__price">250 000 ₸</div>
+      <ul>
+        <li>12 страниц: главная, «О Елене», 5 направлений, блог, контакты</li>
+        <li>Отдельная страница под каждое направление + блог для публикаций</li>
+        <li>Адаптив под телефон, светлый «журнальный» стиль</li>
+        <li>Ваши материалы, домен, публикация</li>
+      </ul>
+    </div>
+    <div class="offer">
+      <span class="offer__tag">Блок 2 · Jarvis</span>
+      <h3>AI-агент вместо техспеца</h3>
+      <div class="offer__price">150 000 ₸ <span style="font-size:11pt;color:var(--ink-soft)">+ 80 000 ₸/мес</span></div>
+      <ul>
+        <li>Внедрение под вас + подписка (тест-цена на 3 месяца)</li>
+        <li>Управление из Telegram — пишете задачу сообщением</li>
+        <li>Сайты, презентации, контент, тексты — сразу</li>
+        <li>Апка и оплаты — через внедрение</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ТАБЛИЦА ПОКРЫТИЯ -->
+<section class="block">
+  <h2 class="sec"><span class="n">03</span>Что агент закрывает из задач техспеца</h2>
+  <table>
+    <thead><tr><th>Задача</th><th>Когда</th><th>Как</th></tr></thead>
+    <tbody>
+      <tr><td class="task">Сайты</td><td><span class="pill pill--now">Сразу</span></td><td>Строит и ведёт сайты — этот сайт уже его работа</td></tr>
+      <tr><td class="task">Презентации</td><td><span class="pill pill--now">Сразу</span></td><td>Делает презентации под задачу за минуты</td></tr>
+      <tr><td class="task">Контент, посты, тексты</td><td><span class="pill pill--now">Сразу</span></td><td>Посты, прогревы, продающие тексты в вашем стиле</td></tr>
+      <tr><td class="task">Продажи курсов (маркетинг)</td><td><span class="pill pill--now">Сразу</span></td><td>Лендинги, воронки, скрипты, ответы на частые вопросы</td></tr>
+      <tr><td class="task">Апка (доработки, поддержка)</td><td><span class="pill pill--later">Внедрение</span></td><td>Дорабатывает и чинит веб-часть — нужен доступ к коду</td></tr>
+      <tr><td class="task">Каспи-оплаты + выдача доступов</td><td><span class="pill pill--later">Внедрение</span></td><td>Учёт оплат, черновики выдачи, напоминания. Авто-выдача — при интеграции с платформой курсов; без неё подтверждаете в 1 клик</td></tr>
+    </tbody>
+  </table>
+  <div class="note"><b>Честно:</b> около 80% списка агент закрывает сразу. Операционка по оплатам/доступам и часть по апке — это как раз то, на что идёт внедрение. Чисто ручное действие после Каспи останется за человеком, но сведём его к одному подтверждению.</div>
+</section>
+
+<!-- ПРАЙС -->
+<section class="block">
+  <h2 class="sec"><span class="n">04</span>Сколько это стоит</h2>
+  <div class="pricing">
+    <div class="row"><span>Сайт (разово)</span><span class="v">250 000 ₸</span></div>
+    <div class="row"><span>Jarvis — внедрение (разово)</span><span class="v">150 000 ₸</span></div>
+    <div class="row"><span>Jarvis — подписка (тест, 3 мес)</span><span class="v">80 000 ₸/мес</span></div>
+    <div class="row total"><span>Старт: сайт + внедрение</span><span class="v">400 000 ₸ единоразово</span></div>
+    <div class="row total"><span>Дальше</span><span class="v">80 000 ₸/мес</span></div>
+  </div>
+  <p class="muted" style="margin-top:12px">Для сравнения: новый техспец в найме — это 300 000–500 000 ₸/мес плюс поиск, онбординг и риск, что уйдёт. Агент за 80 000 ₸/мес закрывает большую часть его функций, работает без выходных и не увольняется.</p>
+</section>
+
+<!-- WIN-WIN -->
+<section class="block">
+  <h2 class="sec"><span class="n">05</span>Почему это предложение именно вам</h2>
+  <p>Я упаковываю этого агента в свой продукт и сейчас выбираю первого клиента, на котором отработаю запуск. Поэтому условия льготные — win-win:</p>
+  <ul class="checklist">
+    <li>Вы получаете супер-агента за тест-цену, пока другие будут платить дороже</li>
+    <li>Я получаю реальный кейс и ваш отзыв как известного эксперта (75 000 подписчиков)</li>
+  </ul>
+  <p class="muted" style="margin-top:8px">Тест-период 3 месяца. За это время видно по факту, сколько он реально снимает с вас — дальше решаем спокойно, без обязательств наперёд.</p>
+</section>
+
+<!-- УСЛОВИЯ -->
+<section class="block">
+  <h2 class="sec"><span class="n">06</span>Условия и оплата</h2>
+  <ul class="checklist">
+    <li>Работаем как <strong>ТОО</strong>, по договору — всё официально</li>
+    <li>Оплата на Kaspi: <a href="https://pay.kaspi.kz/pay/quynakyc">pay.kaspi.kz/pay/quynakyc</a></li>
+    <li>Сайт: 50% на старте, 50% по сдаче (или 100% сразу)</li>
+    <li>Jarvis: внедрение — предоплата, подписка — помесячно вперёд</li>
+    <li>Старт работ — сразу после согласования</li>
+  </ul>
+</section>
+
+<!-- СЛЕДУЮЩИЙ ШАГ -->
+<section class="block">
+  <h2 class="sec"><span class="n">07</span>Следующий шаг</h2>
+  <p class="next">Созвон в понедельник-вторник: покажу агента в деле вживую, ответим на вопросы по вашему списку задач и решим, с чего начинаем.</p>
+</section>
+
+<!-- P.S. -->
+<section class="block">
+  <div class="ps">
+    <p class="eyebrow">P.S.</p>
+    <h3>Это КП сделал не я — его собрал агент</h3>
+    <p>Скажу честно, чтобы вы сразу поняли, о чём речь. Этот документ, расчёты и сам сайт собрал мой AI-агент Jarvis. Я лишь поставил ему задачу в Telegram обычным сообщением — «подготовь КП для Елены по сайту и агенту» — а текст, дизайн и этот файл он сделал сам.</p>
+    <p>Ровно так это и работает в деле: вы говорите, что нужно, агент делает. Тот же агент будет работать на вас.</p>
+  </div>
+  <p class="credit">Сделано в KARINA Media — wa.me/77066567765</p>
+</section>
+
+</body>
+</html>
