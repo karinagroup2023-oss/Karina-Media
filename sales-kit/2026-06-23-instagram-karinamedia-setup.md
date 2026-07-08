@@ -33,7 +33,7 @@ KARINA Media · мини-апп для записи
 ## 3. Ссылка действия
 Линк-хаб (Taplink или готовый портфолио-сайт) с кнопками по порядку:
 1. Написать в WhatsApp (ДЕМО) → `https://wa.me/77066567765?text=ДЕМО`
-2. Смотреть кейсы → `https://karina-portfolio-two-tawny.vercel.app`
+2. Смотреть кейсы → `https://portfolio-app-sooty-three-71.vercel.app/?ref=insta`
 3. Расчёт в Telegram → `https://t.me/karina_media_bot`
 + Подключить нативную кнопку WhatsApp в бизнес-профиле. Один и тот же контакт везде.
 

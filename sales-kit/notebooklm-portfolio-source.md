@@ -74,6 +74,6 @@ KARINA Media делает Telegram мини-аппы и сайты приёма 
 ## Призыв (финал)
 
 Посмотрите живые примеры и решите, как это ляжет на ваш бизнес:
-karina-portfolio-two-tawny.vercel.app
+portfolio-app-sooty-three-71.vercel.app
 
 Сделано в KARINA Media. Написать: wa.me/77066567765
