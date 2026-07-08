@@ -35,7 +35,13 @@
 - Код: `Karina-Media/sales-kit/bot-vercel` (webhook-версия на grammY). Long-polling-копия — `sales-kit/bot` (локальная, не использовать одновременно с webhook).
 - Хостинг: Vercel, проект `bot-vercel` (team karinagroup2023-6262), прод-домен `https://bot-vercel-five.vercel.app`, webhook `/api/bot`. Деплой: `cd sales-kit/bot-vercel && vercel --prod --yes` (CLI авторизован).
 - БД: Supabase проект `epc-progress-hub` (id kvhzixsmbqaoxdkofdbi), таблицы `bot_sessions/bot_leads/bot_users` (RLS + anon-политики). Заявки также падают в TG-группу «Заявки KARINA Media» (OWNER_CHAT_ID -5408311639). TODO: вынести таблицы бота в отдельный Supabase-проект.
-- Меню-кнопка бота открывает портфолио как mini-app: `https://karina-portfolio-two-tawny.vercel.app`.
+- Продающий контур связан воедино (08.07.2026): единый центр = портфолио-апп. Кнопка меню бота и inline-кнопка → `portfolio-app-sooty-three-71.vercel.app` (?ref=bot-menu / ?ref=bot); старое портфолио karina-portfolio-two-tawny = редирект (?ref=legacy); cases.html сайта = редирект (?ref=site); цены на сайте и в боте = прайс v2; файл portfolio.html помечен устаревшим.
+
+**Портфолио-апп с админкой** (визитка + кейсы; наш прототип VIP-админки для демо клиентам):
+- Код: `Karina-Media/sales-kit/portfolio-app` (React+Vite+Supabase). Прод: `https://portfolio-app-sooty-three-71.vercel.app`, админка `/admin`.
+- Доступ в админку: email из таблицы `pf_admins` (сейчас karina.group2023@gmail.com) — зарегистрироваться на /admin, подтвердить почту, войти.
+- Данные: таблицы `pf_cases/pf_leads/pf_ref_links/pf_visits/pf_admins` в Supabase epc-progress-hub; скрины — bucket `pf-screens`. Заявки: pf_leads + уведомление через `bot-vercel /api/portfolio-lead` → TG-группа «Заявки KARINA Media».
+- Деплой: `cd sales-kit/portfolio-app && npm run build && vercel --prod --yes`.
 
 **Kaspi оплата (приём денег):** https://pay.kaspi.kz/pay/quynakyc — ссылка для оплаты клиентами. Условие: 100% сразу → скидка 10% (решение по спринту), иначе 50/50.
 
