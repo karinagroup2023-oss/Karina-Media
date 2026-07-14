@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Коммерческое предложение — Сайт GTF Express</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --orange:#F15A24; --orange-dark:#d64a17; --orange-light:#ff7a45;
+  --navy:#26295a; --navy-deep:#1a1c40; --navy-soft:#31356e;
+  --ink:#22243f; --muted:#6b6f86; --line:#e6e7ee; --line-soft:#f0f1f6;
+  --bg-card:#f7f8fc; --cream:#fbfbfe;
+  --font:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);background:#e9eaf1;color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;padding:14px 0}
+img{display:block;max-width:100%}
+
+.page{width:210mm;margin:0 auto;background:#fff;position:relative;overflow:hidden}
+.page+.page{margin-top:14px}
+.pad{padding:14mm 16mm 16mm;display:flex;flex-direction:column}
+.cover-sheet,.cover-sheet .pad{min-height:297mm}
+.sec{break-inside:avoid;page-break-inside:avoid}
+.rhead{break-after:avoid;page-break-after:avoid}
+
+/* --- brand bar --- */
+.brandbar{display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--line);padding-bottom:14px;margin-bottom:24px}
+.logo{display:flex;align-items:center;gap:11px}
+.logo .mark{width:44px;height:44px;border-radius:11px;background:linear-gradient(135deg,var(--orange),var(--orange-dark));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:20px;letter-spacing:-1px}
+.logo .n{font-size:18px;font-weight:800;letter-spacing:-.3px;color:var(--navy)}
+.logo .n small{display:block;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--orange);font-weight:700;margin-top:2px}
+.brandbar .meta{text-align:right;font-size:10.5px;color:var(--muted);line-height:1.75}
+.brandbar .meta b{color:var(--ink);font-weight:700}
+
+/* --- cover --- */
+.eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--orange);font-weight:800}
+.cover h1{font-weight:800;font-size:34px;line-height:1.12;margin:12px 0 14px;color:var(--navy);letter-spacing:-.5px}
+.cover h1 em{font-style:normal;color:var(--orange)}
+.cover .lead{font-size:14.5px;color:var(--muted);max-width:150mm;line-height:1.7}
+.fromto{display:flex;gap:34px;margin-top:26px;font-size:12px;align-items:center}
+.fromto .blk .k{font-size:9.5px;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:5px;font-weight:700}
+.fromto .blk .v{font-size:14px;font-weight:700;color:var(--navy)}
+.fromto .blk .vs{font-size:11.5px;color:var(--muted);margin-top:2px;font-weight:500}
+.fromto .arrow{color:var(--orange);font-size:22px;font-weight:800}
+
+.pricepill{margin-top:auto;display:flex;gap:14px}
+.pricepill .card{flex:1;background:var(--bg-card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.pricepill .card.hi{background:var(--navy);border-color:var(--navy)}
+.pricepill .card .kk{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:700}
+.pricepill .card.hi .kk{color:#a9adcf}
+.pricepill .card .vv{font-size:24px;font-weight:800;color:var(--navy);margin-top:4px;letter-spacing:-.5px}
+.pricepill .card.hi .vv{color:#fff}
+.pricepill .card .vv small{font-size:13px;font-weight:600;color:var(--muted)}
+.pricepill .card.hi .vv small{color:#a9adcf}
+
+/* --- sections --- */
+.rhead{display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--line);padding-bottom:9px;margin-bottom:16px;font-size:10.5px;color:var(--muted)}
+.rhead .rl{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--navy);font-weight:800}
+.rhead .rl .dot{width:9px;height:9px;border-radius:3px;background:var(--orange)}
+.sec{margin-bottom:12px}
+.sec h2{font-size:15px;font-weight:800;color:var(--navy);margin-bottom:8px;display:flex;align-items:center;gap:9px}
+.sec h2::before{content:'';width:5px;height:17px;border-radius:3px;background:var(--orange);display:inline-block}
+.sec p{font-size:12.5px;color:#3d4059;margin-bottom:8px}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}
+.item{background:var(--bg-card);border:1px solid var(--line);border-radius:10px;padding:11px 13px}
+.item .t{font-size:12.5px;font-weight:700;color:var(--navy)}
+.item .d{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.5}
+
+ul.clean{list-style:none;display:flex;flex-direction:column;gap:5px}
+ul.clean li{font-size:12.5px;color:#3d4059;padding-left:24px;position:relative;line-height:1.5}
+ul.clean li::before{content:'✓';position:absolute;left:0;top:0;color:var(--orange);font-weight:800}
+ul.no li::before{content:'—';color:var(--muted)}
+
+/* --- timeline --- */
+.tl{display:flex;flex-direction:column;gap:0}
+.tl .row{display:flex;gap:14px;position:relative;padding-bottom:10px}
+.tl .row:last-child{padding-bottom:0}
+.tl .num{flex-shrink:0;width:30px;height:30px;border-radius:9px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;z-index:1}
+.tl .row::after{content:'';position:absolute;left:15px;top:30px;bottom:0;width:2px;background:var(--line)}
+.tl .row:last-child::after{display:none}
+.tl .body{padding-top:3px}
+.tl .body .t{font-size:13px;font-weight:800;color:var(--navy)}
+.tl .body .t span{float:right;font-size:11px;color:var(--orange);font-weight:700}
+.tl .body .d{font-size:11.5px;color:var(--muted);margin-top:2px}
+
+/* --- price table --- */
+.ptable{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.ptable .r{display:flex;justify-content:space-between;padding:8px 15px;font-size:12.5px;border-bottom:1px solid var(--line-soft)}
+.ptable .r:last-child{border-bottom:none}
+.ptable .r .l{color:#3d4059;font-weight:600}
+.ptable .r .v{color:var(--navy);font-weight:700}
+.ptable .r.total{background:var(--navy);color:#fff;padding:14px 15px}
+.ptable .r.total .l{color:#fff;font-weight:800;font-size:14px}
+.ptable .r.total .v{color:#fff;font-weight:800;font-size:18px}
+
+.note{background:#fff5f0;border:1px solid #ffd9c7;border-left:4px solid var(--orange);border-radius:8px;padding:12px 15px;font-size:12px;color:#6b3418;line-height:1.6}
+.note b{color:var(--orange-dark)}
+
+.pay{display:flex;gap:12px;margin-top:6px}
+.pay .p{flex:1;background:var(--bg-card);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center}
+.pay .p .big{font-size:22px;font-weight:800;color:var(--orange)}
+.pay .p .lbl{font-size:11px;color:var(--muted);margin-top:3px;font-weight:600}
+
+/* --- footer --- */
+.foot{margin-top:14px;border-top:2px solid var(--line);padding-top:12px;display:flex;justify-content:space-between;align-items:flex-end;break-inside:avoid;page-break-inside:avoid}
+.foot .contacts{font-size:11.5px;color:#3d4059;line-height:1.75}
+.foot .contacts b{color:var(--navy)}
+.foot .sign{text-align:right;font-size:11px;color:var(--muted)}
+.foot .sign .name{font-size:14px;font-weight:800;color:var(--navy)}
+.pfoot{position:absolute;bottom:8mm;left:16mm;right:16mm;display:flex;justify-content:space-between;font-size:9px;color:#b3b6c7;letter-spacing:.5px}
+
+@page{size:A4;margin:0}
+@media print{
+  body{background:#fff;padding:0}
+  .page{margin:0;box-shadow:none}
+  .page+.page{margin-top:0;page-break-before:always}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== PAGE 1 — COVER ===================== -->
+<div class="page cover-sheet"><div class="pad">
+  <div class="brandbar">
+    <div class="logo">
+      <div class="mark">K</div>
+      <div class="n">KARINA Media<small>Web · Development</small></div>
+    </div>
+    <div class="meta">
+      Коммерческое предложение<br>
+      № <b>GTF-WEB-001</b><br>
+      Дата: <b>14.07.2026</b>
+    </div>
+  </div>
+
+  <div class="cover">
+    <div class="eyebrow">Разработка корпоративного сайта</div>
+    <h1>Сайт <em>GTF&nbsp;Express</em><br>для приёма заявок и роста доверия</h1>
+    <p class="lead">Многостраничный корпоративный сайт по вашему ТЗ (GTF Express Website v1.0). Задача версии — принимать заявки через сайт, WhatsApp, телефон и форму, а также заложить архитектуру под калькулятор, трекинг и личный кабинет в следующих версиях.</p>
+
+    <div class="fromto">
+      <div class="blk">
+        <div class="k">Исполнитель</div>
+        <div class="v">KARINA Media</div>
+        <div class="vs">Веб-разработка</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="blk">
+        <div class="k">Заказчик</div>
+        <div class="v">GTF Express</div>
+        <div class="vs">Международная логистика</div>
+      </div>
+      <div class="arrow">·</div>
+      <div class="blk">
+        <div class="k">Контакт</div>
+        <div class="v">Пархат</div>
+        <div class="vs">+7 702 997 7477</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pricepill">
+    <div class="card">
+      <div class="kk">Срок запуска</div>
+      <div class="vv">7–10 <small>рабочих дней</small></div>
+    </div>
+    <div class="card hi">
+      <div class="kk">Стоимость под ключ</div>
+      <div class="vv">700 000 <small>₸</small></div>
+    </div>
+  </div>
+
+
+</div></div>
+
+<!-- ===================== PAGE 2 — CONTENT FLOW ===================== -->
+<div class="page"><div class="pad">
+  <div class="rhead">
+    <div class="rl"><span class="dot"></span>Что входит в сайт (версия 1.0)</div>
+    <div>KARINA Media × GTF Express</div>
+  </div>
+
+  <div class="sec">
+    <h2>Структура — 11 страниц</h2>
+    <div class="grid3">
+      <div class="item"><div class="t">Главная</div><div class="d">Hero, услуги, география, «как работаем», преимущества, форма заявки</div></div>
+      <div class="item"><div class="t">Услуги</div><div class="d">Каталог всех направлений услуг</div></div>
+      <div class="item"><div class="t">Международная доставка</div><div class="d">Китай, ОАЭ, США, Европа → КЗ</div></div>
+      <div class="item"><div class="t">Доставка по Казахстану</div><div class="d">Курьерская доставка</div></div>
+      <div class="item"><div class="t">Для бизнеса (B2B)</div><div class="d">Отдельная страница + B2B-форма</div></div>
+      <div class="item"><div class="t">Направления</div><div class="d">/directions/china, uae, usa</div></div>
+      <div class="item"><div class="t">О компании</div><div class="d">Текст, цифры, преимущества</div></div>
+      <div class="item"><div class="t">Пункты Express</div><div class="d">Города, адреса, фильтр, карта</div></div>
+      <div class="item"><div class="t">Контакты + FAQ</div><div class="d">Контакты, форма, частые вопросы</div></div>
+      <div class="item"><div class="t">Юр. информация</div><div class="d">5 документов + реквизиты</div></div>
+      <div class="item"><div class="t">Форма заявки</div><div class="d">Сквозная, на всех страницах</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>Функционал и технологии</h2>
+    <ul class="clean">
+      <li>Приём заявок: формы → e-mail компании + Telegram-чат менеджеров (мгновенное уведомление)</li>
+      <li>Удобная админ-панель: правка контента и добавление новых страниц без программиста</li>
+      <li>Адаптив: корректно на компьютере, планшете и телефоне</li>
+      <li>SEO-готовность: Title, Description, H1 и человекопонятные URL (ЧПУ) для каждой страницы</li>
+      <li>Быстрая загрузка, карта пунктов, интеграция WhatsApp и телефона в шапке</li>
+      <li>Архитектурный задел под казахский и английский языки (включаются позже)</li>
+      <li>Заложена возможность подключить CRM, калькулятор и личный кабинет в v1.1–v1.2 без переделки сайта</li>
+    </ul>
+  </div>
+
+  <div class="sec">
+    <h2>Не входит в v1.0 (по вашему ТЗ — следующие версии)</h2>
+    <ul class="clean no">
+      <li>Онлайн-калькулятор стоимости — v1.1</li>
+      <li>Полноценный трекинг отправлений — v1.1</li>
+      <li>Личный кабинет и онлайн-оплата — v1.1</li>
+      <li>B2B-кабинет, история заявок, счета, интеграция с CRM — v1.2</li>
+    </ul>
+    <p style="margin-top:9px">Эти функции закладываются в архитектуру уже сейчас, но включаются отдельными этапами по отдельной смете — без переписывания сайта.</p>
+  </div>
+
+  <div class="sec">
+    <h2>Юридические документы (в подвале и на странице /legal)</h2>
+    <ul class="clean">
+      <li>Условия оказания транспортно-логистических услуг</li>
+      <li>Правила оказания транспортно-логистических услуг</li>
+      <li>Перечень запрещённых и ограниченных товаров к перевозке</li>
+      <li>Политика обработки персональных данных</li>
+      <li>Реквизиты компании</li>
+    </ul>
+  </div>
+
+  <div class="sec">
+    <h2>Этапы работы — 7–10 рабочих дней</h2>
+    <div class="tl">
+      <div class="row"><div class="num">1</div><div class="body"><div class="t">Старт и структура <span>день 1</span></div><div class="d">Приём контента и брендбука, настройка проекта, каркас страниц и админ-панели</div></div></div>
+      <div class="row"><div class="num">2</div><div class="body"><div class="t">Дизайн-система и Главная <span>дни 2–3</span></div><div class="d">Шапка, подвал, компоненты по макету, полностью собранная главная страница</div></div></div>
+      <div class="row"><div class="num">3</div><div class="body"><div class="t">Внутренние страницы <span>дни 4–6</span></div><div class="d">Услуги, направления, для бизнеса, пункты Express, о компании, юр. документы</div></div></div>
+      <div class="row"><div class="num">4</div><div class="body"><div class="t">Формы, SEO, адаптив <span>дни 6–8</span></div><div class="d">Заявки в e-mail + Telegram, мета-теги и ЧПУ, проверка на телефоне и планшете</div></div></div>
+      <div class="row"><div class="num">5</div><div class="body"><div class="t">Правки и запуск <span>дни 8–10</span></div><div class="d">Круг правок, финальная проверка, публикация на ваш домен и хостинг</div></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>Стоимость под ключ</h2>
+    <div class="ptable">
+      <div class="r"><span class="l">Разработка сайта v1.0 (11 страниц, по ТЗ)</span><span class="v">включено</span></div>
+      <div class="r"><span class="l">Админ-панель, формы → e-mail + Telegram</span><span class="v">включено</span></div>
+      <div class="r"><span class="l">SEO-настройка, адаптив, публикация</span><span class="v">включено</span></div>
+      <div class="r"><span class="l">Круг правок по каждому этапу</span><span class="v">включено</span></div>
+      <div class="r total"><span class="l">Итого под ключ</span><span class="v">700 000 ₸</span></div>
+    </div>
+    <p style="margin-top:8px;font-size:11.5px;color:var(--muted)">Работаю через ТОО на ОУР, без НДС. Хостинг и домен у вас уже есть — в стоимость не входят.</p>
+  </div>
+
+  <div class="sec">
+    <h2>Порядок оплаты</h2>
+    <div class="pay">
+      <div class="p"><div class="big">50%</div><div class="lbl">предоплата при старте</div></div>
+      <div class="p"><div class="big">50%</div><div class="lbl">при сдаче готового сайта</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>Условие срока 7–10 дней</h2>
+    <div class="note">
+      Срок реален при быстрой обратной связи с вашей стороны:<br>
+      <b>·</b> контент (фото, тексты, 5 юр-документов, реквизиты) — до старта или в первые 2 дня;<br>
+      <b>·</b> правки и согласование по каждому этапу — в течение 24 часов;<br>
+      <b>·</b> одно контактное лицо для решений.<br>
+      Если контент или обратная связь задерживаются — срок сдвигается на то же время. Работаем спринтами: пока согласуете один блок, я делаю следующий — простоя нет.
+    </div>
+  </div>
+
+  <div class="foot">
+    <div class="contacts">
+      <b>KARINA Media</b> · ТОО «QazMediaAI»<br>
+      Телефон / WhatsApp: +7 706 656 77 65<br>
+      E-mail: karina.group2023@gmail.com<br>
+      БИН 250440008218 · директор Еркин Каримов<br>
+      г. Астана, Казахстан
+    </div>
+    <div class="sign">
+      С уважением,<br>
+      <span class="name">Еркин Бакытович</span><br>
+      Веб-разработка · KARINA Media
+    </div>
+  </div>
+
+</div></div>
+
+</body>
+</html>
